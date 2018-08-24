@@ -39,10 +39,10 @@ class EventEmitter {
      * @public
      */
     off(event, listener) {
-        if (!this.events[event]) return;
+        if (!this.events[event]) return this;
 
         const idx = this.events[event].indexOf(listener);
-        if (idx < 0) return;
+        if (idx < 0) return this;
 
         this.events[event].splice(idx, 1);
         return this;
@@ -96,7 +96,7 @@ const Presto = new EventEmitter();
      * boundObjects
      * @type {Array.<Promise>}
      */
-    let boundObjects = [ 'album', 'artist', 'genre', 'library', 'player', 'playlist' ].map(bindObject);
+    let boundObjects = [ 'album', 'artist', 'genre', 'player', 'playlist' ].map(bindObject);
     await Promise.all(boundObjects);
 
     Presto.emit('load');
