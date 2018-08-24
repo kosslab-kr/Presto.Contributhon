@@ -88,17 +88,25 @@ const Presto = new EventEmitter();
      * @param {string} name
      * @returns {Promise}
      */
-    function bindObject(name) {
+    function bind(name) {
         return CefSharp.BindObjectAsync(name);
     }
 
     /**
-     * boundObjects
-     * @type {Array.<Promise>}
+     * Binding object names
+     * @type {[string]}
      */
-    let boundObjects = [ 'album', 'artist', 'genre', 'player', 'playlist' ].map(bindObject);
-    await Promise.all(boundObjects);
+    let objectNames = [ 'album', 'artist', 'genre', 'player', 'playlist' ];
 
+    // Wait for binding
+    await Promise.all(objectNames.map(bind));
+
+    // Make bound objects to EventEmitter
+    for (let name of objectNames) {
+        window[name].__proto__ = new EventEmitter();
+    }
+
+    // Call load event
     Presto.emit('load');
 })().catch(e => {
     throw e;
