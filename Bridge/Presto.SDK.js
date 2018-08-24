@@ -58,10 +58,7 @@ const Presto = new EventEmitter();
     let boundObjects = [ 'player', 'library' ].map(bindObject);
     await Promise.all(boundObjects);
 
-    if (typeof window.onplayerload === 'function') {
-        window.onplayerload.call();
-    }
-
+    Presto.emit('load');
 })().catch(e => {
     throw e;
 });
