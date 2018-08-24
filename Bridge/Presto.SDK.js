@@ -2,40 +2,81 @@ if (!CefSharp) {
     throw 'CefSharp is required';
 }
 
-
+/**
+ * EventEmitter Class
+ */
 class EventEmitter {
+    /**
+     * Constructor of EventEmitter
+     * @constructor
+     * @public
+     */
     constructor() {
         this.events = {};
     }
 
+    /**
+     * Add a listener for a given event.
+     *
+     * @param {(String)} event The event name.
+     * @param {Function} listener The listener function.
+     * @returns {EventEmitter} `this`.
+     * @public
+     */
     on(event, listener) {
-        if (typeof this.events[event] !== 'object') {
-            this.events[event] = [];
-        }
+        if (!this.events[event]) this.events[event] = [];
+
         this.events[event].push(listener);
-        return () => this.removeListener(event, listener);
+        return this;
     }
 
-    removeListener(event, listener) {
-        if (typeof this.events[event] === 'object') {
-            const idx = this.events[event].indexOf(listener);
-            if (idx > -1) {
-                this.events[event].splice(idx, 1);
-            }
-        }
+    /**
+     * Remove the listeners of a given event.
+     *
+     * @param {String} event The event name.
+     * @param {Function} listener Only remove the listeners that match this function.
+     * @returns {EventEmitter} `this`.
+     * @public
+     */
+    off(event, listener) {
+        if (!this.events[event]) return;
+
+        const idx = this.events[event].indexOf(listener);
+        if (idx < 0) return;
+
+        this.events[event].splice(idx, 1);
+        return this;
     }
 
+    /**
+     * Calls each of the listeners registered for a given event.
+     *
+     * @param {String} event The event name.
+     * @param {...*} args The event arguments.
+     * @public
+     */
     emit(event, ...args) {
-        if (typeof this.events[event] === 'object') {
-            this.events[event].forEach(listener => listener.apply(this, args));
-        }
+        if (!this.events[event]) return;
+
+        this.events[event].forEach(listener => listener.apply(this, args));
     }
 
+    /**
+     * Add a one-time listener for a given event.
+     *
+     * @param {String} event The event name.
+     * @param {Function} listener The listener function.
+     * @returns {EventEmitter} `this`.
+     * @public
+     */
     once(event, listener) {
-        const remove = this.on(event, (...args) => {
-            remove();
+        let wrapper = (...args) => {
             listener.apply(this, args);
-        });
+            this.off(event, wrapper);
+        };
+
+        this.on(event, wrapper);
+        return this;
     }
 }
 
