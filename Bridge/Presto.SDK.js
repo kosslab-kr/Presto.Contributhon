@@ -96,7 +96,7 @@ const Presto = new EventEmitter();
      * boundObjects
      * @type {Array.<Promise>}
      */
-    let boundObjects = [ 'player', 'library' ].map(bindObject);
+    let boundObjects = [ 'album', 'artist', 'genre', 'library', 'player', 'playlist' ].map(bindObject);
     await Promise.all(boundObjects);
 
     Presto.emit('load');
