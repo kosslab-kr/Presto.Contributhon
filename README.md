@@ -10,3 +10,4 @@ Presto Contributhon Repository
 - [김도현](https://github.com/ddyokim)
 - [박준호](https://github.com/JunHoPark93)
 - [이희찬](https://github.com/amorfati0310)
+- [최진용](https://github.com/SteaI)
