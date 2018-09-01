@@ -46,6 +46,7 @@
   font-weight: lighter;
   font-size: 1rem;
   color: #aaa;
+  background: #111;
   padding: 0px 25px;
 
   &:hover {
@@ -83,9 +84,9 @@
     }
   }
 
-  &::before { @include cross($top: 25%, $left: 25%, $border-side: right, bottom) }
+  &::before { @include cross($top: 25%, $left: 25%, $border-side: (right, bottom)) }
 
-  &::after { @include cross($top: 48%, $left: 48%, $border-side: top, left) }
+  &::after { @include cross($top: 48%, $left: 48%, $border-side: (top, left)) }
 }
 
 .main-menu__footer-text {

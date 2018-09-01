@@ -101,6 +101,7 @@ table {
   font-weight: lighter;
   font-size: 1rem;
   color: #aaa;
+  background: #111;
   padding: 0px 25px;
 }
 .main-menu__footer:hover .main-menu__footer-icon, .main-menu__footer:hover .main-menu__footer-icon::before, .main-menu__footer:hover .main-menu__footer-icon::after {
