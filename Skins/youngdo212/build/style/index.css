@@ -1,0 +1,220 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.main-menu {
+  position: absolute;
+  top: 0px;
+  right: auto;
+  bottom: auto;
+  left: 0px;
+  width: 200px;
+  height: calc(100vh - 50px);
+  box-sizing: border-box;
+  background: #111;
+  padding: 5px 0px;
+  font-size: 0.9rem;
+}
+.main-menu:hover {
+  cursor: default;
+}
+
+.main-menu__category {
+  color: #aaa;
+  margin-top: 33px;
+}
+
+.main-menu__category-title {
+  font-weight: lighter;
+  letter-spacing: 1px;
+  padding: 0px 25px;
+  font-size: 0.8rem;
+}
+
+.main-menu__item {
+  box-sizing: border-box;
+  padding: 0px 25px;
+  margin: 0.7rem 0;
+  line-height: 1.3rem;
+}
+.main-menu__item:hover {
+  color: #fff;
+}
+
+.main-menu__item--selected {
+  color: #fff;
+  box-shadow: inset 4px 0px 0 0 #34fc34;
+}
+
+.main-menu__footer {
+  position: fixed;
+  top: auto;
+  right: auto;
+  bottom: 50px;
+  left: auto;
+  width: 200px;
+  height: auto;
+  box-sizing: border-box;
+  line-height: 55px;
+  border-top: 1px solid #333;
+  font-weight: lighter;
+  font-size: 1rem;
+  color: #aaa;
+  padding: 0px 25px;
+}
+.main-menu__footer:hover .main-menu__footer-icon, .main-menu__footer:hover .main-menu__footer-icon::before, .main-menu__footer:hover .main-menu__footer-icon::after {
+  border-color: #fff;
+}
+.main-menu__footer:hover .main-menu__footer-text {
+  color: #fff;
+}
+
+.main-menu__footer-icon {
+  position: relative;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  left: auto;
+  width: 21px;
+  height: 21px;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid #aaa;
+  margin-right: 7px;
+  vertical-align: middle;
+}
+.main-menu__footer-icon::before {
+  position: absolute;
+  top: 25%;
+  right: auto;
+  bottom: auto;
+  left: 25%;
+  width: 26%;
+  height: 26%;
+  box-sizing: border-box;
+  display: block;
+  content: "";
+  border-right: 1px solid #aaa;
+  border-bottom: 1px solid #aaa;
+}
+.main-menu__footer-icon::after {
+  position: absolute;
+  top: 48%;
+  right: auto;
+  bottom: auto;
+  left: 48%;
+  width: 26%;
+  height: 26%;
+  box-sizing: border-box;
+  display: block;
+  content: "";
+  border-top: 1px solid #aaa;
+  border-left: 1px solid #aaa;
+}
+
+.main-menu__footer-text {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main-section {
+  position: absolute;
+  top: 0px;
+  right: auto;
+  bottom: auto;
+  left: 200px;
+  box-sizing: border-box;
+  background: #bbb;
+  width: calc(100vw - 200px);
+  height: calc(100vh - 50px);
+  overflow: scroll;
+  padding: 20px;
+}
+
+.album {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  float: left;
+  margin: 10px;
+}
+
+.player {
+  position: fixed;
+  bottom: 0px;
+  height: 50px;
+  background: red;
+  width: 100vw;
+}
+
+.song-info {
+  position: absolute;
+  left: 0px;
+  width: 100px;
+  height: 100%;
+  background: #00f;
+}
+
+.play-control {
+  position: absolute;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  width: 200px;
+  height: 100%;
+  background: #00f;
+}
+
+.setting {
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  background: #00f;
+}
+
+body {
+  position: relative;
+}
+
+/*# sourceMappingURL=index.css.map */
