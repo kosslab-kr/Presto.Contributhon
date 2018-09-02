@@ -10,3 +10,38 @@
   width: $width;
   height: $height;
 }
+
+@mixin line-arrow($size, $border-width, $direction, $color) {
+  &::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    top: 50%; left: 50%;
+    width: $size; height: $size; 
+    border-width: 0 $border-width $border-width 0;
+    border-style: solid;
+    border-color: $color;
+    @if $direction == top {
+      transform: translate3d(-50%, -25%, 0) rotate(-130deg) skew(10deg);
+    }
+    @else if $direction == right {
+      transform: translate3d(-75%, -50%, 0) rotate(-40deg) skew(10deg);
+    }
+    @else if $direction == bottom {
+      transform: translate3d(-50%, -75%, 0) rotate(50deg) skew(10deg);
+    }
+    @else if $direction == left {
+      transform: translate3d(-25%, -50%, 0) rotate(140deg) skew(10deg);
+    }
+  }
+}
+
+@mixin vertical-align-helper {
+  &::before {
+    content:'';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}

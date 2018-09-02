@@ -34,10 +34,19 @@
   </nav>
   <section class="main-section">
     <header class='main-section__header'>
-      <div class="main-section__move"></div>
-      <div class="main-section__search"></div>
-      <div class="main-section__upgrade"></div>
-      <div class="main-section__profile"></div>
+      <div class="main-section__header-category main-section__header-category--left">
+        <div class="main-section__move main-section__move--back"></div>
+        <div class="main-section__move main-section__move--forward"></div>
+        <form class="main-section__search-form" action='' method='get'>
+          <div class="main-section__search-icon"></div>
+          <input class='main-section__search-input' type="text" name='keyword' value='Search'>
+        </form>
+      </div>
+      <div class="main-section__header-category main-section__header-category--right">
+        <div class="main-section__upgrade">UPGRADE</div>
+        <div class="main-section__profile">mando212</div>
+        <div class="main-section__profile-more"></div>
+      </div>
     </header>
     <section class="browse">
       <header>Browse</header>
