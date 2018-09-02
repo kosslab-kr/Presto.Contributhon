@@ -1,8 +1,7 @@
 .main-section {
   @include position(absolute, $top: 0px, $left: $main-menu-width);
-  width: calc(100vw - #{$main-menu-width}); height: calc(100vh - 50px);
-  background: #000;
-  overflow: scroll;
+  width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
+  overflow: hidden;
 }
 
 .main-section__header {
@@ -10,6 +9,7 @@
   width: calc(100vw - #{$main-menu-width}); height: 46px;
   box-sizing: border-box;
   padding: 10px 15px;
+  z-index: 1;
 }
 
 .main-section__header-category {
@@ -71,7 +71,7 @@
   float: left;
   box-sizing: border-box;
   height: 100%;
-  background: #121212;
+  background: #222;
   border: 1px solid #aaa;
   border-radius: 20px;
   padding: 0px 25px;
@@ -110,12 +110,4 @@
   position: relative;
   width: 26px; height: 26px;
   @include line-arrow($size: 50%, $border-width: 1px, $direction: bottom, $color: #fff);
-}
-
-.album {
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  float: left;
-  margin: 10px;
 }

@@ -1,7 +1,7 @@
 .player {
   position: fixed;
   bottom: 0px;
-  height: 50px;
+  height: $player-height;
   background: red;
   width: 100vw;
 }

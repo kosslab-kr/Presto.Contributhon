@@ -54,9 +54,9 @@ table {
   bottom: auto;
   left: 0px;
   width: 200px;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 70px);
   box-sizing: border-box;
-  background: #111;
+  background: #131313;
   padding: 5px 0px;
   font-size: 0.9rem;
 }
@@ -95,7 +95,7 @@ table {
   position: fixed;
   top: auto;
   right: auto;
-  bottom: 50px;
+  bottom: 70px;
   left: auto;
   width: 200px;
   height: auto;
@@ -170,9 +170,8 @@ table {
   bottom: auto;
   left: 200px;
   width: calc(100vw - 200px);
-  height: calc(100vh - 50px);
-  background: #000;
-  overflow: scroll;
+  height: calc(100vh - 70px);
+  overflow: hidden;
 }
 
 .main-section__header {
@@ -185,6 +184,7 @@ table {
   height: 46px;
   box-sizing: border-box;
   padding: 10px 15px;
+  z-index: 1;
 }
 
 .main-section__header-category {
@@ -271,7 +271,7 @@ table {
   float: left;
   box-sizing: border-box;
   height: 100%;
-  background: #121212;
+  background: #222;
   border: 1px solid #aaa;
   border-radius: 20px;
   padding: 0px 25px;
@@ -332,6 +332,84 @@ table {
   transform: translate3d(-50%, -75%, 0) rotate(50deg) skew(10deg);
 }
 
+.sub-section {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background: #191919;
+}
+.sub-section:before {
+  content: "";
+  display: block;
+  height: 90px;
+  background: linear-gradient(#444, #2f2f2f);
+}
+
+.sub-section__header {
+  box-sizing: border-box;
+  position: sticky;
+  top: 0px;
+  height: 160px;
+  background: linear-gradient(#2f2f2f, #191919 100px);
+  border-bottom: 1px solid #333;
+  padding: 55px 30px 0px 30px;
+}
+
+.sub-section__title {
+  height: 40px;
+  color: #fff;
+  padding: 3px 0px;
+  font-size: 1.9rem;
+  font-weight: 900;
+}
+.sub-section__title::before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: bottom;
+}
+.sub-section__title:hover {
+  cursor: default;
+}
+
+.sub-section__menu {
+  margin-top: 28px;
+}
+
+.sub-section__menu-item {
+  display: inline-block;
+  margin-right: 25px;
+}
+.sub-section__menu-item:nth-last-child(1) {
+  margin-right: 0px;
+}
+.sub-section__menu-item--selected .sub-section__menu-name {
+  color: #fff;
+}
+.sub-section__menu-item--selected .sub-section__menu-item-bar {
+  background: #00ff40;
+}
+.sub-section__menu-item:hover {
+  cursor: pointer;
+}
+.sub-section__menu-item:hover .sub-section__menu-name {
+  color: #fff;
+}
+
+.sub-section__menu-name {
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.sub-section__menu-item-bar {
+  margin: auto;
+  margin-top: 10px;
+  width: 30px;
+  height: 2px;
+}
+
 .album {
   width: 200px;
   height: 200px;
@@ -343,7 +421,7 @@ table {
 .player {
   position: fixed;
   bottom: 0px;
-  height: 50px;
+  height: 70px;
   background: red;
   width: 100vw;
 }

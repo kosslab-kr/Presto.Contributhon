@@ -1,8 +1,8 @@
 .main-menu {
   @include position(absolute, $top: 0px, $left: 0px);
-  @include size($width: $main-menu-width, $height: calc(100vh - 50px));
+  @include size($width: $main-menu-width, $height: calc(100vh - #{$player-height}));
   box-sizing: border-box;
-  background: #111;
+  background: #131313;
   padding: 5px 0px;
   font-size: 0.9rem;
 
@@ -36,7 +36,7 @@
 }
 
 .main-menu__footer {
-  @include position(fixed, $bottom: 50px);
+  @include position(fixed, $bottom: $player-height);
   @include size($width: $main-menu-width);
   box-sizing: border-box;
   line-height: 55px;
