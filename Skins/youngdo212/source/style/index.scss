@@ -1,8 +1,8 @@
-@import 'reset';
-@import 'mainMenu';
-@import 'mainSection';
-@import 'player';
+// modules and variables
+@import 'partials/base';
 
-body {
-  position: relative;
-}
+// partials
+@import 'partials/reset';
+@import 'partials/mainMenu';
+@import 'partials/mainSection';
+@import 'partials/player';

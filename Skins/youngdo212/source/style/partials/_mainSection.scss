@@ -1,0 +1,21 @@
+.main-section {
+  @include position(absolute, $top: 0px, $left: $main-menu-width);
+  background: #bbb;
+  width: calc(100vw - $main-menu-width);
+  height: calc(100vh - 50px);
+  overflow: scroll;
+}
+
+.main-section__header {
+  @include position(fixed, $top: 0px, $left: $main-menu-width);
+  @include size($width: 100%, $height: 40px);
+  background: #0ff;
+}
+
+.album {
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  float: left;
+  margin: 10px;
+}
