@@ -82,7 +82,13 @@
           </div>
         </nav>
       </div>
-      <section>
+      <section class='sub-section__body'>
+        <div class="album"></div>
+        <div class="album"></div>
+        <div class="album"></div>
+        <div class="album"></div>
+        <div class="album"></div>
+        <div class="album"></div>
         <div class="album"></div>
         <div class="album"></div>
         <div class="album"></div>
@@ -97,9 +103,39 @@
     </section>
   </section>
   <section class="player">
-    <div class="song-info">1</div>
-    <div class="play-control">2</div>
-    <div class="setting">3</div>
+    <div class="player__wrap">
+      <div class="player__current-song">
+        <div class="player__album-cover"></div>
+        <div class="player__song-title">Title</div>
+        <div class="player__singer">singer</div>
+      </div>
+      <div class="player__controls">
+        <div class="player__controls-wrap">
+          <div class="player__button-wrap">
+            <div class="player__button player__button--shuffle"></div>
+            <div class="player__button player__button--back"></div>
+            <div class="player__button player__button--pause-play"></div>
+            <div class="player__button player__button--forward"></div>
+            <div class="player__button player__button--repeat"></div>
+          </div>
+          <div class="player__scroll-wrap">
+            <div class="player__current-time">0:40</div>
+            <div class="player__scroll">
+              <div style='width: 75%' class="player__scroll-location"></div>
+            </div>
+            <div class="player__total-time">3:17</div>
+          </div>
+        </div>
+      </div>
+      <div class="player__option-wrap">
+        <div class="player__option player__option--queue"></div>
+        <div class="player__option player__option--devices"></div>
+        <div class="player__option player__option--mute"></div>
+        <div class="player__volume">
+          <div style='width: 80%;' class="player__volume-location"></div>
+        </div>
+      </div>
+    </div>
   </section>
 </body>
 </html>

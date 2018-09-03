@@ -26,8 +26,8 @@
   height: 40px;
   color: #fff;
   padding: 3px 0px;
-  font-size: 1.9rem;
-  // font-size: 2.8rem;
+  // font-size: 1.9rem;
+  font-size: 2.8rem;
   font-weight: 900;
   
   &::before {
@@ -60,7 +60,7 @@
     }
 
     .sub-section__menu-item-bar {
-      background: rgb(0, 255, 64);
+      background: $signature-color;
     }
   }
 
@@ -87,10 +87,16 @@
   height: 2px;
 }
 
+.sub-section__body {
+  padding: 30px;
+}
+
 .album {
-  width: 200px;
-  height: 200px;
+  max-width: 220px;
+  max-height: 220px;
+  min-width: 170px;
+  min-height: 170px;
   background: #fff;
   float: left;
-  margin: 10px;
+  margin: 0 15px 15px 0;
 }

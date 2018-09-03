@@ -22,6 +22,7 @@
     border-width: 0 $border-width $border-width 0;
     border-style: solid;
     border-color: $color;
+
     @if $direction == top {
       transform: translate3d(-50%, -25%, 0) rotate(-130deg) skew(10deg);
     }
@@ -34,6 +35,31 @@
     @else if $direction == left {
       transform: translate3d(-25%, -50%, 0) rotate(140deg) skew(10deg);
     }
+  }
+}
+
+@mixin arrow($direction, $width, $height, $color) {
+  width: 0px; height: 0px;
+
+  @if $direction == 'top' {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-bottom: $height solid $color;
+  }
+  @else if $direction == 'right' {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-left: $width solid $color;
+  }
+  @else if $direction == 'bottom' {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-top: $height solid $color;
+  }
+  @else if $direction == 'left' {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-right: $width solid $color;
   }
 }
 
