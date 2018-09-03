@@ -11,24 +11,45 @@
 
 <body>
   <div class="wrapper">
-    <section class="header">
-      <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
+    <div class="hamburger">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+    <header class="header">
+
       <h1 class="title">Presto Music Skin</h1>
       <img class="play-icon" src="./assets/icons/play-btn.svg" alt="play button">
-    </section>
-    <section class="drawer">
-    </section>
-
-    <script>
-      const hamburgerBtn = document.querySelector('.hamburger')
-      hamburgerBtn.addEventListener('click', (e) => {
-        hamburgerBtn.classList.toggle('active')
-      })
-    </script>
+    </header>
+  </div>
+  <nav class="drawer__wrapper">
+    <ul class="drawer">
+      <li>
+        <a href="#">menu00</a>
+      </li>
+      <li>
+        <a href="#">menu01</a>
+      </li>
+      <li>
+        <a href="#">menu02</a>
+      </li>
+      <li>
+        <a href="#">menu03</a>
+      </li>
+      <li>
+        <a href="#">menu03</a>
+      </li>
+    </ul>
+    <div class="modal"></div>
+  </nav>
+  <script>
+    const drawer__wrapper = document.querySelector('.drawer__wrapper')
+    const hamburgerBtn = document.querySelector('.hamburger')
+    hamburgerBtn.addEventListener('click', (e) => {
+      hamburgerBtn.classList.toggle('active')
+      drawer__wrapper.classList.toggle('active')
+    })
+  </script>
 </body>
 
 </html>

@@ -1,19 +1,21 @@
-$h-pad: 10px;
+$h-pad: 80px;
 $h-height: 60px;
 
 .header {
   width: 100%;
   min-width: 375px;
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   background: rgb(168, 144, 254);
   background: linear-gradient(180deg, rgba(168, 144, 254, 1) 0%, rgba(140, 154, 255, 1) 100%);
   height: $h-height;
-  box-sizing: border-box;
   @include padding-side($h-pad);
-  position: absolute;
-  z-index: 1000;
   justify-content: space-between;
+}
+
+.title {
+  text-align: center;
 }
 
 .play-icon {
@@ -21,14 +23,19 @@ $h-height: 60px;
   height: 40px;
 }
 
+//  hamburger
 .hamburger {
+  position: fixed;
+  top: 10px;
+  left: 10px;
   width: 50px;
   height: 38px;
   cursor: pointer;
-  transition: all 0.5s ease-in-out 0.5s;
+  transition: all 0.2s ease-in-out 0.2s;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  z-index: 1000;
 }
 
 .active {
@@ -57,4 +64,39 @@ $h-height: 60px;
 
 .bar:nth-child(3) {
   margin-left: 50%;
+}
+
+//  drawer
+.drawer__wrapper {
+  transition: all 0.2s ease-in-out 0.2s;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+
+  transform: translate(-100%);
+  box-shadow: 0 30px 80px 0 rgba(97, 45, 45, 0.25);
+  & .drawer {
+    box-sizing: border-box;
+    padding-top: 100px;
+    width: 40vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  & .modal {
+    width: 60vw;
+    height: 100vh;
+
+    background-color: rgba(224, 221, 209, 0.7);
+  }
+}
+
+.drawer__wrapper.active {
+  transform: translate(0%);
 }
