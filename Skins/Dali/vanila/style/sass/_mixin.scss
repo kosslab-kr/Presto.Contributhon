@@ -2,3 +2,8 @@
   padding-left: $side;
   padding-right: $side;
 }
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}

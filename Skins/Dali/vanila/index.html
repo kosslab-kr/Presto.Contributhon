@@ -13,9 +13,9 @@
   <div class="wrapper">
     <section class="header">
       <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </div>
       <h1 class="title">Presto Music Skin</h1>
       <img class="play-icon" src="./assets/icons/play-btn.svg" alt="play button">
@@ -23,6 +23,12 @@
     <section class="drawer">
     </section>
 
+    <script>
+      const hamburgerBtn = document.querySelector('.hamburger')
+      hamburgerBtn.addEventListener('click', (e) => {
+        hamburgerBtn.classList.toggle('active')
+      })
+    </script>
 </body>
 
 </html>

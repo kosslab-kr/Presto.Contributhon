@@ -1,5 +1,5 @@
 $h-pad: 10px;
-$h-height: 50px;
+$h-height: 60px;
 
 .header {
   width: 100%;
@@ -19,4 +19,42 @@ $h-height: 50px;
 .play-icon {
   width: 40px;
   height: 40px;
+}
+
+.hamburger {
+  width: 50px;
+  height: 38px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.active {
+  .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-14px, 18px);
+  }
+  .bar:nth-child(2) {
+    transform: rotate(45deg);
+  }
+  .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(12px, -18px);
+  }
+}
+
+.bar {
+  width: 50%;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #333;
+  transition: 0.4s;
+}
+
+.bar:nth-child(2) {
+  width: 100%;
+}
+
+.bar:nth-child(3) {
+  margin-left: 50%;
 }

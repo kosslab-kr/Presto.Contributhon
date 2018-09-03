@@ -33,7 +33,7 @@ a {
   align-items: center;
   background: #a890fe;
   background: linear-gradient(180deg, #a890fe 0%, #8c9aff 100%);
-  height: 50px;
+  height: 60px;
   box-sizing: border-box;
   padding-left: 10px;
   padding-right: 10px;
@@ -45,4 +45,42 @@ a {
 .play-icon {
   width: 40px;
   height: 40px;
+}
+
+.hamburger {
+  width: 50px;
+  height: 38px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out 0.5s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-14px, 18px);
+}
+
+.active .bar:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(12px, -18px);
+}
+
+.bar {
+  width: 50%;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #333;
+  transition: 0.4s;
+}
+
+.bar:nth-child(2) {
+  width: 100%;
+}
+
+.bar:nth-child(3) {
+  margin-left: 50%;
 }
