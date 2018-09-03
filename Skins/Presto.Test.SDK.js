@@ -1,14 +1,13 @@
-{
+(() => {
     let global = window;
+    if (global.CefSharp) return;
 
-    if (!global.CefSharp) {
-        const CefSharp = {};
-        global.CefSharp = CefSharp;
+    const CefSharp = {};
+    global.CefSharp = CefSharp;
 
-        let objects = {};
+    let objects = {};
 
-        CefSharp.BindObjectAsync = async function (name) {
-            global[name] = objects[name];
-        };
-    }
-}
+    CefSharp.BindObjectAsync = async function (name) {
+        global[name] = objects[name];
+    };
+})();
