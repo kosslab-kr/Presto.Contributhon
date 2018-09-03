@@ -1,0 +1,22 @@
+$h-pad: 10px;
+$h-height: 50px;
+
+.header {
+  width: 100%;
+  min-width: 375px;
+  display: flex;
+  align-items: center;
+  background: rgb(168, 144, 254);
+  background: linear-gradient(180deg, rgba(168, 144, 254, 1) 0%, rgba(140, 154, 255, 1) 100%);
+  height: $h-height;
+  box-sizing: border-box;
+  @include padding-side($h-pad);
+  position: absolute;
+  z-index: 1000;
+  justify-content: space-between;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+}

@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #ea8d8d;
+  background: linear-gradient(180deg, #ea8d8d 0%, #a890fe 100%);
+}
+
+.header {
+  width: 100%;
+  min-width: 375px;
+  display: flex;
+  align-items: center;
+  background: #a890fe;
+  background: linear-gradient(180deg, #a890fe 0%, #8c9aff 100%);
+  height: 50px;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+  position: absolute;
+  z-index: 1000;
+  justify-content: space-between;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+}
