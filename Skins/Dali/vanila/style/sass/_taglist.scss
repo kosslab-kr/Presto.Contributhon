@@ -1,0 +1,29 @@
+.tag__section {
+  padding-top: 80px;
+  margin-left: 30px;
+  margin-right: 30px;
+  .title {
+    font-size: 28px;
+    color: #333;
+  }
+}
+
+.taglist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  & a {
+    display: block;
+    padding: 20px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    white-space: nowrap;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    transition: all 0.2s;
+    &:hover {
+      background: #333;
+      color: #fff;
+    }
+  }
+}
