@@ -80,6 +80,45 @@ aside nav hr {
 
 
 
+/* Main */
+main {
+    padding: 0 0 170px 200px;
+}
+
+main .album {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 10px;
+}
+
+main .album .item {
+    display: block;
+    width: 200px;
+    box-sizing: border-box;
+    margin: 10px auto 30px auto;
+}
+
+main .album .item .image {
+    width: 200px;
+    height: 200px;
+}
+
+main .album .item .image img {
+    width: 200px;
+    height: 200px;
+}
+
+main .album .item .title {
+    font-size: 16px;
+    padding-top: 8px;
+}
+
+main .album .item .artist {
+    font-size: 12px;
+    color: #888;
+    padding: 2px 0;
+}
+
 
 
 /* Footer */
