@@ -191,3 +191,79 @@ button:focus {
 .menu-item a:hover::before {
   right: 0;
 }
+
+.player {
+  width: 100%;
+  min-width: 375px;
+  height: 80px;
+  box-sizing: border-box;
+  padding-left: 80px;
+  padding-right: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+}
+
+.player__desc {
+  display: flex;
+  align-items: center;
+}
+
+.player__desc .thumbnail {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.player__desc .artist,
+.player__desc .title {
+  color: #fff;
+  margin: 0;
+  margin-bottom: 5px;
+  margin-right: 25px;
+}
+
+.player__control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.controller-icon {
+  width: 25px;
+}
+
+.player__timeController {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.progressbar {
+  position: relative;
+  width: 300px;
+  height: 2px;
+  background: #fff;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.pointer {
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #f50;
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper__playlist-btn {
+  position: fixed;
+  right: 30px;
+  bottom: 20px;
+}

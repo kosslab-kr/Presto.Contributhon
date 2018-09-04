@@ -18,6 +18,7 @@ class FormView {
   }
   handlePost(keyword) {
     console.log(`submit this ${keyword}`);
+    this.clearInput();
   }
   clearInput() {
     this.searchInputEl.value = "";

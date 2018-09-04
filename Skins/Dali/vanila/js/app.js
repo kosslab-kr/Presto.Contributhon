@@ -6,4 +6,11 @@ $on(document, "DOMContentLoaded", () => {
     searchFormSelector: ".search__form",
     searchInputSelector: ".search-input",
   });
+
+  const drawer__wrapper = document.querySelector(".drawer__wrapper");
+  const hamburgerBtn = document.querySelector(".hamburger");
+  hamburgerBtn.addEventListener("click", e => {
+    hamburgerBtn.classList.toggle("active");
+    drawer__wrapper.classList.toggle("active");
+  });
 });
