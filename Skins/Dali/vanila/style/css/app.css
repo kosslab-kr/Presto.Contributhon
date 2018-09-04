@@ -17,6 +17,10 @@ a {
   color: inherit;
 }
 
+button:focus {
+  outline: none;
+}
+
 .wrapper {
   width: 100%;
   min-height: 100vh;
@@ -28,19 +32,45 @@ a {
 .header {
   width: 100%;
   min-width: 375px;
+  height: 80px;
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  background: #a890fe;
-  background: linear-gradient(180deg, #a890fe 0%, #8c9aff 100%);
-  height: 60px;
   padding-left: 80px;
   padding-right: 80px;
-  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
 }
 
-.title {
-  text-align: center;
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  box-sizing: border-box;
+  width: 500px;
+  color: #666;
+  outline: 0;
+  border: 0;
+  padding: 15px 60px 15px 20px;
+  height: 40px;
+  background: #e5e5e5;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.search-button {
+  top: 0;
+  right: 4px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 4px;
+  border: none;
+  background: url(../../assets/icons/search-icons.svg) center no-repeat;
 }
 
 .play-icon {
@@ -50,7 +80,7 @@ a {
 
 .hamburger {
   position: fixed;
-  top: 10px;
+  top: 15px;
   left: 10px;
   width: 50px;
   height: 38px;
@@ -122,4 +152,42 @@ a {
 
 .drawer__wrapper.active {
   transform: translate(0%);
+}
+
+.menu-item a {
+  width: 160px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 32px;
+  color: #222;
+  transition: color 0.25s;
+  position: relative;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-item a::before {
+  bottom: -5px;
+  left: 0;
+  right: 100%;
+  background: #f50;
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  transition: all 0.2s ease-in-out;
+  z-index: 100;
+  height: 3px;
+}
+
+.menu-item a:hover {
+  color: #f50;
+}
+
+.menu-item a:hover ::before {
+  right: 0;
+}
+
+.menu-item a:hover::before {
+  right: 0;
 }
