@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-size: 16px;
+}
+
+aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    background: #eee;
+}
+
+aside nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+aside nav ul li a {
+    position: relative;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    padding-left: 20px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #000;
+}
+
+aside .menu {
+    position: relative;
+    display: block;
+    height: 50px;
+    border: none;
+    background: none;
+    text-align: left;
+    padding-left: 20px;
+    font-size: 16px;
+}
+
+aside .menu i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-indent: 0;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+aside nav hr {
+    background: #ddd;
+    height: 1px;
+    margin: 15px;
+    border: none;
+}
