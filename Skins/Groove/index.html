@@ -45,7 +45,34 @@
 </main>
 
 <footer>
+    <div class="controller clearfix">
+        <div class="seekbar-panel">
+            <div class="current-time">0:00</div>
+            <div class="seekbar-wrap">
+                <input class="seekbar" type="range" title="seek bar" min="0" max="18000" value="0" />
+            </div>
+            <div class="total-time">3:14</div>
+        </div>
 
+
+        <article class="info-panel">
+            <div class="thumbnail"><img src="https://upload.wikimedia.org/wikipedia/en/thumb/5/54/Public_image_ltd_album_cover.jpg/220px-Public_image_ltd_album_cover.jpg" alt=""></div>
+            <div class="title">Sleep Away</div>
+            <div class="artist">Bob Acri</div>
+        </article>
+
+        <nav class="button-panel">
+            <button class="prev" type="button"><i class="fas fa-step-backward"></i> Previous</button>
+            <button class="play" type="button"><i class="fas fa-play"></i> Play</button>
+            <button class="pause" type="button"><i class="fas fa-pause"></i> Pause</button>
+            <button class="next" type="button"><i class="fas fa-step-forward"></i> Next</button>
+            <div class="volume">
+                <button class="volume"><i class="fas fa-volume-up"></i> Volume</button>
+            </div>
+            <button class="next-type random" type="button"><i class="fas fa-random"></i> Random</button>
+            <button class="repeat-type all" type="button"><i class="fas fa-retweet"></i> All</button>
+        </nav>
+    </div>
 </footer>
 
 </body>
