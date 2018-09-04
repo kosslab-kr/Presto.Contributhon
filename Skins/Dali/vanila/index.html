@@ -17,27 +17,22 @@
       <span class="bar"></span>
     </div>
     <header class="header">
-
-      <h1 class="title">Presto Music Skin</h1>
-      <img class="play-icon" src="./assets/icons/play-btn.svg" alt="play button">
+      <form class="search__form">
+        <input class="search-input" type="text" placeholder="Search">
+        <button class="search-button"></button>
+      </form>
     </header>
   </div>
   <nav class="drawer__wrapper">
     <ul class="drawer">
-      <li>
-        <a href="#">menu00</a>
+      <li class="menu-item">
+        <a href="#">Stream</a>
       </li>
-      <li>
-        <a href="#">menu01</a>
+      <li class="menu-item">
+        <a href="#">Chart</a>
       </li>
-      <li>
-        <a href="#">menu02</a>
-      </li>
-      <li>
-        <a href="#">menu03</a>
-      </li>
-      <li>
-        <a href="#">menu03</a>
+      <li class="menu-item">
+        <a href="#">Discover</a>
       </li>
     </ul>
     <div class="modal"></div>
@@ -50,6 +45,7 @@
       drawer__wrapper.classList.toggle('active')
     })
   </script>
+  <script type="module" src="./js/app.js"></script>
 </body>
 
 </html>
