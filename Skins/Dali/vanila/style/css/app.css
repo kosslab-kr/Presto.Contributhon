@@ -21,6 +21,10 @@ button:focus {
   outline: none;
 }
 
+.blind {
+  text-indent: -3000;
+}
+
 .wrapper {
   width: 100%;
   min-height: 100vh;
