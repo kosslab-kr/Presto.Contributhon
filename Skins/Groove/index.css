@@ -1,0 +1,290 @@
+body, input, select, textarea, button {
+    font-size: inherit;
+    font-family: 'Gothic A1', sans-serif;
+}
+
+body {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Side */
+aside {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 170px;
+    width: 200px;
+    background: #eee;
+}
+
+aside nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+aside nav ul li a {
+    position: relative;
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    overflow: hidden;
+    padding-left: 50px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #000;
+}
+
+aside nav ul li a i {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 50px;
+    width: 50px;
+    font-size: 20px;
+}
+
+aside nav ul li a i::before {
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+aside .menu {
+    position: relative;
+    display: block;
+    width: 50px;
+    height: 50px;
+    text-indent: -100000px;
+    border: none;
+    background: none;
+}
+
+aside .menu i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    text-indent: 0;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+}
+
+aside nav hr {
+    background: #ddd;
+    height: 1px;
+    margin: 15px;
+    border: none;
+}
+
+
+
+/* Main */
+main {
+    padding: 0 0 170px 200px;
+}
+
+main .album {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    padding: 10px;
+}
+
+main .album .item {
+    display: block;
+    width: 200px;
+    box-sizing: border-box;
+    margin: 10px auto 30px auto;
+}
+
+main .album .item .image {
+    width: 200px;
+    height: 200px;
+}
+
+main .album .item .image img {
+    width: 200px;
+    height: 200px;
+}
+
+main .album .item .title {
+    font-size: 16px;
+    padding-top: 8px;
+}
+
+main .album .item .artist {
+    font-size: 12px;
+    color: #888;
+    padding: 2px 0;
+}
+
+
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 170px;
+    box-sizing: border-box;
+    background: rgba(0, 63, 214, 0.8);
+    color: #fff;
+    padding: 30px 20px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+footer .seekbar-panel {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+}
+
+footer .current-time {
+    margin-right: 20px;
+    line-height: 20px;
+}
+
+footer .seekbar-wrap {
+    flex-grow: 1;
+    font-size: 0;
+}
+
+footer .seekbar {
+    display: block;
+    -webkit-appearance: none;
+    outline: none;
+    width: 100%;
+    background: none;
+    border: none;
+    height: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+footer .seekbar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: 2px solid #fff;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    background: rgba(0, 63, 214, 1);
+    margin-top: -8px;
+}
+
+footer .seekbar::-webkit-slider-runnable-track {
+    background: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 4px;
+}
+
+footer .total-time {
+    margin-left: 20px;
+    line-height: 20px;
+}
+
+footer .info-panel {
+    float: left;
+    position: relative;
+    padding: 5px 0 5px 85px;
+    height: 70px;
+    box-sizing: border-box;
+}
+
+footer .info-panel .thumbnail {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 70px;
+    height: 70px;
+}
+
+footer .info-panel .thumbnail img {
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+
+footer .info-panel .title {
+    font-size: 20px;
+    font-weight: bold;
+    height: 35px;
+    line-height: 35px;
+}
+
+footer .info-panel .artist {
+    font-size: 16px;
+    height: 25px;
+    line-height: 25px;
+}
+
+footer .button-panel {
+    float: right;
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+}
+
+footer .button-panel button {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    outline: none;
+    background: none;
+    border: none;
+    margin: 0 5px;
+    color: #fff;
+    overflow: hidden;
+    text-indent: -10000px;
+    font-size: 20px;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+footer .button-panel button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+footer .button-panel button i {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-indent: 0;
+}
+
+footer .button-panel button.play i {
+    left: 55%;
+}
+
+footer .button-panel button.play,
+footer .button-panel button.pause {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+    margin-top: -5px;
+}
+
+footer .button-panel button.play {
+    display: block;
+}
+
+.playing footer .button-panel button.play {
+    display: none;
+}
+
+footer .button-panel button.pause {
+    display: none;
+}
+
+.playing footer .button-panel button.pause {
+    display: block;
+}
+
+.clearfix::after {
+    display: block;
+    content: '';
+    clear: both;
+}
