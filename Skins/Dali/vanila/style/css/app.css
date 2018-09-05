@@ -52,7 +52,7 @@ button:focus {
   align-items: center;
 }
 
-.search-input {
+.search__input {
   box-sizing: border-box;
   min-width: 300px;
   color: #666;
@@ -65,7 +65,7 @@ button:focus {
   font-size: 20px;
 }
 
-.search-button {
+.search__button {
   top: 0;
   right: 4px;
   position: absolute;
@@ -241,13 +241,13 @@ button:focus {
   color: #333;
 }
 
-.your-tastelist {
+.discover__tastelist {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
 }
 
-.your-tastelist .thumbnail {
+.discover__tastelist .thumbnail {
   width: 180px;
   height: 180px;
   margin-bottom: 5px;
