@@ -35,8 +35,7 @@ button:focus {
   min-width: 375px;
   height: 80px;
   box-sizing: border-box;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -51,7 +50,7 @@ button:focus {
 
 .search-input {
   box-sizing: border-box;
-  width: 500px;
+  min-width: 300px;
   color: #666;
   outline: 0;
   border: 0;
@@ -241,6 +240,7 @@ button:focus {
 .your-tastelist {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .your-tastelist .thumbnail {
@@ -307,6 +307,7 @@ button:focus {
 .hot-artistlist {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .hot-artistlist .thumbnail {
@@ -317,23 +318,35 @@ button:focus {
 }
 
 .player {
+  z-index: 50;
   width: 100%;
   min-width: 375px;
-  height: 80px;
+  padding: 10px 70px 10px 10px;
   box-sizing: border-box;
-  padding-left: 80px;
-  padding-right: 80px;
   display: flex;
   align-items: center;
-  justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   bottom: 0;
 }
 
+@media screen and (max-width: 750px) {
+  .player {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .player .player__desc {
+    margin-bottom: 20px;
+  }
+  .player .progressbar {
+    width: 170px;
+  }
+}
+
 .player__desc {
   display: flex;
   align-items: center;
+  margin-right: 10px;
 }
 
 .player__desc .thumbnail {
@@ -354,6 +367,12 @@ button:focus {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.player__control-btn button {
+  border: 0;
+  background: transparent;
 }
 
 .controller-icon {
@@ -387,7 +406,12 @@ button:focus {
 }
 
 .wrapper__playlist-btn {
-  position: fixed;
-  right: 30px;
+  position: absolute;
+  right: 20px;
   bottom: 20px;
+}
+
+.wrapper__playlist-btn button {
+  border: none;
+  background: transparent;
 }

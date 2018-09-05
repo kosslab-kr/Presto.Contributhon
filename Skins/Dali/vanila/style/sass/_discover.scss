@@ -12,6 +12,7 @@
 .your-tastelist {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
   & .thumbnail {
     width: 180px;
