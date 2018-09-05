@@ -1,0 +1,168 @@
+$h-pad: 80px;
+$h-height: 80px;
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-width: 375px;
+  height: $h-height;
+  box-sizing: border-box;
+  padding-left: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.search__form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  min-width: 300px;
+}
+
+.search__input {
+  box-sizing: border-box;
+  width: 100%;
+  color: #666;
+  outline: 0;
+  border: 0;
+  padding: 15px 60px 15px 20px;
+  height: 40px;
+  background: #e5e5e5;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.search__button {
+  top: 0;
+  right: 4px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 4px;
+  border: none;
+  background: url(../../assets/icons/search-icons.svg) center no-repeat;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+}
+
+//  hamburger
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  width: 50px;
+  height: 38px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 1000;
+}
+
+.active {
+  .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-14px, 18px);
+  }
+  .bar:nth-child(2) {
+    transform: rotate(45deg);
+  }
+  .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(12px, -18px);
+  }
+}
+
+.bar {
+  width: 50%;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #333;
+  transition: 0.4s;
+}
+
+.bar:nth-child(2) {
+  width: 100%;
+}
+
+.bar:nth-child(3) {
+  margin-left: 50%;
+}
+
+//  drawer
+.drawer__wrapper {
+  transition: all 0.2s ease-in-out 0.2s;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+
+  transform: translate(-100%);
+  box-shadow: 0 30px 80px 0 rgba(97, 45, 45, 0.25);
+  & .drawer {
+    box-sizing: border-box;
+    padding-top: 100px;
+    width: 40vw;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  & .modal {
+    width: 60vw;
+    height: 100vh;
+
+    background-color: rgba(224, 221, 209, 0.7);
+  }
+}
+
+.drawer__wrapper.active {
+  transform: translate(0%);
+}
+
+.menu-item a {
+  width: 160px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 32px;
+  color: #222;
+  transition: color 0.25s;
+  position: relative;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &::before {
+    bottom: -5px;
+    left: 0;
+    right: 100%;
+    background: #f50;
+    content: "";
+    box-sizing: content-box;
+    position: absolute;
+    transition: all 0.2s ease-in-out;
+    z-index: 100;
+    height: 3px;
+  }
+  &:hover {
+    color: #f50;
+    ::before {
+      right: 0;
+    }
+  }
+}
+.menu-item a:hover::before {
+  right: 0;
+}
+
+// This covers the top & right borders (expands right, then down)

@@ -1,0 +1,10 @@
+$wrapper-side: 30px;
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #fff;
+  // background: rgb(234, 141, 141);
+  // background: linear-gradient(180deg, rgba(234, 141, 141, 1) 0%, rgba(168, 144, 254, 1) 100%);
+}

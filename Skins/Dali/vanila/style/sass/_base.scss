@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  font-family: "Nanum Gothic", sans-serif;
+}
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button:focus {
+  outline: none;
+}
+
+.blind {
+  text-indent: -3000;
+}
