@@ -4,7 +4,7 @@ import FormView from "./View/FormView.js";
 $on(document, "DOMContentLoaded", () => {
   const form = new FormView({
     searchFormSelector: ".search__form",
-    searchInputSelector: ".search-input",
+    searchInputSelector: ".search__input",
   });
 
   const drawer__wrapper = document.querySelector(".drawer__wrapper");
