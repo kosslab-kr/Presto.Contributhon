@@ -7,3 +7,15 @@
   width: $size;
   height: $size;
 }
+
+@mixin responsiveList($s, $m, $l) {
+  @media screen and (min-width: $m+1) and (max-width: $l+1) {
+    width: 33.3333%;
+  }
+  @media screen and (min-width: $s+1) and (max-width: $m) {
+    width: 50%;
+  }
+  @media screen and (max-width: $s) {
+    width: 100%;
+  }
+}
