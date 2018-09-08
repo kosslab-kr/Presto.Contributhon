@@ -51,11 +51,13 @@
 
                 <c:PrestoGroupBox
                     Grid.Column="0"
-                    Padding="10"
+                    Padding="0,5,0,0"
                     Foreground="White"
                     Header="앨범 표지">
 
                     <Image
+                        Width="200"
+                        Height="200"
                         Cursor="Hand"
                         RenderOptions.BitmapScalingMode="HighQuality"
                         Source="{Binding Picture, Converter={cvt:UriToImageConverter CacheOption=OnLoad}}">
@@ -157,6 +159,7 @@
                 BorderBrush="{x:Null}"
                 ItemsSource="{Binding Musics}"
                 SelectedIndex="0">
+
                 <ListView.View>
                     <GridView>
                         <GridViewColumn

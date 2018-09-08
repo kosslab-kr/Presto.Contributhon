@@ -2,6 +2,7 @@
 using Presto.Plugin.YouTube.Models;
 using Presto.Plugin.YouTube.Supports;
 using Presto.Plugin.YouTube.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -15,6 +16,8 @@ namespace Presto.Plugin.YouTube.ViewModels
         private Playlist _playlist;
         private IEnumerable<Video> _videos;
         private bool _isProcessing = false;
+        private double _progress;
+        private string _status;
         #endregion
 
         #region 속성
@@ -51,13 +54,33 @@ namespace Presto.Plugin.YouTube.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public double Progress
+        {
+            get => _progress;
+            set
+            {
+                _progress = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region 생성자
         public ResultViewModel()
         {
             // 커멘드 초기화
-            Select = new DelegateCommand(Select_Execute);
+            Select = new DelegateCommand(Select_Execute, Select_CanExecute);
             Cancel = new DelegateCommand(Cancel_Execute);
         }
         #endregion
@@ -69,10 +92,15 @@ namespace Presto.Plugin.YouTube.ViewModels
 
             if (obj is IEnumerable<object> items)
             {
+                // 음악 다운로드
                 var results = new List<Music>();
                 foreach (var video in items.OfType<Video>())
                 {
-                    var music = await YouTubeUtility.Download(video);
+                    Status = video.Title;
+                    Progress = default(double);
+
+                    var progressHandler = new Progress<double>(p => Progress = p);
+                    var music = await YouTubeUtility.Download(video, progressHandler);
                     if (Playlist != null)
                     {
                         music.Album = Playlist.Title;
@@ -92,6 +120,16 @@ namespace Presto.Plugin.YouTube.ViewModels
 
             RaiseCloseRequested();
             IsProcessing = false;
+        }
+
+        private bool Select_CanExecute(object obj)
+        {
+            if (obj is IEnumerable<object> items)
+            {
+                return items.Count() > 0;
+            }
+
+            return false;
         }
 
         private void Cancel_Execute(object obj)

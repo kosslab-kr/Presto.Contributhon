@@ -5,6 +5,7 @@ using Presto.Plugin.YouTube.Supports;
 using Presto.SDK;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using System.Windows.Input;
 
@@ -77,6 +78,12 @@ namespace Presto.Plugin.YouTube.ViewModels
 
         private void Cancel_Execute(object obj)
         {
+            // 임시 파일 삭제
+            foreach (var music in Musics)
+            {
+                File.Delete(music.Path);
+            }
+
             new SearchDialog().Show();
             RaiseCloseRequested();
         }

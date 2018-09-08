@@ -16,7 +16,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         #endregion
 
         #region 속성
-        public ICommand Analyze { get; }
+        public ICommand Search { get; }
 
         public bool IsProcessing
         {
@@ -43,12 +43,12 @@ namespace Presto.Plugin.YouTube.ViewModels
         public SearchViewModel()
         {
             // 커멘드 초기화
-            Analyze = new DelegateCommand(Analyze_Execute, Analyze_CanExecute);
+            Search = new DelegateCommand(Search_Execute, Search_CanExecute);
         }
         #endregion
 
         #region 커멘드 함수
-        private async void Analyze_Execute(object obj)
+        private async void Search_Execute(object obj)
         {
             IsProcessing = true;
             var client = new YoutubeClient();
@@ -104,7 +104,7 @@ namespace Presto.Plugin.YouTube.ViewModels
             IsProcessing = false;
         }
 
-        private bool Analyze_CanExecute(object obj)
+        private bool Search_CanExecute(object obj)
         {
             return !IsProcessing && !string.IsNullOrWhiteSpace(Input);
         }

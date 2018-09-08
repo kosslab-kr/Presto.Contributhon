@@ -118,7 +118,7 @@
                     Text="{Binding Input, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     <TextBox.InputBindings>
-                        <KeyBinding Key="Enter" Command="{Binding Analyze}" />
+                        <KeyBinding Key="Enter" Command="{Binding Search}" />
                     </TextBox.InputBindings>
                 </TextBox>
             </StackPanel>
@@ -127,7 +127,7 @@
                 Width="100"
                 Height="42"
                 BorderBrush="{x:Null}"
-                Command="{Binding Analyze}"
+                Command="{Binding Search}"
                 Content="검색"
                 FontSize="14"
                 FontWeight="Bold"

@@ -13,7 +13,7 @@ namespace Presto.Plugin.YouTube.Utilities
 {
     static class YouTubeUtility
     {
-        public static async Task<Music> Download(Video video)
+        public static async Task<Music> Download(Video video, IProgress<double> progress = null)
         {
             // 오디오 검색
             var client = new YoutubeClient();
@@ -27,35 +27,34 @@ namespace Presto.Plugin.YouTube.Utilities
             if (!Directory.Exists(downloadPath))
                 Directory.CreateDirectory(downloadPath);
 
-            var audioResult = await ParallelDownloader.DownloadAsync(audio.Url, Path.Combine(downloadPath, $"{Guid.NewGuid().ToString()}.m4a"), 2);
-            if (audioResult.IsSuccess)
+            var filePath = Path.Combine(downloadPath, $"{Guid.NewGuid().ToString()}.m4a");
+            await client.DownloadMediaStreamAsync(audio, filePath, progress);
+
+            // 섬네일 다운로드
+            var thumbResult = await ParallelDownloader.DownloadAsync(video.Thumbnails.HighResUrl, Path.GetTempFileName(), 2);
+            if (thumbResult.IsSuccess)
             {
-                // 섬네일 다운로드
-                var thumbResult = await ParallelDownloader.DownloadAsync(video.Thumbnails.HighResUrl, Path.GetTempFileName(), 2);
-                if (thumbResult.IsSuccess)
+                // 레터 박스 제거
+                using (var bitmap = BitmapUtility.DeleteLetterBox(thumbResult.FilePath))
                 {
-                    // 레터 박스 제거
-                    using (var bitmap = BitmapUtility.DeleteLetterBox(thumbResult.FilePath))
-                    {
-                        bitmap.Save(thumbResult.FilePath);
-                    }
-
-                    // 비율에 맞춰 자르기
-                    using (var bitmap = BitmapUtility.CenterCrop(thumbResult.FilePath))
-                    {
-                        bitmap.Save(thumbResult.FilePath);
-                    }
-
-                    // 결과 반환
-                    return new Music
-                    {
-                        Path = audioResult.FilePath,
-                        Picture = thumbResult.FilePath,
-                        Title = video.Title,
-                        Artist = video.Author,
-                        Album = "YouTube"
-                    };
+                    bitmap.Save(thumbResult.FilePath);
                 }
+
+                // 비율에 맞춰 자르기
+                using (var bitmap = BitmapUtility.CenterCrop(thumbResult.FilePath))
+                {
+                    bitmap.Save(thumbResult.FilePath);
+                }
+
+                // 결과 반환
+                return new Music
+                {
+                    Path = filePath,
+                    Picture = thumbResult.FilePath,
+                    Title = video.Title,
+                    Artist = video.Author,
+                    Album = "YouTube"
+                };
             }
 
             return null;
