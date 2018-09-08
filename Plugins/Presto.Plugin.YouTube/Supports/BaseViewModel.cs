@@ -1,7 +1,6 @@
-﻿using Presto.Plugin.YouTube.Supports;
-using System;
+﻿using System;
 
-namespace Presto.Plugin.YouTube.ViewModels
+namespace Presto.Plugin.YouTube.Supports
 {
     public class BaseViewModel : BaseModel
     {

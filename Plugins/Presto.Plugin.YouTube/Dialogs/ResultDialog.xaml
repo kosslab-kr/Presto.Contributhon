@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="http://schemas.presto.component"
+    xmlns:cvt="clr-namespace:Presto.Plugin.YouTube.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Title="YouTube 검색 결과"
@@ -18,78 +19,86 @@
     </c:PrestoWindow.Caption>
 
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
-        </Grid.RowDefinitions>
+        <Grid Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=False}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="70" />
+            </Grid.RowDefinitions>
 
-        <ListView
-            x:Name="listVideos"
-            Grid.Row="0"
-            Margin="10,10,10,0"
-            BorderBrush="{x:Null}"
-            ItemsSource="{Binding Videos}"
-            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+            <ListView
+                x:Name="listVideos"
+                Grid.Row="0"
+                Margin="10,10,10,0"
+                BorderBrush="{x:Null}"
+                ItemsSource="{Binding Videos}"
+                ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Image
-                            Width="100"
-                            Height="65"
-                            Margin="0,0,10,0"
-                            RenderOptions.BitmapScalingMode="HighQuality"
-                            Source="{Binding Thumbnails.MediumResUrl}"
-                            Stretch="UniformToFill" />
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image
+                                Width="100"
+                                Height="65"
+                                Margin="0,0,10,0"
+                                RenderOptions.BitmapScalingMode="HighQuality"
+                                Source="{Binding Thumbnails.MediumResUrl}"
+                                Stretch="UniformToFill" />
 
-                        <StackPanel VerticalAlignment="Center">
-                            <TextBlock
-                                FontSize="16"
-                                Foreground="#FF404040"
-                                Text="{Binding Title}"
-                                TextTrimming="CharacterEllipsis" />
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="16"
+                                    Foreground="#FF404040"
+                                    Text="{Binding Title}"
+                                    TextTrimming="CharacterEllipsis" />
 
-                            <TextBlock
-                                FontSize="12"
-                                Foreground="#FF6A6A6A"
-                                Text="{Binding Author}"
-                                TextTrimming="CharacterEllipsis" />
+                                <TextBlock
+                                    FontSize="12"
+                                    Foreground="#FF6A6A6A"
+                                    Text="{Binding Author}"
+                                    TextTrimming="CharacterEllipsis" />
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
 
-        <StackPanel
-            Grid.Row="1"
-            Margin="0,0,10,0"
-            HorizontalAlignment="Right"
-            VerticalAlignment="Center"
-            Orientation="Horizontal">
+            <StackPanel
+                Grid.Row="1"
+                Margin="0,0,10,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
 
-            <c:PrestoButton
-                Width="100"
-                Height="42"
-                BorderBrush="{x:Null}"
-                Command="{Binding Cancel}"
-                Content="취소"
-                FontSize="14"
-                FontWeight="Bold"
-                Foreground="#FFCB2B36"
-                MouseOverBackground="White" />
+                <c:PrestoButton
+                    Width="100"
+                    Height="42"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding Cancel}"
+                    Content="취소"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="#FFCB2B36"
+                    MouseOverBackground="White" />
 
-            <c:PrestoButton
-                Width="100"
-                Height="42"
-                Margin="5,0,0,0"
-                BorderBrush="{x:Null}"
-                Command="{Binding Select}"
-                CommandParameter="{Binding SelectedItems, ElementName=listVideos}"
-                Content="선택"
-                FontSize="14"
-                FontWeight="Bold"
-                Foreground="#FFCB2B36"
-                MouseOverBackground="White" />
-        </StackPanel>
+                <c:PrestoButton
+                    Width="100"
+                    Height="42"
+                    Margin="5,0,0,0"
+                    BorderBrush="{x:Null}"
+                    Command="{Binding Select}"
+                    CommandParameter="{Binding SelectedItems, ElementName=listVideos}"
+                    Content="선택"
+                    FontSize="14"
+                    FontWeight="Bold"
+                    Foreground="#FFCB2B36"
+                    MouseOverBackground="White" />
+            </StackPanel>
+        </Grid>
+
+        <c:PrestoProgressRing
+            Width="70"
+            Height="70"
+            Foreground="White"
+            Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=True}}" />
     </Grid>
 </c:PrestoWindow>

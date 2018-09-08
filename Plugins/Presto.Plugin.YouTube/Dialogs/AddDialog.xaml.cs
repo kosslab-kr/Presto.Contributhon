@@ -1,5 +1,5 @@
 ﻿using Presto.Component.Controls;
-using Presto.Plugin.YouTube.ViewModels;
+using Presto.Plugin.YouTube.Supports;
 using System.Windows;
 
 namespace Presto.Plugin.YouTube.Dialogs

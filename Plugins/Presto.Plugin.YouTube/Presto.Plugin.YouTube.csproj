@@ -109,7 +109,7 @@
     <Compile Include="ViewModels\AddViewModel.cs" />
     <Compile Include="ViewModels\ResultViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
-    <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="Supports\BaseViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

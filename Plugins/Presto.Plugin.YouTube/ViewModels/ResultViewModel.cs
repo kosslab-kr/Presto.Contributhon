@@ -14,6 +14,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         #region 변수
         private Playlist _playlist;
         private IEnumerable<Video> _videos;
+        private bool _isProcessing = false;
         #endregion
 
         #region 속성
@@ -40,6 +41,16 @@ namespace Presto.Plugin.YouTube.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public bool IsProcessing
+        {
+            get => _isProcessing;
+            private set
+            {
+                _isProcessing = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         #region 생성자
@@ -53,6 +64,8 @@ namespace Presto.Plugin.YouTube.ViewModels
         #region 커멘드 함수
         private async void Select_Execute(object obj)
         {
+            IsProcessing = true;
+
             if (obj is IEnumerable<object> items)
             {
                 var results = new List<Music>();
@@ -73,6 +86,7 @@ namespace Presto.Plugin.YouTube.ViewModels
             }
 
             RaiseCloseRequested();
+            IsProcessing = false;
         }
 
         private void Cancel_Execute(object obj)
