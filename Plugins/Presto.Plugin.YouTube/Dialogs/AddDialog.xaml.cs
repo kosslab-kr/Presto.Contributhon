@@ -1,17 +1,6 @@
 ﻿using Presto.Component.Controls;
+using Presto.Plugin.YouTube.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Presto.Plugin.YouTube.Dialogs
 {
@@ -23,6 +12,13 @@ namespace Presto.Plugin.YouTube.Dialogs
         public AddDialog()
         {
             InitializeComponent();
+            DataContext = new AddViewModel();
+            (DataContext as AddViewModel).CloseRequested += AddViewModel_CloseRequested;
+        }
+
+        private void AddViewModel_CloseRequested(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

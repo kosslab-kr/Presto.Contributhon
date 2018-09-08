@@ -55,7 +55,7 @@
                                         IsHitTestVisible="False"
                                         Text="{TemplateBinding Tag}"
                                         Visibility="{TemplateBinding Text,
-                                                                     Converter={cvt:EmptyVisibilityConverter}}" />
+                                                                     Converter={cvt:StringToVisibilityConverter}}" />
                                 </Grid>
                             </Border>
                             <Rectangle
@@ -90,7 +90,7 @@
     </c:PrestoWindow.Resources>
 
     <Grid>
-        <StackPanel>
+        <StackPanel Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=False}}">
             <Image
                 Width="150"
                 Margin="0,40"
@@ -114,7 +114,7 @@
                     Foreground="White"
                     Style="{DynamicResource LineTextBoxStyle}"
                     Tag="동영상 또는 재생목록 주소 입력"
-                    Text="{Binding Video.Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    Text="{Binding Url, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     <TextBox.InputBindings>
                         <KeyBinding Key="Enter" Command="{Binding Analyze}" />
@@ -126,6 +126,7 @@
                 Width="100"
                 Height="42"
                 BorderBrush="{x:Null}"
+                Command="{Binding Analyze}"
                 Content="분석"
                 FontSize="14"
                 Foreground="#FFCB2B36"
@@ -135,6 +136,7 @@
         <c:PrestoProgressRing
             Width="70"
             Height="70"
-            Foreground="White" />
+            Foreground="White"
+            Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=True}}" />
     </Grid>
 </c:PrestoWindow>

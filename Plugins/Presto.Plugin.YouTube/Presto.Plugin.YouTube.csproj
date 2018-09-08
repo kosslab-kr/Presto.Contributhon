@@ -69,7 +69,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Converters\EmptyVisibilityConverter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Dialogs\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
     </Compile>
@@ -93,6 +94,8 @@
     <Compile Include="Supports\BaseModel.cs" />
     <Compile Include="Supports\BaseValueConverter.cs" />
     <Compile Include="Supports\DelegateCommand.cs" />
+    <Compile Include="ViewModels\AddViewModel.cs" />
+    <Compile Include="ViewModels\BaseViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
