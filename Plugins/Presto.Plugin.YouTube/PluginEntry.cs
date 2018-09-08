@@ -13,7 +13,7 @@ namespace Presto.Plugin.YouTube
     {
         public static void AddVideo()
         {
-            new AddDialog().Show();
+            new SearchDialog().Show();
         }
 
         [PrestoEntry]

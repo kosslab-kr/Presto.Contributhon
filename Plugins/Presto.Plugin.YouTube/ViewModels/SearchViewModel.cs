@@ -1,19 +1,18 @@
 ﻿using Presto.Component.Controls;
 using Presto.Component.Controls.Common;
+using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Supports;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Input;
 using YoutubeExplode;
-using YoutubeExplode.Models;
 
 namespace Presto.Plugin.YouTube.ViewModels
 {
-    public class AddViewModel : BaseViewModel
+    public class SearchViewModel : BaseViewModel
     {
         #region 변수
         private bool _isProcessing = false;
-        private string _url;
+        private string _input;
         #endregion
 
         #region 속성
@@ -29,36 +28,21 @@ namespace Presto.Plugin.YouTube.ViewModels
             }
         }
 
-        public string Url
+        public string Input
         {
-            get => _url;
+            get => _input;
             set
             {
-                _url = value;
+                _input = value;
                 RaisePropertyChanged();
             }
         }
         #endregion
 
         #region 생성자
-        public AddViewModel()
+        public SearchViewModel()
         {
             Analyze = new DelegateCommand(Analyze_Execute, Analyze_CanExecute);
-        }
-        #endregion
-
-        #region 내부 함수
-        private void ExtractVideo(Video video)
-        {
-            MessageBox.Show($"{video.Title}\n{video.Author}");
-        }
-
-        private void ExtractVideo(IEnumerable<Video> videos)
-        {
-            foreach (var video in videos)
-            {
-                ExtractVideo(video);
-            }
         }
         #endregion
 
@@ -68,36 +52,49 @@ namespace Presto.Plugin.YouTube.ViewModels
             IsProcessing = true;
             var client = new YoutubeClient();
 
-            if (YoutubeClient.TryParsePlaylistId(Url, out string playlistId))
+            if (YoutubeClient.TryParsePlaylistId(Input, out string playlistId))
             {
                 // 재생목록 분석
                 var playlist = await client.GetPlaylistAsync(playlistId);
-                ExtractVideo(playlist.Videos);
-                RaiseCloseRequested();
+                var resultDialog = new ResultDialog
+                {
+                    DataContext = new ResultViewModel
+                    {
+                        Playlist = playlist,
+                        Videos = playlist.Videos
+                    }
+                };
+
+                resultDialog.Show();
             }
-            else if (YoutubeClient.TryParseVideoId(Url, out string videoId))
+            else if (YoutubeClient.TryParseVideoId(Input, out string videoId))
             {
                 // 비디오 분석
                 var video = await client.GetVideoAsync(videoId);
-                ExtractVideo(video);
-                RaiseCloseRequested();
+                MessageBox.Show(video.Author);
             }
             else
             {
-                // 분석 오류
-                Application.Current.Dispatcher.Invoke(() =>
+                // 검색어 검색
+                var results = await client.SearchVideosAsync(Input, 1);
+                var resultDialog = new ResultDialog
                 {
-                    Url = null;
-                    PrestoDialog.Show("입력한 주소는 올바른 동영상 또는 재생목록이 아닙니다.", "오류", PrestoDialogButton.OK);
-                });
+                    DataContext = new ResultViewModel
+                    {
+                        Videos = results
+                    }
+                };
+
+                resultDialog.Show();
             }
 
+            RaiseCloseRequested();
             IsProcessing = false;
         }
 
         private bool Analyze_CanExecute(object obj)
         {
-            return !IsProcessing;
+            return !IsProcessing && !string.IsNullOrWhiteSpace(Input);
         }
         #endregion
     }

@@ -1,0 +1,92 @@
+﻿<c:PrestoWindow
+    x:Class="Presto.Plugin.YouTube.Dialogs.ResultDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="http://schemas.presto.component"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="YouTube 검색 결과"
+    Width="700"
+    Height="500"
+    Background="#FFCB2B36"
+    CaptionHeight="35"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+
+    <c:PrestoWindow.Caption>
+        <c:PrestoWindowCaption Background="#FFB91329" DecorationBrush="{x:Null}" />
+    </c:PrestoWindow.Caption>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <ListView
+            Grid.Row="0"
+            Margin="10,10,10,0"
+            BorderBrush="{x:Null}"
+            ItemsSource="{Binding Videos}"
+            ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="100"
+                            Height="65"
+                            Margin="0,0,10,0"
+                            RenderOptions.BitmapScalingMode="HighQuality"
+                            Source="{Binding Thumbnails.MediumResUrl}"
+                            Stretch="UniformToFill" />
+
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock
+                                FontSize="16"
+                                Foreground="#FF404040"
+                                Text="{Binding Title}"
+                                TextTrimming="CharacterEllipsis" />
+
+                            <TextBlock
+                                FontSize="12"
+                                Foreground="#FF6A6A6A"
+                                Text="{Binding Author}"
+                                TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,0,10,0"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Orientation="Horizontal">
+
+            <c:PrestoButton
+                Width="100"
+                Height="42"
+                BorderBrush="{x:Null}"
+                Command="{Binding Cancel}"
+                Content="취소"
+                FontSize="14"
+                Foreground="#FFCB2B36"
+                MouseOverBackground="White" />
+
+            <c:PrestoButton
+                Width="100"
+                Height="42"
+                Margin="5,0,0,0"
+                BorderBrush="{x:Null}"
+                Command="{Binding Add}"
+                Content="추가"
+                FontSize="14"
+                Foreground="#FFCB2B36"
+                MouseOverBackground="White" />
+        </StackPanel>
+    </Grid>
+</c:PrestoWindow>
