@@ -1,8 +1,8 @@
-﻿using Presto.Component.Controls;
-using Presto.Component.Controls.Common;
-using Presto.Plugin.YouTube.Dialogs;
+﻿using Presto.Plugin.YouTube.Dialogs;
+using Presto.Plugin.YouTube.Models;
 using Presto.Plugin.YouTube.Supports;
-using System.Windows;
+using Presto.Plugin.YouTube.Utilities;
+using System.Collections.Generic;
 using System.Windows.Input;
 using YoutubeExplode;
 
@@ -71,7 +71,18 @@ namespace Presto.Plugin.YouTube.ViewModels
             {
                 // 비디오 분석
                 var video = await client.GetVideoAsync(videoId);
-                MessageBox.Show(video.Author);
+                var addDialog = new AddDialog
+                {
+                    DataContext = new AddViewModel
+                    {
+                        Musics = new List<Music>()
+                        {
+                            await YouTubeUtility.Download(video)
+                        }
+                    }
+                };
+
+                addDialog.Show();
             }
             else
             {

@@ -10,7 +10,6 @@
     Height="500"
     Background="#FFCB2B36"
     CaptionHeight="35"
-    ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
@@ -25,6 +24,7 @@
         </Grid.RowDefinitions>
 
         <ListView
+            x:Name="listVideos"
             Grid.Row="0"
             Margin="10,10,10,0"
             BorderBrush="{x:Null}"
@@ -74,6 +74,7 @@
                 Command="{Binding Cancel}"
                 Content="취소"
                 FontSize="14"
+                FontWeight="Bold"
                 Foreground="#FFCB2B36"
                 MouseOverBackground="White" />
 
@@ -82,9 +83,11 @@
                 Height="42"
                 Margin="5,0,0,0"
                 BorderBrush="{x:Null}"
-                Command="{Binding Add}"
-                Content="추가"
+                Command="{Binding Select}"
+                CommandParameter="{Binding SelectedItems, ElementName=listVideos}"
+                Content="선택"
                 FontSize="14"
+                FontWeight="Bold"
                 Foreground="#FFCB2B36"
                 MouseOverBackground="White" />
         </StackPanel>

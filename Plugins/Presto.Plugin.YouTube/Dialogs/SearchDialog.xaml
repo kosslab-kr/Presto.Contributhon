@@ -130,6 +130,7 @@
                 Command="{Binding Analyze}"
                 Content="검색"
                 FontSize="14"
+                FontWeight="Bold"
                 Foreground="#FFCB2B36"
                 MouseOverBackground="White" />
         </StackPanel>
