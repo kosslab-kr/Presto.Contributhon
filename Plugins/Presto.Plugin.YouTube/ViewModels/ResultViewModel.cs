@@ -56,6 +56,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         #region 생성자
         public ResultViewModel()
         {
+            // 커멘드 초기화
             Select = new DelegateCommand(Select_Execute);
             Cancel = new DelegateCommand(Cancel_Execute);
         }
@@ -72,7 +73,11 @@ namespace Presto.Plugin.YouTube.ViewModels
                 foreach (var video in items.OfType<Video>())
                 {
                     var music = await YouTubeUtility.Download(video);
-                    music.Album = Playlist?.Title;
+                    if (Playlist != null)
+                    {
+                        music.Album = Playlist.Title;
+                    }
+
                     results.Add(music);
                 }
 

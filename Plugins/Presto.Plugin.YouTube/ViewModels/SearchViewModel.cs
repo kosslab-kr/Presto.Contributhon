@@ -42,6 +42,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         #region 생성자
         public SearchViewModel()
         {
+            // 커멘드 초기화
             Analyze = new DelegateCommand(Analyze_Execute, Analyze_CanExecute);
         }
         #endregion

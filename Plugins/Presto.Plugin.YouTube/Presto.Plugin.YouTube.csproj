@@ -125,6 +125,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\Genres.db" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="App.xaml">

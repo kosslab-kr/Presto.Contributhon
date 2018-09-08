@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="http://schemas.presto.component"
+    xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
     xmlns:cvt="clr-namespace:Presto.Plugin.YouTube.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,6 +18,14 @@
     <c:PrestoWindow.Caption>
         <c:PrestoWindowCaption Background="#FFB91329" DecorationBrush="{x:Null}" />
     </c:PrestoWindow.Caption>
+
+    <c:PrestoWindow.Resources>
+        <CollectionViewSource x:Key="GenresViewSource" Source="{Binding Genres}">
+            <CollectionViewSource.SortDescriptions>
+                <cm:SortDescription Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </c:PrestoWindow.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -136,6 +145,7 @@
                             Margin="10,12,0,12"
                             VerticalContentAlignment="Center"
                             IsEditable="True"
+                            ItemsSource="{Binding Source={StaticResource GenresViewSource}}"
                             Text="{Binding Genre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
                 </c:PrestoGroupBox>

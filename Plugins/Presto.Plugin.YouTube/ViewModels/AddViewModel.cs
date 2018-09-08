@@ -1,8 +1,11 @@
 ﻿using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
+using Presto.Plugin.YouTube.Properties;
 using Presto.Plugin.YouTube.Supports;
 using Presto.SDK;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Windows.Input;
 
 namespace Presto.Plugin.YouTube.ViewModels
@@ -27,13 +30,20 @@ namespace Presto.Plugin.YouTube.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        public List<string> Genres { get; } = new List<string>();
         #endregion
 
         #region 생성자
         public AddViewModel()
         {
+            // 커멘드 초기화
             Add = new DelegateCommand(Add_Execute);
             Cancel = new DelegateCommand(Cancel_Execute);
+
+            // 음악 장르 추가
+            var genres = Encoding.Default.GetString(Resources.Genres).Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            Genres.AddRange(genres);
         }
         #endregion
 
