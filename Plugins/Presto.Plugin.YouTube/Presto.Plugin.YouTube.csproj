@@ -41,6 +41,9 @@
     <Reference Include="Presto.Common">
       <HintPath>..\..\Natives\Presto.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Presto.Component">
+      <HintPath>..\..\Natives\Presto.Component.dll</HintPath>
+    </Reference>
     <Reference Include="Presto.SDK">
       <HintPath>..\..\Natives\Presto.SDK.dll</HintPath>
     </Reference>
@@ -63,6 +66,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\EmptyVisibilityConverter.cs" />
+    <Compile Include="Dialogs\AddDialog.xaml.cs">
+      <DependentUpon>AddDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Downloader\Models\DownloadRange.cs" />
     <Compile Include="Downloader\Models\DownloadResult.cs" />
     <Compile Include="Downloader\ParallelDownloader.cs" />
@@ -92,6 +102,19 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Dialogs\AddDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LogoLarge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
