@@ -27,11 +27,11 @@ namespace Presto.Plugin.YouTube.Utilities
             if (!Directory.Exists(downloadPath))
                 Directory.CreateDirectory(downloadPath);
 
-            var audioResult = ParallelDownloader.Download(audio.Url, Path.Combine(downloadPath, $"{Guid.NewGuid().ToString()}.m4a"), 2);
+            var audioResult = await ParallelDownloader.DownloadAsync(audio.Url, Path.Combine(downloadPath, $"{Guid.NewGuid().ToString()}.m4a"), 2);
             if (audioResult.IsSuccess)
             {
                 // 섬네일 다운로드
-                var thumbResult = ParallelDownloader.Download(video.Thumbnails.HighResUrl, Path.GetTempFileName(), 2);
+                var thumbResult = await ParallelDownloader.DownloadAsync(video.Thumbnails.HighResUrl, Path.GetTempFileName(), 2);
                 if (thumbResult.IsSuccess)
                 {
                     // 레터 박스 제거

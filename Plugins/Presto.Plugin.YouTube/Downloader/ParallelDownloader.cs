@@ -106,5 +106,10 @@ namespace Presto.Plugin.YouTube.Downloader
                 return result;
             }
         }
+
+        public static async Task<DownloadResult> DownloadAsync(string url, string destination, int parallelCount = 0)
+        {
+            return await Task.Run(() => Download(url, destination, parallelCount));
+        }
     }
 }
