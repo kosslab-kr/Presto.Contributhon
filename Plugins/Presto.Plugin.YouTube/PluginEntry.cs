@@ -1,25 +1,46 @@
 ﻿using Presto.Common;
-using Presto.Plugin.YouTube;
 using Presto.Plugin.YouTube.Dialogs;
 
 [assembly: PrestoTitle("YouTube")]
 [assembly: PrestoAuthor("Kodnix Software")]
 [assembly: PrestoDescription("YouTube 영상을 라이브러리에 추가하는 기능을 제공합니다.")]
-[assembly: PrestoPlugin(typeof(PluginEntry))]
 
 namespace Presto.Plugin.YouTube
 {
-    public class PluginEntry
+    public class PluginEntry : PrestoPlugin
     {
-        public static void AddVideo()
+        #region 변수
+        private SearchDialog _searchDialog;
+        #endregion
+
+        public override void Load()
         {
-            new SearchDialog().Show();
+
         }
 
-        [PrestoEntry]
-        public static void Initialize()
+        public override void Unload()
         {
-            // TODO 변경된 모듈 시스템 대응 필요
+            _searchDialog?.Close();
+            _searchDialog = null;
+        }
+
+        [PrestoMenu(PrestoKey.MenuLibrary, "음악 추가/YouTube에서 음악 추가", Priority = 2)]
+        private void AddMusic()
+        {
+            if (_searchDialog != null)
+            {
+                _searchDialog.Activate();
+            }
+            else
+            {
+                _searchDialog = new SearchDialog();
+                _searchDialog.Closed += (s, e) =>
+                {
+                    _searchDialog = null;
+                };
+
+                _searchDialog.Show();
+            }
         }
     }
 }

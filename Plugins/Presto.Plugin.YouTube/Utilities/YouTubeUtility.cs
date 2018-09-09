@@ -53,7 +53,7 @@ namespace Presto.Plugin.YouTube.Utilities
                     Picture = thumbResult.FilePath,
                     Title = video.Title,
                     Artist = video.Author,
-                    Album = "YouTube"
+                    Album = video.Title
                 };
             }
 

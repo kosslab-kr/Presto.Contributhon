@@ -10,7 +10,9 @@
     Width="500"
     Height="320"
     Background="#FFCB2B36"
+    BorderBrush="#FFD42F45"
     CaptionHeight="35"
+    DeactiveBorderBrush="#FFB91329"
     ResizeMode="CanMinimize"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">

@@ -10,13 +10,19 @@
     Width="700"
     Height="500"
     Background="#FFCB2B36"
+    BorderBrush="#FFD42F45"
     CaptionHeight="35"
+    DeactiveBorderBrush="#FFB91329"
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
     <c:PrestoWindow.Caption>
         <c:PrestoWindowCaption Background="#FFB91329" DecorationBrush="{x:Null}" />
     </c:PrestoWindow.Caption>
+
+    <c:PrestoWindow.Resources>
+        <ResourceDictionary Source="/Presto.Plugin.YouTube;component/Resources/PluginStyles.xaml" />
+    </c:PrestoWindow.Resources>
 
     <Grid>
         <Grid Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=False}}">
@@ -29,35 +35,51 @@
                 x:Name="listVideos"
                 Grid.Row="0"
                 Margin="10,10,10,0"
+                HorizontalContentAlignment="Stretch"
                 BorderBrush="{x:Null}"
+                BorderThickness="0"
+                ItemContainerStyle="{StaticResource SimpleContainerStyle}"
                 ItemsSource="{Binding Videos}"
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
                             <Image
-                                Width="100"
+                                Grid.Column="0"
                                 Height="65"
-                                Margin="0,0,10,0"
                                 RenderOptions.BitmapScalingMode="HighQuality"
                                 Source="{Binding Thumbnails.MediumResUrl}"
                                 Stretch="UniformToFill" />
 
-                            <StackPanel VerticalAlignment="Center">
+                            <StackPanel
+                                Grid.Column="1"
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Center">
+
                                 <TextBlock
                                     FontSize="16"
-                                    Foreground="#FF404040"
+                                    Foreground="#FF3A3A3A"
                                     Text="{Binding Title}"
                                     TextTrimming="CharacterEllipsis" />
 
                                 <TextBlock
-                                    FontSize="12"
-                                    Foreground="#FF6A6A6A"
+                                    FontSize="14"
+                                    Foreground="#FF646464"
                                     Text="{Binding Author}"
                                     TextTrimming="CharacterEllipsis" />
+
+                                <TextBlock
+                                    Foreground="#FF7A7A7A"
+                                    Text="{Binding Duration}"
+                                    TextTrimming="CharacterEllipsis" />
                             </StackPanel>
-                        </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
