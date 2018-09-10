@@ -1,6 +1,6 @@
-﻿using Presto.Plugin.YouTube.Dialogs;
+﻿using Presto.Component.Supports;
+using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
-using Presto.Plugin.YouTube.Supports;
 using Presto.Plugin.YouTube.Utilities;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -8,7 +8,7 @@ using YoutubeExplode;
 
 namespace Presto.Plugin.YouTube.ViewModels
 {
-    public class SearchViewModel : BaseViewModel
+    public class SearchViewModel : ViewModelBase
     {
         #region 변수
         private bool _isProcessing = false;

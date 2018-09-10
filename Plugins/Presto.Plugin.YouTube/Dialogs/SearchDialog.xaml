@@ -1,11 +1,11 @@
-﻿<c:PrestoWindow
+﻿<p:PrestoWindow
     x:Class="Presto.Plugin.YouTube.Dialogs.SearchDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:c="http://schemas.presto.component"
     xmlns:cvt="clr-namespace:Presto.Plugin.YouTube.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="http://schemas.presto.component"
     Title="YouTube 동영상 추가"
     Width="500"
     Height="320"
@@ -17,11 +17,11 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
 
-    <c:PrestoWindow.Caption>
-        <c:PrestoWindowCaption Background="#FFB91329" DecorationBrush="{x:Null}" />
-    </c:PrestoWindow.Caption>
+    <p:PrestoWindow.Caption>
+        <p:PrestoWindowCaption Background="#FFB91329" DecorationBrush="{x:Null}" />
+    </p:PrestoWindow.Caption>
 
-    <c:PrestoWindow.Resources>
+    <p:PrestoWindow.Resources>
         <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3" />
         <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA" />
         <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5" />
@@ -90,7 +90,7 @@
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-    </c:PrestoWindow.Resources>
+    </p:PrestoWindow.Resources>
 
     <Grid>
         <StackPanel Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=False}}">
@@ -125,7 +125,7 @@
                 </TextBox>
             </StackPanel>
 
-            <c:PrestoButton
+            <p:PrestoButton
                 Width="100"
                 Height="42"
                 BorderBrush="{x:Null}"
@@ -137,10 +137,10 @@
                 MouseOverBackground="White" />
         </StackPanel>
 
-        <c:PrestoProgressRing
+        <p:PrestoProgressRing
             Width="70"
             Height="70"
             Foreground="White"
             Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=True}}" />
     </Grid>
-</c:PrestoWindow>
+</p:PrestoWindow>

@@ -1,12 +1,13 @@
-﻿using Presto.Plugin.YouTube.Supports;
+﻿using Presto.Component.Converters;
 using System;
+using System.Globalization;
 using System.Windows;
 
 namespace Presto.Plugin.YouTube.Converters
 {
-    class StringToVisibilityConverter : BaseValueConverter<string, Visibility>
+    class StringToVisibilityConverter : ValueConverterBase<string, Visibility>
     {
-        public override Visibility Convert(string value, object parameter)
+        public override Visibility Convert(string value, object parameter, CultureInfo culture)
         {
             if (!string.IsNullOrEmpty(value))
             {
@@ -16,7 +17,7 @@ namespace Presto.Plugin.YouTube.Converters
             return Visibility.Visible;
         }
 
-        public override string ConvertBack(Visibility value, object parameter)
+        public override string ConvertBack(Visibility value, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

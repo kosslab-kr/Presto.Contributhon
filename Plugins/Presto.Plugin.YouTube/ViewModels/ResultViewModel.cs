@@ -1,6 +1,6 @@
-﻿using Presto.Plugin.YouTube.Dialogs;
+﻿using Presto.Component.Supports;
+using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
-using Presto.Plugin.YouTube.Supports;
 using Presto.Plugin.YouTube.Utilities;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,7 @@ using YoutubeExplode.Models;
 
 namespace Presto.Plugin.YouTube.ViewModels
 {
-    public class ResultViewModel : BaseViewModel
+    public class ResultViewModel : ViewModelBase
     {
         #region 변수
         private Playlist _playlist;

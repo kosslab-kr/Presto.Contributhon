@@ -1,7 +1,7 @@
-﻿using Presto.Plugin.YouTube.Dialogs;
+﻿using Presto.Component.Supports;
+using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
 using Presto.Plugin.YouTube.Properties;
-using Presto.Plugin.YouTube.Supports;
 using Presto.SDK;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace Presto.Plugin.YouTube.ViewModels
 {
-    public class AddViewModel : BaseViewModel
+    public class AddViewModel : ViewModelBase
     {
         #region 변수
         private IEnumerable<Music> _musics;
