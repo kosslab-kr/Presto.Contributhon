@@ -9,6 +9,8 @@
     Title="YouTube 검색 결과"
     Width="700"
     Height="500"
+    MinWidth="480"
+    MinHeight="500"
     Background="#FFCB2B36"
     BorderBrush="#FFD42F45"
     CaptionHeight="35"
