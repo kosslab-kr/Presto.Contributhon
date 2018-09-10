@@ -10,6 +10,8 @@
     Title="라이브러리에 추가"
     Width="700"
     Height="550"
+    MinWidth="400"
+    MinHeight="500"
     Background="#FFCB2B36"
     BorderBrush="#FFD42F45"
     CaptionHeight="35"
