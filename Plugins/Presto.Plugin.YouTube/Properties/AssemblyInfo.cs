@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Presto.Plugin.YouTube")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Kodnix")]
 [assembly: AssemblyProduct("Presto.Plugin.YouTube")]
-[assembly: AssemblyCopyright("Copyright ©  2018")]
+[assembly: AssemblyCopyright("Copyright © Kodnix. All rights reserved.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
