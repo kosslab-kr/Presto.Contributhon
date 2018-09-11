@@ -513,7 +513,7 @@ table {
   position: absolute;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
-  width: 35vw;
+  width: 40vw;
   height: 100%;
 }
 
@@ -523,7 +523,7 @@ table {
 
 .player__button-wrap {
   position: absolute;
-  width: 290px;
+  width: 220px;
   top: 10px;
   left: 50%;
   transform: translate3d(-50%, 0, 0);
@@ -537,13 +537,13 @@ table {
 
 .player__button {
   display: inline-block;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   vertical-align: middle;
-  margin-right: 36px;
+  margin-right: 23px;
 }
 .player__button--shuffle {
-  background: no-repeat top/100% url(../images/shuffle.png);
+  background: no-repeat center/100% url(../images/shuffle.png);
 }
 .player__button--back, .player__button--forward {
   position: relative;
@@ -554,7 +554,7 @@ table {
   display: block;
   transform: translate3d(3px, 3px, 0);
   width: 2px;
-  height: 14px;
+  height: 12px;
   background: #ccc;
 }
 .player__button--back::after, .player__button--forward::after {
@@ -564,39 +564,79 @@ table {
   transform: translate3d(3px, 3px, 0);
   width: 0px;
   height: 0px;
-  border-top: 7px solid transparent;
-  border-bottom: 7px solid transparent;
-  border-right: 12px solid #ccc;
+  border-top: 6px solid transparent;
+  border-bottom: 6px solid transparent;
+  border-right: 10px solid #ccc;
 }
 .player__button--forward {
   transform: rotate(180deg);
 }
 .player__button--repeat {
-  background: no-repeat top/100% url(../images/repeat.png);
+  background: no-repeat center/100% url(../images/repeat.png);
 }
-.player__button--pause-play {
+.player__button--play {
   box-sizing: border-box;
-  width: 35px;
-  height: 35px;
+  width: 33px;
+  height: 33px;
   border: 1px solid #ccc;
   border-radius: 50%;
   position: relative;
   transition: transform 0.05s;
+  text-align: center;
 }
-.player__button--pause-play::after {
+.player__button--play::before {
   content: "";
-  display: block;
-  position: absolute;
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.player__button--play::after {
+  content: "";
+  display: inline-block;
   top: 50%;
   left: 50%;
-  transform: translate3d(-40%, -50%, 0);
+  vertical-align: middle;
   width: 0px;
   height: 0px;
-  border-top: 8px solid transparent;
-  border-bottom: 8px solid transparent;
-  border-left: 13px solid #fff;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 11px solid #fff;
+  transform: translate3d(2px, -1px, 0);
 }
-.player__button--pause-play:hover {
+.player__button--play:hover {
+  transform: scale(1.1);
+  border-color: #fff;
+}
+.player__button--pause {
+  box-sizing: border-box;
+  width: 33px;
+  height: 33px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  position: relative;
+  transition: transform 0.05s;
+  text-align: center;
+}
+.player__button--pause::before {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+.player__button--pause::before, .player__button--pause::after {
+  content: "";
+  width: 3px;
+  height: 13px;
+  background: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate3d(0, 8px, 0);
+  margin-right: 5px;
+}
+.player__button--pause::after {
+  margin-right: 0px;
+}
+.player__button--pause:hover {
   transform: scale(1.1);
   border-color: #fff;
 }
@@ -607,7 +647,7 @@ table {
 .player__scroll-wrap {
   box-sizing: border-box;
   position: absolute;
-  width: 35vw;
+  width: 100%;
   height: 20px;
   top: 45px;
 }
@@ -634,13 +674,19 @@ table {
   color: #ccc;
 }
 
-.player__scroll {
+.player__scroll-boundary {
+  box-sizing: border-box;
   display: inline-block;
   width: calc(95% - 60px);
-  height: 4px;
-  background: #666;
-  border-radius: 4px;
+  height: 100%;
+  padding: 8px 0;
   vertical-align: middle;
+}
+
+.player__scroll {
+  height: 100%;
+  background: #3a3a3a;
+  border-radius: 4px;
 }
 
 .player__scroll-location {
@@ -680,7 +726,7 @@ table {
   height: 22px;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 4px;
 }
 .player__option--queue {
   background: no-repeat top/100% url(../images/queue.png);
@@ -700,7 +746,7 @@ table {
   vertical-align: middle;
   width: 75px;
   height: 4px;
-  background: #666;
+  background: #3a3a3a;
   border-radius: 4px;
 }
 .player__volume:hover .player__volume-location {

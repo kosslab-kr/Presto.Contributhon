@@ -1,3 +1,6 @@
+$signature-color: rgb(4, 223, 58);
+$player-height: 70px;
+
 .player {
   box-sizing: border-box;
   position: fixed;
@@ -51,7 +54,7 @@
   position: absolute;
   left: 50%;
   transform: translate3d(-50%,0,0);
-  width: 35vw; height: 100%;
+  width: 40vw; height: 100%;
 }
 
 // for child element(position absolute)
@@ -61,7 +64,7 @@
 
 .player__button-wrap {
   position: absolute;
-  width: 290px;
+  width: 220px;
   top: 10px; left: 50%;
   transform: translate3d(-50%, 0, 0);
   @include vertical-align-helper;
@@ -69,12 +72,12 @@
 
 .player__button {
   display: inline-block;
-  width: 20px; height: 20px;
+  width: 18px; height: 18px;
   vertical-align: middle;
-  margin-right: 36px;
+  margin-right: 23px;
 
   &--shuffle {
-    background: no-repeat top/100% url(../images/shuffle.png);
+    background: no-repeat center/100% url(../images/shuffle.png);
   }
 
   &--back {
@@ -87,7 +90,7 @@
       content: '';
       display: block;
       transform: $icon-transforom;
-      width: 2px; height: 14px; background: #ccc;
+      width: 2px; height: 12px; background: #ccc;
     }
 
     &::after {
@@ -95,7 +98,7 @@
       content: '';
       display: block;
       transform: $icon-transforom;
-      @include arrow($direction: left, $width: 12px, $height: 14px, $color: #ccc);
+      @include arrow($direction: left, $width: 10px, $height: 12px, $color: #ccc);
     }
   }
 
@@ -105,24 +108,55 @@
   }
 
   &--repeat {
-    background: no-repeat top/100% url(../images/repeat.png);
+    background: no-repeat center/100% url(../images/repeat.png);
   }
 
-  &--pause-play {
+  &--play {
     box-sizing: border-box;
-    width: 35px; height: 35px;
+    width: 33px; height: 33px;
     border: 1px solid #ccc;
     border-radius: 50%;
     position: relative;
     transition: transform .05s;
+    text-align: center;
+    @include vertical-align-helper;
 
     &::after {
       content: '';
-      display: block;
-      position: absolute;
+      display: inline-block;
       top: 50%; left: 50%;
-      transform: translate3d(-40%, -50%, 0);
-      @include arrow($direction: right, $width: 13px, $height: 16px, $color: #fff);
+      vertical-align: middle;
+      @include arrow($direction: right, $width: 11px, $height: 14px, $color: #fff);
+      transform: translate3d(2px, -1px, 0);
+    }
+
+    &:hover {
+      transform: scale(1.1);
+      border-color: #fff
+    }
+  }
+
+  &--pause {
+    box-sizing: border-box;
+    width: 33px; height: 33px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    transition: transform .05s;
+    text-align: center;
+    @include vertical-align-helper;
+
+    &::before, &::after {
+      content: '';
+      width: 3px; height: 13px; background: #fff;
+      display: inline-block;
+      vertical-align: middle;
+      transform: translate3d(0, 8px, 0);
+      margin-right: 5px;
+    }
+
+    &::after {
+      margin-right: 0px;
     }
 
     &:hover {
@@ -137,7 +171,7 @@
 .player__scroll-wrap {
   box-sizing: border-box;
   position: absolute;
-  width: 35vw; height: 20px;
+  width: 100%; height: 20px;
   top: 45px;
   @include vertical-align-helper;
 
@@ -161,12 +195,20 @@
   color: #ccc;
 }
 
-.player__scroll {
+// for 
+.player__scroll-boundary {
+  box-sizing: border-box;
   display: inline-block;
-  width: calc(95% - #{$player-time-size * 2}); height: 4px;
-  background: #666;
-  border-radius: 4px;
+  width: calc(95% - #{$player-time-size * 2}); height: 100%;
+  padding: 8px 0;
   vertical-align: middle;
+  // margin: 0px 7px;
+}
+
+.player__scroll {
+  height: 100%;
+  background: #3a3a3a;
+  border-radius: 4px;
 }
 
 .player__scroll-location {
@@ -198,7 +240,7 @@
   width: 22px; height: 22px;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 10px;
+  margin-right: 4px;
   
   &--queue {
     background: no-repeat top/100% url(../images/queue.png);
@@ -218,7 +260,7 @@
 .player__volume {
   display: inline-block;
   vertical-align: middle;
-  width: 75px; height: 4px; background: #666;
+  width: 75px; height: 4px; background: #3a3a3a;
   border-radius: 4px;
 
   &:hover {
