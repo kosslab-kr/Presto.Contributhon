@@ -92,6 +92,7 @@
     <Compile Include="Downloader\Models\DownloadResult.cs" />
     <Compile Include="Downloader\ParallelDownloader.cs" />
     <Compile Include="Models\Music.cs" />
+    <Compile Include="PluginData.cs" />
     <Compile Include="PluginEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

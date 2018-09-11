@@ -70,6 +70,12 @@ namespace Presto.Plugin.YouTube.ViewModels
                 if (prestoMusic != null)
                 {
                     PrestoSDK.PrestoService.Library.AddMusic(prestoMusic);
+
+                    // 재생목록에도 추가
+                    if (PluginData.CurrentPlaylist != null)
+                    {
+                        PluginData.CurrentPlaylist.AddMusic(prestoMusic);
+                    }
                 }
             }
 
