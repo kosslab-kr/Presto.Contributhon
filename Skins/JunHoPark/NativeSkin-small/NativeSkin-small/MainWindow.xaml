@@ -6,8 +6,33 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NativeSkin_small"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="Presto Music Player" Height="600" Width="400" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Foreground="LightSteelBlue">
+    <Grid Background="Black">
+        <Grid VerticalAlignment="Top" Margin="10">
+            <Button HorizontalAlignment="Left" Width="20" Height="20" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFA05AF3" Offset="0"/>
+                            <GradientStop Color="#FF573BB8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+            <StackPanel>
+                <TextBlock Text="Name of the song" HorizontalAlignment="Center" Foreground="MediumPurple"/>
+                <TextBlock Text="Name of the artist" HorizontalAlignment="Center" Foreground="MediumPurple"/>
+            </StackPanel>
+            <Button HorizontalAlignment="Right" Width="20" Height="20" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Power" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FFA05AF3" Offset="0"/>
+                            <GradientStop Color="#FF573BB8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+        </Grid>
     </Grid>
 </Window>
