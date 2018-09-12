@@ -7,10 +7,10 @@
         xmlns:local="clr-namespace:NativeSkin_small"
         mc:Ignorable="d"
         Title="Presto Music Player" Height="600" Width="400" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" Foreground="LightSteelBlue">
-    <Grid Background="Black">
+    <Grid Background="#FF131212">
         <Grid VerticalAlignment="Top" Margin="10">
-            <Button HorizontalAlignment="Left" Width="20" Height="20" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Plus" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button HorizontalAlignment="Left" Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                             <GradientStop Color="#FFA05AF3" Offset="0"/>
@@ -20,19 +20,42 @@
                 </materialDesign:PackIcon>
             </Button>
             <StackPanel>
-                <TextBlock Text="Name of the song" HorizontalAlignment="Center" Foreground="MediumPurple"/>
-                <TextBlock Text="Name of the artist" HorizontalAlignment="Center" Foreground="MediumPurple"/>
+                <TextBlock Text="Title : No copy right sound" HorizontalAlignment="Center" Foreground="AliceBlue"/>
+                <TextBlock Text="Artist : Name of the artist" HorizontalAlignment="Center" Foreground="AliceBlue"/>
             </StackPanel>
-            <Button HorizontalAlignment="Right" Width="20" Height="20" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
-                <materialDesign:PackIcon Kind="Power" Width="20" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button HorizontalAlignment="Right" Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Power" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <materialDesign:PackIcon.Foreground>
-                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="#FFA05AF3" Offset="0"/>
                             <GradientStop Color="#FF573BB8" Offset="1"/>
                         </LinearGradientBrush>
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
             </Button>
+        </Grid>
+        <Grid Height="400" VerticalAlignment="Top">
+            <Ellipse Width="250" Height="250" StrokeThickness="2">
+                <Ellipse.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA05AF3" Offset="0"/>
+                        <GradientStop Color="#FF573BB8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+            </Ellipse>
+            <Ellipse Width="245" Height="245">
+                <Ellipse.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA05AF3" Offset="0"/>
+                        <GradientStop Color="#FF573BB8" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Width="240" Height="240">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="Image/image.PNG"/>
+                </Ellipse.Fill>
+            </Ellipse>
         </Grid>
     </Grid>
 </Window>
