@@ -56,6 +56,38 @@
                     <ImageBrush ImageSource="Image/image.PNG"/>
                 </Ellipse.Fill>
             </Ellipse>
+            <Grid VerticalAlignment="Bottom" Margin="0 0 0 5">
+                <Button HorizontalAlignment="Left" Width="30" Height="30" Margin="120 0 0 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="RotateRight" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFA05AF3" Offset="0"/>
+                                <GradientStop Color="#FF573BB8" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Center" Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Heart" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFA05AF3" Offset="0"/>
+                                <GradientStop Color="#FF573BB8" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Right" Width="30" Height="30" Margin="0 0 120 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Shuffle" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="#FFA05AF3" Offset="0"/>
+                                <GradientStop Color="#FF573BB8" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
         </Grid>
     </Grid>
 </Window>
