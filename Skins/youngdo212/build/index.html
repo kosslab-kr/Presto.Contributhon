@@ -147,7 +147,11 @@
           <div class="player__button-wrap">
             <div class="player__button player__button--shuffle"></div>
             <div class="player__button player__button--back"></div>
-            <div class="player__button player__button--play"></div>
+            <div
+              id='play-button'
+              v-bind:class='classObject'
+              v-on:click='toggle'>
+            </div>
             <div class="player__button player__button--forward"></div>
             <div class="player__button player__button--repeat"></div>
           </div>
