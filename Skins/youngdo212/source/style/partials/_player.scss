@@ -168,7 +168,7 @@ $player-height: 70px;
   &:nth-last-child(1) { margin: 0 };
 }
 
-.player__scroll-wrap {
+.player__controls-core {
   box-sizing: border-box;
   position: absolute;
   width: 100%; height: 20px;
@@ -176,7 +176,7 @@ $player-height: 70px;
   @include vertical-align-helper;
 
   &:hover {
-    .player__scroll-location {
+    .player__slider-location {
       background: $signature-color;
 
       // drag-button
@@ -196,7 +196,7 @@ $player-height: 70px;
 }
 
 // for 
-.player__scroll-boundary {
+.player__slider-wrap {
   box-sizing: border-box;
   display: inline-block;
   width: calc(95% - #{$player-time-size * 2}); height: 100%;
@@ -205,13 +205,13 @@ $player-height: 70px;
   // margin: 0px 7px;
 }
 
-.player__scroll {
+.player__slider {
   height: 100%;
   background: #3a3a3a;
   border-radius: 4px;
 }
 
-.player__scroll-location {
+.player__slider-location {
   position: relative;
   height: 100%;
   border-radius: 5px;
