@@ -24,5 +24,22 @@ namespace NativeSkin_small
         {
             InitializeComponent();
         }
+
+        private void Power_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
+
+        private void ExitToApp_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.NavigationService.CanGoBack)
+            {
+                this.NavigationService.GoBack();
+            }
+            else
+            {
+                MessageBox.Show("뒤로 갈 수 없습니다");
+            }
+        }
     }
 }
