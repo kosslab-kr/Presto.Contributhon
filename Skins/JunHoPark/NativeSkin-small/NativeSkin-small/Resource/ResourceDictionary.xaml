@@ -10,10 +10,14 @@
         <Setter Property="Foreground" Value="LightSteelBlue"/>
     </Style>
 
-    <Style x:Key="appBackgroundColor" TargetType="{x:Type Grid}">
-        <Setter Property="Background" Value="#FF131212"/>
+    <Style x:Key="appBackground" TargetType="{x:Type Grid}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="/NativeSkin-small;component/Image/backgroundImage.jpg"/>
+            </Setter.Value>
+        </Setter>
     </Style>
-    <Style x:Key="appBackgroundColorSecond" TargetType="{x:Type Grid}">
+    <Style x:Key="appBackgroundColor" TargetType="{x:Type Grid}">
         <Setter Property="Background" Value="#FF181919"/>
     </Style>
     
