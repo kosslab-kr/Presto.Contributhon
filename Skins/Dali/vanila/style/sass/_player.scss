@@ -2,10 +2,11 @@
   z-index: 50;
   width: 100%;
   min-width: 375px;
-  padding: 10px 70px 10px 10px;
+  padding: 20px 70px 20px 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   bottom: 0;
@@ -23,7 +24,7 @@
 .player__desc {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
 
   & .thumbnail {
     width: 50px;
@@ -59,7 +60,6 @@
   display: flex;
   align-items: center;
   color: #fff;
-  margin-bottom: 10px;
 }
 
 .progressbar {
@@ -88,5 +88,6 @@
   & button {
     border: none;
     background: transparent;
+    padding: 0;
   }
 }
