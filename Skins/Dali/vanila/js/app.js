@@ -1,5 +1,6 @@
 import { $on } from "./helper/domHelper.js";
 import FormView from "./View/FormView.js";
+import MusicPlayer from './MusicPlayer/MusicPlayer.js';
 
 $on(document, "DOMContentLoaded", () => {
   const form = new FormView({
@@ -13,4 +14,10 @@ $on(document, "DOMContentLoaded", () => {
     hamburgerBtn.classList.toggle("active");
     drawer__wrapper.classList.toggle("active");
   });
+  const musicPlayer  = new MusicPlayer({
+    audio: '#fotter-player',
+    playBtn: '#footer-playBtn',
+    pauseBtn: '#footer-pauseBtn',
+  })
+  
 });

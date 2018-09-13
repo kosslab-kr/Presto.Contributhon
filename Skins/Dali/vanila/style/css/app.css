@@ -25,6 +25,10 @@ button:focus {
   text-indent: -3000;
 }
 
+.hide {
+  visibility: hidden;
+}
+
 .wrapper {
   width: 100%;
   min-height: 100vh;
@@ -39,7 +43,7 @@ button:focus {
   min-width: 375px;
   height: 80px;
   box-sizing: border-box;
-  padding-left: 60px;
+  padding-left: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,6 +293,8 @@ button:focus {
   margin-right: 30px;
   border: 1px solid #333;
   overflow: hidden;
+  max-width: 340px;
+  min-width: 180px;
 }
 
 .taste-item .title {
@@ -354,6 +360,8 @@ button:focus {
   margin-right: 30px;
   border: 1px solid #333;
   overflow: hidden;
+  max-width: 340px;
+  min-width: 180px;
 }
 
 .hot__section .hot-item .title {

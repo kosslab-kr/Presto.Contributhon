@@ -22,3 +22,8 @@ button:focus {
 .blind {
   text-indent: -3000;
 }
+
+.hide {
+  visibility: hidden;
+  position: absolute;
+}
