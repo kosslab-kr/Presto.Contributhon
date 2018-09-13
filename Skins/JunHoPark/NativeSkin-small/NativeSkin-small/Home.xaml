@@ -9,10 +9,7 @@
       d:DesignHeight="600" d:DesignWidth="400"
       Title="Presto Music Player">
 
-    <Grid Style="{StaticResource appBackgroundColor}">
-        <Grid.Background>
-            <ImageBrush ImageSource="Image/backgroundImage.jpg"/>
-        </Grid.Background>
+    <Grid Style="{StaticResource appBackground}">
         <Grid VerticalAlignment="Top" Margin="10">
             <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -95,7 +92,7 @@
             </Grid>
         </Grid>
         <Grid VerticalAlignment="Bottom" Height="200">
-            <Grid VerticalAlignment="Top" Height="120" ShowGridLines="True" Style="{StaticResource appBackgroundColorSecond}" Opacity="0.5">
+            <Grid VerticalAlignment="Top" Height="120" ShowGridLines="True" Style="{StaticResource appBackgroundColor}" Opacity="0.5">
                 <TextBlock Text="OH leay \n lyrics " VerticalAlignment="Center" Margin="50"/>
             </Grid>
             <Grid VerticalAlignment="Bottom" Height="80">

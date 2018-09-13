@@ -9,17 +9,27 @@
       d:DesignHeight="600" d:DesignWidth="400"
       Title="PlayListView">
 
-    <Grid Background="#FF131212">
+    <Grid Style="{StaticResource appBackground}">
         <Grid VerticalAlignment="Top" Margin="10">
             <StackPanel>
                 <TextBlock Text="PLAY LIST" HorizontalAlignment="Center" Foreground="AliceBlue"/>
             </StackPanel>
-            <Button HorizontalAlignment="Right" Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+            <Button HorizontalAlignment="Left" Width="30" Height="30" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="ExitToApp_Click">
                 <materialDesign:PackIcon Kind="ExitToApp" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                             <GradientStop Color="#FFA05AF3" Offset="0"/>
                             <GradientStop Color="#FF573BB8" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+            <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="Power_Click">
+                <materialDesign:PackIcon Kind="Power" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
                         </LinearGradientBrush>
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
@@ -113,8 +123,8 @@
                 <materialDesign:PackIcon Kind="ChevronLeft" Width="30" Height="30">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFA05AF3" Offset="0"/>
-                            <GradientStop Color="#FF573BB8" Offset="1"/>
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
                         </LinearGradientBrush>
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
@@ -126,8 +136,8 @@
                 <materialDesign:PackIcon Kind="Pause" Width="40" Height="40">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFA05AF3" Offset="0"/>
-                            <GradientStop Color="#FF573BB8" Offset="1"/>
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
                         </LinearGradientBrush>
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
@@ -136,8 +146,8 @@
                 <materialDesign:PackIcon Kind="ChevronRight" Width="30" Height="30">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                            <GradientStop Color="#FFA05AF3" Offset="0"/>
-                            <GradientStop Color="#FF573BB8" Offset="1"/>
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
                         </LinearGradientBrush>
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
