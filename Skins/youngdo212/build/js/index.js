@@ -26,16 +26,25 @@ Vue.component('player-slider', {
   },
   methods: {
     setPosition({currentTarget, clientX}) {
+      if(clientX === 0) return;
+      
       const {width: sliderWidth, left: sliderLeft} = currentTarget.getBoundingClientRect();
       const positionRatio = ((clientX - sliderLeft) / sliderWidth ) * 100;
 
-      this.widthPercentage = positionRatio;
+      this.widthPercentage = positionRatio >= 100 ? 100 : positionRatio <= 0 ? 0 : positionRatio;
+    },
+    setDragImage(event) {
+      const invisibleElem = document.createElement('img');
+      event.dataTransfer.setDragImage(invisibleElem, 0, 0);
     }
   },
   template: `
   <div
     class="player__slider-wrap"
-    @mousedown='setPosition'>
+    draggable='true'
+    @mousedown='setPosition'
+    @drag='setPosition'
+    @dragstart='setDragImage'>
     <div class="player__slider">
       <div
         :style='{width: widthPercentage + "%"}'
