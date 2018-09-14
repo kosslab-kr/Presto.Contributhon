@@ -247,22 +247,48 @@ button:focus {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .discover__tastelist .thumbnail {
-  width: 180px;
-  height: 180px;
-  margin-bottom: 5px;
-  border-radius: 5px 5px 0 0;
+  max-width: 100%;
+  height: auto;
 }
 
 .taste-item {
   cursor: pointer;
-  background: #000;
   box-sizing: border-box;
+  width: 25%;
   border-radius: 5px;
-  margin-right: 20px;
   margin-bottom: 20px;
+}
+
+@media screen and (min-width: 761px) and (max-width: 1021px) {
+  .taste-item {
+    width: 33.3333%;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 760px) {
+  .taste-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .taste-item {
+    width: 100%;
+  }
+}
+
+.taste-item a {
+  display: block;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 5px;
+  margin-right: 30px;
+  border: 1px solid #333;
+  overflow: hidden;
 }
 
 .taste-item .title {
@@ -275,6 +301,11 @@ button:focus {
   margin-top: 5px;
   font-size: 14px;
   color: #fff;
+}
+
+.taste-item .desc-box {
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 .hot__section {
@@ -291,11 +322,38 @@ button:focus {
 
 .hot__section .hot-item {
   cursor: pointer;
-  background: #000;
   box-sizing: border-box;
+  width: 25%;
   border-radius: 5px;
-  margin-right: 20px;
   margin-bottom: 20px;
+}
+
+@media screen and (min-width: 761px) and (max-width: 1021px) {
+  .hot__section .hot-item {
+    width: 33.3333%;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 760px) {
+  .hot__section .hot-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hot__section .hot-item {
+    width: 100%;
+  }
+}
+
+.hot__section .hot-item a {
+  display: block;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 5px;
+  margin-right: 30px;
+  border: 1px solid #333;
+  overflow: hidden;
 }
 
 .hot__section .hot-item .title {
@@ -310,6 +368,11 @@ button:focus {
   color: #fff;
 }
 
+.hot__section .hot-item .desc-box {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
 .hot-artistlist {
   display: flex;
   align-items: center;
@@ -317,20 +380,18 @@ button:focus {
 }
 
 .hot-artistlist .thumbnail {
-  width: 180px;
-  height: 180px;
-  margin-bottom: 5px;
-  border-radius: 5px 5px 0 0;
+  max-width: 100%;
 }
 
 .player {
   z-index: 50;
   width: 100%;
   min-width: 375px;
-  padding: 10px 70px 10px 10px;
+  padding: 20px 70px 20px 20px;
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.8);
   position: fixed;
   bottom: 0;
@@ -352,7 +413,7 @@ button:focus {
 .player__desc {
   display: flex;
   align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .player__desc .thumbnail {
@@ -389,7 +450,6 @@ button:focus {
   display: flex;
   align-items: center;
   color: #fff;
-  margin-bottom: 10px;
 }
 
 .progressbar {
@@ -420,4 +480,5 @@ button:focus {
 .wrapper__playlist-btn button {
   border: none;
   background: transparent;
+  padding: 0;
 }
