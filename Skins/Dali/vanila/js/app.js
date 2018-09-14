@@ -21,6 +21,7 @@ $on(document, "DOMContentLoaded", () => {
     timer: '.start-timer',
     progressBar: '.progressbar',
     endTime: '.finish-time',
+    rangeBar: '.range-bar',
   })
   
 });

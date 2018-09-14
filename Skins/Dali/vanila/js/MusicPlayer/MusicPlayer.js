@@ -11,12 +11,12 @@ const milliSecToSec = 1000;
 
 
 class MusicPlayer {
-  constructor({audio, playBtn, timer, progressBar, endTime}){
+  constructor({audio, playBtn, timer, progressBar, endTime, rangeBar}){
   
     this.audioEl = qs(audio);
     this.playBtnEl = qs(playBtn);
     this.musicTimer = new Timer({timer})
-    this.progressBarEl = new ProgressBar({progressBar});
+    this.progressBarEl = new ProgressBar({progressBar, rangeBar});
     this.endTimeEl = qs(endTime);
     this.playing = false;
     this.bindEvents();
@@ -24,6 +24,9 @@ class MusicPlayer {
   bindEvents(){
     $on(this.playBtnEl, 'click', ()=>this.togglePlay())
     $on(this.audioEl, 'loadeddata', ()=>this.displayEndTime())  
+  }
+  syncToTime(){
+
   }
   displayEndTime(){
     const endTime = Math.floor(this.audioEl.duration)
@@ -47,6 +50,7 @@ class MusicPlayer {
     qs('.controller-icon', this.playBtnEl).setAttribute('src', playSrc)
     this.playing = false;
     this.musicTimer.stopTimer();
+    this.progressBarEl.stop();
   }
   updateTimer(){
     this.calcTime(this.currentTime)
