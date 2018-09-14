@@ -27,6 +27,7 @@ button:focus {
 
 .hide {
   visibility: hidden;
+  position: absolute;
 }
 
 .wrapper {

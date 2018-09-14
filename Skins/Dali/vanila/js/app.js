@@ -18,6 +18,9 @@ $on(document, "DOMContentLoaded", () => {
     audio: '#fotter-player',
     playBtn: '#footer-playBtn',
     pauseBtn: '#footer-pauseBtn',
+    timer: '.start-timer',
+    progressBar: '.progressBar',
+    endTime: '.finish-time',
   })
   
 });
