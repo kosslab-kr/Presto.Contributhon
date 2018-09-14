@@ -69,16 +69,22 @@
   background: #fff;
   margin-right: 20px;
   margin-left: 20px;
+  .seek-bar {
+    background: #f50;
+    position: absolute;
+    height: 2px;
+  }
 }
 
 .pointer {
   top: 50%;
+  right: 0;
   width: 12px;
   height: 12px;
   background: #f50;
   position: absolute;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, -50%);
 }
 
 .wrapper__playlist-btn {
@@ -91,3 +97,5 @@
     padding: 0;
   }
 }
+
+

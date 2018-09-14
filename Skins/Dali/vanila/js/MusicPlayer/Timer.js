@@ -16,15 +16,15 @@ class Timer {
     },milliSecToSec )
     this.displayTimer(this.spendTime)
   }
-  displayTimer(spentTime){
+  displayTimer(spentTime, el=this.timerEl){
     const min = Math.floor(spentTime/minPerSec)
     const sec = spentTime-min*minPerSec
     const time = {
       min,
       sec,
     }
-    qs('.min', this.timerEl).innerText = this.makeTimeFormat(time.min)
-    qs('.sec', this.timerEl).innerText = this.makeTimeFormat(time.sec)
+    qs('.min', el).innerText = this.makeTimeFormat(time.min)
+    qs('.sec', el).innerText = this.makeTimeFormat(time.sec)
   }
   stopTimer(){
     clearTimeout(this.timerId);

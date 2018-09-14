@@ -19,7 +19,7 @@ $on(document, "DOMContentLoaded", () => {
     playBtn: '#footer-playBtn',
     pauseBtn: '#footer-pauseBtn',
     timer: '.start-timer',
-    progressBar: '.progressBar',
+    progressBar: '.progressbar',
     endTime: '.finish-time',
   })
   

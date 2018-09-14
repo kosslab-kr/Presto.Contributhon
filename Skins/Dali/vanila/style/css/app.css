@@ -470,14 +470,21 @@ button:focus {
   margin-left: 20px;
 }
 
+.progressbar .seek-bar {
+  background: #f50;
+  position: absolute;
+  height: 2px;
+}
+
 .pointer {
   top: 50%;
+  right: 0;
   width: 12px;
   height: 12px;
   background: #f50;
   position: absolute;
   border-radius: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, -50%);
 }
 
 .wrapper__playlist-btn {
