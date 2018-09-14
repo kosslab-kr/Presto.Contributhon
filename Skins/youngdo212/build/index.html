@@ -147,7 +147,11 @@
           <div class="player__button-wrap">
             <div class="player__button player__button--shuffle"></div>
             <div class="player__button player__button--back"></div>
-            <play-button></play-button>
+            <div
+              class='player__button'
+              :class='onPlay ? "player__button--pause" : "player__button--play"'
+              @click='togglePlay'>
+            </div>
             <div class="player__button player__button--next"></div>
             <div class="player__button player__button--repeat"></div>
           </div>

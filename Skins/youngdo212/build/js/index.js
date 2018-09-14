@@ -1,23 +1,3 @@
-Vue.component('play-button', {
-  data() {
-    return {
-      onPlay: false
-    }
-  },
-  methods: {
-    toggle() {
-      this.onPlay = !this.onPlay;
-    }
-  },
-  template: `
-  <div
-    class='player__button'
-    :class='onPlay ? "player__button--pause" : "player__button--play"'
-    @click='toggle'>
-    </div>
-    `
-  })
-  
 Vue.component('horizon-slider', {
   data() {
     return {
@@ -73,7 +53,8 @@ const player = new Vue({
 
   data: {
     currentMusic: {runningTime: 200000},
-    currentTime: 0
+    currentTime: 0,
+    onPlay: false
   },
 
   methods: {
@@ -89,6 +70,10 @@ const player = new Vue({
 
     calcCurrentTime(widthPercentage) {
       this.currentTime = (widthPercentage / 100) * this.currentMusic.runningTime;
+    },
+
+    togglePlay() {
+      this.onPlay = !this.onPlay;
     }
   }
 })
