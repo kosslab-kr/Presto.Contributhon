@@ -152,9 +152,11 @@
             <div class="player__button player__button--repeat"></div>
           </div>
           <div class="player__controls-core">
-            <div class="player__current-time">0:40</div>
-            <player-slider></player-slider>
-            <div class="player__total-time">3:17</div>
+            <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
+            <player-slider
+              v-on:hold-slider-thumb='calcCurrentTime'>
+            </player-slider>
+            <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
           </div>
         </div>
       </div>
