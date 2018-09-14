@@ -545,10 +545,10 @@ table {
 .player__button--shuffle {
   background: no-repeat center/100% url(../images/shuffle.png);
 }
-.player__button--back, .player__button--forward {
+.player__button--back, .player__button--next {
   position: relative;
 }
-.player__button--back::before, .player__button--forward::before {
+.player__button--back::before, .player__button--next::before {
   position: absolute;
   content: "";
   display: block;
@@ -557,7 +557,7 @@ table {
   height: 12px;
   background: #ccc;
 }
-.player__button--back::after, .player__button--forward::after {
+.player__button--back::after, .player__button--next::after {
   position: absolute;
   content: "";
   display: block;
@@ -568,7 +568,7 @@ table {
   border-bottom: 6px solid transparent;
   border-right: 10px solid #ccc;
 }
-.player__button--forward {
+.player__button--next {
   transform: rotate(180deg);
 }
 .player__button--repeat {

@@ -18,7 +18,7 @@ Vue.component('play-button', {
     `
   })
   
-Vue.component('player-slider', {
+Vue.component('horizon-slider', {
   data() {
     return {
       widthPercentage: 0

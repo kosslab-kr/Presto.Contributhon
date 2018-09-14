@@ -102,7 +102,7 @@ $player-height: 70px;
     }
   }
 
-  &--forward {
+  &--next {
     @extend .player__button--back;
     transform: rotate(180deg);
   }
