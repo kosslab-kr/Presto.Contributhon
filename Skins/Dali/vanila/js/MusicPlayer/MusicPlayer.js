@@ -1,41 +1,12 @@
 import { qs, $on } from "../helper/domHelper.js";
+import Timer from './Timer.js';
 
 const playSrc = './assets/icons/play-btn.svg'
 const pauseSrc = './assets/icons/pause-button.svg'
-const minPerSec = 60;
-const milliSecToSec = 1000;
 
-class Timer {
-  constructor({timer}){
-    this.timerEl = qs(timer)
-    this.spendTime =  0;
-    this.timerId = null;
-  }
-  startTimer(){
-    this.timerId = setTimeout(() => this.displayTime(this.startTimer.bind(this)), milliSecToSec);
-  }
-  updateTime(){
-    return this.spendTime +=1
-  }
-  displayTime(startTimer){
-    const spentTime = this.updateTime();
 
-    const min = Math.floor(spentTime/minPerSec)
-    const sec = spentTime-min*minPerSec
-    const time = {
-      min,
-      sec,
-    }
-    qs('.min', this.timerEl).innerText = this.makeTimeFormat(time.min)
-    qs('.sec', this.timerEl).innerText = this.makeTimeFormat(time.sec)
-    startTimer();
-  }
-  makeTimeFormat(time){
-    let timeString = time.toString();
-    if(timeString.length<2) timeString = '0'+timeString;
-    return timeString
-  }
-}
+
+
 
 class MusicPlayer {
   constructor({audio, playBtn, timer, progressBar, endTime}){
@@ -58,12 +29,15 @@ class MusicPlayer {
     this.audioEl.play();
     qs('.controller-icon', this.playBtnEl).setAttribute('src', pauseSrc)
     this.playing = true;
+    this.audioEl.currentTime
+    
     this.musicTimer.startTimer();
   }
   pause(){
     this.audioEl.pause();
     qs('.controller-icon', this.playBtnEl).setAttribute('src', playSrc)
-    this.musicTimer.startTimer();
+    this.playing = false;
+    this.musicTimer.stopTimer();
   }
   updateTimer(){
     this.calcTime(this.currentTime)
