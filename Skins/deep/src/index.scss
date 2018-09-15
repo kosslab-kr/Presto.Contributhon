@@ -1,0 +1,125 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote {
+  &:before, &:after {
+    content: '';
+    content: none; } }
+
+q {
+  &:before, &:after {
+    content: '';
+    content: none; } }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+@mixin position($value, $top: auto, $right: auto, $bottom: auto, $left: auto) {
+  position: $value;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin size($width: auto, $height: auto) {
+  width: $width;
+  height: $height;
+}
+
+@mixin line-arrow($size, $border-width, $direction, $color) {
+  &::before {
+    content: '';
+    position: absolute;
+    box-sizing: border-box;
+    display: block;
+    top: 50%; left: 50%;
+    width: $size; height: $size; 
+    border-width: 0 $border-width $border-width 0;
+    border-style: solid;
+    border-color: $color;
+
+    @if $direction == top {
+      transform: translate3d(-50%, -25%, 0) rotate(-130deg) skew(10deg);
+    }
+    @else if $direction == right {
+      transform: translate3d(-75%, -50%, 0) rotate(-40deg) skew(10deg);
+    }
+    @else if $direction == bottom {
+      transform: translate3d(-50%, -75%, 0) rotate(50deg) skew(10deg);
+    }
+    @else if $direction == left {
+      transform: translate3d(-25%, -50%, 0) rotate(140deg) skew(10deg);
+    }
+  }
+}
+
+@mixin arrow($direction, $width, $height, $color) {
+  width: 0px; height: 0px;
+
+  @if $direction == 'top' {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-bottom: $height solid $color;
+  }
+  @else if $direction == 'right' {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-left: $width solid $color;
+  }
+  @else if $direction == 'bottom' {
+    border-left: $width/2 solid transparent;
+    border-right: $width/2 solid transparent;
+    border-top: $height solid $color;
+  }
+  @else if $direction == 'left' {
+    border-top: $height/2 solid transparent;
+    border-bottom: $height/2 solid transparent;
+    border-right: $width solid $color;
+  }
+}
+
+@mixin vertical-align-helper {
+  &::before {
+    content:'';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+}
+
+body { position: relative; }
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+$player-time-size : 30px;
+$signature-color: rgb(4, 223, 58);
+$main-menu-width: 200px;
+$player-height: 70px;
