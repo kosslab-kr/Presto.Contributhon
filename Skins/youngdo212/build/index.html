@@ -158,6 +158,7 @@
           <div class="player__controls-core">
             <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
             <horizon-slider
+              ref="slider"
               v-on:hold-slider-thumb='calcCurrentTime'>
             </horizon-slider>
             <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
@@ -174,6 +175,6 @@
       </div>
     </div>
   </section>
-  <script src='./js/index.js'></script>
+  <script type='module' src='./js/index.js'></script>
 </body>
 </html>

@@ -1,7 +1,11 @@
+import {DummyCore} from './dummyCore.js';
+
 Vue.component('horizon-slider', {
+  props: ['initialWidthPercentage'],
+
   data() {
     return {
-      widthPercentage: 0
+      widthPercentage: this.initialWidthPercentage || 0
     }
   },
 
@@ -48,13 +52,23 @@ Vue.component('horizon-slider', {
   </div>`
 })
 
+const core = new DummyCore({
+  musicList: [{runningTime: 210000}]
+})
+
 const player = new Vue({
   el: '#player',
 
   data: {
-    currentMusic: {runningTime: 200000},
+    core: core,
+    currentMusic: null,
     currentTime: 0,
     onPlay: false
+  },
+
+  created() {
+    this.currentMusic = this.core.currentMusic;
+    this.core.onReturnCurrentTime = this.setCurrentTime.bind(this);
   },
 
   methods: {
@@ -72,8 +86,28 @@ const player = new Vue({
       this.currentTime = (widthPercentage / 100) * this.currentMusic.runningTime;
     },
 
+    setCurrentTime(time) {
+      this.currentTime = time;
+      this.$refs.slider.widthPercentage = ( this.currentTime / this.currentMusic.runningTime) * 100;
+    },
+    
     togglePlay() {
       this.onPlay = !this.onPlay;
+      this.onPlay ? this.run() : this.pause();
+    },
+
+    run() {
+      this.core.play();
+    },
+
+    pause() {
+      this.core.pause();
+    }
+  },
+
+  computed: {
+    runningTimePercentage() {
+      return ( this.currentTime / this.currentMusic.runningTime) * 100;
     }
   }
 })
