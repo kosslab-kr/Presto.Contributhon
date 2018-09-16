@@ -1,0 +1,25 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:NativeSkin.Small">
+
+    <!-- App Main Color -->
+    <Color x:Key="mediumPurple">#FFA05AF3</Color>
+    <Color x:Key="darkPurple">#FF573BB8</Color>
+
+    <Style x:Key="fontColor" TargetType="{x:Type TextBlock}">
+        <Setter Property="Foreground" Value="LightSteelBlue"/>
+    </Style>
+
+    <Style x:Key="appBackground" TargetType="{x:Type Grid}">
+        <Setter Property="Background">
+            <Setter.Value>
+                <ImageBrush ImageSource="pack://application:,,,/NativeSkin.Small;component/Image/backgroundImage.jpg"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style x:Key="appBackgroundColor" TargetType="{x:Type Grid}">
+        <Setter Property="Background" Value="#FF181919"/>
+    </Style>
+    
+</ResourceDictionary>
