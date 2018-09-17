@@ -21,10 +21,12 @@
           </div>
           <div class="player__controls-core">
             <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
-            <HorizonSlider
-              ref="slider"
-              v-on:hold-slider-thumb='calcCurrentTime'>
-            </HorizonSlider>
+            <div class='player__controls-slider'>
+              <HorizonSlider
+                ref="slider"
+                v-on:hold-slider-thumb='calcCurrentTime'>
+              </HorizonSlider>
+            </div>
             <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
           </div>
         </div>
@@ -361,6 +363,12 @@ export default {
     border-radius: 50%;
     transform: translate3d(-50%, -35%, 0);
   }
+}
+
+.player__controls-slider {
+  display: inline-block;
+  vertical-align: middle;
+  width: 300px; height: 20px;
 }
 
 </style>

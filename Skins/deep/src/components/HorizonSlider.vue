@@ -55,11 +55,9 @@ export default {
 @import '../index.scss';
 
 .slider-wrap {
-  box-sizing: border-box;
   display: inline-block;
-  width: calc(95% - #{$player-time-size * 2}); height: 100%;
-  padding: 8px 0;
-  vertical-align: middle;
+  position: relative;
+  width: 100%; height: 100%;
   
   &:hover {
     .slider-location {
@@ -72,9 +70,12 @@ export default {
 }
 
 .slider {
-  height: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
+  width: 100%; height: 4px;
   background: #3a3a3a;
-  border-radius: 4px;
+  border-radius: 5px;
 }
 
 .slider-location {
