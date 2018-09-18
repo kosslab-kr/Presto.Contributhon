@@ -37,8 +37,10 @@
         <div class="player__option player__option--queue"></div>
         <div class="player__option player__option--devices"></div>
         <div class="player__option player__option--mute"></div>
-        <div class="player__volume">
-          <div style='width: 80%;' class="player__volume-location"></div>
+        <div class="player__volume-slider">
+          <HorizonSlider
+            ref="playerVolumeSlider">
+          </HorizonSlider>
         </div>
       </div>
     </div>
@@ -321,6 +323,13 @@ export default {
   color: #ccc;
 }
 
+.player__controls-slider {
+  display: inline-block;
+  vertical-align: middle;
+  width: 80%; height: 20px;
+  margin: 0 2%;
+}
+
 .player__option-wrap {
   position: absolute;
   right: 0px;
@@ -349,44 +358,10 @@ export default {
   &:nth-last-child(1) { margin-right: 5px; }
 }
 
-.player__volume {
+.player__volume-slider {
   display: inline-block;
   vertical-align: middle;
-  width: 75px; height: 4px; background: #3a3a3a;
-  border-radius: 4px;
-
-  &:hover {
-    .player__volume-location {
-      background: $signature-color;
-
-      // drag button
-      &::before { display: block }
-    }
-  }
-}
-
-.player__volume-location {
-  height: 100%; background: #ccc;
-  border-radius: 4px;
-  position: relative;
-
-  // drag button
-  &::before {
-    content:'';
-    width: 12px; height: 12px; background: #fff;
-    display: none;
-    position: absolute;
-    top: 0px; left: 100%;
-    border-radius: 50%;
-    transform: translate3d(-50%, -35%, 0);
-  }
-}
-
-.player__controls-slider {
-  display: inline-block;
-  vertical-align: middle;
-  width: 80%; height: 20px;
-  margin: 0 2%;
+  width: 80px; height: 22px;
 }
 
 </style>
