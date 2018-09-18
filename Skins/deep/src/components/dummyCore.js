@@ -7,7 +7,9 @@ export default class DummyCore{
     this.onReturnCurrentTime = null;
   }
 
-  play() {
+  play(time) {
+    time && this._setCurrentTime(time);
+
     this.intervalID = setInterval(() => {
       if(this.currentTime >= this.runningTime) {
         this.currentTime = this.runningTime;
@@ -28,7 +30,7 @@ export default class DummyCore{
     clearInterval(this.intervalID);
   }
 
-  setCurrentTime(time) {
+  _setCurrentTime(time) {
     this.currentTime = time;
   }
 }

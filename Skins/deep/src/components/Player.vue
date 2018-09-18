@@ -14,7 +14,7 @@
             <div
               class='player__button'
               :class='onPlay ? "player__button--pause" : "player__button--play"'
-              @click='togglePlay'>
+              @click='togglePlayButton'>
             </div>
             <div class="player__button player__button--next"></div>
             <div class="player__button player__button--repeat"></div>
@@ -23,8 +23,10 @@
             <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
             <div class='player__controls-slider'>
               <HorizonSlider
-                ref="slider"
-                v-on:hold-slider-thumb='calcCurrentTime'>
+                ref="playerControlsSlider"
+                v-on:touch-slider-thumb='manipulateStart'
+                v-on:hold-slider-thumb='calcCurrentTime'
+                v-on:release-slider-thumb='manipulateEnd'>
               </HorizonSlider>
             </div>
             <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
@@ -63,7 +65,8 @@ export default {
       core: core,
       currentMusic: null,
       currentTime: 0,
-      onPlay: false
+      onPlay: false,
+      onManipulate: false,
     }
   },
 
@@ -83,22 +86,36 @@ export default {
       return `${formattedMinutes}:${formattedSeconds}`;
     },
 
+    manipulateStart() {
+      this.onManipulate = true;
+      this.core.pauseToReturnCurrentTime();
+    },
+
+    manipulateEnd() {
+      this.onManipulate = false;
+      this.run();
+    },
+
     calcCurrentTime(widthPercentage) {
       this.currentTime = (widthPercentage / 100) * this.currentMusic.runningTime;
     },
 
     setCurrentTime(time) {
       this.currentTime = time;
-      this.$refs.slider.widthPercentage = ( this.currentTime / this.currentMusic.runningTime) * 100;
+      this.$refs.playerControlsSlider.widthPercentage = ( this.currentTime / this.currentMusic.runningTime) * 100;
     },
     
-    togglePlay() {
+    togglePlayButton() {
       this.onPlay = !this.onPlay;
-      this.onPlay ? this.run() : this.pause();
+      this.run();
     },
 
     run() {
-      this.core.play();
+      this.onPlay ? this.play(this.currentTime) : this.pause();
+    },
+
+    play(time) {
+      this.core.play(time);
     },
 
     pause() {
@@ -368,7 +385,8 @@ export default {
 .player__controls-slider {
   display: inline-block;
   vertical-align: middle;
-  width: 300px; height: 20px;
+  width: 80%; height: 20px;
+  margin: 0 2%;
 }
 
 </style>

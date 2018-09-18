@@ -3,7 +3,7 @@
     class="slider-wrap"
     draggable='true'
     @dragstart='setDragImage'
-    @mousedown='holdSliderThumb'
+    @mousedown='mouseDown'
     @drag='holdSliderThumb'
     @mouseup='releaseSliderThumb'
     @dragend='releaseSliderThumb'>
@@ -35,8 +35,14 @@ export default {
     },
 
     setDragImage(event) {
+      this.$emit('touch-slider-thumb');
       const invisibleElem = document.createElement('img');
       event.dataTransfer.setDragImage(invisibleElem, 0, 0);
+    },
+
+    mouseDown(e) {
+      this.$emit('touch-slider-thumb');
+      this.holdSliderThumb(e);
     },
 
     holdSliderThumb(e) {
