@@ -11,8 +11,8 @@ export default class DummyCore{
     time && this._setCurrentTime(time);
 
     this.intervalID = setInterval(() => {
-      if(this.currentTime >= this.runningTime) {
-        this.currentTime = this.runningTime;
+      if(this.currentTime >= this.currentMusic.runningTime) {
+        this.currentTime = this.currentMusic.runningTime;
         this.pause(); // later next()
       }
       else {
