@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import MainMenu from './components/MainMenu.vue'
-import MainSection from './components/MainSection.vue'
-import Player from './components/Player.vue'
+import MainMenu from './components/mainMenu/MainMenu.vue'
+import MainSection from './components/mainSection/MainSection.vue'
+import Player from './components/player/Player.vue'
 
 export default {
   name: 'App',

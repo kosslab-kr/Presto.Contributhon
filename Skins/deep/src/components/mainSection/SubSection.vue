@@ -93,7 +93,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../index.scss';
+@import '../../index.scss';
 
 .sub-section {
   width: 100%;

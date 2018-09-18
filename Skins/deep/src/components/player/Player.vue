@@ -128,7 +128,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../index.scss';
+@import '../../index.scss';
 
 .player {
   box-sizing: border-box;
@@ -206,7 +206,7 @@ export default {
   margin-right: 23px;
 
   &--shuffle {
-    background: no-repeat center/100% url(../assets/shuffle.png);
+    background: no-repeat center/100% url(../../assets/shuffle.png);
   }
 
   &--back {
@@ -237,7 +237,7 @@ export default {
   }
 
   &--repeat {
-    background: no-repeat center/100% url(../assets/repeat.png);
+    background: no-repeat center/100% url(../../assets/repeat.png);
   }
 
   &--play {
@@ -344,15 +344,15 @@ export default {
   margin-right: 4px;
   
   &--queue {
-    background: no-repeat top/100% url(../assets/queue.png);
+    background: no-repeat top/100% url(../../assets/queue.png);
   }
   
   &--devices {
-    background: no-repeat top/100% url(../assets/devices.png);
+    background: no-repeat top/100% url(../../assets/devices.png);
   }
   
   &--mute {
-    background: no-repeat top/100% url(../assets/mute.png);
+    background: no-repeat top/100% url(../../assets/mute.png);
   }
 
   &:nth-last-child(1) { margin-right: 5px; }

@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../index.scss';
+@import '../../index.scss';
 
 .main-section {
   @include position(absolute, $top: 0px, $left: $main-menu-width);
@@ -84,7 +84,7 @@ export default {
 .main-section__search-icon {
   display: inline-block;
   width: 15px; height: 15px;
-  background: no-repeat top/100% url(../assets/search-icon.png);
+  background: no-repeat top/100% url(../../assets/search-icon.png);
   vertical-align: middle;
 }
 

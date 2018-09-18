@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../index.scss';
+@import '../../index.scss';
 
 .main-menu {
   @include position(absolute, $top: 0px, $left: 0px);
