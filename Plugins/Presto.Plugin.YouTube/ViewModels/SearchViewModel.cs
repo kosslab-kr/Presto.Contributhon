@@ -2,6 +2,7 @@
 using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
 using Presto.Plugin.YouTube.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using YoutubeExplode;
@@ -12,6 +13,8 @@ namespace Presto.Plugin.YouTube.ViewModels
     {
         #region 변수
         private bool _isProcessing = false;
+        private double _progress;
+        private string _status;
         private string _input;
         #endregion
 
@@ -24,6 +27,26 @@ namespace Presto.Plugin.YouTube.ViewModels
             private set
             {
                 _isProcessing = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Progress
+        {
+            get => _progress;
+            set
+            {
+                _progress = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
                 RaisePropertyChanged();
             }
         }
@@ -72,13 +95,18 @@ namespace Presto.Plugin.YouTube.ViewModels
             {
                 // 비디오 분석
                 var video = await client.GetVideoAsync(videoId);
+
+                Status = video.Title;
+                Progress = default(double);
+                var progressHandler = new Progress<double>(p => Progress = p);
+
                 var addDialog = new AddDialog
                 {
                     DataContext = new AddViewModel
                     {
                         Musics = new List<Music>()
                         {
-                            await YouTubeUtility.Download(video)
+                            await YouTubeUtility.Download(video, progressHandler)
                         }
                     }
                 };

@@ -5,16 +5,18 @@ using System.Windows;
 
 namespace Presto.Plugin.YouTube.Converters
 {
-    class StringToVisibilityConverter : ValueConverterBase<string, Visibility>
+    class EmptyToVisibilityConverter : ValueConverterBase<string, Visibility>
     {
+        public bool Condition { get; set; }
+
         public override Visibility Convert(string value, object parameter, CultureInfo culture)
         {
-            if (!string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value) == Condition)
             {
-                return Visibility.Collapsed;
+                return Visibility.Visible;
             }
 
-            return Visibility.Visible;
+            return Visibility.Collapsed;
         }
 
         public override string ConvertBack(Visibility value, object parameter, CultureInfo culture)

@@ -44,12 +44,14 @@
                                 x:Name="border"
                                 Background="{x:Null}"
                                 BorderBrush="{x:Null}">
+
                                 <Grid>
                                     <ScrollViewer
                                         x:Name="PART_ContentHost"
                                         Focusable="false"
                                         HorizontalScrollBarVisibility="Hidden"
                                         VerticalScrollBarVisibility="Hidden" />
+
                                     <TextBlock
                                         x:Name="placeHolder"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -58,9 +60,10 @@
                                         IsHitTestVisible="False"
                                         Text="{TemplateBinding Tag}"
                                         Visibility="{TemplateBinding Text,
-                                                                     Converter={cvt:StringToVisibilityConverter}}" />
+                                                                     Converter={cvt:EmptyToVisibilityConverter Condition=True}}" />
                                 </Grid>
                             </Border>
+
                             <Rectangle
                                 x:Name="borderLine"
                                 Height="2"
@@ -68,11 +71,13 @@
                                 VerticalAlignment="Bottom"
                                 Fill="{TemplateBinding Background}" />
                         </Grid>
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter TargetName="border" Property="Opacity" Value="0.3" />
                                 <Setter TargetName="borderLine" Property="Opacity" Value="0.3" />
                             </Trigger>
+
                             <Trigger Property="IsKeyboardFocused" Value="true">
                                 <Setter TargetName="placeHolder" Property="Visibility" Value="Collapsed" />
                             </Trigger>
@@ -137,10 +142,37 @@
                 MouseOverBackground="White" />
         </StackPanel>
 
-        <p:PrestoProgressRing
-            Width="70"
-            Height="70"
-            Foreground="White"
-            Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=True}}" />
+        <StackPanel
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Visibility="{Binding IsProcessing, Converter={cvt:BoolToVisibilityConverter Condition=True}}">
+
+            <p:PrestoProgressRing
+                Width="70"
+                Height="70"
+                Foreground="White" />
+
+            <TextBlock
+                Width="400"
+                Margin="0,30,0,0"
+                FontSize="18"
+                Foreground="White"
+                Text="{Binding Status}"
+                TextAlignment="Center"
+                TextTrimming="CharacterEllipsis"
+                Visibility="{Binding Status, Converter={cvt:EmptyToVisibilityConverter Condition=False}}" />
+
+            <p:PrestoProgressBar
+                Width="150"
+                Height="10"
+                Margin="0,20,0,0"
+                Background="{x:Null}"
+                BorderBrush="White"
+                BorderThickness="0"
+                Foreground="White"
+                Maximum="1"
+                Visibility="{Binding Status, Converter={cvt:EmptyToVisibilityConverter Condition=False}}"
+                Value="{Binding Progress}" />
+        </StackPanel>
     </Grid>
 </p:PrestoWindow>

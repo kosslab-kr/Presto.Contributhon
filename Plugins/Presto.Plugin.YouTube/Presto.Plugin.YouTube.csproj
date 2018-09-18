@@ -77,7 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
-    <Compile Include="Converters\StringToVisibilityConverter.cs" />
+    <Compile Include="Converters\EmptyToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageConverter.cs" />
     <Compile Include="Dialogs\AddDialog.xaml.cs">
       <DependentUpon>AddDialog.xaml</DependentUpon>
