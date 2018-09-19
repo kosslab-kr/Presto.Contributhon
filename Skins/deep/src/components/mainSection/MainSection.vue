@@ -1,19 +1,8 @@
 <template>
   <section class="main-section">
     <header class='main-section__header'>
-      <div class="main-section__header-category main-section__header-category--left">
-        <div class="main-section__move main-section__move--back"></div>
-        <div class="main-section__move main-section__move--forward"></div>
-        <form class="main-section__search-form" action='' method='get'>
-          <div class="main-section__search-icon"></div>
-          <input class='main-section__search-input' type="text" name='keyword' value='Search'>
-        </form>
-      </div>
-      <div class="main-section__header-category main-section__header-category--right">
-        <div class="main-section__upgrade">UPGRADE</div>
-        <div class="main-section__profile">mando212</div>
-        <div class="main-section__profile-more"></div>
-      </div>
+      <Search/>
+      <div class="main-section__profile-more"></div>
     </header>
     <SubSection/>
   </section>
@@ -21,11 +10,13 @@
 
 <script>
 import SubSection from './SubSection.vue';
+import Search from './Search.vue';
 
 export default {
   name: 'MainSection',
   components: {
-    SubSection
+    SubSection,
+    Search
   }
 }
 </script>
@@ -43,7 +34,7 @@ export default {
   @include position(fixed, $top: 0px, $left: $main-menu-width);
   width: calc(100vw - #{$main-menu-width}); height: 46px;
   box-sizing: border-box;
-  padding: 10px 15px;
+  padding: 15px 30px;
   z-index: 1;
 }
 
@@ -66,39 +57,6 @@ export default {
 
   &--forward {
     @include line-arrow($size: 50%, $border-width: 1px, $direction: right, $color: #fff);
-  }
-}
-
-.main-section__search-form {
-  float: left;
-  box-sizing: border-box;
-  width: 180px; height: 100%;
-  background: #fff;
-  margin-left: 20px;
-  border-radius: 20px;
-  padding: 1px 5px;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.main-section__search-icon {
-  display: inline-block;
-  width: 15px; height: 15px;
-  background: no-repeat top/100% url(../../assets/search-icon.png);
-  vertical-align: middle;
-}
-
-.main-section__search-input {
-  display: inline-block;
-  width: 100%; height: 100%;
-  font-family: inherit;
-  font-size: 0.9rem;
-  border: none;
-  padding: 0;
-  vertical-align: middle;
-
-  &:focus {
-    outline: none;
   }
 }
 
