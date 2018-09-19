@@ -1,17 +1,22 @@
-﻿using Presto.Plugin.YouTube.Dialogs;
+﻿using Presto.Component.Controls;
+using Presto.Component.Supports;
+using Presto.Plugin.YouTube.Dialogs;
 using Presto.Plugin.YouTube.Models;
-using Presto.Plugin.YouTube.Supports;
 using Presto.Plugin.YouTube.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
 using YoutubeExplode;
+using YoutubeExplode.Exceptions;
 
 namespace Presto.Plugin.YouTube.ViewModels
 {
-    public class SearchViewModel : BaseViewModel
+    public class SearchViewModel : ViewModelBase
     {
         #region 변수
         private bool _isProcessing = false;
+        private double _progress;
+        private string _status;
         private string _input;
         #endregion
 
@@ -24,6 +29,26 @@ namespace Presto.Plugin.YouTube.ViewModels
             private set
             {
                 _isProcessing = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Progress
+        {
+            get => _progress;
+            set
+            {
+                _progress = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public string Status
+        {
+            get => _status;
+            set
+            {
+                _status = value;
                 RaisePropertyChanged();
             }
         }
@@ -67,40 +92,70 @@ namespace Presto.Plugin.YouTube.ViewModels
                 };
 
                 resultDialog.Show();
+                RaiseCloseRequested();
             }
             else if (YoutubeClient.TryParseVideoId(Input, out string videoId))
             {
                 // 비디오 분석
-                var video = await client.GetVideoAsync(videoId);
-                var addDialog = new AddDialog
+                try
                 {
-                    DataContext = new AddViewModel
-                    {
-                        Musics = new List<Music>()
-                        {
-                            await YouTubeUtility.Download(video)
-                        }
-                    }
-                };
+                    var video = await client.GetVideoAsync(videoId);
 
-                addDialog.Show();
+                    Status = video.Title;
+                    Progress = default(double);
+                    var progressHandler = new Progress<double>(p => Progress = p);
+
+                    var addDialog = new AddDialog
+                    {
+                        DataContext = new AddViewModel
+                        {
+                            Musics = new List<Music>()
+                            {
+                                await YouTubeUtility.Download(video, progressHandler)
+                            }
+                        }
+                    };
+
+                    addDialog.Show();
+                    RaiseCloseRequested();
+                }
+                catch (VideoUnavailableException ex)
+                {
+                    switch (ex.Code)
+                    {
+                        case 150:
+                            PrestoDialog.Show("동영상에 저작권상의 이유로 차단된 콘텐츠가 포함되어 있습니다.", "동영상 오류");
+                            break;
+
+                        default:
+                            PrestoDialog.Show(ex.Reason, "동영상 오류");
+                            break;
+                    }
+                }
             }
             else
             {
                 // 검색어 검색
                 var results = await client.SearchVideosAsync(Input, 1);
-                var resultDialog = new ResultDialog
+                if (results.Count > 0)
                 {
-                    DataContext = new ResultViewModel
+                    var resultDialog = new ResultDialog
                     {
-                        Videos = results
-                    }
-                };
+                        DataContext = new ResultViewModel
+                        {
+                            Videos = results
+                        }
+                    };
 
-                resultDialog.Show();
+                    resultDialog.Show();
+                    RaiseCloseRequested();
+                }
+                else
+                {
+                    PrestoDialog.Show("입력된 검색어에 해당하는 동영상이 없습니다.", "동영상 검색 결과");
+                }
             }
 
-            RaiseCloseRequested();
             IsProcessing = false;
         }
 

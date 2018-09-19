@@ -1,0 +1,508 @@
+body {
+  margin: 0;
+  font-family: "Nanum Gothic", sans-serif;
+}
+
+ul {
+  padding-left: 0;
+  margin: 0;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button:focus {
+  outline: none;
+}
+
+.blind {
+  text-indent: -3000;
+}
+
+.hide {
+  visibility: hidden;
+  position: absolute;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: #fff;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  min-width: 375px;
+  height: 80px;
+  box-sizing: border-box;
+  padding-left: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+}
+
+.search__form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 40%;
+  min-width: 300px;
+}
+
+.search__input {
+  box-sizing: border-box;
+  width: 100%;
+  color: #666;
+  outline: 0;
+  border: 0;
+  padding: 15px 60px 15px 20px;
+  height: 40px;
+  background: #e5e5e5;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.search__button {
+  top: 0;
+  right: 4px;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  box-sizing: border-box;
+  padding: 4px;
+  border: none;
+  background: url(../../assets/icons/search-icons.svg) center no-repeat;
+}
+
+.play-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.hamburger {
+  position: fixed;
+  top: 15px;
+  left: 10px;
+  width: 50px;
+  height: 38px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  z-index: 1000;
+}
+
+.active .bar:nth-child(1) {
+  transform: rotate(-45deg) translate(-14px, 18px);
+}
+
+.active .bar:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.active .bar:nth-child(3) {
+  transform: rotate(-45deg) translate(12px, -18px);
+}
+
+.bar {
+  width: 50%;
+  border-radius: 5px;
+  height: 5px;
+  background-color: #333;
+  transition: 0.4s;
+}
+
+.bar:nth-child(2) {
+  width: 100%;
+}
+
+.bar:nth-child(3) {
+  margin-left: 50%;
+}
+
+.drawer__wrapper {
+  transition: all 0.2s ease-in-out 0.2s;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  width: 100%;
+  min-width: 300px;
+  height: 100vh;
+  display: flex;
+  transform: translate(-100%);
+  box-shadow: 0 30px 80px 0 rgba(97, 45, 45, 0.25);
+}
+
+.drawer__wrapper .drawer {
+  box-sizing: border-box;
+  padding-top: 100px;
+  width: 40vw;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.drawer__wrapper .modal {
+  width: 60vw;
+  height: 100vh;
+  background-color: rgba(224, 221, 209, 0.7);
+}
+
+.drawer__wrapper.active {
+  transform: translate(0%);
+}
+
+.menu-item a {
+  width: 160px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 32px;
+  color: #222;
+  transition: color 0.25s;
+  position: relative;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.menu-item a::before {
+  bottom: -5px;
+  left: 0;
+  right: 100%;
+  background: #f50;
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  transition: all 0.2s ease-in-out;
+  z-index: 100;
+  height: 3px;
+}
+
+.menu-item a:hover {
+  color: #f50;
+}
+
+.menu-item a:hover ::before {
+  right: 0;
+}
+
+.menu-item a:hover::before {
+  right: 0;
+}
+
+.tag__section {
+  padding-top: 80px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.tag__section .title {
+  font-size: 28px;
+  color: #333;
+}
+
+.taglist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.taglist a {
+  display: block;
+  padding: 20px;
+  border: 1px solid #333;
+  border-radius: 5px;
+  white-space: nowrap;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  transition: all 0.2s;
+}
+
+.taglist a:hover {
+  background: #333;
+  color: #fff;
+}
+
+.discover__section {
+  margin-left: 30px;
+  margin-right: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 40px;
+}
+
+.discover__section .title {
+  font-size: 28px;
+  color: #333;
+}
+
+.discover__tastelist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.discover__tastelist .thumbnail {
+  max-width: 100%;
+  height: auto;
+}
+
+.taste-item {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 25%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 761px) and (max-width: 1021px) {
+  .taste-item {
+    width: 33.3333%;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 760px) {
+  .taste-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .taste-item {
+    width: 100%;
+  }
+}
+
+.taste-item a {
+  display: block;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 5px;
+  margin-right: 30px;
+  border: 1px solid #333;
+  overflow: hidden;
+  max-width: 340px;
+  min-width: 180px;
+}
+
+.taste-item .title {
+  font-size: 16px;
+  margin: 0;
+  color: #fff;
+}
+
+.taste-item .artist {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.taste-item .desc-box {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.hot__section {
+  margin-left: 30px;
+  margin-right: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 40px;
+}
+
+.hot__section .title {
+  font-size: 28px;
+  color: #333;
+}
+
+.hot__section .hot-item {
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 25%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 761px) and (max-width: 1021px) {
+  .hot__section .hot-item {
+    width: 33.3333%;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 760px) {
+  .hot__section .hot-item {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hot__section .hot-item {
+    width: 100%;
+  }
+}
+
+.hot__section .hot-item a {
+  display: block;
+  box-sizing: border-box;
+  background: #000;
+  border-radius: 5px;
+  margin-right: 30px;
+  border: 1px solid #333;
+  overflow: hidden;
+  max-width: 340px;
+  min-width: 180px;
+}
+
+.hot__section .hot-item .title {
+  font-size: 16px;
+  margin: 0;
+  color: #fff;
+}
+
+.hot__section .hot-item .artist {
+  margin-top: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.hot__section .hot-item .desc-box {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.hot-artistlist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hot-artistlist .thumbnail {
+  max-width: 100%;
+}
+
+.player {
+  z-index: 50;
+  width: 100%;
+  min-width: 375px;
+  padding: 20px 70px 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+}
+
+@media screen and (max-width: 750px) {
+  .player {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .player .player__desc {
+    margin-bottom: 20px;
+  }
+  .player .progressbar {
+    width: 170px;
+  }
+}
+
+.player__desc {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.player__desc .thumbnail {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.player__desc .artist,
+.player__desc .title {
+  color: #fff;
+  margin: 0;
+  margin-bottom: 5px;
+  margin-right: 25px;
+}
+
+.player__control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.player__control-btn button {
+  border: 0;
+  background: transparent;
+}
+
+.controller-icon {
+  width: 25px;
+}
+
+.player__timeController {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.progressbar {
+  position: relative;
+  width: 300px;
+  height: 2px;
+  background: #fff;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.progressbar .seek-bar {
+  background: #f50;
+  position: absolute;
+  height: 2px;
+}
+
+.progressbar .range-bar {
+  width: 100%;
+  height: 2%;
+  z-index: 1000;
+  position: absolute;
+  opacity: 0;
+}
+
+.pointer {
+  top: 50%;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: #f50;
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.wrapper__playlist-btn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+
+.wrapper__playlist-btn button {
+  border: none;
+  background: transparent;
+  padding: 0;
+}

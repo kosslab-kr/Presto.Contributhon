@@ -1,0 +1,110 @@
+.player {
+  z-index: 50;
+  width: 100%;
+  min-width: 375px;
+  padding: 20px 70px 20px 20px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  bottom: 0;
+  @media screen and (max-width: 750px) {
+    flex-direction: column;
+    align-items: flex-start;
+    .player__desc {
+      margin-bottom: 20px;
+    }
+    .progressbar {
+      width: 170px;
+    }
+  }
+}
+.player__desc {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+
+  & .thumbnail {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+
+  .artist,
+  .title {
+    color: #fff;
+    margin: 0;
+    margin-bottom: 5px;
+    margin-right: 25px;
+  }
+}
+
+.player__control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  & button {
+    border: 0;
+    background: transparent;
+  }
+}
+
+.controller-icon {
+  width: 25px;
+}
+
+.player__timeController {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.progressbar {
+  position: relative;
+  width: 300px;
+  height: 2px;
+  background: #fff;
+  margin-right: 20px;
+  margin-left: 20px;
+  .seek-bar {
+    background: #f50;
+    position: absolute;
+    height: 2px;
+  }
+  .range-bar {
+    width: 100%;
+    height: 2%;
+    z-index: 1000;
+    position: absolute;
+    opacity: 0;
+  }
+}
+
+.pointer {
+  top: 50%;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: #f50;
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(50%, -50%);
+}
+
+.wrapper__playlist-btn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  & button {
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+}
+
+
+
+

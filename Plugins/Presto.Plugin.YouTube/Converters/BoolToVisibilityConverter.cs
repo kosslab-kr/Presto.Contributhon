@@ -1,14 +1,15 @@
-﻿using Presto.Plugin.YouTube.Supports;
+﻿using Presto.Component.Converters;
 using System;
+using System.Globalization;
 using System.Windows;
 
 namespace Presto.Plugin.YouTube.Converters
 {
-    class BoolToVisibilityConverter : BaseValueConverter<bool, Visibility>
+    class BoolToVisibilityConverter : ValueConverterBase<bool, Visibility>
     {
         public bool Condition { get; set; }
 
-        public override Visibility Convert(bool value, object parameter)
+        public override Visibility Convert(bool value, object parameter, CultureInfo culture)
         {
             if (value == Condition)
             {
@@ -18,7 +19,7 @@ namespace Presto.Plugin.YouTube.Converters
             return Visibility.Collapsed;
         }
 
-        public override bool ConvertBack(Visibility value, object parameter)
+        public override bool ConvertBack(Visibility value, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }

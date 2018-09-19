@@ -1,5 +1,5 @@
 ﻿using Presto.Component.Controls;
-using Presto.Plugin.YouTube.Supports;
+using Presto.Component.Supports;
 using Presto.Plugin.YouTube.ViewModels;
 using System.Windows;
 
@@ -19,7 +19,7 @@ namespace Presto.Plugin.YouTube.Dialogs
 
         private void SearchDialog_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            (e.NewValue as BaseViewModel).CloseRequested += delegate
+            (e.NewValue as ViewModelBase).CloseRequested += delegate
             {
                 Close();
             };

@@ -1,0 +1,54 @@
+.discover__section {
+  margin-left: 30px;
+  margin-right: 30px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 40px;
+  .title {
+    font-size: 28px;
+    color: #333;
+  }
+}
+
+.discover__tastelist {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  & .thumbnail {
+    max-width: 100%;
+    height: auto;
+  }
+}
+.taste-item {
+  @include responsiveList($s, $m, $l);
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 25%;
+  a {
+    display: block;
+    box-sizing: border-box;
+    background: #000;
+    border-radius: 5px;
+    margin-right: 30px;
+    border: 1px solid #333;
+    overflow: hidden;
+    max-width: 340px;
+    min-width: 180px;
+  }
+  border-radius: 5px;
+  margin-bottom: 20px;
+  & .title {
+    font-size: 16px;
+    margin: 0;
+    color: #fff;
+  }
+  .artist {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #fff;
+  }
+  .desc-box {
+    padding: 10px;
+    box-sizing: border-box;
+  }
+}
