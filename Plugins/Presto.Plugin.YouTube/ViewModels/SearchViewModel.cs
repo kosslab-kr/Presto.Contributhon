@@ -124,7 +124,7 @@ namespace Presto.Plugin.YouTube.ViewModels
                     switch (ex.Code)
                     {
                         case 150:
-                            PrestoDialog.Show("동영상에 저작권상의 이유로 차단된 콘텐츠가 포함되어 있습니다.", "동영상 오류");
+                            PrestoDialog.Show("저작권상의 이유로 해당 콘텐츠는 사용할 수 없습니다.", "동영상 오류");
                             break;
 
                         default:
