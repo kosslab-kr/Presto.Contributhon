@@ -8,6 +8,8 @@
       <div class="more__list-item">first</div>
       <div class="more__list-item">second</div>
       <div class="more__list-item">third</div>
+      <div class="more__list-item">fourth</div>
+      <div class="more__list-item">fifth</div>
     </div>
   </div>
 </template>
@@ -26,6 +28,17 @@ export default {
     activate() {
       this.isActive = !this.isActive;
     }
+  },
+
+  // collape when clicking outside of more componenet
+  mounted() {
+    const collapse = ({target}) => {
+      if(target.contains(this.$el)) return;
+
+      this.isActive = false;
+    }
+
+    document.body.addEventListener('click', collapse);
   }
 }
 </script>
