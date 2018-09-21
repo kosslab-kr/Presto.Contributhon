@@ -8,33 +8,42 @@
           :key="idx"
           :name="menuName"
           ref="menuItems"
-          v-on:menu-selected="showContent"/>
+          @menu-selected="showContent"/>
       </div>
     </div>
     <section class='sub-section__body'>
       <Album
         v-for="(n, idx) in 10"
-        :key="idx"/>
+        :key="idx"
+        @album-selected="openAlbumWindow"/>
     </section>
+    <AlbumWindow
+      v-if="isAlbumSelected"
+      :album="selectedAlbum"
+      @click-outside="closeAlbumWindow"/>
   </section>
 </template>
 
 <script>
 import ViewHeaderMenuItem from './ViewHeaderMenuItem.vue';
 import Album from './Album.vue';
+import AlbumWindow from './AlbumWindow.vue';
 
 export default {
   name: 'AlbumView',
   
   components: {
     ViewHeaderMenuItem,
-    Album
+    Album,
+    AlbumWindow
   },
 
   data() {
     return {
       title: 'Album',
-      menuList: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH']
+      menuList: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH'],
+      isAlbumSelected: false,
+      selectedAlbum: null
     }
   },
 
@@ -55,13 +64,22 @@ export default {
   methods: {
     showContent(name) {
       this.activateMenu(name);
-      // more
     },
 
     activateMenu(name) {
       this.$refs.menuItems.forEach(menu => {
         menu.isActive = (menu.name === name) ? true : false;
       });
+    },
+
+    openAlbumWindow(album) {
+      this.isAlbumSelected = true;
+      this.selectedAlbum = album;
+    },
+
+    closeAlbumWindow() {
+      this.isAlbumSelected = false;
+      this.selectedAlbum = null;
     }
   }
 }
@@ -69,6 +87,19 @@ export default {
 
 <style scope lang="scss">
 @import '../../index.scss';
+
+.sub-section {
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background: #191919;
+
+  &:before {
+    content: '';
+    display: block;
+    height: 100px;
+  }
+}
 
 .sub-section__header {
   position: sticky;
@@ -94,20 +125,6 @@ export default {
   box-sizing: border-box;
   background: #191919;
   padding: 20px 30px 2px 30px;
-}
-
-.sub-section {
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  background: #191919;
-
-  &:before {
-    content: '';
-    display: block;
-    height: 100px;
-    // background: linear-gradient(#444, #2f2f2f);
-  }
 }
 
 .sub-section__body {
