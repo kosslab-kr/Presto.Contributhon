@@ -39,7 +39,7 @@ export default {
   background: linear-gradient(#191919 50%, rgba(0,0,0,0));
   box-sizing: border-box;
   padding: 15px 30px 0 30px;
-  z-index: 1;
+  z-index: 100;
 }
 
 </style>

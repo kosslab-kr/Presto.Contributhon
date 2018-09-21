@@ -12,73 +12,30 @@
       </div>
     </div>
     <section class='sub-section__body'>
-      <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
-        <div class="album">
-          <div class="album__cover"></div>
-        </div>
+      <Album
+        v-for="(n, idx) in 10"
+        :key="idx"/>
     </section>
   </section>
 </template>
 
 <script>
 import ViewHeaderMenuItem from './ViewHeaderMenuItem.vue';
+import Album from './Album.vue';
 
 export default {
   name: 'AlbumView',
+  
+  components: {
+    ViewHeaderMenuItem,
+    Album
+  },
 
   data() {
     return {
       title: 'Album',
       menuList: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH']
     }
-  },
-  
-  components: {
-    ViewHeaderMenuItem
   },
 
   // initialize
@@ -116,6 +73,8 @@ export default {
 .sub-section__header {
   position: sticky;
   top: 0px;
+  border-bottom: 1px solid #333;
+  z-index: 1;
 }
 
 .sub-section__title {
@@ -134,7 +93,6 @@ export default {
 .sub-section__menu {
   box-sizing: border-box;
   background: #191919;
-  border-bottom: 1px solid #333;
   padding: 20px 30px 2px 30px;
 }
 
@@ -154,37 +112,6 @@ export default {
 
 .sub-section__body {
   padding: 30px;
-}
-
-.album {
-  width: 32%;
-  background: #fff;
-  float: left;
-  margin-right: 2%;
-  margin-bottom: 2%;
-
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  .album {
-    width: 23.5%;
-
-    &:nth-child(3n) {
-      margin-right: 2%;
-    }
-
-    &:nth-child(4n) {
-      margin-right: 0px;
-    }
-  }
-}
-
-.album__cover {
-  height: 0;
-  padding-top: 100%;
 }
 
 </style>
