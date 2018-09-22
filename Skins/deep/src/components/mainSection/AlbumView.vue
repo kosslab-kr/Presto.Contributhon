@@ -15,12 +15,14 @@
       <Album
         v-for="(n, idx) in 10"
         :key="idx"
-        @album-selected="openAlbumWindow"/>
+        @album-selected="openAlbumWindow"
+        @album-played="playAlbum"/>
     </section>
     <AlbumWindow
       v-if="isAlbumSelected"
       :album="selectedAlbum"
-      @click-outside="closeAlbumWindow"/>
+      @click-outside="closeAlbumWindow"
+      @album-played="playAlbum"/>
   </section>
 </template>
 
@@ -80,6 +82,11 @@ export default {
     closeAlbumWindow() {
       this.isAlbumSelected = false;
       this.selectedAlbum = null;
+    },
+
+    playAlbum(album) {
+      const targetAlbum = album || this.selectedAlbum;
+      console.log(`Album(${targetAlbum.title}) is now playing...`);
     }
   }
 }

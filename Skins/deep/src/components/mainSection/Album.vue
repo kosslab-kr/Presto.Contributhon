@@ -3,14 +3,14 @@
     <div
       class="album__picture-wrap"
       :class="{'album__picture-wrap--pressed': isAlbumPressed}"
-      @mousedown="selectAlbum"
+      @mousedown="isAlbumPressed = true"
       @mouseup="selectAlbum">
       <img class="album__picture" :src="album.picture" alt="cover1">
       <div class="album__picture-cover">
         <div
           class="album__play-button"
-          :class="{'album__play-button--pressed': isPlayPressed}"
-          @mousedown.stop="playAlbum"
+          :class="{'album__play-button--pressed': isPlayButtonPressed}"
+          @mousedown.stop="isPlayButtonPressed = true"
           @mouseup.stop="playAlbum">
           <div class="album__play-button-triangle"></div>
         </div>
@@ -35,19 +35,19 @@ export default {
   data() {
     return {
       isAlbumPressed: false,
-      isPlayPressed: false
+      isPlayButtonPressed: false
     }
   },
 
   methods: {
     selectAlbum() {
-      this.isAlbumPressed = !this.isAlbumPressed;
-      if(!this.isAlbumPressed) this.$emit('album-selected', this.album);
+      this.isAlbumPressed = false;
+      this.$emit('album-selected', this.album);
     },
 
     playAlbum() {
-      this.isPlayPressed = !this.isPlayPressed;
-      if(!this.isPlayPressed) this.$emit('album-played', this.album);
+      this.isPlayButtonPressed = false;
+      this.$emit('album-played', this.album);
     }
   }
 }
@@ -122,18 +122,18 @@ export default {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 35%; height: 35%;
+  width: 30%; height: 30%;
   background: rgba(0, 0, 0, 0.4);
   border-radius: 50%;
-  border: 1px solid #fff;
-  transition: transform 0.07s;
+  border: 1px solid #bbb;
+  transition: transform 0.05s;
   text-align: center;
   overflow: hidden;
   @include vertical-align-helper;
 
   &--pressed {
     border-width: 0px;
-    transform: scale(0.9);
+    transform: scale(1) !important;
 
     // cover
     &::after {
@@ -143,6 +143,7 @@ export default {
 
   &:hover {
     cursor: default;
+    border-color: #fff;
     background: rgba(0, 0, 0, 0.7);
     transform: scale(1.1);
   }

@@ -10,7 +10,12 @@
           <div class="album-window__title">{{album.title}}</div>
           <div class="album-window__artist"><span class="album-window__artist-by">By</span>{{album.artist}}</div>
         </div>
-        <div class="album-window__play-button">PLAY</div>
+        <div
+          class="album-window__play-button"
+          :class="{'album-window__play-button--pressed': isPlayButtonPressed}"
+          @mousedown="isPlayButtonPressed = true"
+          @mouseup="playAlbum">PLAY
+        </div>
         <div class="album-window__field">
           <div class="album-window__field-number">#</div>
           <div class="album-window__field-title">TITLE</div>
@@ -32,6 +37,12 @@
 export default {
   name: 'AlbumWindow',
 
+  data() {
+    return {
+      isPlayButtonPressed: false
+    }
+  },
+
   props: {
     album: Object
   },
@@ -45,6 +56,13 @@ export default {
     }
 
     document.body.addEventListener('click', closeWindow);
+  },
+
+  methods: {
+    playAlbum() {
+      this.isPlayButtonPressed = false;
+      this.$emit('album-played');
+    }
   }
 }
 </script>
@@ -130,6 +148,20 @@ $picture-size: 100px;
   font-size: 0.7rem;
   letter-spacing: 2px;
   text-align: center;
+  overflow: hidden;
+
+  &--pressed {
+    transform: scale(1) !important;
+
+    // cover
+    &::after {
+      position: absolute;
+      top: 0px; left: 0px;
+      content: '';
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+    }
+  }
 
   &:hover {
     cursor: default;
@@ -170,6 +202,7 @@ $picture-size: 100px;
 
 .album-window__music-list {
   width: 100%;
+  padding-bottom: 15px;
 }
 
 .album-window__music {
