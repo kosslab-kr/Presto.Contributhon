@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MainMenu/>
-    <MainSection/>
+    <MainSection :library="library"/>
     <Player/>
   </div>
 </template>
@@ -10,13 +10,21 @@
 import MainMenu from './components/mainMenu/MainMenu.vue'
 import MainSection from './components/mainSection/MainSection.vue'
 import Player from './components/player/Player.vue'
+import library from './library.js'
 
 export default {
   name: 'App',
+
   components: {
     MainMenu,
     MainSection,
     Player
+  },
+
+  data() {
+    return {
+      library: library
+    }
   }
 }
 </script>

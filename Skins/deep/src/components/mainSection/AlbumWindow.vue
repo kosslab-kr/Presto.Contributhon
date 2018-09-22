@@ -23,10 +23,13 @@
         </div>
       </header>
       <ul class="album-window__music-list">
-        <li v-for="(n, idx) in 20" :key="idx" class="album-window__music">
-          <div class="album-window__music-number">{{n}}</div>
-          <div class="album-window__music-title">This is title</div>
-          <div class="album-window__music-time">3:33</div>
+        <li
+          v-for="(music, idx) in album.musics"
+          :key="music"
+          class="album-window__music">
+          <div class="album-window__music-number">{{idx+1}}</div>
+          <div class="album-window__music-title">{{music.title}}</div>
+          <div class="album-window__music-time">{{formatTime(music.runningTime)}}</div>
         </li>
       </ul>
     </div>
@@ -62,6 +65,16 @@ export default {
     playAlbum() {
       this.isPlayButtonPressed = false;
       this.$emit('album-played');
+    },
+
+    formatTime(milliseconds) {
+      const date = new Date(milliseconds);
+      const minutes = date.getMinutes();
+      const seconds = date.getSeconds();
+      const formattedMinutes = minutes.toString();
+      const formattedSeconds = seconds.toString().padStart(2, 0);
+
+      return `${formattedMinutes}:${formattedSeconds}`;
     }
   }
 }
@@ -87,8 +100,10 @@ $picture-size: 100px;
   transform: translate3d(-50%, -50%, 0);
   width: 60%; height: 70%;
   background: #191919;
+  border-radius: 10px;
   padding: 0px 15px;
   overflow: scroll;
+  box-shadow: 2px 2px 20px 5px #070707;
 }
 
 .album-window__header {
@@ -109,7 +124,7 @@ $picture-size: 100px;
 .album-window__description {
   box-sizing: border-box;
   float: left;
-  margin-left: 10px;
+  margin-left: 14px;
   width: 60%; height: $picture-size;
   padding-top: 40px;
 }
@@ -173,7 +188,7 @@ $picture-size: 100px;
 .album-window__field {
   float: left;
   width: 100%; height: 20px;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 @mixin field-props {

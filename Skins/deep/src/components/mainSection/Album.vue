@@ -23,13 +23,10 @@
 
 <script>
 export default {
+  name: 'Album',
+  
   props: {
-    album: {
-      type: Object,
-      default() {
-        return {picture: require('../../assets/album_picture/1.jpg'), title: 'Title', artist: 'Artist'};
-      }
-    }
+    album: Object
   },
 
   data() {

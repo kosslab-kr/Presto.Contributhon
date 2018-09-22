@@ -1,20 +1,13 @@
 <template>
-  <section class="sub-section">
-    <div class="sub-section__header">
-      <div class="sub-section__title">{{title}}</div>
-      <div class="sub-section__menu">
-        <ViewHeaderMenuItem
-          v-for="(menuName, idx) in menuList"
-          :key="idx"
-          :name="menuName"
-          ref="menuItems"
-          @menu-selected="showContent"/>
-      </div>
+  <section class="album-view">
+    <div class="album-view__header">
+      <div class="album-view__title">{{title}}</div>
     </div>
-    <section class='sub-section__body'>
+    <section class='album-view__body'>
       <Album
-        v-for="(n, idx) in 10"
+        v-for="(album, idx) in albums"
         :key="idx"
+        :album="album"
         @album-selected="openAlbumWindow"
         @album-played="playAlbum"/>
     </section>
@@ -27,7 +20,6 @@
 </template>
 
 <script>
-import ViewHeaderMenuItem from './ViewHeaderMenuItem.vue';
 import Album from './Album.vue';
 import AlbumWindow from './AlbumWindow.vue';
 
@@ -35,45 +27,23 @@ export default {
   name: 'AlbumView',
   
   components: {
-    ViewHeaderMenuItem,
     Album,
     AlbumWindow
   },
 
+  props: {
+    albums: Array
+  },
+
   data() {
     return {
-      title: 'Album',
-      menuList: ['FIRST', 'SECOND', 'THIRD', 'FOURTH', 'FIFTH'],
+      title: 'Albums',
       isAlbumSelected: false,
       selectedAlbum: null
     }
   },
 
-  // initialize
-  mounted() {
-    const firstMenuName = this.menuList[0];
-    const initialClickEvent = new Event('click');
-
-    this.$refs.menuItems.some( menu => {
-      if(menu.name !== firstMenuName) return false;
-
-      menu.$el.dispatchEvent(initialClickEvent);
-
-      return true;
-    })
-  },
-
   methods: {
-    showContent(name) {
-      this.activateMenu(name);
-    },
-
-    activateMenu(name) {
-      this.$refs.menuItems.forEach(menu => {
-        menu.isActive = (menu.name === name) ? true : false;
-      });
-    },
-
     openAlbumWindow(album) {
       this.isAlbumSelected = true;
       this.selectedAlbum = album;
@@ -95,7 +65,7 @@ export default {
 <style scope lang="scss">
 @import '../../index.scss';
 
-.sub-section {
+.album-view {
   width: 100%;
   height: 100%;
   overflow: scroll;
@@ -108,17 +78,17 @@ export default {
   }
 }
 
-.sub-section__header {
+.album-view__header {
   position: sticky;
   top: 0px;
   border-bottom: 1px solid #333;
   z-index: 1;
 }
 
-.sub-section__title {
+.album-view__title {
   box-sizing: border-box;
   color: #fff;
-  padding: 0 30px;
+  padding: 0px 30px 20px 30px;
   font-size: 2.8rem;
   font-weight: 900;
   background: #191919;
@@ -128,13 +98,7 @@ export default {
   }
 }
 
-.sub-section__menu {
-  box-sizing: border-box;
-  background: #191919;
-  padding: 20px 30px 2px 30px;
-}
-
-.sub-section__body {
+.album-view__body {
   padding: 30px;
 }
 

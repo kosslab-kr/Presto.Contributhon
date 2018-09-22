@@ -4,7 +4,7 @@
       <Search/>
       <More/>
     </header>
-    <AlbumView/>
+    <AlbumView :albums="library.albums"/>
   </section>
 </template>
 
@@ -20,6 +20,10 @@ export default {
     AlbumView,
     Search,
     More
+  },
+
+  props: {
+    library: Object
   }
 }
 </script>
