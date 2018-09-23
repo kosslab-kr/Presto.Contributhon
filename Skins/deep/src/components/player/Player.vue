@@ -14,10 +14,10 @@
           <div class="player__button-wrap">
             <div class="player__button player__button--shuffle"></div>
             <div class="player__button player__button--back"></div>
-            <div
-              class='player__button'
-              :class='onPlay ? "player__button--pause" : "player__button--play"'
-              @click='togglePlayButton'>
+            <div class="player__button" style="width: 30px; height: 30px">
+              <PlayPauseButton
+                ref="playPauseButton"
+                @button-clicked="togglePlayPauseButton"/>
             </div>
             <div class="player__button player__button--next"></div>
             <div class="player__button player__button--repeat"></div>
@@ -53,6 +53,7 @@
 <script>
 import HorizonSlider from './HorizonSlider.vue';
 import DummyCore from './dummyCore.js';
+import PlayPauseButton from '../PlayPauseButton.vue';
 
 const core = new DummyCore({
   playQueue: []
@@ -62,7 +63,8 @@ export default {
   name: 'Player',
 
   components: {
-    HorizonSlider
+    HorizonSlider,
+    PlayPauseButton
   },
 
   data() {
@@ -113,7 +115,8 @@ export default {
       this.$refs.playerControlsSlider.widthPercentage = ( this.currentTime / this.currentMusic.runningTime) * 100;
     },
     
-    togglePlayButton() {
+    togglePlayPauseButton() {
+      this.$refs.playPauseButton.onPlay = !this.$refs.playPauseButton.onPlay;
       this.onPlay = !this.onPlay;
       this.onPlay ? this.play() : this.pause();
     },
@@ -132,7 +135,11 @@ export default {
       this.core.setPlayQueue(playQueue);
       this.currentTime = 0;
 
-      if(!this.onPlay) this.onPlay = true;
+      if(!this.onPlay) {
+        this.onPlay = true;
+        this.$refs.playPauseButton.onPlay = true;
+      }
+
       this.play();
     },
 
@@ -258,60 +265,6 @@ export default {
 
   &--repeat {
     background: no-repeat center/100% url(../../assets/repeat.png);
-  }
-
-  &--play {
-    box-sizing: border-box;
-    width: 33px; height: 33px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    position: relative;
-    transition: transform .05s;
-    text-align: center;
-    @include vertical-align-helper;
-
-    &::after {
-      content: '';
-      display: inline-block;
-      top: 50%; left: 50%;
-      vertical-align: middle;
-      @include arrow($direction: right, $width: 11px, $height: 14px, $color: #fff);
-      transform: translate3d(2px, -1px, 0);
-    }
-
-    &:hover {
-      transform: scale(1.1);
-      border-color: #fff
-    }
-  }
-
-  &--pause {
-    box-sizing: border-box;
-    width: 33px; height: 33px;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-    position: relative;
-    transition: transform .05s;
-    text-align: center;
-    @include vertical-align-helper;
-
-    &::before, &::after {
-      content: '';
-      width: 3px; height: 13px; background: #fff;
-      display: inline-block;
-      vertical-align: middle;
-      transform: translate3d(0, 8px, 0);
-      margin-right: 5px;
-    }
-
-    &::after {
-      margin-right: 0px;
-    }
-
-    &:hover {
-      transform: scale(1.1);
-      border-color: #fff
-    }
   }
 
   &:nth-last-child(1) { margin: 0 };
