@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <MainMenu/>
-    <MainSection :library="library"/>
-    <Player/>
+    <MainSection :library="library" @album-played="playAlbum"/>
+    <Player ref="player"/>
   </div>
 </template>
 
@@ -23,7 +23,14 @@ export default {
 
   data() {
     return {
-      library: library
+      library: library,
+      playQueue: null
+    }
+  },
+  
+  methods: {
+    playAlbum(album) {
+      this.$refs.player.playPlayQueue(album.musics);
     }
   }
 }

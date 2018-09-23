@@ -1,10 +1,13 @@
 <template>
   <section id='player' class="player">
     <div class="player__wrap">
-      <div class="player__current-song">
-        <div class="player__album-cover"></div>
-        <div class="player__song-title">Title</div>
-        <div class="player__singer">singer</div>
+      <div class="player__current-music">
+        <img
+          class="player__album-picture"
+          :src="currentMusic.album.picture"
+          alt="album-picture">
+        <div class="player__song-title">{{currentMusic.title}}</div>
+        <div class="player__artist">{{currentMusic.artist}}</div>
       </div>
       <div class="player__controls">
         <div class="player__controls-wrap">
@@ -52,7 +55,7 @@ import HorizonSlider from './HorizonSlider.vue';
 import DummyCore from './dummyCore.js';
 
 const core = new DummyCore({
-  musicList: [{runningTime: 210000}]
+  playQueue: []
 })
 
 export default {
@@ -65,16 +68,21 @@ export default {
   data() {
     return {
       core: core,
-      currentMusic: null,
+      currentMusic: {
+        title: 'untitled',
+        artist: 'anonymous',
+        runningTime: 0,
+        album: {picture: require('../../assets/album_picture/untitled.png')},
+        genre: 'notFound'
+      },
       currentTime: 0,
       onPlay: false,
-      onManipulate: false,
     }
   },
 
   created() {
-    this.currentMusic = this.core.currentMusic;
     this.core.onReturnCurrentTime = this.setCurrentTime.bind(this);
+    this.core.onSetCurrentMusic = this.setCurrentMusic.bind(this);
   },
 
   methods: {
@@ -89,13 +97,11 @@ export default {
     },
 
     manipulateStart() {
-      this.onManipulate = true;
       this.core.pauseToReturnCurrentTime();
     },
 
     manipulateEnd() {
-      this.onManipulate = false;
-      this.run();
+      this.onPlay && this.play();
     },
 
     calcCurrentTime(widthPercentage) {
@@ -109,19 +115,29 @@ export default {
     
     togglePlayButton() {
       this.onPlay = !this.onPlay;
-      this.run();
+      this.onPlay ? this.play() : this.pause();
     },
 
-    run() {
-      this.onPlay ? this.play(this.currentTime) : this.pause();
-    },
-
-    play(time) {
-      this.core.play(time);
+    play() {
+      this.core.play(this.currentTime);
     },
 
     pause() {
       this.core.pause();
+    },
+
+    playPlayQueue(playQueue) {
+      this.pause();
+
+      this.core.setPlayQueue(playQueue);
+      this.currentTime = 0;
+
+      if(!this.onPlay) this.onPlay = true;
+      this.play();
+    },
+
+    setCurrentMusic(music) {
+      this.currentMusic = music;
     }
   }
 }
@@ -144,13 +160,14 @@ export default {
   width: 100%; height: 100%;
 }
 
-.player__current-song {
+.player__current-music {
   position: absolute;
   left: 0px;
   width: 270px; height: 100%;
 }
 
-.player__album-cover {
+.player__album-picture {
+  display: block;
   float: left;
   $album-cover-size: 50px !global;
   width: $album-cover-size; height: $album-cover-size;
@@ -164,12 +181,15 @@ export default {
   width: 190px; height: $album-cover-size/2;
   color: #fff;
   margin-top: ($player-height - $album-cover-size)/2;
-  padding-top: 5px;
+  padding-top: 10px;
   vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @include vertical-align-helper;
 }
 
-.player__singer {
+.player__artist {
   box-sizing: border-box;
   float: left;
   width: 190px; height: $album-cover-size/2;

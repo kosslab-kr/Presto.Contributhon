@@ -56,7 +56,7 @@ export default {
 
     playAlbum(album) {
       const targetAlbum = album || this.selectedAlbum;
-      console.log(`Album(${targetAlbum.title}) is now playing...`);
+      this.$emit('album-played', targetAlbum);
     }
   }
 }

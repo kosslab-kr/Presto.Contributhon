@@ -1,19 +1,25 @@
 export default class DummyCore{
-  constructor({musicList}) {
-    this.musicList = musicList;
-    this.currentMusic = this.musicList[0];
+  constructor({playQueue}) {
+    this.playQueue = playQueue;
+    this.currentMusicIdx = 0;
+    this.currentMusic = this.playQueue[this.currentMusicIdx] || null;
     this.currentTime = 0;
     this.intervalID = null;
     this.onReturnCurrentTime = null;
+    this.onSetCurrentMusic = null;
   }
 
   play(time) {
-    time && this._setCurrentTime(time);
+    if(!this.currentMusic) return;
+
+    if(time !== undefined) this._setCurrentTime(time);
 
     this.intervalID = setInterval(() => {
       if(this.currentTime >= this.currentMusic.runningTime) {
-        this.currentTime = this.currentMusic.runningTime;
-        this.pause(); // later next()
+        this.currentTime = 0;
+        this.pause();
+        this.next();
+        this.play();
       }
       else {
         this.currentTime += 100;
@@ -30,7 +36,39 @@ export default class DummyCore{
     clearInterval(this.intervalID);
   }
 
+  previous() {
+    if(this.currentTime > 1000) {
+      this.currentTime = 0;
+      return;
+    }
+
+    this.currentMusicIdx = ((this.currentMusicIdx - 1) + this.playQueue.length) % this.playQueue.length;
+    this._setCurrentMusic();
+  }
+
+  next() {
+    this.currentMusicIdx = (this.currentMusicIdx + 1) % this.playQueue.length;
+    this._setCurrentMusic();
+  }
+
+  shuffle() {}
+
+  repeat() {}
+
+  setVolume() {}
+
+  setPlayQueue(playQueue) {
+    this.playQueue = playQueue;
+    this.currentMusicIdx = 0;
+    this._setCurrentMusic();
+  }
+
   _setCurrentTime(time) {
     this.currentTime = time;
+  }
+
+  _setCurrentMusic() {
+    this.currentMusic = this.playQueue[this.currentMusicIdx];
+    this.onSetCurrentMusic(this.currentMusic);
   }
 }

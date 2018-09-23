@@ -4,7 +4,7 @@
       <Search/>
       <More/>
     </header>
-    <AlbumView :albums="library.albums"/>
+    <AlbumView :albums="library.albums" @album-played="playAlbum"/>
   </section>
 </template>
 
@@ -24,6 +24,12 @@ export default {
 
   props: {
     library: Object
+  },
+
+  methods: {
+    playAlbum(album) {
+      this.$emit('album-played', album);
+    }
   }
 }
 </script>
