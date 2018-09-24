@@ -11,7 +11,9 @@
     <MusicListItem
       v-for="(music, idx) in musics"
       :key="idx"
-      :music="music"/>
+      :music="music"
+      :index="idx"
+      @music-played="playPlayQueue"/>
   </div>
 </template>
 
@@ -33,6 +35,12 @@ export default {
   data() {
     return {
       isActive: false
+    }
+  },
+
+  methods: {
+    playPlayQueue(index) {
+      this.$emit('playQueue-played', {currentMusicIdx: index, musics: this.musics})
     }
   }
 }

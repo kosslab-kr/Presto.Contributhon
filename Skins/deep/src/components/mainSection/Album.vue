@@ -47,7 +47,7 @@ export default {
     },
 
     playAlbum() {
-      this.$emit('album-played', this.album);
+      this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
     }
   }
 }

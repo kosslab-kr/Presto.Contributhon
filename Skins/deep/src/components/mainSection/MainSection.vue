@@ -4,8 +4,8 @@
       <Search/>
       <More/>
     </header>
-    <AlbumView v-if="isAlbumViewActive" :albums="library.albums" @album-played="playAlbum"/>
-    <GenreView v-if="isGenreViewActive" :genres="library.genres"/>
+    <AlbumView v-if="isAlbumViewActive" :albums="library.albums" @album-played="playPlayQueue"/>
+    <GenreView v-if="isGenreViewActive" :genres="library.genres" @genre-played="playPlayQueue"/>
   </section>
 </template>
 
@@ -38,8 +38,8 @@ export default {
   },
 
   methods: {
-    playAlbum(album) {
-      this.$emit('album-played', album);
+    playPlayQueue(playQueue) {
+      this.$emit('playQueue-played', playQueue);
     }
   }
 }

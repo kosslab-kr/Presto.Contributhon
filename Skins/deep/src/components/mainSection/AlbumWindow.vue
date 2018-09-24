@@ -64,7 +64,7 @@ export default {
   methods: {
     playAlbum() {
       this.isPlayButtonPressed = false;
-      this.$emit('album-played');
+      this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
     },
 
     formatTime(milliseconds) {

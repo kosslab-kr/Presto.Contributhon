@@ -2,7 +2,10 @@
   <div class="music">
     <div class="music__play">
       <div class="music__play-icon">
-        <PlayPauseButton :background="'rgba(0,0,0,0.3)'" :hoverBackground="'rgba(0,0,0,0.6)'"/>
+        <PlayPauseButton
+          :background="'rgba(0,0,0,0.3)'"
+          :hoverBackground="'rgba(0,0,0,0.6)'"
+          @button-clicked="playMusic"/>
       </div>
     </div>
     <div class="music__title">{{music.title}}</div>
@@ -34,7 +37,8 @@ export default {
   },
 
   props: {
-    music: Object
+    music: Object,
+    index: Number
   },
 
   computed: {
@@ -46,6 +50,12 @@ export default {
       const formattedSeconds = seconds.toString().padStart(2, 0);
 
       return `${formattedMinutes}:${formattedSeconds}`;
+    }
+  },
+
+  methods: {
+    playMusic() {
+      this.$emit('music-played', this.index);
     }
   }
 }

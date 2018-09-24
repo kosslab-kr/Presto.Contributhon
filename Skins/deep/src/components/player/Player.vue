@@ -56,7 +56,7 @@ import DummyCore from './dummyCore.js';
 import PlayPauseButton from '../PlayPauseButton.vue';
 
 const core = new DummyCore({
-  playQueue: []
+  playQueue: {currentMusicIdx: 0, musics: []}
 })
 
 export default {

@@ -54,9 +54,8 @@ export default {
       this.selectedAlbum = null;
     },
 
-    playAlbum(album) {
-      const targetAlbum = album || this.selectedAlbum;
-      this.$emit('album-played', targetAlbum);
+    playAlbum(playQueue) {
+      this.$emit('album-played', playQueue);
     }
   }
 }

@@ -17,7 +17,8 @@
         :key="idx"
         :name="genre.type"
         :musics="genre.musics"
-        ref="musicList"/>
+        ref="musicList"
+        @playQueue-played="playGenre"/>
     </section>
   </section>
 </template>
@@ -82,6 +83,10 @@ export default {
       this.$refs.musicList.forEach(musicList => {
         musicList.isActive = (musicList.name === name) ? true : false;
       })
+    },
+
+    playGenre(playQueue) {
+      this.$emit('genre-played', playQueue);
     }
   }
 }

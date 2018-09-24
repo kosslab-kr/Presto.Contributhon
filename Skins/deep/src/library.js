@@ -186,8 +186,102 @@ ThePastThePresentThePossible_Tahiti80.musics = [
   },
 ]
 
+const RiotOnAnEmptyStreet_KingsOfConvenience = {
+  title: "Riot On An Empty Street",
+  artist: "Kings of Convenience",
+  picture: require('./assets/album_picture/RiotOnAnEmptyStreet.jpg'),
+  musics: null
+}
+
+RiotOnAnEmptyStreet_KingsOfConvenience.musics = [
+  {
+    title: 'Homesick',
+    artist: 'Kings of Convenience',
+    runningTime: 193000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Misread',
+    artist: 'Kings of Convenience',
+    runningTime: 188000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Cayman Island',
+    artist: 'Kings of Convenience',
+    runningTime: 183000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Stay Out Of Trouble',
+    artist: 'Kings of Convenience',
+    runningTime: 304000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Know How',
+    artist: 'Kings of Convenience',
+    runningTime: 238000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Sorry Or Please',
+    artist: 'Kings of Convenience',
+    runningTime: 227000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Love Is No Big Truth',
+    artist: 'Kings of Convenience',
+    runningTime: 228000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: "I'd Rather Dance With You",
+    artist: 'Kings of Convenience',
+    runningTime: 209000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Live Long',
+    artist: 'Kings of Convenience',
+    runningTime: 238000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Surprise Ice',
+    artist: 'Kings of Convenience',
+    runningTime: 263000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'Gold In The Air Of Summer',
+    artist: 'Kings of Convenience',
+    runningTime: 214000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+  {
+    title: 'The Build Up',
+    artist: 'Kings of Convenience',
+    runningTime: 246000,
+    album: RiotOnAnEmptyStreet_KingsOfConvenience,
+    genre: 'POP'
+  },
+]
+
 const library = {
-  albums: [Nevermind_Nirvana, ThePastThePresentThePossible_Tahiti80]
+  albums: [Nevermind_Nirvana, ThePastThePresentThePossible_Tahiti80, RiotOnAnEmptyStreet_KingsOfConvenience]
 }
 
 const musics = library.albums.reduce((musics, album) => musics.concat(album.musics), []);
