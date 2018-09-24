@@ -2,7 +2,7 @@
   <div class="music">
     <div class="music__play">
       <div class="music__play-icon">
-        <PlayPauseButton/>
+        <PlayPauseButton :background="'rgba(0,0,0,0.3)'" :hoverBackground="'rgba(0,0,0,0.6)'"/>
       </div>
     </div>
     <div class="music__title">{{music.title}}</div>
@@ -89,7 +89,7 @@ export default {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate3d(-50%, -50%, 0);
-  width: 27px; height: 27px;
+  width: 29px; height: 29px;
 }
 
 .music__title {
