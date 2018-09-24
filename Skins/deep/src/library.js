@@ -303,16 +303,4 @@ const genres = musics.reduce((genres, music) => {
 library.musics = musics;
 library.genres = genres;
 
-library.genres.push({type: 'JAZZ', musics: []});
-library.genres.push({type: 'EDM', musics: []});
-library.genres.push({type: 'CLASSIC', musics: []});
-library.genres.push({type: 'HIP-HOP', musics: []});
-library.genres.push({type: 'COUNTRY', musics: []});
-library.genres.push({type: 'CONTEMPORARY', musics: []});
-library.genres.push({type: 'DANCE', musics: []});
-library.genres.push({type: 'METAL', musics: []});
-library.genres.push({type: 'R&B', musics: []});
-library.genres.push({type: 'BLUES', musics: []});
-
-
 export default library;

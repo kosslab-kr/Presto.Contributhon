@@ -54,16 +54,10 @@ export default {
   mounted() {
     if(!this.genres[0]) return;
 
-    const firstMenuName = this.genres[0].type;
-    const initialClickEvent = new Event('click');
+    const clickEvent = new Event('click');
+    const firstMenuItem = this.$refs.menuItems[0];
 
-    this.$refs.menuItems.some( menu => {
-      if(menu.name !== firstMenuName) return false;
-
-      menu.$el.dispatchEvent(initialClickEvent);
-
-      return true;
-    })
+    firstMenuItem.$el.dispatchEvent(clickEvent);
   },
 
   methods: {

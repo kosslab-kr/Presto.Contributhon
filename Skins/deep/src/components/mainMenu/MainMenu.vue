@@ -1,77 +1,95 @@
 <template>
-  <nav class='main-menu'>
-    <ul class='main-menu__category'>
-      <li class="main-menu__item main-menu__item--selected">Browse</li>
-      <li class="main-menu__item">Radio</li>
+  <nav class='menu'>
+    <ul class='menu__category'>
+      <li class="menu__category-title">YOUR LIBRARY</li>
+      <MainMenuItem
+        v-for="menuItemName in menuItemNames"
+        :key="menuItemName"
+        :name="menuItemName"
+        ref="menuItems"
+        @menu-clicked="showContent"/>
     </ul>
-    <ul class='main-menu__category'>
-      <li class="main-menu__category-title">YOUR LIBRARY</li>
-      <li class="main-menu__item">Recently Played</li>
-      <li class="main-menu__item">Favorite Songs</li>
-      <li class="main-menu__item">Albums</li>
-      <li class="main-menu__item">Artists</li>
-      <li class="main-menu__item">Stations</li>
-      <li class="main-menu__item">Local Files</li>
-      <li class="main-menu__item">Podcasts</li>
+    <ul class='menu__category'>
+      <li class="menu__category-title">PLAYLISTS</li>
+      <MainMenuItem :name="'my music1'"/>
+      <MainMenuItem :name="'my music2'"/>
+      <MainMenuItem :name="'my music3'"/>
+      <MainMenuItem :name="'my music4'"/>
+      <MainMenuItem :name="'my music5'"/>
+      <MainMenuItem :name="'my music6'"/>
     </ul>
-    <ul class='main-menu__category'>
-      <li class="main-menu__category-title">PLAYLISTS</li>
-      <li class="main-menu__item">my music</li>
-    </ul>
-    <div class="main-menu__footer">
-      <div class="main-menu__footer-icon"></div>
-      <div class='main-menu__footer-text'>New Playlist</div>
+    <div class="menu__footer">
+      <div class="menu__footer-icon"></div>
+      <div class='menu__footer-text'>New Playlist</div>
     </div>
   </nav>
 </template>
 
 <script>
+import MainMenuItem from './MainMenuItem.vue';
+
 export default {
-  name: 'MainMenu'
+  name: 'MainMenu',
+
+  components: {
+    MainMenuItem
+  },
+
+  data() {
+    return {
+      menuItemNames: ['Musics', 'Albums', 'Genres', 'Artists']
+    }
+  },
+
+  mounted() {
+    const clickEvent = new Event('click');
+    const firstMenuItem = this.$refs.menuItems[0];
+
+    firstMenuItem.$el.dispatchEvent(clickEvent);
+  },
+
+  methods: {
+    showContent(menuItemName) {
+      this.activateMenu(menuItemName);
+      this.$emit('menu-selected', menuItemName);
+    },
+
+    activateMenu(menuItemName) {
+      this.$refs.menuItems.forEach(menuItem => {
+        menuItem.isActive = (menuItem.name === menuItemName) ? true : false;
+      })
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import '../../index.scss';
 
-.main-menu {
+.menu {
   @include position(absolute, $top: 0px, $left: 0px);
   @include size($width: $main-menu-width, $height: calc(100vh - #{$player-height}));
   box-sizing: border-box;
   background: #131313;
-  padding: 5px 0px;
+  padding-top: 35px;
   font-size: 0.9rem;
 
   &:hover { cursor: default; }
 }
 
-.main-menu__category {
+.menu__category {
   color: #aaa;
   margin-top: 33px;
 }
 
-.main-menu__category-title {
+.menu__category-title {
   font-weight: lighter;
   letter-spacing: 1px;
   padding: 0px 25px;
   font-size: 0.8rem;
 }
 
-.main-menu__item {
-  box-sizing: border-box;
-  padding: 0px 25px;
-  margin: 0.7rem 0;
-  line-height: 1.3rem;
-
-  &:hover { color: #fff; }
-}
-
-.main-menu__item--selected {
-  color: #fff;
-  box-shadow: inset 4px 0px 0 0 $signature-color;
-}
-
-.main-menu__footer {
+.menu__footer {
   @include position(fixed, $bottom: $player-height);
   @include size($width: $main-menu-width);
   box-sizing: border-box;
@@ -84,20 +102,20 @@ export default {
   padding: 0px 25px;
 
   &:hover {
-    .main-menu__footer-icon {
+    .menu__footer-icon {
       &, &::before, &::after {
         border-color: #fff;
       }
     }
     
-    .main-menu__footer-text {
+    .menu__footer-text {
       color: #fff;
     }
   }
 }
 
 
-.main-menu__footer-icon {
+.menu__footer-icon {
   @include position(relative);
   @include size($width: 21px, $height: 21px);
   display: inline-block;
@@ -123,7 +141,7 @@ export default {
   &::after { @include cross($top: 48%, $left: 48%, $border-side: (top, left)) }
 }
 
-.main-menu__footer-text {
+.menu__footer-text {
   display: inline-block;
   vertical-align: middle
 }

@@ -4,8 +4,8 @@
       <Search/>
       <More/>
     </header>
-    <AlbumView v-if="isAlbumViewActive" :albums="library.albums" @album-played="playPlayQueue"/>
-    <GenreView v-if="isGenreViewActive" :genres="library.genres" @genre-played="playPlayQueue"/>
+    <AlbumView v-if="viewDict.Albums" :albums="library.albums" @album-played="playPlayQueue"/>
+    <GenreView v-if="viewDict.Genres" :genres="library.genres" @genre-played="playPlayQueue"/>
   </section>
 </template>
 
@@ -26,20 +26,28 @@ export default {
     GenreView
   },
 
-  data() {
-    return {
-      isAlbumViewActive: false,
-      isGenreViewActive: true
-    }
-  },
-
   props: {
     library: Object
+  },
+
+  data() {
+    return {
+      viewDict: {
+        'Albums': false,
+        'Genres': false
+      }
+    }
   },
 
   methods: {
     playPlayQueue(playQueue) {
       this.$emit('playQueue-played', playQueue);
+    },
+
+    showView(viewName) {
+      for(let view in this.viewDict) {
+        this.viewDict[view] = (view === viewName) ? true : false;
+      }
     }
   }
 }

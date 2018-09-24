@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MainMenu/>
-    <MainSection :library="library" @playQueue-played="playPlayQueue"/>
+    <MainMenu @menu-selected="showView"/>
+    <MainSection :library="library" @playQueue-played="playPlayQueue" ref="mainSection"/>
     <Player ref="player"/>
   </div>
 </template>
@@ -31,6 +31,10 @@ export default {
   methods: {
     playPlayQueue(playQueue) {
       this.$refs.player.playPlayQueue(playQueue);
+    },
+
+    showView(menuItemName) {
+      this.$refs.mainSection.showView(menuItemName);
     }
   }
 }
