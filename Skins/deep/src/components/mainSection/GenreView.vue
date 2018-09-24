@@ -127,6 +127,8 @@ export default {
   box-sizing: border-box;
   background: #191919;
   padding: 0px 30px 2px 30px;
+  white-space: nowrap;
+  overflow: scroll;
 }
 
 .genre-view__body {
