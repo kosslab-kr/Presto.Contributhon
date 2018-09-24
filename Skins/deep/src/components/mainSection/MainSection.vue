@@ -4,22 +4,33 @@
       <Search/>
       <More/>
     </header>
-    <AlbumView :albums="library.albums" @album-played="playAlbum"/>
+    <AlbumView v-if="isAlbumViewActive" :albums="library.albums" @album-played="playAlbum"/>
+    <GenreView v-if="isGenreViewActive" :genres="library.genres"/>
   </section>
 </template>
 
 <script>
-import AlbumView from './AlbumView.vue';
 import Search from './Search.vue';
 import More from './More.vue';
+
+import AlbumView from './AlbumView.vue';
+import GenreView from './GenreView.vue';
 
 export default {
   name: 'MainSection',
 
   components: {
-    AlbumView,
     Search,
-    More
+    More,
+    AlbumView,
+    GenreView
+  },
+
+  data() {
+    return {
+      isAlbumViewActive: false,
+      isGenreViewActive: true
+    }
   },
 
   props: {
