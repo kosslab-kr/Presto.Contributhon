@@ -14,7 +14,7 @@
           <div class="player__button-wrap">
             <div class="player__button player__button--shuffle"></div>
             <div class="player__button player__button--back"></div>
-            <div class="player__button" style="width: 30px; height: 30px">
+            <div class="player__button" style="width: 33px; height: 33px">
               <PlayPauseButton
                 ref="playPauseButton"
                 @button-clicked="togglePlayPauseButton"/>

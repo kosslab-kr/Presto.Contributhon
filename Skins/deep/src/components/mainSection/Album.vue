@@ -122,7 +122,7 @@ export default {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 30%; height: 30%;
+  width: 32%; height: 32%;
 }
 
 .album__picture {
