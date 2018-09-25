@@ -4,6 +4,7 @@
       <Search/>
       <More/>
     </header>
+    <MusicView v-if="viewDict.Musics" :musics="library.musics" @muisc-played="playPlayQueue"/>
     <AlbumView v-if="viewDict.Albums" :albums="library.albums" @album-played="playPlayQueue"/>
     <GenreView v-if="viewDict.Genres" :genres="library.genres" @genre-played="playPlayQueue"/>
     <ArtistView v-if="viewDict.Artists" :artists="library.artists" @artist-played="playPlayQueue"/>
@@ -17,6 +18,7 @@ import More from './More.vue';
 import AlbumView from './AlbumView.vue';
 import GenreView from './GenreView.vue';
 import ArtistView from './ArtistView.vue';
+import MusicView from './MusicView.vue';
 
 export default {
   name: 'MainSection',
@@ -24,9 +26,10 @@ export default {
   components: {
     Search,
     More,
+    MusicView,
     AlbumView,
     GenreView,
-    ArtistView
+    ArtistView,
   },
 
   props: {
@@ -36,6 +39,7 @@ export default {
   data() {
     return {
       viewDict: {
+        'Musics': false,
         'Albums': false,
         'Genres': false,
         'Artists': false
