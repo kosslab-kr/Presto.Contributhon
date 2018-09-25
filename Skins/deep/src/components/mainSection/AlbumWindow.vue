@@ -1,14 +1,18 @@
 <template>
-  <div class="album-window-wrap">
-    <div class="album-window">
+  <div
+    class="album-window-wrap"
+    :class="{'album-window-wrap--active': isActive, 'album-window-wrap--inactive': !isActive}">
+    <div
+      class="album-window"
+      :class="{'album-window--active': isActive, 'album-window--inactive': !isActive}">
       <header class="album-window__header">
         <div
         class="album-window__picture"
-        :style="{ background: 'no-repeat center/100% url(' + album.picture + ')' }">
+        :style="{ background: 'no-repeat center/100% url(' + picture + ')' }">
         </div>
         <div class="album-window__description">
-          <div class="album-window__title">{{album.title}}</div>
-          <div class="album-window__artist"><span class="album-window__artist-by">By</span>{{album.artist}}</div>
+          <div class="album-window__title">{{title}}</div>
+          <div class="album-window__artist"><span class="album-window__artist-by">By</span>{{artist}}</div>
         </div>
         <div
           class="album-window__play-button"
@@ -24,8 +28,8 @@
       </header>
       <ul class="album-window__music-list">
         <li
-          v-for="(music, idx) in album.musics"
-          :key="music"
+          v-for="(music, idx) in musics"
+          :key="idx"
           class="album-window__music">
           <div class="album-window__music-number">{{idx+1}}</div>
           <div class="album-window__music-title">{{music.title}}</div>
@@ -42,26 +46,30 @@ export default {
 
   data() {
     return {
+      album: null,
+      isActive: false,
       isPlayButtonPressed: false
     }
   },
 
-  props: {
-    album: Object
-  },
-
   // close AlbumWindow
-  mounted() {
-    const closeWindow = ({target}) => {
+  created() {
+    const closeAlbumWindow = function({target}) {
       if(target.closest('.album-window')) return;
 
-      this.$emit('click-outside');
+      this.isActive = false;
+      this.album = null;
     }
 
-    document.body.addEventListener('click', closeWindow);
+    document.body.addEventListener('mousedown', closeAlbumWindow.bind(this));
   },
 
   methods: {
+    open(album) {
+      this.isActive = true;
+      this.album = album;
+    },
+
     playAlbum() {
       this.isPlayButtonPressed = false;
       this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
@@ -75,6 +83,24 @@ export default {
       const formattedSeconds = seconds.toString().padStart(2, 0);
 
       return `${formattedMinutes}:${formattedSeconds}`;
+    }
+  },
+
+  computed: {
+    picture() {
+      return this.album ? this.album.picture : '';
+    },
+
+    title() {
+      return this.album ? this.album.title : '';
+    },
+
+    artist() {
+      return this.album ? this.album.artist : '';
+    },
+
+    musics() {
+      return this.album ? this.album.musics : [];
     }
   }
 }
@@ -91,19 +117,36 @@ $picture-size: 100px;
   z-index: 1000; // viewHeader(1) < mainHeader(100) < 1000
   width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
   background: rgba(0, 0, 0, 0.4);
+
+  &--inactive {
+    transition: visibility 0s .55s, opacity .5s;
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  &--active {
+    transition: visibility 0s, opacity .5s .05s;
+    visibility: visible;
+    opacity: 1;
+  }
 }
+
 
 .album-window {
   box-sizing: border-box;
   position: absolute;
   top: 50%; left: 50%;
-  transform: translate3d(-50%, -50%, 0);
   width: 60%; height: 70%;
   background: #191919;
   border-radius: 10px;
   padding: 0px 15px;
   overflow: scroll;
   box-shadow: 2px 2px 20px 5px #070707;
+  transition: transform .5s;
+
+  &--inactive { transform: translate3d(-50%, -60%, 0); }
+
+  &--active { transform: translate3d(-50%, -50%, 0); }
 }
 
 .album-window__header {

@@ -12,9 +12,7 @@
         @album-played="playAlbum"/>
     </section>
     <AlbumWindow
-      v-if="isAlbumSelected"
-      :album="selectedAlbum"
-      @click-outside="closeAlbumWindow"
+      ref="albumWindow"
       @album-played="playAlbum"/>
   </section>
 </template>
@@ -37,21 +35,13 @@ export default {
 
   data() {
     return {
-      title: 'Albums',
-      isAlbumSelected: false,
-      selectedAlbum: null
+      title: 'Albums'
     }
   },
 
   methods: {
     openAlbumWindow(album) {
-      this.isAlbumSelected = true;
-      this.selectedAlbum = album;
-    },
-
-    closeAlbumWindow() {
-      this.isAlbumSelected = false;
-      this.selectedAlbum = null;
+      this.$refs.albumWindow.open(album)
     },
 
     playAlbum(playQueue) {
