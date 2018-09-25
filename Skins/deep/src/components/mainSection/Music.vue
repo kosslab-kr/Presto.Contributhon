@@ -1,5 +1,5 @@
 <template>
-  <div class="music">
+  <div class="music" @mouseover="startSlide" @mouseleave="stopSlide">
     <div
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
@@ -9,7 +9,9 @@
       <div class="music__picture-cover"></div>
     </div>
     <div class="music__description">
-      <div class="music__title">{{music.title}}</div>
+      <div class="music__title">
+        <InfiniteTextSlider ref="infiniteTextSlider" :text="music.title"/>
+      </div>
       <div class="music__artist">{{music.artist}}</div>
     </div>
   </div>
@@ -17,16 +19,28 @@
 
 <script>
 import PlayPauseButton from '../PlayPauseButton.vue';
+import InfiniteTextSlider from './InfiniteTextSlider.vue';
 
 export default {
-  name: 'Muisc',
+  name: 'Music',
 
   components: {
-    PlayPauseButton
+    PlayPauseButton,
+    InfiniteTextSlider
   },
 
   props: {
     music: Object
+  },
+
+  methods: {
+    startSlide() {
+      this.$refs.infiniteTextSlider.isActive = true;
+    },
+
+    stopSlide() {
+      this.$refs.infiniteTextSlider.isActive = false;
+    }
   }
 }
 </script>
@@ -81,13 +95,6 @@ $picture-size: 60px;
   float: left;
   width: calc(100% - #{$picture-size}); height: 100%;
   padding: 5px 8px;
-}
-
-.music__title {
-  color: #fff;
-  white-space: nowrap;
-  overflow: hidden;
-  line-height: 1.3;
 }
 
 .music__artist {

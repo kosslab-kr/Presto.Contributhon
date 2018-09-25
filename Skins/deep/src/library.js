@@ -14,7 +14,7 @@ Nevermind_Nirvana.musics = [
     genre: 'ROCK'
   },
   {
-    title: 'In Bloom - Nevermind Vesion',
+    title: 'In Bloom - Nevermind Version',
     artist: 'Nirvana',
     runningTime: 255000,
     album: Nevermind_Nirvana,
