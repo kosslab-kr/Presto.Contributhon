@@ -6,6 +6,7 @@
     </header>
     <AlbumView v-if="viewDict.Albums" :albums="library.albums" @album-played="playPlayQueue"/>
     <GenreView v-if="viewDict.Genres" :genres="library.genres" @genre-played="playPlayQueue"/>
+    <ArtistView v-if="viewDict.Artists" :artists="library.artists" @artist-played="playPlayQueue"/>
   </section>
 </template>
 
@@ -15,6 +16,7 @@ import More from './More.vue';
 
 import AlbumView from './AlbumView.vue';
 import GenreView from './GenreView.vue';
+import ArtistView from './ArtistView.vue';
 
 export default {
   name: 'MainSection',
@@ -23,7 +25,8 @@ export default {
     Search,
     More,
     AlbumView,
-    GenreView
+    GenreView,
+    ArtistView
   },
 
   props: {
@@ -34,7 +37,8 @@ export default {
     return {
       viewDict: {
         'Albums': false,
-        'Genres': false
+        'Genres': false,
+        'Artists': false
       }
     }
   },

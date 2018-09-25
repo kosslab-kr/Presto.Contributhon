@@ -280,8 +280,84 @@ RiotOnAnEmptyStreet_KingsOfConvenience.musics = [
   },
 ]
 
+const Scorpion_Drake = {
+  title: "Scorpion",
+  artist: "Drake",
+  picture: require('./assets/album_picture/Scorpion.jpg'),
+  musics: null
+};
+
+Scorpion_Drake.musics = [
+  {
+    title: 'In My Feelings',
+    artist: 'Drake',
+    runningTime: 218000,
+    album: Scorpion_Drake,
+    genre: 'HIP-HOP'
+  }
+];
+
+const V_Maroon5 = {
+  title: "V",
+  artist: "Maroon5",
+  picture: require('./assets/album_picture/V.jpg'),
+  musics: null
+};
+
+V_Maroon5.musics = [
+  {
+    title: 'Sugar',
+    artist: 'Maroon5',
+    runningTime: 236000,
+    album: V_Maroon5,
+    genre: 'POP'
+  }
+];
+
+const Youngblood_FiveSecondsOfSummer = {
+  title: "Youngblood",
+  artist: "Five Seconds of Summer",
+  picture: require('./assets/album_picture/Youngblood.jpg'),
+  musics: null
+};
+
+Youngblood_FiveSecondsOfSummer.musics = [
+  {
+    title: 'Youngblood',
+    artist: 'Five Seconds of Summer',
+    runningTime: 203000,
+    album: Youngblood_FiveSecondsOfSummer,
+    genre: 'ROCK'
+  }
+];
+
+const MakeMyBed_KingPrincess = {
+  title: "Make My Bed",
+  artist: "King Princess",
+  picture: require('./assets/album_picture/MakeMyBed.jpg'),
+  musics: null
+};
+
+MakeMyBed_KingPrincess.musics = [
+  {
+    title: '1950',
+    artist: 'King Princess',
+    runningTime: 226000,
+    album: MakeMyBed_KingPrincess,
+    genre: 'POP'
+  }
+];
+
 const library = {
-  albums: [Nevermind_Nirvana, ThePastThePresentThePossible_Tahiti80, RiotOnAnEmptyStreet_KingsOfConvenience]
+  albums: [
+    Nevermind_Nirvana,
+    ThePastThePresentThePossible_Tahiti80,
+    RiotOnAnEmptyStreet_KingsOfConvenience,
+    MakeMyBed_KingPrincess,
+    Youngblood_FiveSecondsOfSummer,
+    V_Maroon5,
+    Scorpion_Drake
+  ]
 }
 
 const musics = library.albums.reduce((musics, album) => musics.concat(album.musics), []);
@@ -302,5 +378,137 @@ const genres = musics.reduce((genres, music) => {
 
 library.musics = musics;
 library.genres = genres;
+
+library.artists = [
+  {
+    name: 'King Princess',
+    picture: require('./assets/artist_picture/KingPrincess.jpg'),
+    musics: [
+      {
+        title: '1950',
+        artist: 'King Princess',
+        runningTime: 226000,
+        album: MakeMyBed_KingPrincess,
+        genre: 'POP'
+      }
+    ]
+  },
+  {
+    name: 'Kings of Convenience',
+    picture: require('./assets/artist_picture/KingsOfConvenience.jpg'),
+    musics: [
+      {
+        title: 'Homesick',
+        artist: 'Kings of Convenience',
+        runningTime: 193000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Misread',
+        artist: 'Kings of Convenience',
+        runningTime: 188000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Cayman Island',
+        artist: 'Kings of Convenience',
+        runningTime: 183000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Stay Out Of Trouble',
+        artist: 'Kings of Convenience',
+        runningTime: 304000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Know How',
+        artist: 'Kings of Convenience',
+        runningTime: 238000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Sorry Or Please',
+        artist: 'Kings of Convenience',
+        runningTime: 227000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Love Is No Big Truth',
+        artist: 'Kings of Convenience',
+        runningTime: 228000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: "I'd Rather Dance With You",
+        artist: 'Kings of Convenience',
+        runningTime: 209000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Live Long',
+        artist: 'Kings of Convenience',
+        runningTime: 238000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Surprise Ice',
+        artist: 'Kings of Convenience',
+        runningTime: 263000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'Gold In The Air Of Summer',
+        artist: 'Kings of Convenience',
+        runningTime: 214000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      },
+      {
+        title: 'The Build Up',
+        artist: 'Kings of Convenience',
+        runningTime: 246000,
+        album: RiotOnAnEmptyStreet_KingsOfConvenience,
+        genre: 'POP'
+      }
+    ]
+  },
+  {
+    name: 'Drake',
+    picture: require('./assets/artist_picture/Drake.jpg'),
+    musics: [
+      {
+        title: 'In My Feelings',
+        artist: 'Drake',
+        runningTime: 218000,
+        album: Scorpion_Drake,
+        genre: 'HIP-HOP'
+      }
+    ]
+  },
+  {
+    name: 'Five Seconds of Summer',
+    picture: require('./assets/artist_picture/FiveSecondsOfSummer.jpg'),
+    musics: [
+      {
+        title: 'Youngblood',
+        artist: 'Five Seconds of Summer',
+        runningTime: 203000,
+        album: Youngblood_FiveSecondsOfSummer,
+        genre: 'ROCK'
+      }
+    ]
+  }
+]
 
 export default library;
