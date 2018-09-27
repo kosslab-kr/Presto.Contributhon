@@ -11,9 +11,17 @@
         @album-selected="_openAlbumWindow"
         @album-played="_playAlbum"/>
     </section>
-    <AlbumWindow
-      ref="albumWindow"
-      @album-played="_playAlbum"/>
+    <transition name="fade">
+      <div v-if="isAlbumSelected" class="album-window-background"></div>
+    </transition>
+    <transition name="slide-fade">
+      <AlbumWindow
+        v-if="isAlbumSelected"
+        ref="albumWindow"
+        :album="selectedAlbum"
+        @album-played="_playAlbum"
+        @window-closed="_closeAlbumWindow"/>
+    </transition>
   </section>
 </template>
 
@@ -36,23 +44,29 @@ export default {
   data() {
     return {
       title: 'Albums',
-      isActive: false
+      isActive: false,
+      isAlbumSelected: false,
+      selectedAlbum: null
     }
   },
 
   methods: {
     activate() {
       this.isActive = true;
-      this.$refs.albumWindow.activate();
     },
 
     inactivate() {
       this.isActive = false;
-      this.$refs.albumWindow.inactivate();
     },
 
     _openAlbumWindow(album) {
-      this.$refs.albumWindow.open(album)
+      this.isAlbumSelected = true;
+      this.selectedAlbum = album;
+    },
+
+    _closeAlbumWindow() {
+      this.isAlbumSelected = false;
+      this.selectedAlbum = null;
     },
 
     _playAlbum(playQueue) {
@@ -100,6 +114,31 @@ export default {
 
 .album-view__body {
   padding: 30px;
+}
+
+.album-window-background {
+  position: fixed;
+  top: 0px; left: $main-menu-width;
+  z-index: 1000; // viewHeader(1) < mainHeader(100) < 1000
+  width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
+  background: rgba(0,0,0,0.5);
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: opacity .5s, transform .5s;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  transform: translate3d(0, -100px, 0);
+  opacity: 0;
 }
 
 </style>

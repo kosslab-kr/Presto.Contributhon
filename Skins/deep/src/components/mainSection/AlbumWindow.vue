@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="album-window-wrap"
-    :class="{'album-window-wrap--opened': isOpened, 'album-window-wrap--closed': !isOpened}">
+  <div class="album-window-wrap">
     <div
       class="album-window"
-      :class="{'album-window--opened': isOpened, 'album-window--closed': !isOpened}"
       @mouseover="_startSlide"
       @mouseleave="_stopSlide">
       <header class="album-window__header">
@@ -54,10 +51,12 @@ export default {
     InfiniteTextSlider
   },
 
+  props: {
+    album: Object
+  },
+
   data() {
     return {
-      album: null,
-      isOpened: false,
       isPlayButtonPressed: false
     }
   },
@@ -67,27 +66,16 @@ export default {
     const closeAlbumWindow = function({target}) {
       if(target.closest('.album-window')) return;
 
-      this.isOpened = false;
-      this.album = null;
+      this.$refs.infiniteTextSlider.inactivate();
+      this.$emit('window-closed');
     }
 
     document.body.addEventListener('mousedown', closeAlbumWindow.bind(this));
+
+    this.$refs.InfiniteTextSlider.activate();
   },
 
   methods: {
-    activate() {
-      this.$refs.infiniteTextSlider.activate();
-    },
-
-    inactivate() {
-      this.$refs.infiniteTextSlider.inactivate();
-    },
-
-    open(album) {
-      this.isOpened = true;
-      this.album = album;
-    },
-
     _playAlbum() {
       this.isPlayButtonPressed = false;
       this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
@@ -142,37 +130,22 @@ $picture-size: 100px;
   top: 0px; left: $main-menu-width;
   z-index: 1000; // viewHeader(1) < mainHeader(100) < 1000
   width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
-  background: rgba(0, 0, 0, 0.4);
-
-  &--closed {
-    transition: visibility 0s .55s, opacity .5s;
-    visibility: hidden;
-    opacity: 0;
-  }
-
-  &--opened {
-    transition: visibility 0s, opacity .5s .05s;
-    visibility: visible;
-    opacity: 1;
-  }
+  text-align: center;
+  @include vertical-align-helper;
 }
 
-
 .album-window {
+  display: inline-block;
+  vertical-align: middle;
   box-sizing: border-box;
-  position: absolute;
-  top: 50%; left: 50%;
   width: 60%; height: 70%;
   background: #191919;
   border-radius: 10px;
   padding: 0px 15px;
   overflow: scroll;
   box-shadow: 2px 2px 20px 5px #070707;
-  transition: transform .5s;
-
-  &--closed { transform: translate3d(-50%, -60%, 0); }
-
-  &--opened { transform: translate3d(-50%, -50%, 0); }
+  z-index: 1000; // viewHeader(1) < mainHeader(100) < 1000
+  text-align: left;
 }
 
 .album-window__header {
