@@ -1,5 +1,5 @@
 <template>
-  <section class="album-view">
+  <section v-show="isActive" class="album-view">
     <div class="album-view__header">
       <div class="album-view__title">{{title}}</div>
     </div>
@@ -8,12 +8,12 @@
         v-for="(album, idx) in albums"
         :key="idx"
         :album="album"
-        @album-selected="openAlbumWindow"
-        @album-played="playAlbum"/>
+        @album-selected="_openAlbumWindow"
+        @album-played="_playAlbum"/>
     </section>
     <AlbumWindow
       ref="albumWindow"
-      @album-played="playAlbum"/>
+      @album-played="_playAlbum"/>
   </section>
 </template>
 
@@ -35,16 +35,27 @@ export default {
 
   data() {
     return {
-      title: 'Albums'
+      title: 'Albums',
+      isActive: false
     }
   },
 
   methods: {
-    openAlbumWindow(album) {
+    activate() {
+      this.isActive = true;
+      this.$refs.albumWindow.activate();
+    },
+
+    inactivate() {
+      this.isActive = false;
+      this.$refs.albumWindow.inactivate();
+    },
+
+    _openAlbumWindow(album) {
       this.$refs.albumWindow.open(album)
     },
 
-    playAlbum(playQueue) {
+    _playAlbum(playQueue) {
       this.$emit('album-played', playQueue);
     }
   }

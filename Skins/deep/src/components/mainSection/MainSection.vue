@@ -4,10 +4,10 @@
       <Search/>
       <More/>
     </header>
-    <MusicView v-if="viewDict.Musics" :musics="library.musics" @muisc-played="playPlayQueue"/>
-    <AlbumView v-if="viewDict.Albums" :albums="library.albums" @album-played="playPlayQueue"/>
-    <GenreView v-if="viewDict.Genres" :genres="library.genres" @genre-played="playPlayQueue"/>
-    <ArtistView v-if="viewDict.Artists" :artists="library.artists" @artist-played="playPlayQueue"/>
+    <MusicView ref="Musics" :musics="library.musics" @music-played="playPlayQueue"/>
+    <AlbumView ref="Albums" :albums="library.albums" @album-played="playPlayQueue"/>
+    <GenreView ref="Genres" :genres="library.genres" @genre-played="playPlayQueue"/>
+    <ArtistView ref="Artists"  :artists="library.artists" @artist-played="playPlayQueue"/>
   </section>
 </template>
 
@@ -38,12 +38,7 @@ export default {
 
   data() {
     return {
-      viewDict: {
-        'Musics': false,
-        'Albums': false,
-        'Genres': false,
-        'Artists': false
-      }
+      viewNameList: ['Musics', 'Albums', 'Genres', 'Artists']
     }
   },
 
@@ -52,9 +47,10 @@ export default {
       this.$emit('playQueue-played', playQueue);
     },
 
-    showView(viewName) {
-      for(let view in this.viewDict) {
-        this.viewDict[view] = (view === viewName) ? true : false;
+    showView(targetViewName) {
+      for(let viewName of this.viewNameList) {
+        const view = this.$refs[viewName];
+        targetViewName === viewName ? view.activate() : view.inactivate();
       }
     }
   }

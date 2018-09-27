@@ -1,5 +1,5 @@
 <template>
-  <div class="music" @mouseover="startSlide" @mouseleave="stopSlide">
+  <div class="music" @mouseover="_startSlide" @mouseleave="_stopSlide">
     <div
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
@@ -34,12 +34,20 @@ export default {
   },
 
   methods: {
-    startSlide() {
-      this.$refs.infiniteTextSlider.isActive = true;
+    activate() {
+      this.$refs.infiniteTextSlider.activate();
     },
 
-    stopSlide() {
-      this.$refs.infiniteTextSlider.isActive = false;
+    inactivate() {
+      this.$refs.infiniteTextSlider.inactivate();
+    },
+    
+    _startSlide() {
+      this.$refs.infiniteTextSlider.onPlay = true;
+    },
+
+    _stopSlide() {
+      this.$refs.infiniteTextSlider.onPlay = false;
     }
   }
 }

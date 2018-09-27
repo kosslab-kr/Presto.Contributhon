@@ -1,5 +1,5 @@
 <template>
-  <section class="artist-view">
+  <section v-show="isActive" class="artist-view">
     <div class="artist-view__header">
       <div class="artist-view__title">{{title}}</div>
     </div>
@@ -8,12 +8,12 @@
         v-for="(artist, idx) in artists"
         :key="idx"
         :artist="artist"
-        @artist-selected="openArtistWindow"
-        @artist-played="playArtist"/>
+        @artist-selected="_openArtistWindow"
+        @artist-played="_playArtist"/>
     </section>
     <ArtistWindow
       ref="artistWindow"
-      @artist-played="playArtist"/>
+      @artist-played="_playArtist"/>
   </section>
 </template>
 
@@ -35,16 +35,25 @@ export default {
 
   data() {
     return {
+      isActive: false,
       title: 'Artists'
     }
   },
 
   methods: {
-    openArtistWindow(artist) {
+    activate() {
+      this.isActive = true;
+    },
+
+    inactivate() {
+      this.isActive = false;
+    },
+
+    _openArtistWindow(artist) {
       this.$refs.artistWindow.open(artist)
     },
 
-    playArtist(playQueue) {
+    _playArtist(playQueue) {
       this.$emit('artist-played', playQueue);
     }
   }

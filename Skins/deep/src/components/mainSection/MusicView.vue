@@ -1,5 +1,5 @@
 <template>
-  <section class="music-view">
+  <section v-show="isActive" class="music-view">
     <div class="music-view__header">
       <div class="music-view__title">{{title}}</div>
     </div>
@@ -7,7 +7,8 @@
       <Music
         v-for="(music, idx) in musics"
         :key="idx"
-        :music="music"/>
+        :music="music"
+        ref="musicComponents"/>
     </section>
   </section>
 </template>
@@ -28,12 +29,26 @@ export default {
 
   data() {
     return {
+      isActive: false,
       title: 'Musics'
     }
   },
 
   methods: {
-    
+    activate() {
+      this.isActive = true;
+      this.$refs.musicComponents.forEach(musicComponent => {
+        musicComponent.activate();
+      })
+    },
+
+    inactivate() {
+      this.isActive = false;
+
+      this.$refs.musicComponents.forEach(musicComponent => {
+        musicComponent.inactivate();
+      })
+    }
   }
 }
 </script>

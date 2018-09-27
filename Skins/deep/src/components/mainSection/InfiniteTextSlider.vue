@@ -1,6 +1,6 @@
 <template>
   <div ref="gallery" class="gallery">
-    <div class="wrap" :class="{'wrap--active': isActive}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's'}">
+    <div class="wrap" :class="{'wrap--active': onPlay}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's'}">
       <div ref="text" class="text" :style="fontStyle">{{text}}</div>
       <div v-if="isTextOverflowed" class="text text-copy" :style="fontStyle">{{text}}</div>
     </div>
@@ -28,19 +28,25 @@ export default {
 
   data() {
     return {
-      isActive: false,
+      onPlay: false,
       isTextOverflowed: false,
       sliderDistance: 0
     }
   },
 
-  mounted() {
-    window.addEventListener('resize', this.setAnimation.bind(this));
-    this.setAnimation();
-  },
-
   methods: {
-    setAnimation() {
+    activate() {
+      window.addEventListener('resize', this._setAnimation.bind(this));
+
+      setTimeout(this._setAnimation.bind(this));
+    },
+
+    inactivate() {
+      window.removeEventListener('resize', this._setAnimation.bind(this));
+    },
+    
+    _setAnimation() {
+      // debugger;
       const gallery = this.$refs.gallery;
       const text = this.$refs.text;
       const gap = text.clientWidth - gallery.offsetWidth;

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <MainMenu @menu-selected="showView"/>
+    <MainMenu ref="mainMenu" @menu-selected="showView"/>
     <MainSection :library="library" @playQueue-played="playPlayQueue" ref="mainSection"/>
     <Player ref="player"/>
   </div>
@@ -26,6 +26,10 @@ export default {
       library: library,
       playQueue: null
     }
+  },
+
+  mounted() {
+    this.$refs.mainMenu.triggerClickEvent({menuIndex: 0});
   },
   
   methods: {

@@ -1,5 +1,5 @@
 <template>
-  <section class="genre-view">
+  <section v-show="isActive" class="genre-view">
     <div class="genre-view__header">
       <div class="genre-view__title">{{title}}</div>
       <div class="genre-view__menu">
@@ -8,7 +8,7 @@
           :key="idx"
           :name="genre.type"
           ref="menuItems"
-          @menu-selected="showContent"/>
+          @menu-selected="_showContent"/>
       </div>
     </div>
     <section class='genre-view__body'>
@@ -18,7 +18,7 @@
         :name="genre.type"
         :musics="genre.musics"
         ref="musicList"
-        @playQueue-played="playGenre"/>
+        @playQueue-played="_playGenre"/>
     </section>
   </section>
 </template>
@@ -46,6 +46,7 @@ export default {
 
   data() {
     return {
+      isActive: false,
       title: 'Genres'
     }
   },
@@ -61,25 +62,33 @@ export default {
   },
 
   methods: {
-    showContent(name) {
-      this.$el.scrollTo(0,0);
-      this.activateMenu(name);
-      this.activateMusicList(name);
+    activate() {
+      this.isActive = true;
     },
 
-    activateMenu(name) {
+    inactivate() {
+      this.isActive = false;
+    },
+
+    _showContent(name) {
+      this.$el.scrollTo(0,0);
+      this._activateMenu(name);
+      this._activateMusicList(name);
+    },
+
+    _activateMenu(name) {
       this.$refs.menuItems.forEach(menu => {
         menu.isActive = (menu.name === name) ? true : false;
       });
     },
 
-    activateMusicList(name) {
+    _activateMusicList(name) {
       this.$refs.musicList.forEach(musicList => {
         musicList.isActive = (musicList.name === name) ? true : false;
       })
     },
 
-    playGenre(playQueue) {
+    _playGenre(playQueue) {
       this.$emit('genre-played', playQueue);
     }
   }

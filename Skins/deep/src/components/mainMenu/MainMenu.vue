@@ -7,7 +7,7 @@
         :key="menuItemName"
         :name="menuItemName"
         ref="menuItems"
-        @menu-clicked="showContent"/>
+        @menu-clicked="_showContent"/>
     </ul>
     <ul class='menu__category'>
       <li class="menu__category-title">PLAYLISTS</li>
@@ -41,20 +41,20 @@ export default {
     }
   },
 
-  mounted() {
-    const clickEvent = new Event('click');
-    const firstMenuItem = this.$refs.menuItems[0];
-
-    firstMenuItem.$el.dispatchEvent(clickEvent);
-  },
-
   methods: {
-    showContent(menuItemName) {
-      this.activateMenu(menuItemName);
+    triggerClickEvent({menuIndex}) {
+      const clickEvent = new Event('click');
+      const firstMenuItem = this.$refs.menuItems[menuIndex];
+
+      firstMenuItem.$el.dispatchEvent(clickEvent);
+    },
+
+    _showContent(menuItemName) {
+      this._activateMenu(menuItemName);
       this.$emit('menu-selected', menuItemName);
     },
 
-    activateMenu(menuItemName) {
+    _activateMenu(menuItemName) {
       this.$refs.menuItems.forEach(menuItem => {
         menuItem.isActive = (menuItem.name === menuItemName) ? true : false;
       })

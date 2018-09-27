@@ -1,24 +1,28 @@
 <template>
   <div
     class="album-window-wrap"
-    :class="{'album-window-wrap--active': isActive, 'album-window-wrap--inactive': !isActive}">
+    :class="{'album-window-wrap--opened': isOpened, 'album-window-wrap--closed': !isOpened}">
     <div
       class="album-window"
-      :class="{'album-window--active': isActive, 'album-window--inactive': !isActive}">
+      :class="{'album-window--opened': isOpened, 'album-window--closed': !isOpened}"
+      @mouseover="_startSlide"
+      @mouseleave="_stopSlide">
       <header class="album-window__header">
         <div
         class="album-window__picture"
         :style="{ background: 'no-repeat center/100% url(' + picture + ')' }">
         </div>
         <div class="album-window__description">
-          <div class="album-window__title">{{title}}</div>
+          <div class="album-window__title">
+            <InfiniteTextSlider ref="infiniteTextSlider" :text="title" :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}"/>
+          </div>
           <div class="album-window__artist"><span class="album-window__artist-by">By</span>{{artist}}</div>
         </div>
         <div
           class="album-window__play-button"
           :class="{'album-window__play-button--pressed': isPlayButtonPressed}"
           @mousedown="isPlayButtonPressed = true"
-          @mouseup="playAlbum">PLAY
+          @mouseup="_playAlbum">PLAY
         </div>
         <div class="album-window__field">
           <div class="album-window__field-number">#</div>
@@ -33,7 +37,7 @@
           class="album-window__music">
           <div class="album-window__music-number">{{idx+1}}</div>
           <div class="album-window__music-title">{{music.title}}</div>
-          <div class="album-window__music-time">{{formatTime(music.runningTime)}}</div>
+          <div class="album-window__music-time">{{_formatTime(music.runningTime)}}</div>
         </li>
       </ul>
     </div>
@@ -41,23 +45,29 @@
 </template>
 
 <script>
+import InfiniteTextSlider from './InfiniteTextSlider.vue';
+
 export default {
   name: 'AlbumWindow',
+
+  components: {
+    InfiniteTextSlider
+  },
 
   data() {
     return {
       album: null,
-      isActive: false,
+      isOpened: false,
       isPlayButtonPressed: false
     }
   },
 
   // close AlbumWindow
-  created() {
+  mounted() {
     const closeAlbumWindow = function({target}) {
       if(target.closest('.album-window')) return;
 
-      this.isActive = false;
+      this.isOpened = false;
       this.album = null;
     }
 
@@ -65,17 +75,25 @@ export default {
   },
 
   methods: {
+    activate() {
+      this.$refs.infiniteTextSlider.activate();
+    },
+
+    inactivate() {
+      this.$refs.infiniteTextSlider.inactivate();
+    },
+
     open(album) {
-      this.isActive = true;
+      this.isOpened = true;
       this.album = album;
     },
 
-    playAlbum() {
+    _playAlbum() {
       this.isPlayButtonPressed = false;
       this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
     },
 
-    formatTime(milliseconds) {
+    _formatTime(milliseconds) {
       const date = new Date(milliseconds);
       const minutes = date.getMinutes();
       const seconds = date.getSeconds();
@@ -83,6 +101,14 @@ export default {
       const formattedSeconds = seconds.toString().padStart(2, 0);
 
       return `${formattedMinutes}:${formattedSeconds}`;
+    },
+
+    _startSlide() {
+      this.$refs.infiniteTextSlider.onPlay = true;
+    },
+
+    _stopSlide() {
+      this.$refs.infiniteTextSlider.onPlay = false;
     }
   },
 
@@ -118,13 +144,13 @@ $picture-size: 100px;
   width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
   background: rgba(0, 0, 0, 0.4);
 
-  &--inactive {
+  &--closed {
     transition: visibility 0s .55s, opacity .5s;
     visibility: hidden;
     opacity: 0;
   }
 
-  &--active {
+  &--opened {
     transition: visibility 0s, opacity .5s .05s;
     visibility: visible;
     opacity: 1;
@@ -144,9 +170,9 @@ $picture-size: 100px;
   box-shadow: 2px 2px 20px 5px #070707;
   transition: transform .5s;
 
-  &--inactive { transform: translate3d(-50%, -60%, 0); }
+  &--closed { transform: translate3d(-50%, -60%, 0); }
 
-  &--active { transform: translate3d(-50%, -50%, 0); }
+  &--opened { transform: translate3d(-50%, -50%, 0); }
 }
 
 .album-window__header {
@@ -173,13 +199,7 @@ $picture-size: 100px;
 }
 
 .album-window__title {
-  color: #fff;
   line-height: 1.3;
-  font-weight: 900;
-  font-size: 2rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .album-window__artist-by {
