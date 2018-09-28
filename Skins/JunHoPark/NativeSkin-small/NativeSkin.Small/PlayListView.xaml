@@ -4,8 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:ps="clr-namespace:Presto.SDK;assembly=Presto.SDK"
       xmlns:local="clr-namespace:NativeSkin.Small"
       mc:Ignorable="d" 
+      DataContext="{x:Static ps:PrestoSDK.PrestoService}"
       d:DesignHeight="600" d:DesignWidth="400"
       Title="PlayListView">
 
@@ -41,84 +43,19 @@
         </Grid>
 
         <Grid VerticalAlignment="Top" Height="500" Margin="0 40 0 0">
-            <ListView VerticalAlignment="Top" Margin="10" Height="500" Foreground="LightSteelBlue">
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="01" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="02" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="03" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="04" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="05" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="06" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
-                <ListViewItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="07" Margin="5" VerticalAlignment="Center"/>
-                        <Ellipse Width="30" Height="30">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="Image/image.PNG"/>
-                            </Ellipse.Fill>
-                        </Ellipse>
-                        <TextBlock Text="The name of the song (Feat. singer)" Margin="10,0" VerticalAlignment="Center" Width="auto" TextTrimming="CharacterEllipsis"/>
-                    </StackPanel>
-                </ListViewItem>
+            <ListView VerticalAlignment="Top" Margin="10" Height="500" Foreground="LightSteelBlue" DataContext="{Binding Library.Musics}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="30" Height="30">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Album.Picture}"/>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock Width="auto" Margin="10 0" VerticalAlignment="Center" Text="{Binding Title}" TextTrimming="CharacterEllipsis"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
         </Grid>
 
