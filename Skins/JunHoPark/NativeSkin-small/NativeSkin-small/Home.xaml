@@ -1,0 +1,155 @@
+﻿<Page x:Class="NativeSkin_small.Home"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:NativeSkin_small"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="400"
+      Title="Presto Music Player">
+
+    <Grid Style="{StaticResource appBackground}">
+        <Grid VerticalAlignment="Top" Margin="10">
+            <Button HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" ToolTip="MaterialDesignFloatingActionMiniAccentButton" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Plus" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+            <StackPanel>
+                <TextBlock Text="Title : No copy right sound" HorizontalAlignment="Center" />
+                <TextBlock Text="Artist : Name of the artist" HorizontalAlignment="Center" />
+            </StackPanel>
+            <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                <materialDesign:PackIcon Kind="Power" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                            <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                            <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+        </Grid>
+        <Grid Height="400" VerticalAlignment="Top">
+            <Ellipse Width="250" Height="250" StrokeThickness="2">
+                <Ellipse.Stroke>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                        <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Stroke>
+            </Ellipse>
+            <Ellipse Width="245" Height="245">
+                <Ellipse.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                        <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                    </LinearGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse Width="240" Height="240">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="Image/image.PNG"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Grid VerticalAlignment="Bottom" Margin="0 0 0 5">
+                <Button HorizontalAlignment="Left" Margin="120 0 0 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="RotateRight" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Heart" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0 0 120 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Shuffle" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid VerticalAlignment="Bottom" Height="200">
+            <Grid VerticalAlignment="Top" Height="120" ShowGridLines="True" Style="{StaticResource appBackgroundColor}" Opacity="0.5">
+                <TextBlock Text="OH leay \n lyrics " VerticalAlignment="Center" Margin="50"/>
+            </Grid>
+            <Grid VerticalAlignment="Bottom" Height="80">
+                <Button HorizontalAlignment="Left" Margin="20 0 0 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center" Click="ListviewBtn_Click">
+                    <materialDesign:PackIcon Kind="FormatListBulleted" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Left" Margin="130 0 0 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ChevronLeft" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Center" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <Button.Effect>
+                        <DropShadowEffect Color="#FF7152B4" BlurRadius="40" Direction="0" RenderingBias="Quality"/>
+                    </Button.Effect>
+                    <materialDesign:PackIcon Kind="Pause" Width="40" Height="40">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0 0 130 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="ChevronRight" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+                <Button HorizontalAlignment="Right" Margin="0 0 20 0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
+                    <materialDesign:PackIcon Kind="Speaker" Width="30" Height="30">
+                        <materialDesign:PackIcon.Foreground>
+                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                <GradientStop Color="{StaticResource mediumPurple}" Offset="0"/>
+                                <GradientStop Color="{StaticResource darkPurple}" Offset="1"/>
+                            </LinearGradientBrush>
+                        </materialDesign:PackIcon.Foreground>
+                    </materialDesign:PackIcon>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
