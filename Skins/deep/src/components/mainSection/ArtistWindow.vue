@@ -17,7 +17,7 @@
           class="artist-window__play-button"
           :class="{'artist-window__play-button--pressed': isPlayButtonPressed}"
           @mousedown="isPlayButtonPressed = true"
-          @mouseup="playArtist">PLAY
+          @mouseup="playArtistAllMusic">PLAY
         </div>
         <div class="artist-window__field">
           <div class="artist-window__field-number">#</div>
@@ -73,6 +73,10 @@ export default {
     open(artist) {
       this.isActive = true;
       this.artist = artist;
+    },
+
+    playArtistAllMusic() {
+      this.playArtist(0);
     },
 
     playArtist(index) {
