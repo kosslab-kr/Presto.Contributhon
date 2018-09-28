@@ -4,7 +4,11 @@
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
       <div class="music__play-button">
-        <PlayPauseButton :background="'rgba(0,0,0,0.5)'" :hoverBackground="'rgba(0,0,0,0.7)'"/>
+        <PlayPauseButton
+          :background="'rgba(0,0,0,0.5)'"
+          :hoverBackground="'rgba(0,0,0,0.7)'"
+          @button-clicked="playMusic"
+        />
       </div>
       <div class="music__picture-cover"></div>
     </div>
@@ -30,7 +34,8 @@ export default {
   },
 
   props: {
-    music: Object
+    music: Object,
+    index: Number
   },
 
   methods: {
@@ -40,6 +45,10 @@ export default {
 
     _stopSlide() {
       this.$refs.infiniteTextSlider.onPlay = false;
+    },
+
+    playMusic() {
+      this.$emit('music-played', this.index);
     }
   }
 }

@@ -7,8 +7,11 @@
       <Music
         v-for="(music, idx) in musics"
         :key="idx"
+        :index="idx"
         :music="music"
-        ref="musicComponents"/>
+        ref="musicComponents"
+        @music-played="playMusic"
+      />
     </section>
   </section>
 </template>
@@ -30,6 +33,12 @@ export default {
   data() {
     return {
       title: 'Musics'
+    }
+  },
+
+  methods: {
+    playMusic(index) {
+      this.$emit('music-played', {currentMusicIdx: index, musics: this.musics});
     }
   }
 }
