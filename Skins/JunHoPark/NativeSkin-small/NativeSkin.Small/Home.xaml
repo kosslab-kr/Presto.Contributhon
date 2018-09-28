@@ -28,8 +28,8 @@
                 </materialDesign:PackIcon>
             </Button>
             <StackPanel>
-                <TextBlock Text="Title : No copy right sound" HorizontalAlignment="Center" />
-                <TextBlock Text="Artist : Name of the artist" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding Player.CurrentMusic.Title}" HorizontalAlignment="Center" />
+                <TextBlock Text="{Binding Player.CurrentMusic.Artist.Name}" HorizontalAlignment="Center" />
             </StackPanel>
             <Button HorizontalAlignment="Right" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center">
                 <materialDesign:PackIcon Kind="Power" Width="30" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -61,7 +61,7 @@
             </Ellipse>
             <Ellipse Width="240" Height="240">
                 <Ellipse.Fill>
-                    <ImageBrush ImageSource="Image/image.PNG"/>
+                    <ImageBrush ImageSource="{Binding Player.CurrentMusic.Album.Picture}"/>
                 </Ellipse.Fill>
             </Ellipse>
             <Grid VerticalAlignment="Bottom" Margin="0 0 0 5">
