@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isActive" class="album-view">
+  <section class="album-view">
     <div class="album-view__header">
       <div class="album-view__title">{{title}}</div>
     </div>
@@ -44,21 +44,12 @@ export default {
   data() {
     return {
       title: 'Albums',
-      isActive: false,
       isAlbumSelected: false,
       selectedAlbum: null
     }
   },
 
   methods: {
-    activate() {
-      this.isActive = true;
-    },
-
-    inactivate() {
-      this.isActive = false;
-    },
-
     _openAlbumWindow(album) {
       this.isAlbumSelected = true;
       this.selectedAlbum = album;
@@ -137,7 +128,7 @@ export default {
 }
 
 .slide-fade-enter, .slide-fade-leave-to {
-  transform: translate3d(0, -100px, 0);
+  transform: translate3d(0, -50px, 0);
   opacity: 0;
 }
 

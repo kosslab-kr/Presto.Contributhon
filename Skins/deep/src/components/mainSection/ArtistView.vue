@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isActive" class="artist-view">
+  <section class="artist-view">
     <div class="artist-view__header">
       <div class="artist-view__title">{{title}}</div>
     </div>
@@ -35,20 +35,11 @@ export default {
 
   data() {
     return {
-      isActive: false,
       title: 'Artists'
     }
   },
 
   methods: {
-    activate() {
-      this.isActive = true;
-    },
-
-    inactivate() {
-      this.isActive = false;
-    },
-
     _openArtistWindow(artist) {
       this.$refs.artistWindow.open(artist)
     },

@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isActive" class="music-view">
+  <section class="music-view">
     <div class="music-view__header">
       <div class="music-view__title">{{title}}</div>
     </div>
@@ -29,25 +29,7 @@ export default {
 
   data() {
     return {
-      isActive: false,
       title: 'Musics'
-    }
-  },
-
-  methods: {
-    activate() {
-      this.isActive = true;
-      this.$refs.musicComponents.forEach(musicComponent => {
-        musicComponent.activate();
-      })
-    },
-
-    inactivate() {
-      this.isActive = false;
-
-      this.$refs.musicComponents.forEach(musicComponent => {
-        musicComponent.inactivate();
-      })
     }
   }
 }

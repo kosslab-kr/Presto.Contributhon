@@ -11,7 +11,7 @@
         </div>
         <div class="album-window__description">
           <div class="album-window__title">
-            <InfiniteTextSlider ref="infiniteTextSlider" :text="title" :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}"/>
+            <InfiniteTextSlider ref="infiniteTextSlider" :text="title" :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}" :delay="1"/>
           </div>
           <div class="album-window__artist"><span class="album-window__artist-by">By</span>{{artist}}</div>
         </div>
@@ -66,13 +66,10 @@ export default {
     const closeAlbumWindow = function({target}) {
       if(target.closest('.album-window')) return;
 
-      this.$refs.infiniteTextSlider.inactivate();
       this.$emit('window-closed');
     }
 
     document.body.addEventListener('mousedown', closeAlbumWindow.bind(this));
-
-    this.$refs.InfiniteTextSlider.activate();
   },
 
   methods: {
@@ -92,10 +89,12 @@ export default {
     },
 
     _startSlide() {
+      if(!this.$refs.infiniteTextSlider) return;
       this.$refs.infiniteTextSlider.onPlay = true;
     },
 
     _stopSlide() {
+      if(!this.$refs.infiniteTextSlider) return;
       this.$refs.infiniteTextSlider.onPlay = false;
     }
   },

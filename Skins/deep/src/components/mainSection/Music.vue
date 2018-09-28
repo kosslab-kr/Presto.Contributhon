@@ -34,14 +34,6 @@ export default {
   },
 
   methods: {
-    activate() {
-      this.$refs.infiniteTextSlider.activate();
-    },
-
-    inactivate() {
-      this.$refs.infiniteTextSlider.inactivate();
-    },
-    
     _startSlide() {
       this.$refs.infiniteTextSlider.onPlay = true;
     },

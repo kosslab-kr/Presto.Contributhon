@@ -1,5 +1,5 @@
 <template>
-  <section v-show="isActive" class="genre-view">
+  <section class="genre-view">
     <div class="genre-view__header">
       <div class="genre-view__title">{{title}}</div>
       <div class="genre-view__menu">
@@ -46,7 +46,6 @@ export default {
 
   data() {
     return {
-      isActive: false,
       title: 'Genres'
     }
   },
@@ -62,14 +61,6 @@ export default {
   },
 
   methods: {
-    activate() {
-      this.isActive = true;
-    },
-
-    inactivate() {
-      this.isActive = false;
-    },
-
     _showContent(name) {
       this.$el.scrollTo(0,0);
       this._activateMenu(name);

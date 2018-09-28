@@ -1,6 +1,6 @@
 <template>
   <div ref="gallery" class="gallery">
-    <div class="wrap" :class="{'wrap--active': onPlay}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's'}">
+    <div class="wrap" :class="{'wrap--active': onPlay}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's', '--slider-delay': delay +'s'}">
       <div ref="text" class="text" :style="fontStyle">{{text}}</div>
       <div v-if="isTextOverflowed" class="text text-copy" :style="fontStyle">{{text}}</div>
     </div>
@@ -23,6 +23,11 @@ export default {
           'font-weight': 'normal'
         }
       }
+    },
+
+    delay: {
+      type: Number,
+      default: 0
     }
   },
 
@@ -30,23 +35,24 @@ export default {
     return {
       onPlay: false,
       isTextOverflowed: false,
-      sliderDistance: 0
+      sliderDistance: 0,
+      registeredSetAnimaitionFn: null
     }
   },
 
+  mounted() {
+    this.registeredSetAnimaitionFn = this._setAnimation.bind(this);
+    window.addEventListener('resize', this.registeredSetAnimaitionFn);
+    this._setAnimation();
+  },
+
+  destroyed() {
+    window.removeEventListener('resize', this.registeredSetAnimaitionFn);
+    this.registeredSetAnimaitionFn = null;
+  },
+
   methods: {
-    activate() {
-      window.addEventListener('resize', this._setAnimation.bind(this));
-
-      setTimeout(this._setAnimation.bind(this));
-    },
-
-    inactivate() {
-      window.removeEventListener('resize', this._setAnimation.bind(this));
-    },
-    
     _setAnimation() {
-      // debugger;
       const gallery = this.$refs.gallery;
       const text = this.$refs.text;
       const gap = text.clientWidth - gallery.offsetWidth;
@@ -86,12 +92,12 @@ export default {
 }
 
 .wrap--active {
-  animation: slide var(--slider-duration) infinite linear;
+  animation: slide var(--slider-duration) infinite linear var(--slider-delay);
 }
 
 .text {
   display: inline-block;
-  border-right: 2rem solid transparent;
+  border-right: 2em solid transparent;
 }
 
 </style>
