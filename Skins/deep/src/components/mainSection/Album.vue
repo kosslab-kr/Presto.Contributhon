@@ -8,7 +8,7 @@
       <img class="album__picture" :src="album.picture" alt="cover1">
       <div class="album__picture-cover">
         <div class="album__play-button">
-          <PlayPauseButton
+          <BaseButtonPlayPause
             :background="'rgba(0,0,0,0.5)'"
             :hoverBackground="'rgba(0,0,0,0.7)'"
             @button-clicked="playAlbum"/>
@@ -21,14 +21,8 @@
 </template>
 
 <script>
-import PlayPauseButton from "../PlayPauseButton.vue";
-
 export default {
   name: 'Album',
-
-  components: {
-    PlayPauseButton
-  },
   
   props: {
     album: Object
