@@ -41,6 +41,9 @@
     <Reference Include="Presto.Common">
       <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Presto\Skins\Presto.Skin.Kanon\Presto.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Presto.Component">
+      <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Presto\Skins\Presto.Skin.Kanon\Presto.Component.dll</HintPath>
+    </Reference>
     <Reference Include="Presto.SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Presto\Skins\Presto.Skin.Kanon\Presto.SDK.dll</HintPath>
@@ -117,4 +120,15 @@
     <Resource Include="Image\image.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>SET Type=Skins
+
+FOR %25%25F IN (*.dll) DO (
+    IF NOT %25%25F == "$(TargetFileName)" (
+        XCOPY %25%25F "%25AppData%25\Presto\%25Type%25\$(TargetName)\%25%25F*" /Y
+    )
+)
+
+XCOPY "$(TargetFileName)" "%25AppData%25\Presto\%25Type%25\$(TargetName)\$(TargetName).psm*" /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>
