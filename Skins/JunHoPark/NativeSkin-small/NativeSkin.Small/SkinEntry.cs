@@ -1,10 +1,11 @@
 ﻿using Presto.Common;
 using Presto.SDK;
 using System.Windows;
+using Presto.Component;
 
-[assembly: PrestoTitle("NativeSkin.Small")]
-[assembly: PrestoDescription("스킨 테스트 입니다")]
-[assembly: PrestoAuthor("프레스토")]
+[assembly: PrestoTitle("MySkin")]
+[assembly: PrestoDescription("skintest")]
+[assembly: PrestoAuthor("skin")]
 
 namespace NativeSkin.Small
 {
@@ -14,7 +15,9 @@ namespace NativeSkin.Small
         {
             base.Load();
 
-            //MessageBox.Show(PrestoSDK.PrestoService.Library.Musics.Count.ToString());
+#if !DEBUG
+            MessageBox.Show(PrestoSDK.PrestoService.Library.Musics.Count.ToString());
+#endif
         }
 
         protected override IPrestoWindow CreateWindow()
