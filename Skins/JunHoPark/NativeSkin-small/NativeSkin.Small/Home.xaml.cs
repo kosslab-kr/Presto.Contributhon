@@ -112,5 +112,17 @@ namespace NativeSkin.Small
 
             Player.Play(selectedMusic);
         }
+
+        private void Add_Music(object sender, RoutedEventArgs e)
+        {
+            // 이렇게 해야하나..?
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+            dlg.DefaultExt = ".mp3";
+            dlg.Filter = "mp3 Files (*.mp3)|*.mp3";
+
+            var music = Library.LoadMusic(dlg.ToString());
+            Library.AddMusic(music);
+        }
     }
 }
