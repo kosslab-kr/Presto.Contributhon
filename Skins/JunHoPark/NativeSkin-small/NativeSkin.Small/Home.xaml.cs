@@ -102,5 +102,15 @@ namespace NativeSkin.Small
                     break;
             }
         }
+
+        private void ListView_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            var music = Library.LoadMusic(listview.SelectedItem.ToString());
+            IMusic selectedMusic = listview.SelectedItem as IMusic;
+
+            MessageBox.Show(selectedMusic.Title);
+
+            Player.Play(selectedMusic);
+        }
     }
 }
