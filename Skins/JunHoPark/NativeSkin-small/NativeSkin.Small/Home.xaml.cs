@@ -58,6 +58,24 @@ namespace NativeSkin.Small
         {
             Application.Current.Shutdown();
         }
+        private void Play_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine(Player.PlaybackState);
 
- 
+            switch (Player.PlaybackState)
+            {
+                case Presto.Common.PlaybackState.Playing:
+                    Player.Pause();
+                    break;
+
+                case Presto.Common.PlaybackState.Paused:
+                    Player.Play();
+                    break;
+
+                default:
+                    Player.Play();
+                    break;
+            }
+        }
+    }
 }
