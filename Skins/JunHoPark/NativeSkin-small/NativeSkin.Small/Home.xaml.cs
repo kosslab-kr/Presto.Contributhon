@@ -58,6 +58,7 @@ namespace NativeSkin.Small
         {
             Application.Current.Shutdown();
         }
+
         private void Play_Click(object sender, RoutedEventArgs e)
         {
             Console.WriteLine(Player.PlaybackState);
@@ -74,6 +75,30 @@ namespace NativeSkin.Small
 
                 default:
                     Player.Play();
+                    break;
+            }
+        }
+
+        private void Next_Click(object sender, RoutedEventArgs e)
+        {
+            Player.PlayNext();
+        }
+
+        private void Before_Click(object sender, RoutedEventArgs e)
+        {
+            Player.PlayPrevious();
+        }
+
+        private void Repeat_Click(object sender, RoutedEventArgs e)
+        {
+            switch (Player.RepeatMode)
+            {
+                case RepeatMode.None:
+                    Player.RepeatMode = RepeatMode.All;
+                    break;
+
+                case RepeatMode.One:
+                    Player.RepeatMode = RepeatMode.None;
                     break;
             }
         }
