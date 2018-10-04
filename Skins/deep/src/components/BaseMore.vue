@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'More',
+  name: 'BaseMore',
 
   data() {
     return {
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 .more {
   position: relative;

@@ -15,7 +15,7 @@
             <div class="player__button player__button--shuffle"></div>
             <div class="player__button player__button--back"></div>
             <div class="player__button" style="width: 33px; height: 33px">
-              <PlayPauseButton
+              <BaseButtonPlayPause
                 ref="playPauseButton"
                 @button-clicked="togglePlayPauseButton"/>
             </div>
@@ -25,12 +25,12 @@
           <div class="player__controls-core">
             <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
             <div class='player__controls-slider'>
-              <HorizonSlider
+              <PlayerSliderHorizon
                 ref="playerControlsSlider"
                 v-on:touch-slider-thumb='manipulateStart'
                 v-on:hold-slider-thumb='calcCurrentTime'
                 v-on:release-slider-thumb='manipulateEnd'>
-              </HorizonSlider>
+              </PlayerSliderHorizon>
             </div>
             <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
           </div>
@@ -41,9 +41,9 @@
         <div class="player__option player__option--devices"></div>
         <div class="player__option player__option--mute"></div>
         <div class="player__volume-slider">
-          <HorizonSlider
+          <PlayerSliderHorizon
             ref="playerVolumeSlider">
-          </HorizonSlider>
+          </PlayerSliderHorizon>
         </div>
       </div>
     </div>
@@ -51,9 +51,8 @@
 </template>
 
 <script>
-import HorizonSlider from './HorizonSlider.vue';
+import PlayerSliderHorizon from './PlayerSliderHorizon.vue';
 import DummyCore from './dummyCore.js';
-import PlayPauseButton from '../PlayPauseButton.vue';
 
 const core = new DummyCore({
   playQueue: {currentMusicIdx: 0, musics: []}
@@ -63,8 +62,7 @@ export default {
   name: 'Player',
 
   components: {
-    HorizonSlider,
-    PlayPauseButton
+    PlayerSliderHorizon,
   },
 
   data() {
@@ -74,7 +72,7 @@ export default {
         title: 'untitled',
         artist: 'anonymous',
         runningTime: 0,
-        album: {picture: require('../../assets/album_picture/untitled.png')},
+        album: {picture: require('../assets/album_picture/untitled.png')},
         genre: 'notFound'
       },
       currentTime: 0,
@@ -151,7 +149,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 .player {
   box-sizing: border-box;
@@ -233,7 +231,7 @@ export default {
   margin-right: 23px;
 
   &--shuffle {
-    background: no-repeat center/100% url(../../assets/shuffle.png);
+    background: no-repeat center/100% url(../assets/shuffle.png);
   }
 
   &--back {
@@ -264,7 +262,7 @@ export default {
   }
 
   &--repeat {
-    background: no-repeat center/100% url(../../assets/repeat.png);
+    background: no-repeat center/100% url(../assets/repeat.png);
   }
 
   &:nth-last-child(1) { margin: 0 };
@@ -317,15 +315,15 @@ export default {
   margin-right: 4px;
   
   &--queue {
-    background: no-repeat top/100% url(../../assets/queue.png);
+    background: no-repeat top/100% url(../assets/queue.png);
   }
   
   &--devices {
-    background: no-repeat top/100% url(../../assets/devices.png);
+    background: no-repeat top/100% url(../assets/devices.png);
   }
   
   &--mute {
-    background: no-repeat top/100% url(../../assets/mute.png);
+    background: no-repeat top/100% url(../assets/mute.png);
   }
 
   &:nth-last-child(1) { margin-right: 5px; }

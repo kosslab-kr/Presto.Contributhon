@@ -4,7 +4,7 @@
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
       <div class="music__play-button">
-        <PlayPauseButton
+        <BaseButtonPlayPause
           :background="'rgba(0,0,0,0.5)'"
           :hoverBackground="'rgba(0,0,0,0.7)'"
           @button-clicked="playMusic"
@@ -14,7 +14,7 @@
     </div>
     <div class="music__description">
       <div class="music__title">
-        <InfiniteTextSlider ref="infiniteTextSlider" :text="music.title"/>
+        <BaseTextRolling ref="textRolling" :text="music.title"/>
       </div>
       <div class="music__artist">{{music.artist}}</div>
     </div>
@@ -22,16 +22,8 @@
 </template>
 
 <script>
-import PlayPauseButton from '../PlayPauseButton.vue';
-import InfiniteTextSlider from './InfiniteTextSlider.vue';
-
 export default {
-  name: 'Music',
-
-  components: {
-    PlayPauseButton,
-    InfiniteTextSlider
-  },
+  name: 'MainMusicsItem',
 
   props: {
     music: Object,
@@ -40,11 +32,11 @@ export default {
 
   methods: {
     _startSlide() {
-      this.$refs.infiniteTextSlider.onPlay = true;
+      this.$refs.textRolling.onPlay = true;
     },
 
     _stopSlide() {
-      this.$refs.infiniteTextSlider.onPlay = false;
+      this.$refs.textRolling.onPlay = false;
     },
 
     playMusic() {
@@ -55,7 +47,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 $picture-size: 60px;
 

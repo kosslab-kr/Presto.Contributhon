@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'InfiniteTextSlider',
+  name: 'BaseTextRolling',
 
   props: {
     text: String,
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 @keyframes slide {
   100% {

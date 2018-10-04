@@ -7,12 +7,12 @@
 
 <script>
 export default {
-  name: 'Search'
+  name: 'MainSearch'
 }
 </script>
 
 <style scoped lang="scss">
-@import "../../index.scss";
+@import "../index.scss";
 
 .search {
   position: relative;
@@ -28,7 +28,7 @@ export default {
   position: absolute;
   top: 6px; left: 5px;
   width: 15px; height: 15px;
-  background: no-repeat center/100% url(../../assets/search-icon.png);
+  background: no-repeat center/100% url(../assets/search-icon.png);
 }
 
 .search__input {

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'MainMenuItem',
+  name: 'MenuItem',
 
   props: {
     name: String
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 .menu-item {
   box-sizing: border-box;

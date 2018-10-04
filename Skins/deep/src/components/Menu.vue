@@ -2,7 +2,7 @@
   <nav class='menu'>
     <ul class='menu__category'>
       <li class="menu__category-title">YOUR LIBRARY</li>
-      <MainMenuItem
+      <MenuItem
         v-for="menuItemName in menuItemNames"
         :key="menuItemName"
         :name="menuItemName"
@@ -11,12 +11,12 @@
     </ul>
     <ul class='menu__category'>
       <li class="menu__category-title">PLAYLISTS</li>
-      <MainMenuItem :name="'my music1'"/>
-      <MainMenuItem :name="'my music2'"/>
-      <MainMenuItem :name="'my music3'"/>
-      <MainMenuItem :name="'my music4'"/>
-      <MainMenuItem :name="'my music5'"/>
-      <MainMenuItem :name="'my music6'"/>
+      <MenuItem :name="'my music1'"/>
+      <MenuItem :name="'my music2'"/>
+      <MenuItem :name="'my music3'"/>
+      <MenuItem :name="'my music4'"/>
+      <MenuItem :name="'my music5'"/>
+      <MenuItem :name="'my music6'"/>
     </ul>
     <div class="menu__footer">
       <div class="menu__footer-icon"></div>
@@ -26,13 +26,13 @@
 </template>
 
 <script>
-import MainMenuItem from './MainMenuItem.vue';
+import MenuItem from './MenuItem.vue';
 
 export default {
-  name: 'MainMenu',
+  name: 'Menu',
 
   components: {
-    MainMenuItem
+    MenuItem
   },
 
   data() {
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
 .menu {
   @include position(absolute, $top: 0px, $left: 0px);

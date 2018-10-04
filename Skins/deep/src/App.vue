@@ -1,23 +1,23 @@
 <template>
   <div id="app">
-    <MainMenu ref="mainMenu" @menu-selected="showView"/>
-    <MainSection :library="library" @playQueue-played="playPlayQueue" ref="mainSection"/>
+    <Menu ref="menu" @menu-selected="showView"/>
+    <Main :library="library" @playQueue-played="playPlayQueue" ref="main"/>
     <Player ref="player"/>
   </div>
 </template>
 
 <script>
-import MainMenu from './components/mainMenu/MainMenu.vue'
-import MainSection from './components/mainSection/MainSection.vue'
-import Player from './components/player/Player.vue'
+import Menu from './components/Menu.vue'
+import Main from './components/Main.vue'
+import Player from './components/Player.vue'
 import library from './library.js'
 
 export default {
   name: 'App',
 
   components: {
-    MainMenu,
-    MainSection,
+    Menu,
+    Main,
     Player
   },
 
@@ -29,7 +29,7 @@ export default {
   },
 
   mounted() {
-    this.$refs.mainMenu.triggerClickEvent({menuIndex: 0});
+    this.$refs.menu.triggerClickEvent({menuIndex: 0});
   },
   
   methods: {
@@ -38,7 +38,7 @@ export default {
     },
 
     showView(menuItemName) {
-      this.$refs.mainSection.showView(menuItemName);
+      this.$refs.main.showView(menuItemName);
     }
   }
 }

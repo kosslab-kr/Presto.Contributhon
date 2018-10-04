@@ -1,10 +1,10 @@
 <template>
   <div
-    class="menu-list-item"
-    :class="{'menu-list-item--selected': isActive}"
-    @click="$emit('menu-selected', name)">
-    <div class="menu-list-item__name">{{name}}</div>
-    <div class="menu-list-item__bar"></div>
+    class="navigator-item"
+    @click="$emit('item-selected', name)"
+  >
+    <div class="navigator-item__name">{{name}}</div>
+    <div class="navigator-item__bar"></div>
   </div>
 </template>
 
@@ -14,20 +14,14 @@ export default {
   
   props: {
     name: String
-  },
-
-  data() {
-    return {
-      isActive: false
-    }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
-.menu-list-item {
+.navigator-item {
   display: inline-block;
   margin-right: 25px;
 
@@ -35,12 +29,12 @@ export default {
     margin-right: 0px;
   }
 
-  &--selected {
-    .menu-list-item__name {
+  &--active {
+    .navigator-item__name {
       color: #fff;
     }
 
-    .menu-list-item__bar {
+    .navigator-item__bar {
       background: $signature-color;
     }
   }
@@ -48,20 +42,20 @@ export default {
   &:hover {
     cursor: pointer;
 
-    .menu-list-item__name {
+    .navigator-item__name {
       color: #fff;
     }
   }
 }
 
-.menu-list-item__name {
+.navigator-item__name {
   color: #aaa;
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 2px;
 }
 
-.menu-list-item__bar {
+.navigator-item__bar {
   margin: auto;
   margin-top: 10px;
   width: 30px;

@@ -1,56 +1,73 @@
 <template>
-  <div class="album">
+  <div class="group" :class="{'group--artist': type === 'artist'}">
     <div
-      class="album__picture-wrap"
-      :class="{'album__picture-wrap--pressed': isAlbumPressed}"
-      @mousedown="isAlbumPressed = true"
-      @mouseup="selectAlbum">
-      <img class="album__picture" :src="album.picture" alt="cover1">
-      <div class="album__picture-cover">
-        <div class="album__play-button">
+      class="group__picture-wrap"
+      :class="{'group__picture-wrap--pressed': isPicturePressed}"
+      @mousedown="isPicturePressed = true"
+      @mouseup="selectPicture"
+    >
+      <img class="group__picture" :src="group.picture" alt="groupPicture">
+      <div class="group__picture-cover">
+        <div class="group__play-button">
           <BaseButtonPlayPause
             :background="'rgba(0,0,0,0.5)'"
             :hoverBackground="'rgba(0,0,0,0.7)'"
-            @button-clicked="playAlbum"/>
+            @button-clicked="play"
+          />
         </div>
       </div>
     </div>
-    <div class="album__title">{{album.title}}</div>
-    <div class="album__artist">{{album.artist}}</div>
+    <div class="group__title">{{title}}</div>
+    <div class="group__description">{{description}}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Album',
+  name: 'MainViewGroup',
   
   props: {
-    album: Object
+    type: {
+      validator(value) {
+        return (value === 'album') || (value === 'artist');
+      }
+    },
+    group: Object
   },
 
   data() {
     return {
-      isAlbumPressed: false,
+      isPicturePressed: false,
     }
   },
 
   methods: {
-    selectAlbum() {
-      this.isAlbumPressed = false;
-      this.$emit('album-selected', this.album);
+    selectPicture() {
+      this.isPicturePressed = false;
+      this.$emit('picture-selected', this.group);
     },
 
-    playAlbum() {
-      this.$emit('album-played', {currentMusicIdx: 0, musics: this.album.musics});
+    play() {
+      this.$emit('group-played', {currentMusicIdx: 0, musics: this.group.musics});
+    }
+  },
+
+  computed: {
+    title() {
+      return this.type === 'artist' ? this.group.name : this.group.title;
+    },
+
+    description() {
+      return this.type === 'artist' ? this.group.musics.length + ' SONGS' : this.group.artist;
     }
   }
 }
 </script>
 
 <style scoped lang="scss">
-@import '../../index.scss';
+@import '../index.scss';
 
-.album {
+.group {
   float: left;
   width: 32%;
   margin-right: 2%;
@@ -73,11 +90,21 @@ export default {
   }
 }
 
-.album__picture-wrap {
+.group--artist {
+  .group__picture-wrap { border-radius: 50%; }
+  .group__title { text-align: center; }
+  .group__description {
+    text-align: center;
+    margin-top: 5px;
+  }
+}
+
+.group__picture-wrap {
   position: relative;
   width: 100%; height: 0;
   padding-top: 100%;
   margin-bottom: 15px;
+  overflow: hidden;
 
   &--pressed {
     transform: scale(0.95);
@@ -97,11 +124,11 @@ export default {
   &:hover {
     cursor: pointer;
 
-    .album__picture-cover { display: block;}
+    .group__picture-cover { display: block;}
   }
 }
 
-.album__picture-cover {
+.group__picture-cover {
   display: none;
   position: absolute;
   top: 0px; left: 0px;
@@ -112,20 +139,20 @@ export default {
   @include vertical-align-helper;
 }
 
-.album__play-button {
+.group__play-button {
   position: relative;
   display: inline-block;
   vertical-align: middle;
   width: 32%; height: 32%;
 }
 
-.album__picture {
+.group__picture {
   position: absolute;
   top: 0px; left: 0px;
   width: 100%;
 }
 
-.album__title {
+.group__title {
   line-height: 1.3;
   color: #fff;
   white-space: nowrap;
@@ -133,7 +160,7 @@ export default {
   text-overflow: ellipsis;
 }
 
-.album__artist {
+.group__description {
   line-height: 1.3;
   font-size: 0.9rem;
   color: #bbb;
