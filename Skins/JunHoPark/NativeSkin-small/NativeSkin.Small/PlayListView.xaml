@@ -8,8 +8,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ps="clr-namespace:Presto.SDK;assembly=Presto.SDK"
     Title="PlayListView"
-    d:DesignHeight="600"
-    d:DesignWidth="400"
+    d:DesignHeight="500"
+    d:DesignWidth="350"
     DataContext="{x:Static ps:PrestoSDK.PrestoService}"
     mc:Ignorable="d">
 
@@ -17,7 +17,7 @@
         <ResourceDictionary Source="Resource/ResourceDictionary.xaml" />
     </Page.Resources>
 
-    <Grid Style="{StaticResource appBackground}">
+    <Grid Style="{StaticResource appBackground}">  
         <Grid Margin="10" VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock
