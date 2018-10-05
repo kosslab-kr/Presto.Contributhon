@@ -11,28 +11,36 @@
       />
     </template>
     <template slot="popup">
-      <div
-        v-if="!!selectedAlbum"
-        class="popup-wrap"
-      >
-        <div class="popup">
-          <MainViewPopup
-            type="album"
-            :group="selectedAlbum"
-            @popup-closed="selectedAlbum = null"
-            @group-played="$emit('music-played', $event)"
-          >
-            <template slot="body">
-              <MainViewList
-                :items="albumListItems"
-                :fields="albumListFields"
-                :height="'100%'"
-                @music-played="$emit('music-played', {currentMusicIdx: $event, musics: selectedAlbum.musics})"
-              />
-            </template>
-          </MainViewPopup>
+      <transition name="fade">
+        <div
+          v-if="!!selectedAlbum"
+          class="popup-background"
+        />
+      </transition>
+      <transition name="slide-fade">
+        <div
+          v-if="!!selectedAlbum"
+          class="popup-wrap"
+        >
+          <div class="popup">
+            <MainViewPopup
+              type="album"
+              :group="selectedAlbum"
+              @popup-closed="selectedAlbum = null"
+              @group-played="$emit('music-played', $event)"
+            >
+              <template slot="body">
+                <MainViewList
+                  :items="albumListItems"
+                  :fields="albumListFields"
+                  :height="'100%'"
+                  @music-played="$emit('music-played', {currentMusicIdx: $event, musics: selectedAlbum.musics})"
+                />
+              </template>
+            </MainViewPopup>
+          </div>
         </div>
-      </div>
+      </transition>
     </template>
   </MainView>
 </template>
@@ -114,12 +122,17 @@ export default {
 <style scoped lang="scss">
 @import '../index.scss';
 
-.popup-wrap {
+.popup-background {
   position: fixed;
   top: 0px; left: $main-menu-width;
   width: calc(100vw - #{$main-menu-width}); height: calc(100vh - #{$player-height});
   background: rgba(0,0,0,0.6);
   z-index: 100;
+}
+
+.popup-wrap {
+  @extend .popup-background;
+  background: transparent;
   text-align: center;
   
   // vertical align helper
@@ -134,6 +147,23 @@ export default {
 .popup {
   display: inline-block;
   vertical-align: middle;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+
+.slide-fade-enter, .slide-fade-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -70px, 0);
+}
+
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: opacity .5s, transform .5s;
 }
 
 </style>
