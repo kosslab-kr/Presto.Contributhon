@@ -1,5 +1,5 @@
 <template>
-  <div class="music" @mouseover="_startSlide" @mouseleave="_stopSlide">
+  <div class="music" @mouseover="isMouseOvered = true" @mouseleave="isMouseOvered = false">
     <div
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
@@ -14,7 +14,10 @@
     </div>
     <div class="music__description">
       <div class="music__title">
-        <BaseTextRolling ref="textRolling" :text="music.title"/>
+        <BaseTextRolling
+          :text="music.title"
+          :onPlay="isMouseOvered"
+        />
       </div>
       <div class="music__artist">{{music.artist}}</div>
     </div>
@@ -30,15 +33,13 @@ export default {
     index: Number
   },
 
+  data() {
+    return {
+      isMouseOvered: false
+    }
+  },
+
   methods: {
-    _startSlide() {
-      this.$refs.textRolling.onPlay = true;
-    },
-
-    _stopSlide() {
-      this.$refs.textRolling.onPlay = false;
-    },
-
     playMusic() {
       this.$emit('music-played', this.index);
     }

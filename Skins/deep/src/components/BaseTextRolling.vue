@@ -1,8 +1,8 @@
 <template>
   <div ref="gallery" class="gallery">
-    <div class="wrap" :class="{'wrap--active': onPlay}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's', '--slider-delay': delay +'s'}">
+    <div class="wrap" :class="{'wrap--active': onPlay && isTextOverflowed}" :style="{'--slider-destination': '-' + sliderDistance + 'px', '--slider-duration': sliderDuration + 's', '--slider-delay': delay +'s'}">
       <div ref="text" class="text" :style="fontStyle">{{text}}</div>
-      <div v-if="isTextOverflowed" class="text text-copy" :style="fontStyle">{{text}}</div>
+      <div v-if="onPlay && isTextOverflowed" class="text text-copy" :style="fontStyle">{{text}}</div>
     </div>
   </div>
 </template>
@@ -28,49 +28,37 @@ export default {
     delay: {
       type: Number,
       default: 0
+    },
+
+    onPlay: {
+      type: Boolean,
+      default: false
     }
   },
 
   data() {
     return {
-      onPlay: false,
-      isTextOverflowed: false,
-      sliderDistance: 0,
-      registeredSetAnimaitionFn: null
+      sliderDistance: 0
     }
   },
 
   mounted() {
-    this.registeredSetAnimaitionFn = this._setAnimation.bind(this);
-    window.addEventListener('resize', this.registeredSetAnimaitionFn);
-    this._setAnimation();
-  },
-
-  destroyed() {
-    window.removeEventListener('resize', this.registeredSetAnimaitionFn);
-    this.registeredSetAnimaitionFn = null;
-  },
-
-  methods: {
-    _setAnimation() {
-      const gallery = this.$refs.gallery;
-      const text = this.$refs.text;
-      const gap = text.clientWidth - gallery.offsetWidth;
-
-      if(gap > 0) {
-        this.isTextOverflowed = true;
-        this.sliderDistance = text.offsetWidth;
-      }
-      else {
-        this.isTextOverflowed = false;
-        this.sliderDistance = 0;
-      }
-    }
+    this.sliderDistance = this.$refs.text.offsetWidth;
   },
 
   computed: {
     sliderDuration() {
       return this.sliderDistance/40;
+    },
+
+    isTextOverflowed() {
+      if(!this.onPlay) return false;
+
+      const gallery = this.$refs.gallery;
+      const text = this.$refs.text;
+      const gap = text.clientWidth - gallery.offsetWidth;
+
+      return gap > 0;
     }
   }
 }

@@ -2,8 +2,8 @@
   <div
     class="popup"
     :class="{'popup--artist': type === 'artist'}"
-    @mouseover="startRolling"
-    @mouseleave="stopRolling"
+    @mouseover="isMouseOvered = true"
+    @mouseleave="isMouseOvered = false"
   >
     <header class="popup__header">
       <div
@@ -13,7 +13,12 @@
       <div class="popup__description-wrap">
         <div class="popup__description">
           <div class="popup__title">
-            <BaseTextRolling ref="textRolling" :text="title" :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}" :delay="1"/>
+            <BaseTextRolling
+              :onPlay="isMouseOvered"
+              :text="title"
+              :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}"
+              :delay="1"
+            />
           </div>
           <div
             v-if="type === 'album'"
@@ -53,7 +58,8 @@ export default {
 
   data() {
     return {
-      isPlayButtonPressed: false
+      isPlayButtonPressed: false,
+      isMouseOvered: false
     }
   },
 
@@ -72,14 +78,6 @@ export default {
     playGroup() {
       this.isPlayButtonPressed = false;
       this.$emit('group-played', {currentMusicIdx: 0, musics: this.group.musics});
-    },
-
-    startRolling() {
-      this.$refs.textRolling.onPlay = true;
-    },
-
-    stopRolling() {
-      this.$refs.textRolling.onPlay = false;
     }
   },
 
