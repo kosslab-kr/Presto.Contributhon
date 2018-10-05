@@ -69,22 +69,34 @@ export default {
 
 .group {
   float: left;
-  width: 32%;
+  width: 23.5%;
   margin-right: 2%;
   margin-bottom: 45px;
 
-  &:nth-child(3n) {
+  &:nth-child(4n) {
     margin-right: 0px;
   }
 
-  @media only screen and (min-width: 950px) {
-    width: 23.5%;
+  @media only screen and (min-width: 1000px) {
+    width: 18.4%;
 
-    &:nth-child(3n) {
+    &:nth-child(4n) {
       margin-right: 2%;
     }
 
-    &:nth-child(4n) {
+    &:nth-child(5n) {
+      margin-right: 0px;
+    }
+  }
+
+  @media only screen and (min-width: 1200px) {
+    width: 15%;
+
+    &:nth-child(5n) {
+      margin-right: 2%;
+    }
+
+    &:nth-child(6n) {
       margin-right: 0px;
     }
   }
@@ -143,7 +155,7 @@ export default {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  width: 32%; height: 32%;
+  width: 38%; height: 38%;
 }
 
 .group__picture {
@@ -165,5 +177,8 @@ export default {
   font-size: 0.9rem;
   color: #bbb;
   font-weight: lighter;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
