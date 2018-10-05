@@ -26,7 +26,7 @@ export default {
   mounted() {
     document.addEventListener('mousemove', (e) => {
       if(!this.isMousePressed) return;
-      this.setPosition({currentTarget: this.$el, clientX: e.clientX});
+      this.holdSliderThumb({currentTarget: this.$el, clientX: e.clientX});
     });
 
     document.addEventListener('mouseup', () => {
