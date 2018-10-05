@@ -48,9 +48,9 @@
                     </materialDesign:PackIcon.Foreground>
                 </materialDesign:PackIcon>
             </Button>
-            <StackPanel>
-                <TextBlock HorizontalAlignment="Center" Text="{Binding Player.CurrentMusic.Title}" />
-                <TextBlock HorizontalAlignment="Center" Text="{Binding Player.CurrentMusic.Artist.Name}" />
+            <StackPanel Margin="30 0 30 0">
+                <TextBlock HorizontalAlignment="Center" Text="{Binding Player.CurrentMusic.Title}" TextTrimming="CharacterEllipsis"/>
+                <TextBlock HorizontalAlignment="Center" Text="{Binding Player.CurrentMusic.Artist.Name}" TextTrimming="CharacterEllipsis"/>
             </StackPanel>
             <Button
                 HorizontalAlignment="Right"
@@ -144,7 +144,8 @@
                     VerticalAlignment="Center"
                     Background="{x:Null}"
                     BorderBrush="{x:Null}"
-                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                    Click="Shuffle_Click">
                 <materialDesign:PackIcon
                         Width="30"
                         Height="30"
@@ -235,7 +236,8 @@
                 <materialDesign:PackIcon
                         Width="40"
                         Height="40"
-                        Kind="Pause">
+                        Kind="Play"
+                        Name="musicControl">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                             <GradientStop Offset="0" Color="{StaticResource mediumPurple}" />

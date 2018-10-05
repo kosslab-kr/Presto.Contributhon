@@ -66,15 +66,18 @@ namespace NativeSkin.Small
             switch (Player.PlaybackState)
             {
                 case Presto.Common.PlaybackState.Playing:
+                    //this.musicControl.Kind = "Pause";
                     Player.Pause();
                     break;
 
                 case Presto.Common.PlaybackState.Paused:
+                    //this.musicControl.Kind = "Play";
                     Player.Play();
                     break;
 
                 default:
                     Player.Play();
+                    //this.musicControl.Kind = "Pause";
                     break;
             }
         }
@@ -123,6 +126,14 @@ namespace NativeSkin.Small
 
             var music = Library.LoadMusic(dlg.ToString());
             Library.AddMusic(music);
+        }
+
+        private void Shuffle_Click(object sender, RoutedEventArgs e)
+        {
+            //switch(Player.ShuffleMode)
+            //{
+            //    //case Player.ShuffleMode.
+            //}
         }
     }
 }
