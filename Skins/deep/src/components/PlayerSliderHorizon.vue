@@ -1,12 +1,8 @@
 <template>
   <div
     class="slider-wrap"
-    draggable='true'
-    @dragstart='setDragImage'
     @mousedown='mouseDown'
-    @drag='holdSliderThumb'
-    @mouseup='releaseSliderThumb'
-    @dragend='releaseSliderThumb'>
+    >
     <div class="slider">
       <div
         :style='{width: widthPercentage + "%"}'
@@ -22,8 +18,21 @@ export default {
 
   data() {
     return {
-      widthPercentage: 0
+      widthPercentage: 0,
+      isMousePressed: false
     }
+  },
+
+  mounted() {
+    document.addEventListener('mousemove', (e) => {
+      if(!this.isMousePressed) return;
+      this.setPosition({currentTarget: this.$el, clientX: e.clientX});
+    });
+
+    document.addEventListener('mouseup', () => {
+      if(!this.isMousePressed) return;
+      this.releaseSliderThumb()
+    })
   },
 
   methods: {
@@ -43,16 +52,19 @@ export default {
     },
 
     mouseDown(e) {
+      this.isMousePressed = true;
       this.$emit('touch-slider-thumb');
       this.holdSliderThumb(e);
     },
 
     holdSliderThumb(e) {
+      if(!this.isMousePressed) return;
       this.setPosition(e);
       this.$emit('hold-slider-thumb', this.widthPercentage);
     },
 
     releaseSliderThumb() {
+      this.isMousePressed = false;
       this.$emit('release-slider-thumb')
     }
   }

@@ -37,8 +37,6 @@
         </div>
       </div>
       <div class="player__option-wrap">
-        <div class="player__option player__option--queue"></div>
-        <div class="player__option player__option--devices"></div>
         <div class="player__option player__option--mute"></div>
         <div class="player__volume-slider">
           <PlayerSliderHorizon
@@ -218,9 +216,10 @@ export default {
 
 .player__button-wrap {
   position: absolute;
-  width: 220px;
+  width: 100%;
   top: 10px; left: 50%;
   transform: translate3d(-50%, 0, 0);
+  text-align: center;
   @include vertical-align-helper;
 }
 
@@ -272,7 +271,8 @@ export default {
   box-sizing: border-box;
   position: absolute;
   width: 100%; height: 20px;
-  top: 45px;
+  top: 45px; left: 0px;
+  white-space: nowrap;
   @include vertical-align-helper;
 
   &:hover {
@@ -287,7 +287,7 @@ export default {
 
 .player__current-time, .player__total-time {
   display: inline-block;
-  width: $player-time-size; height: 10px;
+  width: 30px;
   vertical-align: middle;
   font-size: 0.8rem;
   text-align: center;
@@ -297,14 +297,14 @@ export default {
 .player__controls-slider {
   display: inline-block;
   vertical-align: middle;
-  width: 80%; height: 20px;
-  margin: 0 2%;
+  width: calc(100% - 80px); height: 20px;
+  margin: 0 10px;
 }
 
 .player__option-wrap {
   position: absolute;
   right: 0px;
-  width: 200px; height: 100%;
+  width: 150px; height: 100%;
   @include vertical-align-helper;
 }
 
@@ -312,15 +312,7 @@ export default {
   width: 22px; height: 22px;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 4px;
-  
-  &--queue {
-    background: no-repeat top/100% url(../assets/queue.png);
-  }
-  
-  &--devices {
-    background: no-repeat top/100% url(../assets/devices.png);
-  }
+  margin-right: 5px;
   
   &--mute {
     background: no-repeat top/100% url(../assets/mute.png);
@@ -332,7 +324,8 @@ export default {
 .player__volume-slider {
   display: inline-block;
   vertical-align: middle;
-  width: 80px; height: 22px;
+  width: 90px; height: 22px;
+  margin-left: 2px;
 }
 
 </style>
