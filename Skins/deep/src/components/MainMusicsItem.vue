@@ -1,5 +1,10 @@
 <template>
-  <div class="music" @mouseover="isMouseOvered = true" @mouseleave="isMouseOvered = false">
+  <div
+    class="music"
+    @mouseover="isMouseOvered = true"
+    @mouseleave="isMouseOvered = false"
+    @dblclick="playMusic"
+  >
     <div
       class="music__picture"
       :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">

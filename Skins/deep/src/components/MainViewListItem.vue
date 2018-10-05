@@ -1,5 +1,8 @@
 <template>
-  <div class="wrap">
+  <div
+    class="wrap"
+    @dblclick="playMusic"
+  >
     <div
       class="field"
       v-for="field in playButtonFields"
@@ -11,7 +14,7 @@
         <BaseButtonPlayPause
           :background="'rgba(0,0,0,0.3)'"
           :hoverBackground="'rgba(0,0,0,0.6)'"
-          @button-clicked="$emit('music-played', item.source)"
+          @button-clicked="playMusic"
         />
       </div>
     </div>
@@ -42,6 +45,12 @@ export default {
 
     nonPlayButtonFields() {
       return this.fields.filter(field => field.playButton !== true);
+    }
+  },
+
+  methods: {
+    playMusic() {
+      this.$emit('music-played', this.item.source)
     }
   }
 }
