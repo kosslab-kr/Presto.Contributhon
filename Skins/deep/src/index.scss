@@ -113,7 +113,10 @@ table {
   }
 }
 
-body { position: relative; }
+body {
+  position: relative;
+  -webkit-user-select: none;
+}
 
 ::-webkit-scrollbar {
   display: none;
