@@ -40,12 +40,12 @@ namespace Presto.Plugin.YouTube
         }
         #endregion
 
-        public override void Load()
+        public override void OnLoad()
         {
 
         }
 
-        public override void Unload()
+        public override void OnUnload()
         {
             _searchDialog?.Close();
             _searchDialog = null;
