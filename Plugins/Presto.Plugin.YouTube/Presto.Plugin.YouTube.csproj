@@ -140,7 +140,7 @@
 	  <Version>1.1.1</Version>
 	</PackageReference>
 	<PackageReference Include="Kodnix.Presto.Component">
-	  <Version>1.1.1</Version>
+	  <Version>1.1.2</Version>
 	</PackageReference>
 	<PackageReference Include="Kodnix.Presto.SDK">
 	  <Version>1.1.1</Version>
