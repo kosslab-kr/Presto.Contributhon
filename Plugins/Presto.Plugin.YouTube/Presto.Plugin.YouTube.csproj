@@ -153,4 +153,15 @@
     </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>SET Type=Plugins
+
+FOR %25%25F IN (*.dll) DO (
+    IF NOT %25%25F == $(TargetFileName) (
+        XCOPY %25%25F %25AppData%25\Presto\%25Type%25\$(TargetName)\%25%25F* /Y
+    )
+)
+
+XCOPY $(TargetFileName) %25AppData%25\Presto\%25Type%25\$(TargetName)\$(TargetName).psm* /Y</PostBuildEvent>
+  </PropertyGroup>
 </Project>
