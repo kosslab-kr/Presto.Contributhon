@@ -1,5 +1,5 @@
-﻿<Page
-    x:Class="NativeSkin.Small.PlayListView"
+﻿<UserControl
+    x:Class="NativeSkin.Small.PlayListviewControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -7,17 +7,16 @@
     xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ps="clr-namespace:Presto.SDK;assembly=Presto.SDK"
-    Title="PlayListView"
     d:DesignHeight="500"
     d:DesignWidth="350"
     DataContext="{x:Static ps:PrestoSDK.PrestoService}"
     mc:Ignorable="d">
 
-    <Page.Resources>
+    <UserControl.Resources>
         <ResourceDictionary Source="Resource/ResourceDictionary.xaml" />
-    </Page.Resources>
+    </UserControl.Resources>
 
-    <Grid Style="{StaticResource appBackground}">  
+    <Grid Style="{StaticResource appBackground}">
         <Grid Margin="10" VerticalAlignment="Top">
             <StackPanel>
                 <TextBlock
@@ -32,7 +31,6 @@
                 VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Click="ExitToApp_Click"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                     Width="30"
@@ -53,7 +51,6 @@
                 VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Click="Power_Click"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                     Width="30"
@@ -76,11 +73,12 @@
             Margin="0,40,0,0"
             VerticalAlignment="Top">
             <ListView
+                Name="listview"
                 Height="500"
                 Margin="10"
                 VerticalAlignment="Top"
-                DataContext="{Binding Library.Musics}"
-                Foreground="LightSteelBlue">
+                Foreground="LightSteelBlue"
+                ItemsSource="{Binding Library.Musics}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -176,4 +174,4 @@
             </Button>
         </Grid>
     </Grid>
-</Page>
+</UserControl>

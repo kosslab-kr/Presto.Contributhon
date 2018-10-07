@@ -11,9 +11,9 @@ namespace NativeSkin.Small
 {
     public class SkinEntry : PrestoSkin
     {
-        public override void Load()
+        public override void OnLoad()
         {
-            base.Load();
+            base.OnLoad();
 
 #if !DEBUG
             MessageBox.Show(PrestoSDK.PrestoService.Library.Musics.Count.ToString());
