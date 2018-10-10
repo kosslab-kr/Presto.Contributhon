@@ -1,35 +1,30 @@
 <template>
   <section id='player' class="player">
     <div class="player__wrap">
-      <div class="player__current-music">
-        <img
-          class="player__album-picture"
-          :src="currentMusic.album.picture"
-          alt="album-picture">
-        <div class="player__song-title">{{currentMusic.title}}</div>
-        <div class="player__artist">{{currentMusic.artist}}</div>
-      </div>
+      <PlayerCurrentMusic
+        :music="currentMusic"
+      />
       <div class="player__controls">
         <div class="player__controls-wrap">
           <div class="player__button-wrap">
-            <div class="player__button player__button--shuffle"></div>
-            <div class="player__button player__button--back"></div>
-            <div class="player__button" style="width: 33px; height: 33px">
+            <PlayerButtonShuffle/>
+            <PlayerButtonBack/>
+            <div class="player__play-button" style="width: 33px; height: 33px">
               <BaseButtonPlayPause
                 ref="playPauseButton"
                 @button-clicked="togglePlayPauseButton"/>
             </div>
-            <div class="player__button player__button--next"></div>
-            <div class="player__button player__button--repeat"></div>
+            <PlayerButtonNext/>
+            <PlayerButtonRepeat/>
           </div>
           <div class="player__controls-core">
             <div class="player__current-time">{{formatTime(this.currentTime)}}</div>
             <div class='player__controls-slider'>
               <PlayerSliderHorizon
                 ref="playerControlsSlider"
-                v-on:touch-slider-thumb='manipulateStart'
-                v-on:hold-slider-thumb='calcCurrentTime'
-                v-on:release-slider-thumb='manipulateEnd'>
+                v-on:slider-thumb-down='manipulateStart'
+                v-on:slider-thumb-move='calcCurrentTime'
+                v-on:slider-thumb-up='manipulateEnd'>
               </PlayerSliderHorizon>
             </div>
             <div class="player__total-time">{{formatTime(this.currentMusic.runningTime)}}</div>
@@ -51,6 +46,11 @@
 <script>
 import PlayerSliderHorizon from './PlayerSliderHorizon.vue';
 import DummyCore from './dummyCore.js';
+import PlayerCurrentMusic from './PlayerCurrentMusic.vue';
+import PlayerButtonBack from './PlayerButtonBack.vue';
+import PlayerButtonNext from './PlayerButtonNext.vue';
+import PlayerButtonShuffle from './PlayerButtonShuffle.vue';
+import PlayerButtonRepeat from './PlayerButtonRepeat.vue';
 
 const core = new DummyCore({
   playQueue: {currentMusicIdx: 0, musics: []}
@@ -61,6 +61,11 @@ export default {
 
   components: {
     PlayerSliderHorizon,
+    PlayerCurrentMusic,
+    PlayerButtonBack,
+    PlayerButtonNext,
+    PlayerButtonShuffle,
+    PlayerButtonRepeat
   },
 
   data() {
@@ -81,6 +86,8 @@ export default {
   created() {
     this.core.onReturnCurrentTime = this.setCurrentTime.bind(this);
     this.core.onSetCurrentMusic = this.setCurrentMusic.bind(this);
+    // this.$el.addEventListener('timeChanged', this.setCurrentTime.bind(this))
+    // this.$el.addEventListener('musicChanged', this.setCurrentMusic.bind(this))
   },
 
   methods: {
@@ -94,12 +101,15 @@ export default {
       return `${formattedMinutes}:${formattedSeconds}`;
     },
 
-    manipulateStart() {
+    manipulateStart(widthPercentage) {
       this.core.pauseToReturnCurrentTime();
+      this.calcCurrentTime(widthPercentage)
+      // this.$el.removeEventListner('timeChanged', this.setCurrentTime.bind(this))
     },
 
     manipulateEnd() {
       this.onPlay && this.play();
+      // this.$el.addEventListener('timeChanged', this.setCurrentTime.bind(this))
     },
 
     calcCurrentTime(widthPercentage) {
@@ -125,6 +135,7 @@ export default {
       this.core.pause();
     },
 
+    // 외부에서 음악 실행
     playPlayQueue(playQueue) {
       this.pause();
 
@@ -139,6 +150,7 @@ export default {
       this.play();
     },
 
+    // 다음 음악 세팅
     setCurrentMusic(music) {
       this.currentMusic = music;
     }
@@ -223,48 +235,11 @@ export default {
   @include vertical-align-helper;
 }
 
-.player__button {
+.player__play-button {
   display: inline-block;
   width: 18px; height: 18px;
   vertical-align: middle;
   margin-right: 23px;
-
-  &--shuffle {
-    background: no-repeat center/100% url(../assets/shuffle.png);
-  }
-
-  &--back {
-    position: relative;
-
-    $icon-transforom: translate3d(3px, 3px, 0);
-
-    &::before {
-      position: absolute;
-      content: '';
-      display: block;
-      transform: $icon-transforom;
-      width: 2px; height: 12px; background: #ccc;
-    }
-
-    &::after {
-      position: absolute;
-      content: '';
-      display: block;
-      transform: $icon-transforom;
-      @include arrow($direction: left, $width: 10px, $height: 12px, $color: #ccc);
-    }
-  }
-
-  &--next {
-    @extend .player__button--back;
-    transform: rotate(180deg);
-  }
-
-  &--repeat {
-    background: no-repeat center/100% url(../assets/repeat.png);
-  }
-
-  &:nth-last-child(1) { margin: 0 };
 }
 
 .player__controls-core {

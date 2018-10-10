@@ -1,6 +1,7 @@
 <template>
   <div
     class="slider-wrap"
+    :class="{'slider-wrap--active': isActive}"
     @mousedown='mouseDown'
     >
     <div class="slider">
@@ -19,54 +20,58 @@ export default {
   data() {
     return {
       widthPercentage: 0,
-      isMousePressed: false
+      isActive: false
     }
   },
 
-  mounted() {
-    document.addEventListener('mousemove', (e) => {
-      if(!this.isMousePressed) return;
-      this.holdSliderThumb({currentTarget: this.$el, clientX: e.clientX});
-    });
-
-    document.addEventListener('mouseup', () => {
-      if(!this.isMousePressed) return;
-      this.releaseSliderThumb()
-    })
-  },
-
   methods: {
-    setPosition({currentTarget, clientX}) {
+    setPosition({clientX}) {
       if(clientX === 0) return;
-      
-      const {width: sliderWidth, left: sliderLeft} = currentTarget.getBoundingClientRect();
+
+      const slider = this.$el;
+      const {width: sliderWidth, left: sliderLeft} = slider.getBoundingClientRect();
       const positionRatio = ((clientX - sliderLeft) / sliderWidth ) * 100;
 
       this.widthPercentage = positionRatio >= 100 ? 100 : positionRatio <= 0 ? 0 : positionRatio;
     },
 
-    setDragImage(event) {
-      this.$emit('touch-slider-thumb');
-      const invisibleElem = document.createElement('img');
-      event.dataTransfer.setDragImage(invisibleElem, 0, 0);
-    },
-
     mouseDown(e) {
-      this.isMousePressed = true;
-      this.$emit('touch-slider-thumb');
-      this.holdSliderThumb(e);
-    },
-
-    holdSliderThumb(e) {
-      if(!this.isMousePressed) return;
+      this.isActive = true;
+      this.setCapture();
       this.setPosition(e);
-      this.$emit('hold-slider-thumb', this.widthPercentage);
+      this.$emit('slider-thumb-down', this.widthPercentage);
     },
 
-    releaseSliderThumb() {
-      this.isMousePressed = false;
-      this.$emit('release-slider-thumb')
-    }
+    mouseMove(e) {
+      this.setPosition(e);
+      this.$emit('slider-thumb-move', this.widthPercentage);
+    },
+
+    mouseUp() {
+      this.isActive = false;
+      this.$emit('slider-thumb-up')
+    },
+
+    setCapture() {
+      const mouseMoveListener = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+
+        this.mouseMove(e);
+      }
+
+      const mouseUpListener = (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        window.removeEventListener('mousemove', mouseMoveListener, true);
+        window.removeEventListener('mouseup', mouseUpListener, true);
+
+        this.mouseUp();
+      }
+
+      window.addEventListener('mousemove', mouseMoveListener, true);
+      window.addEventListener('mouseup', mouseUpListener, true);
+    },
   }
 }
 </script>
@@ -78,13 +83,22 @@ export default {
   display: inline-block;
   position: relative;
   width: 100%; height: 100%;
-  
+
   &:hover {
     .slider-location {
-      background: $signature-color;
+    background: $signature-color;
+    &::before {
+      display: block;
+    }
+  }
+  }
+}
 
-      // slider-thumb
-      &::before { display: block }
+.slider-wrap--active {
+  .slider-location {
+    background: $signature-color;
+    &::before {
+      display: block;
     }
   }
 }
