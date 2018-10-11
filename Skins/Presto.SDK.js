@@ -118,7 +118,6 @@ const Presto = new EventEmitter();
                 get () {
                     return query.get(pointer);
                 },
-                writable: false,
                 enumerable: true,
                 configurable: false,
             });
@@ -139,7 +138,7 @@ const Presto = new EventEmitter();
         }
 
         // Wrapping Object
-        if (!value && typeof value === 'object') {
+        if (value && typeof value === 'object') {
             return wrappingObject(value);
         }
 
