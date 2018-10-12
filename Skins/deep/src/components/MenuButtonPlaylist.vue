@@ -42,6 +42,13 @@ export default {
     }
   },
 
+  // focusing input box
+  updated() {
+    if(this.isActive !== true) return;
+
+    this.$refs.input.focus();
+  },
+
   methods: {
     toggleButton({target}) {
       if(target.closest('.playlist-button__form')) return;
