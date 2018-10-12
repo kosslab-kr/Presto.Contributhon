@@ -9,6 +9,8 @@ using System.IO;
 using System.Text;
 using System.Windows.Input;
 
+using TagLibPicture = TagLib.Picture;
+
 namespace Presto.Plugin.YouTube.ViewModels
 {
     public class AddViewModel : ViewModelBase
@@ -58,10 +60,10 @@ namespace Presto.Plugin.YouTube.ViewModels
                 {
                     aacFile.Tag.Title = music.Title;
                     aacFile.Tag.Album = music.Album;
-                    aacFile.Tag.AlbumArtists = new[] { music.Artist };
-                    aacFile.Tag.Performers = new[] { music.Artist };
-                    aacFile.Tag.Pictures = new[] { new TagLib.Picture(music.Picture) };
-                    aacFile.Tag.Genres = new[] { music.Genre };
+                    aacFile.Tag.AlbumArtists = Pack(music.Artist);
+                    aacFile.Tag.Performers = Pack(music.Artist);
+                    aacFile.Tag.Pictures = File.Exists(music.Picture) ? new[] { new TagLibPicture(music.Picture) } : null;
+                    aacFile.Tag.Genres = Pack(music.Genre);
                     aacFile.Save();
                 }
 
@@ -80,6 +82,14 @@ namespace Presto.Plugin.YouTube.ViewModels
             }
 
             RaiseCloseRequested();
+        }
+
+        T[] Pack<T>(T item)
+        {
+            if (Equals(item, default(T)) || item == null)
+                return null;
+
+            return new T[] { item };
         }
 
         private void Cancel_Execute(object obj)
