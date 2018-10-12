@@ -4,7 +4,12 @@
       <MainSearch/>
       <BaseMore/>
     </header>
-    <component :is="currentView" :items="currentViewItems" @music-played="playPlayQueue"/>
+    <component
+      :name="currentViewName"
+      :is="currentViewComponentName"
+      :items="currentViewItems"
+      @music-played="playPlayQueue"
+    />
   </section>
 </template>
 
@@ -15,6 +20,7 @@ import MainMusics from './MainMusics.vue';
 import MainAlbums from './MainAlbums.vue';
 import MainGenres from './MainGenres.vue';
 import MainArtists from './MainArtists.vue';
+import MainPlaylist from './MainPlaylist.vue';
 
 export default {
   name: 'Main',
@@ -25,15 +31,14 @@ export default {
     MainAlbums,
     MainGenres,
     MainArtists,
-  },
-
-  props: {
-    library: Object
+    MainPlaylist,
   },
 
   data() {
     return {
-      currentView: ''
+      currentViewName: '',
+      currentViewComponentName: '',
+      currentViewItems: null,
     }
   },
 
@@ -42,17 +47,10 @@ export default {
       this.$emit('playQueue-played', playQueue);
     },
 
-    showView(targetViewName) {
-      this.currentView = 'Main' + targetViewName;
-    }
-  },
-
-  computed: {
-    currentViewItems() {
-      if(this.currentView === 'MainMusics') return this.library.musics;
-      else if(this.currentView === 'MainAlbums') return this.library.albums;
-      else if(this.currentView === 'MainGenres') return this.library.genres;
-      else if(this.currentView === 'MainArtists') return this.library.artists;
+    showView(view) {
+      this.currentViewName = view.name;
+      this.currentViewComponentName = view.componentName;
+      this.currentViewItems = view.items;
     }
   }
 }

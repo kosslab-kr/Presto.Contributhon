@@ -1,7 +1,7 @@
 const Nevermind_Nirvana = {
   title: 'Nevermind',
   artist: 'Nirvana',
-  picture: require('./assets/album_picture/Nevermind.jpg'),
+  picture: require('../assets/album_picture/Nevermind.jpg'),
   musics: null
 }
 
@@ -102,7 +102,7 @@ Nevermind_Nirvana.musics = [
 const ThePastThePresentThePossible_Tahiti80 = {
   title: "The Past, The Present & The Possible",
   artist: "Tahiti 80",
-  picture: require('./assets/album_picture/ThePastThePresentThePossible.jpg'),
+  picture: require('../assets/album_picture/ThePastThePresentThePossible.jpg'),
   musics: null
 }
 
@@ -189,7 +189,7 @@ ThePastThePresentThePossible_Tahiti80.musics = [
 const RiotOnAnEmptyStreet_KingsOfConvenience = {
   title: "Riot On An Empty Street",
   artist: "Kings of Convenience",
-  picture: require('./assets/album_picture/RiotOnAnEmptyStreet.jpg'),
+  picture: require('../assets/album_picture/RiotOnAnEmptyStreet.jpg'),
   musics: null
 }
 
@@ -283,7 +283,7 @@ RiotOnAnEmptyStreet_KingsOfConvenience.musics = [
 const Scorpion_Drake = {
   title: "Scorpion",
   artist: "Drake",
-  picture: require('./assets/album_picture/Scorpion.jpg'),
+  picture: require('../assets/album_picture/Scorpion.jpg'),
   musics: null
 };
 
@@ -300,7 +300,7 @@ Scorpion_Drake.musics = [
 const V_Maroon5 = {
   title: "V",
   artist: "Maroon5",
-  picture: require('./assets/album_picture/V.jpg'),
+  picture: require('../assets/album_picture/V.jpg'),
   musics: null
 };
 
@@ -317,7 +317,7 @@ V_Maroon5.musics = [
 const Youngblood_FiveSecondsOfSummer = {
   title: "Youngblood",
   artist: "Five Seconds of Summer",
-  picture: require('./assets/album_picture/Youngblood.jpg'),
+  picture: require('../assets/album_picture/Youngblood.jpg'),
   musics: null
 };
 
@@ -334,7 +334,7 @@ Youngblood_FiveSecondsOfSummer.musics = [
 const MakeMyBed_KingPrincess = {
   title: "Make My Bed",
   artist: "King Princess",
-  picture: require('./assets/album_picture/MakeMyBed.jpg'),
+  picture: require('../assets/album_picture/MakeMyBed.jpg'),
   musics: null
 };
 
@@ -382,7 +382,7 @@ library.genres = genres;
 library.artists = [
   {
     name: 'King Princess',
-    picture: require('./assets/artist_picture/KingPrincess.jpg'),
+    picture: require('../assets/artist_picture/KingPrincess.jpg'),
     musics: [
       {
         title: '1950',
@@ -395,7 +395,7 @@ library.artists = [
   },
   {
     name: 'Kings of Convenience',
-    picture: require('./assets/artist_picture/KingsOfConvenience.jpg'),
+    picture: require('../assets/artist_picture/KingsOfConvenience.jpg'),
     musics: [
       {
         title: 'Homesick',
@@ -485,7 +485,7 @@ library.artists = [
   },
   {
     name: 'Drake',
-    picture: require('./assets/artist_picture/Drake.jpg'),
+    picture: require('../assets/artist_picture/Drake.jpg'),
     musics: [
       {
         title: 'In My Feelings',
@@ -498,7 +498,7 @@ library.artists = [
   },
   {
     name: 'Five Seconds of Summer',
-    picture: require('./assets/artist_picture/FiveSecondsOfSummer.jpg'),
+    picture: require('../assets/artist_picture/FiveSecondsOfSummer.jpg'),
     musics: [
       {
         title: 'Youngblood',

@@ -1,17 +1,11 @@
 <template>
   <MainView :name="name">
-    <template slot="navigator">
-      <MainViewNavigator
-        :itemNames="items.map(item => item.type)"
-        @item-selected="selectGenre"
-      />
-    </template>
     <template slot="body">
       <MainViewList
-        v-if="selectedGenre"
-        :items="genreListItems"
-        :fields="genreListFields"
-        @music-played="$emit('music-played', {currentMusicIdx: $event, musics: selectedGenre.musics})"
+        v-if="items.length > 0"
+        :items="playlistItems"
+        :fields="playlistFields"
+        @music-played="$emit('music-played', {currentMusicIdx: $event, musics: items})"
       />
     </template>
   </MainView>
@@ -19,27 +13,24 @@
 
 <script>
 import MainView from './MainView.vue';
-import MainViewNavigator from './MainViewNavigator.vue';
 import MainViewList from './MainViewList.vue';
 
 export default {
-  name: 'MainGenres',
+  name: 'MainPlaylist',
 
   components: {
     MainView,
-    MainViewNavigator,
     MainViewList
   },
 
   props: {
     name: String,
-    items: Array
+    items: Array,
   },
 
   data() {
     return {
-      selectedGenreName: '',
-      genreListFields: [
+      playlistFields: [
         {
           name: '',
           value: 'number',
@@ -88,11 +79,6 @@ export default {
   },
 
   methods: {
-    selectGenre(genreName) {
-      this.selectedGenreName = genreName;
-      this.$el.scrollTo(0,0);
-    },
-
     formatTime(milliseconds) {
       const date = new Date(milliseconds);
       const minutes = date.getMinutes();
@@ -105,16 +91,8 @@ export default {
   },
 
   computed: {
-    selectedGenre() {
-      for(let genre of this.items) {
-        if(genre.type === this.selectedGenreName) return genre;
-      }
-
-      return null;
-    },
-
-    genreListItems() {
-      const musics = this.selectedGenre.musics;
+    playlistItems() {
+      const musics = this.items;
 
       return musics.map((music, index) => {
         return {

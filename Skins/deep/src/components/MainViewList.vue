@@ -29,8 +29,31 @@ export default {
   },
 
   props: {
-    items: Array,
-    fields: Array,
+    items: {
+      type: Array,
+      default() {
+        return [
+          {
+            'matchedToFieldValue': '',
+          }
+        ]
+      }
+    },
+    fields: {
+      type: Array,
+      default() {
+        return [
+          {
+            name: '',
+            value: 'matchedToFieldValue',
+            width: '0%',
+            textAlign: 'center',
+            marginRight: '0%',
+            playButton: false
+          }
+        ]
+      }
+    },
     height: {
       type: String,
       default: 'auto'

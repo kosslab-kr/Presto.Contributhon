@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu ref="menu" @menu-selected="showView"/>
-    <Main :library="library" @playQueue-played="playPlayQueue" ref="main"/>
+    <Main ref="main" @playQueue-played="playPlayQueue"/>
     <Player ref="player"/>
   </div>
 </template>
@@ -10,7 +10,6 @@
 import Menu from './components/Menu.vue'
 import Main from './components/Main.vue'
 import Player from './components/Player.vue'
-import library from './library.js'
 
 export default {
   name: 'App',
@@ -23,7 +22,6 @@ export default {
 
   data() {
     return {
-      library: library,
       playQueue: null
     }
   },
@@ -37,8 +35,8 @@ export default {
       this.$refs.player.playPlayQueue(playQueue);
     },
 
-    showView(menuItemName) {
-      this.$refs.main.showView(menuItemName);
+    showView(view) {
+      this.$refs.main.showView(view);
     }
   }
 }

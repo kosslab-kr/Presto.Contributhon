@@ -1,5 +1,5 @@
 <template>
-  <MainView name="Artists">
+  <MainView :name="name">
     <template slot="body">
       <MainViewGroup
         v-for="(item, index) in items"
@@ -62,6 +62,7 @@ export default {
   },
 
   props: {
+    name: String,
     items: Array
   },
 

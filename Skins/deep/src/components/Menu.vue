@@ -3,61 +3,105 @@
     <ul class='menu__category'>
       <li class="menu__category-title">YOUR LIBRARY</li>
       <MenuItem
-        v-for="menuItemName in menuItemNames"
-        :key="menuItemName"
-        :name="menuItemName"
-        ref="menuItems"
-        @menu-clicked="_showContent"/>
+        ref="libraries"
+        v-for="(library, index) in libraries"
+        :key="index"
+        :name="library.name"
+        :componentName="library.componentName"
+        :items="library.items"
+        @menu-clicked="showContent"
+      />
     </ul>
     <ul class='menu__category'>
       <li class="menu__category-title">PLAYLISTS</li>
-      <MenuItem :name="'my music1'"/>
-      <MenuItem :name="'my music2'"/>
-      <MenuItem :name="'my music3'"/>
-      <MenuItem :name="'my music4'"/>
-      <MenuItem :name="'my music5'"/>
-      <MenuItem :name="'my music6'"/>
+      <MenuItem
+        ref="playlists"
+        v-for="(playlist, index) in playlists"
+        :key="index"
+        :name="playlist.name"
+        :componentName="'MainPlaylist'"
+        :items="playlist.musics"
+        @menu-clicked="showContent"
+      />
     </ul>
-    <div class="menu__footer">
-      <div class="menu__footer-icon"></div>
-      <div class='menu__footer-text'>New Playlist</div>
-    </div>
+    <MenuButtonPlaylist
+      @playlist-name-submitted="createPlaylist"
+    />
   </nav>
 </template>
 
 <script>
 import MenuItem from './MenuItem.vue';
+import MenuButtonPlaylist from './MenuButtonPlaylist.vue';
+import library from './library.js';
+import IPlaylistService from './IPlaylistService.js';
 
 export default {
   name: 'Menu',
 
   components: {
-    MenuItem
+    MenuItem,
+    MenuButtonPlaylist,
   },
 
   data() {
     return {
-      menuItemNames: ['Musics', 'Albums', 'Genres', 'Artists']
+      libraries: [
+        {
+          name: 'Musics',
+          componentName: 'MainMusics',
+          items: library.musics,
+        },
+        {
+          name: 'Albums',
+          componentName: 'MainAlbums',
+          items: library.albums,
+        },
+        {
+          name: 'Genres',
+          componentName: 'MainGenres',
+          items: library.genres,
+        },
+        {
+          name: 'Artists',
+          componentName: 'MainArtists',
+          items: library.artists,
+        },
+      ],
+
+      playlists: [],
     }
   },
 
   methods: {
-    triggerClickEvent({menuIndex}) {
+    triggerClickEvent({menuIndex} = {}) {
       const clickEvent = new Event('click');
-      const firstMenuItem = this.$refs.menuItems[menuIndex];
+      const menuItemsPlaylist = this.$refs.playlists || [];
+      const menuItems = this.$refs.libraries.concat(menuItemsPlaylist);
+      if(menuIndex === undefined) menuIndex = menuItems.length-1;
+      const targetMenuItem = menuItems[menuIndex];
 
-      firstMenuItem.$el.dispatchEvent(clickEvent);
+      targetMenuItem.$el.dispatchEvent(clickEvent);
     },
 
-    _showContent(menuItemName) {
-      this._activateMenu(menuItemName);
-      this.$emit('menu-selected', menuItemName);
+    showContent(view) {
+      this.activateMenu(view);
+      this.$emit('menu-selected', view);
     },
 
-    _activateMenu(menuItemName) {
-      this.$refs.menuItems.forEach(menuItem => {
-        menuItem.isActive = (menuItem.name === menuItemName) ? true : false;
+    activateMenu({name}) {
+      const menuItemsPlaylist = this.$refs.playlists || [];
+      const menuItems = this.$refs.libraries.concat(menuItemsPlaylist);
+
+      menuItems.forEach(menuItem => {
+        menuItem.isActive = (menuItem.name === name) ? true : false;
       })
+    },
+
+    createPlaylist(playlistName) {
+      const newPlaylist = IPlaylistService.createPlaylist(playlistName);
+      this.playlists.push(newPlaylist);
+      setTimeout(this.triggerClickEvent.bind(this));
     }
   }
 }
@@ -87,63 +131,6 @@ export default {
   letter-spacing: 1px;
   padding: 0px 25px;
   font-size: 0.8rem;
-}
-
-.menu__footer {
-  @include position(fixed, $bottom: $player-height);
-  @include size($width: $main-menu-width);
-  box-sizing: border-box;
-  line-height: 55px;
-  border-top: 1px solid #333;
-  font-weight: lighter;
-  font-size: 1rem;
-  color: #aaa;
-  background: #111;
-  padding: 0px 25px;
-
-  &:hover {
-    .menu__footer-icon {
-      &, &::before, &::after {
-        border-color: #fff;
-      }
-    }
-    
-    .menu__footer-text {
-      color: #fff;
-    }
-  }
-}
-
-
-.menu__footer-icon {
-  @include position(relative);
-  @include size($width: 21px, $height: 21px);
-  display: inline-block;
-  border-radius: 50%;
-  $border-style: 1px solid #aaa;
-  border: $border-style;
-  margin-right: 7px;
-  vertical-align: middle;
-
-  @mixin cross($top, $left, $border-side) {
-    @include position(absolute, $top: $top, $left: $left);
-    @include size($width: 26%, $height: 26%);
-    box-sizing: border-box;
-    display: block;
-    content: '';
-    @each $side in $border-side {
-      border-#{$side} : $border-style;
-    }
-  }
-
-  &::before { @include cross($top: 25%, $left: 25%, $border-side: (right, bottom)) }
-
-  &::after { @include cross($top: 48%, $left: 48%, $border-side: (top, left)) }
-}
-
-.menu__footer-text {
-  display: inline-block;
-  vertical-align: middle
 }
 
 </style>

@@ -33,7 +33,7 @@ export default {
   // collape when clicking outside of more componenet
   mounted() {
     const collapse = ({target}) => {
-      if(target.contains(this.$el)) return;
+      if(this.$el.contains(target)) return;
 
       this.isActive = false;
     }
