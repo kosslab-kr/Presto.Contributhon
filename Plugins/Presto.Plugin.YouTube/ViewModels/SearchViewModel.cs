@@ -16,6 +16,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         #region 변수
         private bool _isProcessing = false;
         private double _progress;
+        private double _maximum;
         private string _status;
         private string _input;
         #endregion
@@ -39,6 +40,16 @@ namespace Presto.Plugin.YouTube.ViewModels
             set
             {
                 _progress = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public double Maximum
+        {
+            get => _maximum;
+            set
+            {
+                _maximum = value;
                 RaisePropertyChanged();
             }
         }
@@ -103,6 +114,7 @@ namespace Presto.Plugin.YouTube.ViewModels
 
                     Status = video.Title;
                     Progress = default(double);
+                    Maximum = 1 + (YouTubeUtility.IsEncodeRequired ? 0.5d : 0);
                     var progressHandler = new Progress<double>(p => Progress = p);
 
                     var addDialog = new AddDialog

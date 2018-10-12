@@ -98,7 +98,7 @@
                 BorderBrush="White"
                 BorderThickness="0"
                 Foreground="White"
-                Maximum="1"
+                Maximum="{Binding Maximum}"
                 Visibility="{Binding Status, Converter={cvt:EmptyToVisibilityConverter Condition=False}}"
                 Value="{Binding Progress}" />
         </StackPanel>
