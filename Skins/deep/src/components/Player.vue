@@ -9,10 +9,11 @@
           <div class="player__button-wrap">
             <PlayerButtonShuffle/>
             <PlayerButtonBack/>
-            <div class="player__play-button" style="width: 33px; height: 33px">
+            <div class="player__play-button">
               <BaseButtonPlayPause
-                ref="playPauseButton"
-                @button-clicked="togglePlayPauseButton"/>
+                :onPlay="onPlay"
+                @button-clicked="togglePlayPauseButton"
+              />
             </div>
             <PlayerButtonNext/>
             <PlayerButtonRepeat/>
@@ -122,7 +123,6 @@ export default {
     },
     
     togglePlayPauseButton() {
-      this.$refs.playPauseButton.onPlay = !this.$refs.playPauseButton.onPlay;
       this.onPlay = !this.onPlay;
       this.onPlay ? this.play() : this.pause();
     },
@@ -144,7 +144,6 @@ export default {
 
       if(!this.onPlay) {
         this.onPlay = true;
-        this.$refs.playPauseButton.onPlay = true;
       }
 
       this.play();
@@ -175,45 +174,6 @@ export default {
   width: 100%; height: 100%;
 }
 
-.player__current-music {
-  position: absolute;
-  left: 0px;
-  width: 270px; height: 100%;
-}
-
-.player__album-picture {
-  display: block;
-  float: left;
-  $album-cover-size: 50px !global;
-  width: $album-cover-size; height: $album-cover-size;
-  background: #fff;
-  margin: ($player-height - $album-cover-size)/2;
-}
-
-.player__song-title {
-  box-sizing: border-box;
-  float: left;
-  width: 190px; height: $album-cover-size/2;
-  color: #fff;
-  margin-top: ($player-height - $album-cover-size)/2;
-  padding-top: 10px;
-  vertical-align: middle;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  @include vertical-align-helper;
-}
-
-.player__artist {
-  box-sizing: border-box;
-  float: left;
-  width: 190px; height: $album-cover-size/2;
-  color: #ccc;
-  font-size: 0.8rem;
-  vertical-align: middle;
-  @include vertical-align-helper;
-}
-
 .player__controls {
   position: absolute;
   left: 50%;
@@ -237,8 +197,8 @@ export default {
 
 .player__play-button {
   display: inline-block;
-  width: 18px; height: 18px;
   vertical-align: middle;
+  width: 33px; height: 33px;
   margin-right: 23px;
 }
 

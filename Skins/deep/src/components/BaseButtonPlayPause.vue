@@ -7,7 +7,8 @@
     :class="{'button--pressed': isButtonPressed}"
     :style="{'--background': background, '--hoverBackground': hoverBackground}"
     @mousedown.stop="isButtonPressed = true"
-    @mouseup.stop="releaseButton">
+    @mouseleave.stop="isButtonPressed = false"
+    @click.stop="clickButton">
     <polygon v-if="!onPlay" points="39 31, 72 50, 39 69" fill="#fff"/>
     <line v-if="onPlay" x1="39" y1="31" x2="39" y2="69" stroke="#fff" stroke-width="9"/>
     <line v-if="onPlay" x1="61" y1="31" x2="61" y2="69" stroke="#fff" stroke-width="9"/>
@@ -20,6 +21,11 @@ export default {
   name: 'BaseButtonPlayPause',
 
   props: {
+    onPlay: {
+      type: Boolean,
+      default: false
+    },
+
     background: {
       type: String,
       default: 'transparent'
@@ -34,12 +40,11 @@ export default {
   data() {
     return {
       isButtonPressed: false,
-      onPlay: false
     }
   },
 
   methods: {
-    releaseButton() {
+    clickButton() {
       this.isButtonPressed = false;
       this.$emit('button-clicked');
     }
