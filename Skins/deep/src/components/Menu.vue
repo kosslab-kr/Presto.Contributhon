@@ -101,7 +101,9 @@ export default {
     createPlaylist(playlistName) {
       const newPlaylist = IPlaylistService.createPlaylist(playlistName);
       this.playlists.push(newPlaylist);
-      setTimeout(this.triggerClickEvent.bind(this));
+      this.$nextTick(() => {
+        this.triggerClickEvent();
+      })
     }
   }
 }
