@@ -4,7 +4,8 @@
       class="group__picture-wrap"
       :class="{'group__picture-wrap--pressed': isPicturePressed}"
       @mousedown="isPicturePressed = true"
-      @mouseup="selectPicture"
+      @mouseleave="isPicturePressed = false"
+      @click="selectPicture"
     >
       <img class="group__picture" :src="group.picture" alt="groupPicture">
       <div class="group__picture-cover">
