@@ -56,15 +56,15 @@ namespace Presto.Plugin.YouTube.ViewModels
             foreach (var music in Musics)
             {
                 // 태그 정보 작성
-                using (var aacFile = TagLib.File.Create(music.Path))
+                using (var audioFile = TagLib.File.Create(music.Path))
                 {
-                    aacFile.Tag.Title = music.Title;
-                    aacFile.Tag.Album = music.Album;
-                    aacFile.Tag.AlbumArtists = Pack(music.Artist);
-                    aacFile.Tag.Performers = Pack(music.Artist);
-                    aacFile.Tag.Pictures = File.Exists(music.Picture) ? new[] { new TagLibPicture(music.Picture) } : null;
-                    aacFile.Tag.Genres = Pack(music.Genre);
-                    aacFile.Save();
+                    audioFile.Tag.Title = music.Title;
+                    audioFile.Tag.Album = music.Album;
+                    audioFile.Tag.AlbumArtists = Pack(music.Artist);
+                    audioFile.Tag.Performers = Pack(music.Artist);
+                    audioFile.Tag.Pictures = File.Exists(music.Picture) ? new[] { new TagLibPicture(music.Picture) } : null;
+                    audioFile.Tag.Genres = Pack(music.Genre);
+                    audioFile.Save();
                 }
 
                 // 라이브러리 추가

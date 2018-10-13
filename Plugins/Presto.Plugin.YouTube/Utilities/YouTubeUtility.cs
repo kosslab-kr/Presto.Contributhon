@@ -19,7 +19,6 @@ namespace Presto.Plugin.YouTube.Utilities
         {
             get
             {
-                return true;
                 var version = Environment.OSVersion.Version;
                 return version.Major <= 6 && version.Minor <= 1;
             }
