@@ -4,6 +4,7 @@
     @mouseover="isMouseOvered = true"
     @mouseleave="isMouseOvered = false"
     @dblclick="playMusic"
+    @contextmenu="openContextMenu"
   >
     <div
       class="music__picture"
@@ -26,10 +27,19 @@
       </div>
       <div class="music__artist">{{music.artist}}</div>
     </div>
+    <BaseContextMenu
+      v-if="isContextMenuOpened"
+      :style="contextMenuStyle"
+      :items="contextMenuItems"
+      @outside-clicked="closeContextMenu"
+      @item-clicked="closeContextMenu"
+    />
   </div>
 </template>
 
 <script>
+import IPlaylistService from './IPlaylistService.js';
+
 export default {
   name: 'MainMusicsItem',
 
@@ -40,13 +50,54 @@ export default {
 
   data() {
     return {
-      isMouseOvered: false
+      isMouseOvered: false,
+      isContextMenuOpened: false,
+      contextMenuStyle: {
+        top: '0px',
+        left: '0px',
+      },
+      contextMenuItems: [
+        {
+          name: '음악 재생',
+          callback: this.playMusic.bind(this),
+        },
+        {
+          name: '플레이리스트에 추가',
+          subItems: IPlaylistService.playlists.reduce((items, playlist) => {
+            return items.concat({
+              name: playlist.name,
+              callback: () => { playlist.addMusic(this.music); },
+            })
+          }, [
+            {
+              name: 'New Playist',
+              callback: () => {
+                const newPlaylist = IPlaylistService.createPlaylist(this.music.title);
+                newPlaylist.addMusic(this.music);
+              }
+            }
+          ])
+        },
+      ],
     }
   },
 
   methods: {
     playMusic() {
       this.$emit('music-played', this.index);
+    },
+
+    openContextMenu(e) {
+      this.isContextMenuOpened = true;
+      this.contextMenuStyle = {
+        top: `${e.clientY}px`,
+        left: `${e.clientX}px`,
+      }
+      e.preventDefault();
+    },
+
+    closeContextMenu() {
+      this.isContextMenuOpened = false;
     }
   }
 }

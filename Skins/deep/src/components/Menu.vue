@@ -69,7 +69,7 @@ export default {
         },
       ],
 
-      playlists: [],
+      playlists: IPlaylistService.playlists,
     }
   },
 
@@ -99,8 +99,7 @@ export default {
     },
 
     createPlaylist(playlistName) {
-      const newPlaylist = IPlaylistService.createPlaylist(playlistName);
-      this.playlists.push(newPlaylist);
+      IPlaylistService.createPlaylist(playlistName);
       this.$nextTick(() => {
         this.triggerClickEvent();
       })

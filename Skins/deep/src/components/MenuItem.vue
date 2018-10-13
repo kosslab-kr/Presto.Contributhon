@@ -44,6 +44,9 @@ export default {
   margin: 0.7rem 0;
   line-height: 1.3;
   color: #aaa;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 
   &:hover { color: #fff; }
 }
