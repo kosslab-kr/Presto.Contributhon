@@ -1,7 +1,9 @@
 <template>
   <section class="main">
     <header class='main__header'>
-      <MainSearch/>
+      <MainSearch
+        @value-changed="searchItem"
+      />
       <BaseMore/>
     </header>
     <component
@@ -38,6 +40,7 @@ export default {
     return {
       currentViewName: '',
       currentViewComponentName: '',
+      currentViewItemsAll: null,
       currentViewItems: null,
     }
   },
@@ -50,7 +53,23 @@ export default {
     showView(view) {
       this.currentViewName = view.name;
       this.currentViewComponentName = view.componentName;
-      this.currentViewItems = view.items;
+      this.currentViewItemsAll = view.items;
+      this.currentViewItems = this.currentViewItemsAll;
+    },
+
+    searchItem({target}) {
+      const keyword = target.value;
+      const keywordLowerCase = keyword.toLowerCase();
+
+      this.currentViewItems = this.currentViewItemsAll.filter(item => {
+        const targetName = item.title ? item.title :
+                           item.name ? item.name :
+                           item.type;
+                           
+        const targetNameLowerCase = targetName.toLowerCase();
+
+        return targetNameLowerCase.includes(keywordLowerCase);
+      })
     }
   }
 }

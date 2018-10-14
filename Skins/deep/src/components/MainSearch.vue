@@ -1,8 +1,14 @@
 <template>
-  <form class="search" action='' method='get'>
+  <div class="search">
     <div class="search__icon"></div>
-    <input class='search__input' type="text" name='keyword' placeholder='Search'>
-  </form>
+    <input
+      class='search__input'
+      type="text"
+      name='keyword'
+      placeholder='Search'
+      @input="$emit('value-changed', $event)"
+    >
+  </div>
 </template>
 
 <script>
