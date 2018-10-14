@@ -1,6 +1,9 @@
 <template>
   <div
     class="playlist-button"
+    :class="{'playlist-button--pressed': isButtonPressed}"
+    @mousedown="isButtonPressed = true"
+    @mouseleave="isButtonPressed = false"
     @click="toggleButton"
   >
     <div class="playlist-button__icon"></div>
@@ -9,17 +12,25 @@
       class="playlist-button__form"
       v-if="isActive"
     >
-      <input
-        ref="input"
-        type="text"
-        @keypress="checkEnter"
-      >
+      <div class="playlist-button__form-text">Playlist Name</div>
+      <div class="playlist-button__input-wrap">
+        <input
+          class="playlist-button__input"
+          ref="input"
+          type="text"
+          @keypress="checkEnter"
+        >
+      </div>
       <div
         class="playlist-button__submit"
+        :class="{'playlist-button__submit--pressed': isSubmitPressed}"
+        @mousedown="isSubmitPressed = true"
+        @mouseleave="isSubmitPressed = false"
         @click="submitPlaylistName"
       >
         CREATE
       </div>
+      <div class="playlist-button__form-tail"></div>
     </div>
   </div>
 </template>
@@ -28,37 +39,45 @@
 export default {
   name: 'MenuButtonPlaylist',
 
-  mounted() {
-    window.addEventListener('click', ({target}) => {
-      if(this.$el.contains(target)) return;
-
-      this.isActive = false;
-    })
+  created() {
+    window.addEventListener('click', this.closeCreateForm, true);
+    window.addEventListener('contextmenu', this.closeCreateForm, true);
   },
 
   data() {
     return {
+      isButtonPressed: false,
       isActive: false,
+      isSubmitPressed: false,
     }
   },
 
   methods: {
+    closeCreateForm({target}) {
+      if(this.$el.contains(target)) return;
+
+      this.isActive = false;
+    },
+
     toggleButton({target}) {
       if(target.closest('.playlist-button__form')) return;
       
+      this.isButtonPressed = false;
       this.isActive = !this.isActive;
+
       this.$nextTick(() => {
+        if(!this.$refs.input) return;
+
         this.$refs.input.focus();
       })
     },
 
     submitPlaylistName() {
+      this.isSubmitPressed = false;
+
       const playlistName = this.$refs.input.value;
 
-      if(playlistName === '') {
-        console.log('no name playlist!');
-        return;
-      }
+      if(playlistName === '') return;
 
       this.$emit('playlist-name-submitted', playlistName);
       this.isActive = false;
@@ -101,6 +120,10 @@ export default {
   }
 }
 
+.playlist-button--pressed {
+  .playlist-button__icon, .playlist-button__text {opacity: 0.7;}
+}
+
 
 .playlist-button__icon {
   @include position(relative);
@@ -134,14 +157,71 @@ export default {
 }
 
 .playlist-button__form {
+  box-sizing: border-box;
   position: absolute;
-  top: -120px; left: 0px;
-  width: 180px; height: 100px;
-  background: red;
+  top: -160px; left: 20px;
+  width: 160px; height: 135px;
+  padding: 20px 15px;
+  border-radius: 8px;
+  background: #272727;
+  box-shadow: 0px 0px 20px 2px #111;
+}
+
+.playlist-button__form-text {
+  color: #bbb;
+  width: 100%; line-height: 1.3rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.playlist-button__input-wrap {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 1.6rem;
+  background: #fff;
+  margin-bottom: 20px;
+}
+
+.playlist-button__input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
 }
 
 .playlist-button__submit {
-  border: 1px solid black;
+  width: 70%; line-height: 25px;
+  border-radius: 20px;
+  background: $signature-color;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-align: center;
+  margin: auto;
+
+  &:hover {
+    transform: scale(1.05);
+    background: #13f74c;
+  }
+
+  &--pressed {
+    transform: scale(1) !important;
+    opacity: 0.7;
+  }
+}
+
+.playlist-button__form-tail {
+  position: absolute;
+  left: calc(50% - 10px); bottom: -13px;
+  width: 0px; height: 0px;
+  border-top: 13px solid #272727;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 }
 
 </style>
