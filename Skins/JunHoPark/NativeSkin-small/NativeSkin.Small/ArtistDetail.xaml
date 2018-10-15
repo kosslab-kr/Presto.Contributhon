@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="NativeSkin.Small.ArtistDetail"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:NativeSkin.Small"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ps="clr-namespace:Presto.SDK;assembly=Presto.SDK"
+    d:DesignHeight="500"
+    d:DesignWidth="350"
+    DataContext="{x:Static ps:PrestoSDK.PrestoService}"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="Resource/ResourceDictionary.xaml" />
+    </UserControl.Resources>
+
+    <Grid Background="Beige">
+        <Button Content="HEY" />
+    </Grid>
+</UserControl>
