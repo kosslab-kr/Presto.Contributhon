@@ -32,7 +32,6 @@ Homesick.previous = Misread;
 
 const KingsOfConvenience = {
   name: 'Kings of Convenience',
-  picture: require('../assets/artist_picture/KingsOfConvenience.jpg'),
   musics: [Misread, Homesick],
 }
 

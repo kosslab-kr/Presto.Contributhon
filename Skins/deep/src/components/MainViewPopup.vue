@@ -8,7 +8,7 @@
     <header class="popup__header">
       <div
         class="popup__picture"
-        :style="{ background: 'no-repeat center/100% url(' + group.picture + ')' }"
+        :style="{ background: 'no-repeat center/100% url(' + picture + ')' }"
       />
       <div class="popup__description-wrap">
         <div class="popup__description">
@@ -78,6 +78,12 @@ export default {
     playGroup() {
       this.isPlayButtonPressed = false;
       this.$emit('group-played', this.group.musics[0]);
+    }
+  },
+
+  computed: {
+    picture() {
+      return this.type === 'artist' ? this.group.musics[0].album.picture : this.group.picture;
     }
   },
 }

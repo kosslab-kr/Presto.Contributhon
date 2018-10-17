@@ -7,7 +7,7 @@
       @mouseleave="isPicturePressed = false"
       @click="selectPicture"
     >
-      <img class="group__picture" :src="group.picture" alt="groupPicture">
+      <img class="group__picture" :src="picture" alt="groupPicture">
       <div class="group__picture-cover">
         <div class="group__play-button">
           <BaseButtonPlayPause
@@ -56,7 +56,11 @@ export default {
   computed: {
     description() {
       return this.type === 'artist' ? this.group.musics.length + ' SONGS' : this.group.artist.name;
-    }
+    },
+
+    picture() {
+      return this.type === 'artist' ? this.group.musics[0].album.picture : this.group.picture;
+    },
   }
 }
 </script>
