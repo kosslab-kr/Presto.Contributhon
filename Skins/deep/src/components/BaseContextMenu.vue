@@ -81,7 +81,7 @@ export default {
 .context-menu {
   box-sizing: border-box;
   position: fixed;
-  width: 150px;
+  width: 160px;
   padding: 10px 0;
   background: #272727;
   border-radius: 8px;

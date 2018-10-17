@@ -88,7 +88,7 @@ export default {
 
 $picture-size: 100px;
 $popup-width: 50vw;
-$popup-height: 60vh;
+$popup-height: 70vh;
 
 .popup {
   box-sizing: border-box;
