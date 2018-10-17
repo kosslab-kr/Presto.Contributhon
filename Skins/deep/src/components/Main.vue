@@ -10,7 +10,7 @@
       :name="currentViewName"
       :is="currentViewComponentName"
       :items="currentViewItems"
-      @music-played="playPlayQueue"
+      @music-played="playMusic"
     />
   </section>
 </template>
@@ -46,8 +46,8 @@ export default {
   },
 
   methods: {
-    playPlayQueue(playQueue) {
-      this.$emit('playQueue-played', playQueue);
+    playMusic(music) {
+      this.$emit('music-played', music);
     },
 
     showView(view) {

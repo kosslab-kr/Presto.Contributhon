@@ -33,8 +33,12 @@
 <script>
 import MenuItem from './MenuItem.vue';
 import MenuButtonPlaylist from './MenuButtonPlaylist.vue';
-import library from './library.js';
 import IPlaylistService from './IPlaylistService.js';
+// import library from './library.js';
+import ILibraryService from './ILibraryService.js';
+import IAlbumService from './IAlbumService.js';
+import IGenreService from './IGenreService.js';
+import IArtistService from './IArtistService.js';
 
 export default {
   name: 'Menu',
@@ -50,22 +54,22 @@ export default {
         {
           name: 'Musics',
           componentName: 'MainMusics',
-          items: library.musics,
+          items: ILibraryService.musics,
         },
         {
           name: 'Albums',
           componentName: 'MainAlbums',
-          items: library.albums,
+          items: IAlbumService.albums,
         },
         {
           name: 'Genres',
           componentName: 'MainGenres',
-          items: library.genres,
+          items: IGenreService.genres,
         },
         {
           name: 'Artists',
           componentName: 'MainArtists',
-          items: library.artists,
+          items: IArtistService.artists,
         },
       ],
 

@@ -15,7 +15,7 @@
           <div class="popup__title">
             <BaseTextRolling
               :onPlay="isMouseOvered"
-              :text="title"
+              :text="group.name"
               :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}"
               :delay="1"
             />
@@ -25,7 +25,7 @@
             class="popup__artist"
           >
             <span class="popup__artist-by">By</span>
-            {{group.artist}}
+            {{group.artist.name}}
           </div>
         </div>
       </div>
@@ -77,15 +77,9 @@ export default {
   methods: {
     playGroup() {
       this.isPlayButtonPressed = false;
-      this.$emit('group-played', {currentMusicIdx: 0, musics: this.group.musics});
+      this.$emit('group-played', this.group.musics[0]);
     }
   },
-
-  computed: {
-    title() {
-      return this.type === 'artist' ? this.group.name : this.group.title;
-    }
-  }
 }
 </script>
 

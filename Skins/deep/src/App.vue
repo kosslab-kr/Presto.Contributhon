@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Menu ref="menu" @menu-selected="showView"/>
-    <Main ref="main" @playQueue-played="playPlayQueue"/>
+    <Main ref="main" @music-played="playMusic"/>
     <Player ref="player"/>
   </div>
 </template>
@@ -31,8 +31,8 @@ export default {
   },
   
   methods: {
-    playPlayQueue(playQueue) {
-      this.$refs.player.playPlayQueue(playQueue);
+    playMusic(music) {
+      this.$refs.player.play(music);
     },
 
     showView(view) {

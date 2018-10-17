@@ -5,7 +5,7 @@
       :src="music.album.picture"
       alt="music__album-picture">
     <div class="music__title">{{music.title}}</div>
-    <div class="music__artist">{{music.artist}}</div>
+    <div class="music__artist">{{music.artist.name}}</div>
   </div>
 </template>
 

@@ -2,7 +2,7 @@
   <MainView :name="name">
     <template slot="navigator">
       <MainViewNavigator
-        :itemNames="items.map(item => item.type)"
+        :itemNames="items.map(item => item.name)"
         @item-selected="selectGenre"
       />
     </template>
@@ -11,7 +11,7 @@
         v-if="selectedGenre"
         :items="genreListItems"
         :fields="genreListFields"
-        @music-played="$emit('music-played', {currentMusicIdx: $event, musics: selectedGenre.musics})"
+        @music-played="$emit('music-played', $event)"
       />
     </template>
   </MainView>
@@ -107,7 +107,7 @@ export default {
   computed: {
     selectedGenre() {
       for(let genre of this.items) {
-        if(genre.type === this.selectedGenreName) return genre;
+        if(genre.name === this.selectedGenreName) return genre;
       }
 
       return null;
@@ -116,15 +116,15 @@ export default {
     genreListItems() {
       const musics = this.selectedGenre.musics;
 
-      return musics.map((music, index) => {
+      return musics.map((music) => {
         return {
           number: '',
           title: music.title,
-          artist: music.artist,
-          album: music.album.title,
-          time: this.formatTime(music.runningTime),
+          artist: music.artist.name,
+          album: music.album.name,
+          time: this.formatTime(music.length),
           more: '',
-          source: index
+          source: music
         };
       })
     }

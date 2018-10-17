@@ -25,7 +25,7 @@
           :onPlay="isMouseOvered"
         />
       </div>
-      <div class="music__artist">{{music.artist}}</div>
+      <div class="music__artist">{{music.artist.name}}</div>
     </div>
     <BaseContextMenu
       v-if="isContextMenuOpened"
@@ -45,7 +45,6 @@ export default {
 
   props: {
     music: Object,
-    index: Number
   },
 
   data() {
@@ -84,7 +83,7 @@ export default {
 
   methods: {
     playMusic() {
-      this.$emit('music-played', this.index);
+      this.$emit('music-played', this.music);
     },
 
     openContextMenu(e) {

@@ -34,7 +34,7 @@
                   :items="artistListItems"
                   :fields="artistListFields"
                   :height="'100%'"
-                  @music-played="$emit('music-played', {currentMusicIdx: $event, musics: selectedArtist.musics})"
+                  @music-played="$emit('music-played', $event)"
                 />
               </template>
             </MainViewPopup>
@@ -130,10 +130,10 @@ export default {
         return {
           number: index+1,
           title: music.title,
-          album: music.album.title,
-          time: this.formatTime(music.runningTime),
+          album: music.album.name,
+          time: this.formatTime(music.length),
           more: '',
-          source: index
+          source: music,
         };
       })
     }

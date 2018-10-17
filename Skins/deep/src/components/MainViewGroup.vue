@@ -13,12 +13,12 @@
           <BaseButtonPlayPause
             :background="'rgba(0,0,0,0.5)'"
             :hoverBackground="'rgba(0,0,0,0.7)'"
-            @button-clicked="play"
+            @button-clicked="playGroup"
           />
         </div>
       </div>
     </div>
-    <div class="group__title">{{title}}</div>
+    <div class="group__name">{{group.name}}</div>
     <div class="group__description">{{description}}</div>
   </div>
 </template>
@@ -48,18 +48,14 @@ export default {
       this.$emit('picture-selected', this.group);
     },
 
-    play() {
-      this.$emit('group-played', {currentMusicIdx: 0, musics: this.group.musics});
+    playGroup() {
+      this.$emit('group-played', this.group.musics[0]);
     }
   },
 
   computed: {
-    title() {
-      return this.type === 'artist' ? this.group.name : this.group.title;
-    },
-
     description() {
-      return this.type === 'artist' ? this.group.musics.length + ' SONGS' : this.group.artist;
+      return this.type === 'artist' ? this.group.musics.length + ' SONGS' : this.group.artist.name;
     }
   }
 }
@@ -105,7 +101,7 @@ export default {
 
 .group--artist {
   .group__picture-wrap { border-radius: 50%; }
-  .group__title { text-align: center; }
+  .group__name { text-align: center; }
   .group__description {
     text-align: center;
     margin-top: 5px;
@@ -165,7 +161,7 @@ export default {
   width: 100%;
 }
 
-.group__title {
+.group__name {
   line-height: 1.3;
   color: #fff;
   white-space: nowrap;

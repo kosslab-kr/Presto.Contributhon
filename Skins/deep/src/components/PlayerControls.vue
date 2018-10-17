@@ -6,7 +6,7 @@
           @button-clicked="shuffle"
         />
         <PlayerButtonBack
-          @button-clicked="playBack"
+          @button-clicked="playPrevious"
         />
         <div class="player__play-button">
           <BaseButtonPlayPause
@@ -44,6 +44,7 @@ import PlayerButtonShuffle from './PlayerButtonShuffle.vue';
 import PlayerButtonBack from './PlayerButtonBack.vue';
 import PlayerButtonNext from './PlayerButtonNext.vue';
 import PlayerButtonRepeat from './PlayerButtonRepeat.vue';
+import IPlayerService from './IPlayerService.js';
 
 export default {
   name: 'PlayerControls',
@@ -56,34 +57,68 @@ export default {
     PlayerButtonRepeat
   },
 
-  props: {
-    music: {
-      type: Object,
-      default() {
-        return {length: 0};
-      }
-    }
-  },
-
   data() {
     return {
+      music: {length: 0},
       currentTime: 0,
       onPlay: false,
-      onSetCurrentTime: null,
     }
   },
 
   mounted() {
-    this.onSetCurrentTime = this.setCurrentTime.bind(this);
-    // presto.addEventListener('onPropertyChanged', this.onSetCurrentTime);
-    // player.addEventListener('back', () => { this.$emit('music-changed') })
-    // player.addEventListener('next', () => { this.$emit('music-changed') })
+    IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
+    IPlayerService.addEventListener('onStreamChanged', ({music}) => { this.setMusic(music); });
   },
 
   methods: {
-    setCurrentTime(time) {
-      this.currentTime = time;
+    play(music) {
+      this.setMusic(music);
+      IPlayerService.play(music);
+    },
+
+    pause() {
+      IPlayerService.pause();
+    },
+
+    resume() {
+      IPlayerService.resume();
+    },
+
+    playPrevious() {
+      IPlayerService.playPrevious();
+    },
+
+    playNext() {
+      IPlayerService.playNext();
+    },
+
+    // @param {Boolean} isShuffled
+    shuffle({isShuffled}) {
+      // when shuffle button is clicked
+      console.log(isShuffled);
+    },
+
+    // @param {Number} repeatMode - 0 is None, 1 is once repeat, 2 is infinite repeat
+    repeat({repeatMode}) {
+      // when repeat button is clicked
+      console.log(repeatMode);
+    },
+
+    setCurrentTime({position}) {
+      this.currentTime = position;
       this.setSliderWidthPercentage({time: this.currentTime, length: this.music.length});
+    },
+
+    setMusic(music) {
+      this.onPlay = true;
+      this.music = music;
+      this.currentTime = 0;
+      this.$emit('music-changed', music);
+    },
+
+    togglePlayPauseButton() {
+      this.onPlay = !this.onPlay;
+      this.onPlay ? this.resume() : this.pause();
     },
 
     setSliderWidthPercentage({time, length}) {
@@ -91,7 +126,7 @@ export default {
     },
 
     sliderDown(widthPercentage) {
-      // this.onPlay && presto.removeEventListener('onProperyChanged', this.onSetCurrentTime);
+      this.onPlay && IPlayerService.removeEventListener('onPositionChanged', this.setCurrentTime);
       this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
     },
 
@@ -100,8 +135,8 @@ export default {
     },
 
     sliderUp() {
-      // player.setPosition(this.currentTime);
-      // this.onPlay && presto.addEventListener('onPropertyChanged', this.onSetCurrentTime);
+      IPlayerService.setPosition(this.currentTime);
+      this.onPlay && IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
     },
 
     calcTimeByPercentage({percentage, length}) {
@@ -117,50 +152,7 @@ export default {
 
       return `${formattedMinutes}:${formattedSeconds}`;
     },
-
-    togglePlayPauseButton() {
-      this.onPlay = !this.onPlay;
-      this.onPlay ? this.resume() : this.pause();
-    },
-
-    resume() {
-      // resume music
-    },
-
-    pause() {
-      // pause music
-    },
-
-    play(music) {
-      // music play
-    },
-
-    // @param {Boolean} isShuffled
-    shuffle({isShuffled}) {
-      // when shuffle button is clicked
-    },
-
-    playBack() {
-      // when back button is clicked
-    },
-
-    playNext() {
-      // when next button is clicked
-    },
-
-    // @param {Number} repeatMode - 0 is None, 1 is once repeat, 2 is infinite repeat
-    repeat({repeatMode}) {
-      // when repeat button is clicked
-    }
   },
-
-  watch: {
-    music(newMusic) {
-      this.currentTime = 0;
-      this.onPlay = true;
-      this.play(newMusic);
-    }
-  }
 }
 </script>
 

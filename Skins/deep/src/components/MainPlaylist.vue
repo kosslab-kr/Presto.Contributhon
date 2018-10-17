@@ -5,7 +5,7 @@
         v-if="items.length > 0"
         :items="playlistItems"
         :fields="playlistFields"
-        @music-played="$emit('music-played', {currentMusicIdx: $event, musics: items})"
+        @music-played="$emit('music-played', $event)"
       />
     </template>
   </MainView>
@@ -94,15 +94,15 @@ export default {
     playlistItems() {
       const musics = this.items;
 
-      return musics.map((music, index) => {
+      return musics.map((music) => {
         return {
           number: '',
           title: music.title,
-          artist: music.artist,
-          album: music.album.title,
-          time: this.formatTime(music.runningTime),
+          artist: music.artist.name,
+          album: music.album.name,
+          time: this.formatTime(music.length),
           more: '',
-          source: index
+          source: music
         };
       })
     }

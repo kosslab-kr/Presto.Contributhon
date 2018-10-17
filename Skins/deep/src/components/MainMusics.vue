@@ -4,7 +4,6 @@
       <MainMusicsItem
         v-for="(item, index) in items"
         :key="index"
-        :index="index"
         :music="item"
         @music-played="playMusic"
       />
@@ -30,8 +29,8 @@ export default {
   },
 
   methods: {
-    playMusic(index) {
-      this.$emit('music-played', {currentMusicIdx: index, musics: this.items});
+    playMusic(music) {
+      this.$emit('music-played', music);
     }
   }
 }
