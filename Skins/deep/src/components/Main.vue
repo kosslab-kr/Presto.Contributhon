@@ -4,7 +4,17 @@
       <MainSearch
         @value-changed="searchItem"
       />
-      <BaseMore/>
+      <div
+        class="more-menu-button"
+        :style="{opacity: isMoreMenuPressed ? '0.7' : '1'}"
+        @mousedown="isMoreMenuPressed = true"
+        @mouseleave="isMoreMenuPressed = false"
+        @click="openMoreMenu"
+      />
+      <MainMoreMenu
+        v-if="isMoreMenuOpened"
+        @menu-closed="closeMoreMenu"
+      />
     </header>
     <component
       :name="currentViewName"
@@ -17,7 +27,7 @@
 
 <script>
 import MainSearch from './MainSearch.vue';
-
+import MainMoreMenu from './MainMoreMenu.vue';
 import MainMusics from './MainMusics.vue';
 import MainAlbums from './MainAlbums.vue';
 import MainGenres from './MainGenres.vue';
@@ -29,6 +39,7 @@ export default {
 
   components: {
     MainSearch,
+    MainMoreMenu,
     MainMusics,
     MainAlbums,
     MainGenres,
@@ -38,6 +49,8 @@ export default {
 
   data() {
     return {
+      isMoreMenuPressed: false,
+      isMoreMenuOpened: false,
       currentViewName: '',
       currentViewComponentName: '',
       currentViewItemsAll: null,
@@ -70,6 +83,15 @@ export default {
 
         return targetNameLowerCase.includes(keywordLowerCase);
       })
+    },
+
+    openMoreMenu() {
+      this.isMoreMenuPressed = false;
+      this.isMoreMenuOpened = true;
+    },
+
+    closeMoreMenu() {
+      this.isMoreMenuOpened = false;
     }
   }
 }
@@ -91,6 +113,14 @@ export default {
   box-sizing: border-box;
   padding: 15px 30px 0 30px;
   z-index: 100;
+}
+
+.more-menu-button {
+  position: relative;
+  float: left;
+  width: 26px; height: 26px;
+  margin-left: 5px;
+  @include line-arrow($size: 50%, $border-width: 1px, $direction: bottom, $color: #fff);
 }
 
 </style>
