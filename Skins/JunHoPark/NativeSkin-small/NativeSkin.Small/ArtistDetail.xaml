@@ -16,7 +16,101 @@
         <ResourceDictionary Source="Resource/ResourceDictionary.xaml" />
     </UserControl.Resources>
 
-    <Grid Background="Beige">
-        <Button Content="HEY" />
+    <Grid Style="{StaticResource appBackground}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="9*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Margin="15,10,10,10"
+            VerticalAlignment="Top">
+            <Button
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Center"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Click="BackHome_Click"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Kind="ExitToApp">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="#FFA05AF3" />
+                            <GradientStop Offset="1" Color="#FF573BB8" />
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+            <StackPanel Margin="30,0,30,0">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Foreground="AliceBlue"
+                    Text="PLAY LIST" />
+            </StackPanel>
+            <Button
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Click="Power_Click"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Kind="Power">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="{StaticResource mediumPurple}" />
+                            <GradientStop Offset="1" Color="{StaticResource darkPurple}" />
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid>
+                <TextBlock
+                    Margin="50,0,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Text="{Binding Player.CurrentMusic.Artist.Name}" />
+                <Button
+                    Margin="200,0,20,0"
+                    Click="ArtistInfo_Click"
+                    Content="가수 정보" />
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2">
+            <ListView Name="artistDetail" Foreground="LightSteelBlue">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding Title}"
+                                TextTrimming="CharacterEllipsis" />
+                            <TextBlock
+                                Width="auto"
+                                Margin="10,0,10,0"
+                                VerticalAlignment="Center"
+                                Text="{Binding Content}"
+                                TextTrimming="CharacterEllipsis" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </UserControl>
