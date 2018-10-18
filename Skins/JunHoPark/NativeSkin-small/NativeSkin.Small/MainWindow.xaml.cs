@@ -31,21 +31,33 @@ namespace NativeSkin.Small
         List<EventHandler<PCancelEventArgs>> _closingEvents = new List<EventHandler<PCancelEventArgs>>();
         List<EventHandler<EventArgs>> _loadedEvents = new List<EventHandler<EventArgs>>();
         #endregion
-        private readonly HomeControl homeControl;
-        private readonly PlayListviewControl playListviewControl;
+        private readonly Home homeControl;
+        private readonly PlayListView playListviewControl;
+        private readonly ArtistDetail artistDetail;
 
         public MainWindow()
         {
             InitializeComponent();
-            //Source = new Uri("pack://application:,,,/NativeSkin.Small;component/Home.xaml");
-            homeControl = new HomeControl(this);
+            homeControl = new Home(this);
+            playListviewControl = new PlayListView(this);
+            artistDetail = new ArtistDetail(this);
+
             presenter.Content = homeControl;
-            playListviewControl = new PlayListviewControl(this);
+
         }
 
-        public void ShowHome()
+        public void ListViewControl()
         {
-            MessageBox.Show("홈 켜라");
+            presenter.Content = playListviewControl;
+        }
+
+        public void HomeControl() {
+            presenter.Content = homeControl;
+        }
+
+        public void ArtistDetailControl()
+        {
+            presenter.Content = artistDetail;
         }
 
         protected override void OnSourceInitialized(EventArgs e)
