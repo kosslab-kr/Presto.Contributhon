@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -33,38 +34,46 @@ namespace NativeSkin.Small
             InitializeComponent();
             this.mainWindow = mainWindow;
 
-            //findArtist();
+            // 이 페이지가 실행됐을 때
+            this.Loaded += ArtistDetail_Loaded;
+
         }
 
-        private void findArtist()
+        private async void ArtistDetail_Loaded(object sender, RoutedEventArgs e)
         {
-            
-        }
+            if (Player.CurrentMusic == null)
+            {
+                return;
+            }
 
-        private void ArtistInfo_Click(object sender, RoutedEventArgs e)
-        {
-            ArtistDetailModel[] model;
 
             // 재생중이거나 정지상태이거나
             MessageBox.Show(Player.CurrentMusic.Artist.Name);
             var url = "https://ko.wikipedia.org/wiki/" + Player.CurrentMusic.Artist.Name;
             var web = new HtmlWeb();
-            var doc = web.Load(url);
+            var doc = await Task.Factory.StartNew(() => web.Load(url));
 
-            if (doc == null)
+            var documentNode = doc?.DocumentNode;
+            var tableNode = documentNode?.SelectSingleNode("//table[contains(@class, 'infobox')]//tbody");
+            var rowsNodesList = tableNode?.SelectNodes("tr");
+
+            if (rowsNodesList == null)
             {
-                
+                // 찾을 수 없습니다
+                // return
             }
 
-            var documentNode = doc.DocumentNode;
-            var tableNode = documentNode.SelectSingleNode("//table[contains(@class, 'infobox')]//tbody");
-            var rowsNodesList = tableNode.SelectNodes("tr");
+            DocumentAnalyze(rowsNodesList);
+            
+        }
+
+        private void DocumentAnalyze(HtmlNodeCollection rowsNodesList)
+        {
+            ArtistDetailModel[] model = new ArtistDetailModel[rowsNodesList.Count];
+            var contentList = new List<string>();
+            var titleList = new List<string>();
             var rowCount = 1;
 
-            model = new ArtistDetailModel[rowsNodesList.Count];
-
-            List<string> contentList = new List<string>();
-            List<string> titleList = new List<string>();
             foreach (var row in rowsNodesList)
             {
                 var td = row.SelectNodes("td");
@@ -86,7 +95,12 @@ namespace NativeSkin.Small
                 }
             }
 
-            artistDetail.ItemsSource = model; 
+            artistDetail.ItemsSource = model;
+        }
+
+        private void ArtistInfo_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private void BackHome_Click(object sender, RoutedEventArgs e)
