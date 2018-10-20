@@ -48,13 +48,13 @@
     }
 
     .image {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 
     .GalleryItem__Wrapper .image img {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 
     .title {
