@@ -107,8 +107,6 @@
 
         <Grid Grid.Row="2">
             <Button
-                Width="30"
-                Height="30"
                 Margin="130,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
@@ -129,8 +127,6 @@
                 </materialDesign:PackIcon>
             </Button>
             <Button
-                Width="40"
-                Height="40"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Background="{x:Null}"
@@ -148,7 +144,7 @@
                     Name="musicControl"
                     Width="40"
                     Height="40"
-                    Kind="Pause">
+                    Kind="Play">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                             <GradientStop Offset="0" Color="{StaticResource mediumPurple}" />
@@ -158,8 +154,6 @@
                 </materialDesign:PackIcon>
             </Button>
             <Button
-                Width="30"
-                Height="30"
                 Margin="0,0,130,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
