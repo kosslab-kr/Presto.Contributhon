@@ -1,4 +1,5 @@
-﻿using Presto.Common.Models;
+﻿using Presto.Common;
+using Presto.Common.Models;
 using Presto.Common.Services;
 using Presto.SDK;
 using System;
@@ -32,6 +33,12 @@ namespace NativeSkin.Small
         {
             InitializeComponent();
             this.mainWindow = window;
+            Player.PlaybackStateChanged += Player_PlaybackStateChanged;
+        }
+
+        private void Player_PlaybackStateChanged(object sender, PlaybackStateChangedEventArgs e)
+        {
+            CheckPlayingState();
         }
 
         private void ListView_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -46,20 +53,18 @@ namespace NativeSkin.Small
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+            
             switch (Player.PlaybackState)
             {
                 case Presto.Common.PlaybackState.Playing:
-                    this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Play;
                     Player.Pause();
                     break;
 
                 case Presto.Common.PlaybackState.Paused:
-                    this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Pause;
-                    Player.Play();
+                    Player.Resume();
                     break;
 
                 default:
-                    this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Pause;
                     Player.Play();
                     break;
             }
@@ -84,5 +89,18 @@ namespace NativeSkin.Small
         {
             Application.Current.Shutdown();
         }
+
+        private void CheckPlayingState()
+        {
+            if (Player.PlaybackState == PlaybackState.Playing)
+            {
+                this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Pause;
+            }
+            else
+            {
+                this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Play;
+            }
+        }
+
     }
 }
