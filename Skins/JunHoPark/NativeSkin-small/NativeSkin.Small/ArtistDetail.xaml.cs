@@ -53,14 +53,17 @@ namespace NativeSkin.Small
             var web = new HtmlWeb();
             var doc = await Task.Factory.StartNew(() => web.Load(url));
 
+            this.loadingText.Visibility = Visibility.Hidden;
+
             var documentNode = doc?.DocumentNode;
             var tableNode = documentNode?.SelectSingleNode("//table[contains(@class, 'infobox')]//tbody");
             var rowsNodesList = tableNode?.SelectNodes("tr");
 
             if (rowsNodesList == null)
             {
-                // 찾을 수 없습니다
-                // return
+                MessageBox.Show("가수 정보를 찾을 수 없습니다");
+                artistDetail.ItemsSource = null;
+                return;
             }
 
             DocumentAnalyze(rowsNodesList);
