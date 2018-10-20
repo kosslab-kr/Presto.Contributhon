@@ -59,7 +59,7 @@ export default {
 
   data() {
     return {
-      music: {length: 0},
+      music: {},
       currentTime: 0,
       onPlay: false,
     }
@@ -82,6 +82,7 @@ export default {
 
     resume() {
       // resume
+      this.music.length = player.getLength();
       player.play();
     },
 
@@ -136,7 +137,7 @@ export default {
     },
 
     sliderUp() {
-      IPlayerService.setPosition(this.currentTime);
+      player.setPosition(this.currentTime);
       this.onPlay && IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
     },
 
