@@ -35,6 +35,10 @@
         content: '';
         clear: both;
     }
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
 </style>
 
 <style scoped>
