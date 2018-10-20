@@ -94,7 +94,7 @@ const Presto = new EventEmitter();
 
     const POINTER_PREFIX = '__Ptr';
     const GETTER_PREFIX = 'get';
-    const SETTER_PREFIX = 'set';
+    const CHANGED_EVENT_SUFFIX = 'Changed';
 
     /**
      * Wrapping Object
@@ -160,10 +160,17 @@ const Presto = new EventEmitter();
     function wrappingCefSharpObject(object) {
         object.__proto__ = new EventEmitter();
 
+        // Methods wrapping
         for (let key in object) {
             if (!object.hasOwnProperty(key)) continue;
             object[key] = wrappingCefSharpFunction(object[key]);
         }
+
+        // PropertyChanged event wrapping
+        object.on('propertyChanged', propertyName => {
+            let lowerName = propertyName.charAt(0).toLowerCase() + propertyName.substr(1);
+            object.emit(`${lowerName}${CHANGED_EVENT_SUFFIX}`);
+        });
 
         return object;
     }
