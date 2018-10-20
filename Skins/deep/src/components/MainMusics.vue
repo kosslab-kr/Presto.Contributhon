@@ -63,6 +63,7 @@ export default {
             }, [
               {
                 name: 'New Playist',
+                border: true,
                 callback: () => {
                   const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title)
                   newPlaylist.addMusic(this.contextMenu.music);

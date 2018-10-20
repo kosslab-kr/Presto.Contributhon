@@ -10,13 +10,17 @@
       @mouseenter="activatedSubContextMenuNumber = index"
       @mouseleave="activatedSubContextMenuNumber = null"
     >
-      {{item.name}}
+      <div class="context-menu__item-name">{{item.name}}</div>
       <BaseContextMenu
         v-if="!!item.subItems"
         v-show="activatedSubContextMenuNumber === index"
         :style="{position: 'absolute', top: '-10px', left: '100%'}"
         :items="item.subItems"
         @item-clicked="$emit('item-clicked')"
+      />
+      <div
+        class="context-menu__border"
+        v-if="item.border && (index !== (items.length-1))"
       />
     </div>
   </div>
@@ -32,6 +36,7 @@ export default {
       name: {String},
       callback: {Function} - optional,
       subItems: {Array} - optional
+      border: {Boolean} - optional
     }
     */
     items: Array,
@@ -95,15 +100,29 @@ export default {
 .context-menu__item {
   position: relative;
   box-sizing: border-box;
-  padding: 0 10px;
   line-height: 1.8rem;
-  color: #fff;
   font-weight: lighter;
   font-size: 0.9rem;
 
   &:hover {
-    background: #555;
+    > .context-menu__item-name {
+      color: #fff;
+      background: #555;
+    }
   }
 }
 
+.context-menu__item-name {
+  color: #ccc;
+  padding: 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.context-menu__border {
+  width: 100%; height: 0px;
+  border-bottom: 1px solid #444;
+  margin: 5px 0px;
+}
 </style>
