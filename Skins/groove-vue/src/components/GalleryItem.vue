@@ -39,11 +39,12 @@
         width: 200px;
         box-sizing: border-box;
         margin: 10px auto 30px auto;
+        padding: 10px;
         cursor: pointer;
     }
 
     .GalleryItem__Wrapper:hover {
-        background: #f7f7f7;
+        background: #eee;
     }
 
     .image {
