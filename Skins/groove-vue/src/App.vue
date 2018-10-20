@@ -1,28 +1,55 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <main id="main">
+            <Main></Main>
+        </main>
+        <footer id="footer">
+            <Footer></Footer>
+        </footer>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import Side from './components/Side.vue';
+    import Main from './components/Main.vue';
+    import Footer from './components/Footer.vue';
 
-export default {
-  name: 'app',
-  components: {
-    HelloWorld
-  }
-}
+    export default {
+        name: 'app',
+        components: {
+            Side, Main, Footer,
+        },
+    };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+    body { margin: 0; }
+
+    .clearfix::after {
+        display: block;
+        content: '';
+        clear: both;
+    }
+</style>
+
+<style scoped>
+    #side {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 170px;
+        width: 200px;
+    }
+
+    #main {
+        padding: 0 0 170px 0;
+    }
+
+    #footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 170px;
+    }
 </style>
