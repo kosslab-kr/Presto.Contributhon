@@ -50,6 +50,9 @@ export default {
     window.addEventListener('contextmenu', this.emitOutsideClickEvent, true);
   },
 
+  updated() {
+  },
+
   destroyed() {
     window.onwheel = null;
     window.onkeydown = null;

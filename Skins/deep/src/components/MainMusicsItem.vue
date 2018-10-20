@@ -49,20 +49,26 @@ export default {
 
   data() {
     return {
+      playlistService: IPlaylistService,
       isMouseOvered: false,
       isContextMenuOpened: false,
       contextMenuStyle: {
         top: '0px',
         left: '0px',
       },
-      contextMenuItems: [
+    }
+  },
+
+  computed: {
+    contextMenuItems() {
+      return [
         {
           name: '음악 재생',
           callback: this.playMusic.bind(this),
         },
         {
           name: '플레이리스트에 추가',
-          subItems: IPlaylistService.playlists.reduce((items, playlist) => {
+          subItems: this.playlistService.playlists.reduce((items, playlist) => {
             return items.concat({
               name: playlist.name,
               callback: () => { playlist.addMusic(this.music); },
@@ -71,13 +77,13 @@ export default {
             {
               name: 'New Playist',
               callback: () => {
-                const newPlaylist = IPlaylistService.createPlaylist(this.music.title);
+                const newPlaylist = this.playlistService.createPlaylist(this.music.title);
                 newPlaylist.addMusic(this.music);
               }
             }
           ])
         },
-      ],
+      ];
     }
   },
 
@@ -97,8 +103,8 @@ export default {
 
     closeContextMenu() {
       this.isContextMenuOpened = false;
-    }
-  }
+    },
+  },
 }
 </script>
 
