@@ -40,7 +40,7 @@ export default {
 
   methods: {
     setVolume(volume) {
-      IPlayerService.setVolume(volume);
+      player.setVolume(volume);
     },
     
     mute(isMuted) {

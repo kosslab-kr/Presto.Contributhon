@@ -73,23 +73,24 @@ export default {
   methods: {
     play(music) {
       this.setMusic(music);
-      IPlayerService.play(music);
+      player.playByMusic(music);
     },
 
     pause() {
-      IPlayerService.pause();
+      player.pause();
     },
 
     resume() {
-      IPlayerService.resume();
+      // resume
+      player.play();
     },
 
     playPrevious() {
-      IPlayerService.playPrevious();
+      player.playPrev();
     },
 
     playNext() {
-      IPlayerService.playNext();
+      player.playNext();
     },
 
     // @param {Boolean} isShuffled
