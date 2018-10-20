@@ -24,7 +24,10 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
-        <Rectangle x:Name="captionBar" Fill="Transparent" />
+        <Rectangle
+            x:Name="captionBar"
+            Fill="Transparent"
+            MouseLeftButtonDown="captionBar_MouseLeftButtonDown" />
         <Grid
             Name="topBar"
             Grid.Row="0"
@@ -122,6 +125,7 @@
                 Click="Repeat_Click"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
+                    Name="repeatControl"
                     Width="30"
                     Height="30"
                     Kind="RotateRight">

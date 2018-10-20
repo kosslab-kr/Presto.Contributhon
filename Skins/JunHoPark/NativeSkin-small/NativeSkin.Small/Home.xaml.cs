@@ -38,6 +38,7 @@ namespace NativeSkin.Small
         {
             InitializeComponent();
             this.mainWindow = mainWindow;
+            Player.RepeatMode = RepeatMode.All; // 전곡반복 세팅
             Player.PlaybackStateChanged += Player_PlaybackStateChanged;
         }
 
@@ -86,14 +87,18 @@ namespace NativeSkin.Small
 
         private void Repeat_Click(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(Player.RepeatMode.ToString());
             switch (Player.RepeatMode)
             {
-                case RepeatMode.None:
-                    Player.RepeatMode = RepeatMode.All;
+                case RepeatMode.All:
+                    Player.RepeatMode = RepeatMode.One;
+                    this.repeatControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Rotate3d;
                     break;
 
+               
                 case RepeatMode.One:
-                    Player.RepeatMode = RepeatMode.None;
+                    Player.RepeatMode = RepeatMode.All;
+                    this.repeatControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.RotateRight;
                     break;
             }
         }
@@ -141,6 +146,12 @@ namespace NativeSkin.Small
             {
                 this.musicControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Play;
             }
+        }
+
+        private void captionBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var window = Parent as Window;
+            window.DragMove();
         }
     }
 }
