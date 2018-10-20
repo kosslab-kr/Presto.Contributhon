@@ -2,10 +2,10 @@
   <div class="music">
     <img
       class="music__album-picture"
-      :src="music.album.picture"
+      :src="music.Album.Picture"
       alt="music__album-picture">
-    <div class="music__title">{{music.title}}</div>
-    <div class="music__artist">{{music.artist.name}}</div>
+    <div class="music__title">{{music.Title}}</div>
+    <div class="music__artist">{{music.Artist.Name}}</div>
   </div>
 </template>
 

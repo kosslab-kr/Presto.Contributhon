@@ -8,7 +8,7 @@
   >
     <div
       class="music__picture"
-      :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
+      :style="{background: 'no-repeat center/100% url(' + music.Album.Picture + ')'}">
       <div class="music__play-button">
         <BaseButtonPlayPause
           :background="'rgba(0,0,0,0.5)'"
@@ -21,11 +21,11 @@
     <div class="music__description">
       <div class="music__title">
         <BaseTextRolling
-          :text="music.title"
+          :text="music.Title"
           :onPlay="isMouseOvered"
         />
       </div>
-      <div class="music__artist">{{music.artist.name}}</div>
+      <div class="music__artist">{{music.Artist.Name}}</div>
     </div>
   </div>
 </template>

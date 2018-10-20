@@ -59,7 +59,7 @@ export default {
 
   data() {
     return {
-      music: {},
+      music: {length: 100000},
       currentTime: 0,
       onPlay: false,
     }
@@ -81,9 +81,7 @@ export default {
     },
 
     resume() {
-      // resume
-      this.music.length = player.getLength();
-      player.play();
+      player.resume();
     },
 
     playPrevious() {
