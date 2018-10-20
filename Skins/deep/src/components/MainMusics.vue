@@ -12,8 +12,13 @@
     <template slot="context-menu">
       <BaseContextMenu
         v-if="isContextMenuOpened"
+<<<<<<< HEAD
         :style="contextMenu.style"
         :items="contextMenu.items"
+=======
+        :style="contextMenuStyle"
+        :items="contextMenuItems"
+>>>>>>> refactor: contextMenu Component move to MainView Component
         @outside-clicked="closeContextMenu"
         @item-clicked="closeContextMenu"
       />
@@ -41,6 +46,7 @@ export default {
 
   data() {
     return {
+<<<<<<< HEAD
       isContextMenuOpened: false,
       contextMenu: {
         music: null,
@@ -74,6 +80,40 @@ export default {
           },
         ],
       }
+=======
+      playlistService: IPlaylistService,
+      isContextMenuOpened: false,
+      contextMenuStyle: null,
+      music: null,
+    }
+  },
+
+  computed: {
+    contextMenuItems() {
+      return [
+        {
+          name: '음악 재생',
+          callback: () => { this.playMusic(this.music); },
+        },
+        {
+          name: '플레이리스트에 추가',
+          subItems: this.playlistService.playlists.reduce((items, playlist) => {
+            return items.concat({
+              name: playlist.name,
+              callback: () => { playlist.addMusic(this.music); },
+            })
+          }, [
+            {
+              name: 'New Playist',
+              callback: () => {
+                const newPlaylist = this.playlistService.createPlaylist(this.music.title);
+                newPlaylist.addMusic(this.music);
+              }
+            }
+          ])
+        },
+      ];
+>>>>>>> refactor: contextMenu Component move to MainView Component
     }
   },
 
@@ -82,15 +122,26 @@ export default {
       this.$emit('music-played', music);
     },
 
+<<<<<<< HEAD
     openContextMenu(contextMenuOption) {
       this.contextMenu.music = contextMenuOption.music;
       this.contextMenu.style = contextMenuOption.style;
       this.isContextMenuOpened = true;
+=======
+    openContextMenu(e) {
+      this.isContextMenuOpened = true;
+      this.contextMenuStyle = {
+        top: e.top,
+        left: e.left,
+      };
+      this.music = e.music;
+>>>>>>> refactor: contextMenu Component move to MainView Component
     },
 
     closeContextMenu() {
       this.isContextMenuOpened = false;
     },
+<<<<<<< HEAD
 
     addPlaylistOnContextMenu(playlist) {
       const subItem = {
@@ -102,6 +153,9 @@ export default {
       this.contextMenu.items[1].subItems.push(subItem);
     }
   },
+=======
+  }
+>>>>>>> refactor: contextMenu Component move to MainView Component
 }
 </script>
 

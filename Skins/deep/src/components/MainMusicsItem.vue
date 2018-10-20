@@ -51,6 +51,7 @@ export default {
 
     openContextMenu(e) {
       e.preventDefault();
+<<<<<<< HEAD
 
       const contextMenuOption = {
         music: this.music,
@@ -61,6 +62,16 @@ export default {
       };
 
       this.$emit('context-menu-opened', contextMenuOption);
+=======
+
+      const event = {
+        top: `${e.clientY}px`,
+        left: `${e.clientX}px`,
+        music: this.music,
+      };
+
+      this.$emit('context-menu-opened', event);
+>>>>>>> refactor: contextMenu Component move to MainView Component
     },
   },
 }
