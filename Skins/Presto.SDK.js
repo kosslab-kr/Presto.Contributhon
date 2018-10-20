@@ -93,6 +93,8 @@ const Presto = new EventEmitter();
     }
 
     const POINTER_PREFIX = '__Ptr';
+    const GETTER_PREFIX = 'get';
+    const SETTER_PREFIX = 'set';
 
     /**
      * Wrapping Object
@@ -112,15 +114,12 @@ const Presto = new EventEmitter();
             // Case pointer
             let name = key.substr(POINTER_PREFIX.length);
             let pointer = object[key];
+            let methodName = `${GETTER_PREFIX}${name}`;
 
-            // Define get property
-            Object.defineProperty(object, name, {
-                get () {
-                    return query.get(pointer);
-                },
-                enumerable: true,
-                configurable: false,
-            });
+            // Define get method
+            object[methodName] = function () {
+                return query.get(pointer);
+            };
         }
 
         return object;
@@ -152,14 +151,11 @@ const Presto = new EventEmitter();
      * @returns {Function} Wrapped function.
      */
     function wrappingCefSharpFunction(func) {
-        return function () {
-            let result = func.apply(this, arguments);
+        return async function () {
+            let result = await func.apply(this, arguments);
             return wrapping(result);
         };
     }
-
-    const GETTER_PREFIX = 'get';
-    const SETTER_PREFIX = 'set';
 
     function wrappingCefSharpObject(object) {
         object.__proto__ = new EventEmitter();
