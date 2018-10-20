@@ -1,44 +1,42 @@
 <template>
   <div id="app">
-    <MainMenu ref="mainMenu" @menu-selected="showView"/>
-    <MainSection :library="library" @playQueue-played="playPlayQueue" ref="mainSection"/>
+    <Menu ref="menu" @menu-selected="showView"/>
+    <Main ref="main" @music-played="playMusic"/>
     <Player ref="player"/>
   </div>
 </template>
 
 <script>
-import MainMenu from './components/mainMenu/MainMenu.vue'
-import MainSection from './components/mainSection/MainSection.vue'
-import Player from './components/player/Player.vue'
-import library from './library.js'
+import Menu from './components/Menu.vue'
+import Main from './components/Main.vue'
+import Player from './components/Player.vue'
 
 export default {
   name: 'App',
 
   components: {
-    MainMenu,
-    MainSection,
+    Menu,
+    Main,
     Player
   },
 
   data() {
     return {
-      library: library,
       playQueue: null
     }
   },
 
   mounted() {
-    this.$refs.mainMenu.triggerClickEvent({menuIndex: 0});
+    this.$refs.menu.triggerClickEvent({menuIndex: 0});
   },
   
   methods: {
-    playPlayQueue(playQueue) {
-      this.$refs.player.playPlayQueue(playQueue);
+    playMusic(music) {
+      this.$refs.player.play(music);
     },
 
-    showView(menuItemName) {
-      this.$refs.mainSection.showView(menuItemName);
+    showView(view) {
+      this.$refs.main.showView(view);
     }
   }
 }
