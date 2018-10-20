@@ -92,6 +92,113 @@ const Presto = new EventEmitter();
         return CefSharp.BindObjectAsync(name);
     }
 
+    const POINTER_PREFIX = '__Ptr';
+
+    /**
+     * Wrapping Object
+     * @param {Object} object
+     * @returns {Object} the object was passed as parameter.
+     */
+    function wrappingObject(object) {
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+
+            // Case normal
+            if (!key.startsWith(POINTER_PREFIX)) {
+                object[key] = wrapping(object[key]);
+                continue;
+            }
+
+            // Case pointer
+            let name = key.substr(POINTER_PREFIX.length);
+            let pointer = object[key];
+
+            // Define get property
+            Object.defineProperty(object, name, {
+                get () {
+                    return query.get(pointer);
+                },
+                enumerable: true,
+                configurable: false,
+            });
+        }
+
+        return object;
+    }
+
+    /**
+     * Wrapping Anything
+     * @param {*} value
+     * @returns {*}
+     */
+    function wrapping (value) {
+        // Wrapping Array
+        if (Array.isArray(value)) {
+            return value.map(v => wrapping(v));
+        }
+
+        // Wrapping Object
+        if (value && typeof value === 'object') {
+            return wrappingObject(value);
+        }
+
+        // Wrapping Normal (Number, String, Boolean, ...)
+        return value;
+    }
+
+    /**
+     * Wrapping CefSharp Function
+     * @param {Function} func The function that want to wrap.
+     * @returns {Function} Wrapped function.
+     */
+    function wrappingCefSharpFunction(func) {
+        return function () {
+            let result = func.apply(this, arguments);
+            return wrapping(result);
+        };
+    }
+
+    const GETTER_PREFIX = 'get';
+    const SETTER_PREFIX = 'set';
+
+    function wrappingCefSharpObject(object) {
+        object.__proto__ = new EventEmitter();
+
+        let properties = {};
+
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+
+            let func = object[key];
+
+            if (key.startsWith(GETTER_PREFIX)) {
+                let name = key.substr(GETTER_PREFIX.length);
+                properties[name] = Object.assign({}, properties[name], { get: func });
+            }
+            else if (key.startsWith(SETTER_PREFIX)) {
+                let name = key.substr(SETTER_PREFIX.length);
+                properties[name] = Object.assign({}, properties[name], { set: func });
+            }
+
+            object[key] = wrappingCefSharpFunction(func);
+        }
+
+        for (let name in properties) {
+            let get = wrappingCefSharpFunction(properties[name].get);
+            let set = properties[name].set;
+
+            let desc = {
+                get, set,
+                configurable: false,
+                enumerable: true,
+            };
+
+            Object.defineProperty(object, name, desc);
+        }
+
+        return object;
+    }
+
     /**
      * Binding object names
      * @type {[string]}
@@ -103,7 +210,7 @@ const Presto = new EventEmitter();
 
     // Make bound objects to EventEmitter
     for (let name of objectNames) {
-        window[name].__proto__ = new EventEmitter();
+        window[name] = wrappingCefSharpObject(window[name]);
     }
 
     // Call load event
