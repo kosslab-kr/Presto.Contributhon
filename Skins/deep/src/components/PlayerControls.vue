@@ -32,7 +32,7 @@
           >
           </PlayerSliderHorizon>
         </div>
-        <div class="player__total-time">{{formatTime(music.length)}}</div>
+        <div class="player__total-time">{{formatTime(music.getLength())}}</div>
       </div>
     </div>
   </div>
@@ -44,7 +44,6 @@ import PlayerButtonShuffle from './PlayerButtonShuffle.vue';
 import PlayerButtonBack from './PlayerButtonBack.vue';
 import PlayerButtonNext from './PlayerButtonNext.vue';
 import PlayerButtonRepeat from './PlayerButtonRepeat.vue';
-import IPlayerService from './IPlayerService.js';
 
 export default {
   name: 'PlayerControls',
@@ -66,8 +65,8 @@ export default {
   },
 
   mounted() {
-    IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
-    IPlayerService.addEventListener('onStreamChanged', ({music}) => { this.setMusic(music); });
+    player.on('positionChanged', this.changePosition);
+    player.on('streamChanged', this.changeStream);
   },
 
   methods: {
@@ -104,9 +103,19 @@ export default {
       console.log(repeatMode);
     },
 
-    setCurrentTime({position}) {
+    changePosition() {
+      const position = player.getPosition();
+      this.setCurrentTime(position);
+    },
+
+    changeStream() {
+      const currentMusic = player.getCurrentMusic();
+      this.setMusic(currentMusic);
+    },
+
+    setCurrentTime(position) {
       this.currentTime = position;
-      this.setSliderWidthPercentage({time: this.currentTime, length: this.music.length});
+      this.setSliderWidthPercentage({time: this.currentTime, length: this.music.getLength()});
     },
 
     setMusic(music) {
@@ -126,7 +135,7 @@ export default {
     },
 
     sliderDown(widthPercentage) {
-      this.onPlay && IPlayerService.removeEventListener('onPositionChanged', this.setCurrentTime);
+      this.onPlay && player.off('positionChanged', this.changePosition);
       this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
     },
 
@@ -136,7 +145,7 @@ export default {
 
     sliderUp() {
       player.setPosition(this.currentTime);
-      this.onPlay && IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
+      this.onPlay && player.on('positionChanged', this.changePosition);
     },
 
     calcTimeByPercentage({percentage, length}) {
