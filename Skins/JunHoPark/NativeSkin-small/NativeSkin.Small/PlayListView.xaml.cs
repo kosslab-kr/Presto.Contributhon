@@ -1,6 +1,7 @@
 ﻿using Presto.Common;
 using Presto.Common.Models;
 using Presto.Common.Services;
+using Presto.Component.Utilities;
 using Presto.SDK;
 using System;
 using System.Collections.Generic;
@@ -102,5 +103,10 @@ namespace NativeSkin.Small
             }
         }
 
+        private void CaptionBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var window = VisualTreeHelper2.FindVisualParents<Window>(this).First();
+            window.DragMove();
+        }
     }
 }

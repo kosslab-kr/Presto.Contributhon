@@ -1,5 +1,6 @@
 ﻿using HtmlAgilityPack;
 using Presto.Common.Services;
+using Presto.Component.Utilities;
 using Presto.SDK;
 using System;
 using System.Collections.Generic;
@@ -114,6 +115,12 @@ namespace NativeSkin.Small
         private void Power_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Shutdown();
+        }
+
+        private void CaptionBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            var window = VisualTreeHelper2.FindVisualParents<Window>(this).First();
+            window.DragMove();
         }
     }
 }

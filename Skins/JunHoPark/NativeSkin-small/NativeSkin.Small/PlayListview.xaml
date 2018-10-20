@@ -22,6 +22,10 @@
             <RowDefinition Height="9*" />
             <RowDefinition Height="2*" />
         </Grid.RowDefinitions>
+        <Rectangle
+            x:Name="captionBar"
+            Fill="Transparent"
+            MouseLeftButtonDown="CaptionBar_MouseLeftButtonDown" />
         <Grid
             Grid.Row="0"
             Margin="15,10,10,10"

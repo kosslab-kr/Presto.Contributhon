@@ -21,6 +21,7 @@ using System.Windows.Shapes;
 using HtmlAgilityPack;
 using System.IO;
 using System.Text.RegularExpressions;
+using Presto.Component.Utilities;
 
 namespace NativeSkin.Small
 {
@@ -148,9 +149,9 @@ namespace NativeSkin.Small
             }
         }
 
-        private void captionBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            var window = Parent as Window;
+        private void CaptionBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {   
+            var window = VisualTreeHelper2.FindVisualParents<Window>(this).First();
             window.DragMove();
         }
     }

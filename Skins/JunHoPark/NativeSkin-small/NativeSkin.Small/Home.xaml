@@ -27,7 +27,7 @@
         <Rectangle
             x:Name="captionBar"
             Fill="Transparent"
-            MouseLeftButtonDown="captionBar_MouseLeftButtonDown" />
+            MouseLeftButtonDown="CaptionBar_MouseLeftButtonDown" />
         <Grid
             Name="topBar"
             Grid.Row="0"
