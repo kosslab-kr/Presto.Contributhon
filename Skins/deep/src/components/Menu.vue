@@ -52,7 +52,7 @@ export default {
         {
           name: 'Musics',
           componentName: 'MainMusics',
-          items: library.getMusics(),
+          // items: [],
         },
         {
           name: 'Albums',
@@ -73,6 +73,12 @@ export default {
 
       playlists: IPlaylistService.playlists,
     }
+  },
+
+  created () {
+    library.getMusics().then(musics => {
+      this.libraries[0].items = musics;
+    });
   },
 
   methods: {

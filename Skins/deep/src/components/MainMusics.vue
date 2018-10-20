@@ -36,11 +36,12 @@ export default {
 
   props: {
     name: String,
-    items: Array
+    // items: Array
   },
 
   data() {
     return {
+      items: [],
       isContextMenuOpened: false,
       contextMenu: {
         music: null,
@@ -75,6 +76,12 @@ export default {
         ],
       }
     }
+  },
+
+  created () {
+    library.getMusics().then(musics => {
+      this.items = musics;
+    });
   },
 
   methods: {

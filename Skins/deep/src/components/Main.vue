@@ -19,7 +19,6 @@
     <component
       :name="currentViewName"
       :is="currentViewComponentName"
-      :items="currentViewItems"
       @music-played="playMusic"
     />
   </section>
@@ -66,8 +65,8 @@ export default {
     showView(view) {
       this.currentViewName = view.name;
       this.currentViewComponentName = view.componentName;
-      this.currentViewItemsAll = view.items;
-      this.currentViewItems = this.currentViewItemsAll;
+      // this.currentViewItemsAll = view.items;
+      // this.currentViewItems = this.currentViewItemsAll;
     },
 
     searchItem({target}) {
