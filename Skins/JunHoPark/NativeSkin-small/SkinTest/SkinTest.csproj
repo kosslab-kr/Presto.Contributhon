@@ -44,6 +44,9 @@
     <Reference Include="Presto.Common">
       <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Presto\Skins\Presto.Skin.Kanon\Presto.Common.dll</HintPath>
     </Reference>
+    <Reference Include="Presto.Component">
+      <HintPath>..\..\..\..\Natives\Presto.Component.dll</HintPath>
+    </Reference>
     <Reference Include="Presto.SDK">
       <HintPath>..\..\..\..\..\..\..\AppData\Roaming\Presto\Skins\Presto.Skin.Kanon\Presto.SDK.dll</HintPath>
     </Reference>
