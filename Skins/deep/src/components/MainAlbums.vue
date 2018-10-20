@@ -120,7 +120,7 @@ export default {
             name: '플레이리스트에 추가',
             subItems: IPlaylistService.playlists.reduce((items, playlist) => {
               return items.concat({
-                name: playlist.name,
+                name: playlist.Name,
                 callback: () => { playlist.addMusic(this.contextMenu.music); },
               })
             }, [
@@ -128,7 +128,7 @@ export default {
                 name: 'New Playist',
                 border: true,
                 callback: () => {
-                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title);
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.Title);
                   newPlaylist.addMusic(this.contextMenu.music);
                   this.addPlaylistOnContextMenu(newPlaylist);
                 }
@@ -167,7 +167,7 @@ export default {
 
     addPlaylistOnContextMenu(playlist) {
       const subItem = {
-        name: playlist.name,
+        name: playlist.Name,
         callback: () => {
           playlist.addMusic(this.contextMenu.music);
         },
@@ -178,10 +178,10 @@ export default {
 
   computed: {
     albumListItems() {
-      const musics = this.selectedAlbum.musics;
+      const musics = this.selectedAlbum.getMusics();
 
       return musics.map((music, index) => {
-        return {number: index+1, title: music.title, time: this.formatTime(music.length), source: music};
+        return {number: index+1, title: music.Title, time: this.formatTime(music.getLength()), source: music};
       })
     }
   }

@@ -192,14 +192,14 @@ export default {
 
   computed: {
     artistListItems() {
-      const musics = this.selectedArtist.musics;
+      const musics = this.selectedArtist.getMusics();
 
       return musics.map((music, index) => {
         return {
           number: index+1,
-          title: music.title,
-          album: music.album.name,
-          time: this.formatTime(music.length),
+          title: music.Title,
+          album: music.Album.Name,
+          time: this.formatTime(music.getLength()),
           more: '',
           source: music,
         };

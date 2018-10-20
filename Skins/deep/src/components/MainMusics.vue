@@ -71,7 +71,7 @@ export default {
             name: '플레이리스트에 추가',
             subItems: IPlaylistService.playlists.reduce((items, playlist) => {
               return items.concat({
-                name: playlist.name,
+                name: playlist.Name,
                 callback: () => { playlist.addMusic(this.contextMenu.music); },
               })
             }, [
@@ -170,7 +170,7 @@ export default {
 
     addPlaylistOnContextMenu(playlist) {
       const subItem = {
-        name: playlist.name,
+        name: playlist.Name,
         callback: () => {
           playlist.addMusic(this.contextMenu.music);
         },

@@ -2,7 +2,7 @@
   <MainView :name="name">
     <template slot="navigator">
       <MainViewNavigator
-        :itemNames="items.map(item => item.name)"
+        :itemNames="items.map(item => item.Name)"
         @item-selected="selectGenre"
       />
     </template>
@@ -175,22 +175,22 @@ export default {
   computed: {
     selectedGenre() {
       for(let genre of this.items) {
-        if(genre.name === this.selectedGenreName) return genre;
+        if(genre.Name === this.selectedGenreName) return genre;
       }
 
       return null;
     },
 
     genreListItems() {
-      const musics = this.selectedGenre.musics;
+      const musics = this.selectedGenre.getMusics();
 
       return musics.map((music) => {
         return {
           number: '',
-          title: music.title,
-          artist: music.artist.name,
-          album: music.album.name,
-          time: this.formatTime(music.length),
+          title: music.Title,
+          artist: music.Artist.Name,
+          album: music.Album.Name,
+          time: this.formatTime(music.getLength()),
           more: '',
           source: music
         };

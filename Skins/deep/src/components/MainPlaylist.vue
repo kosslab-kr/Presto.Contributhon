@@ -97,10 +97,10 @@ export default {
       return musics.map((music) => {
         return {
           number: '',
-          title: music.title,
-          artist: music.artist.name,
-          album: music.album.name,
-          time: this.formatTime(music.length),
+          title: music.Title,
+          artist: music.Artist.Name,
+          album: music.Album.Name,
+          time: this.formatTime(music.getLength()),
           more: '',
           source: music
         };
