@@ -10,7 +10,13 @@
       @mouseenter="activatedSubContextMenuNumber = index"
       @mouseleave="activatedSubContextMenuNumber = null"
     >
-      <div class="context-menu__item-name">{{item.name}}</div>
+      <div class="context-menu__item-name">
+        {{item.name}}
+        <div
+          v-if="!!item.subItems"
+          class="context-menu__more-icon"
+        />
+      </div>
       <BaseContextMenu
         v-if="!!item.subItems"
         v-show="activatedSubContextMenuNumber === index"
@@ -89,7 +95,7 @@ export default {
 .context-menu {
   box-sizing: border-box;
   position: fixed;
-  width: 160px;
+  width: 200px;
   padding: 10px 0;
   background: #272727;
   border-radius: 8px;
@@ -113,11 +119,19 @@ export default {
 }
 
 .context-menu__item-name {
+  position: relative;
   color: #ccc;
-  padding: 0 10px;
+  padding: 0 20px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.context-menu__more-icon {
+  position: absolute;
+  top: 0px; right: 10px;
+  width: 20px; height: 100%;
+  @include line-arrow($size: 10px, $border-width: 1px, $direction: right, $color: #ccc)
 }
 
 .context-menu__border {
