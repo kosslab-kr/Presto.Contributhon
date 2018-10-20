@@ -38,13 +38,13 @@
 <style scoped>
     .GalleryItem__Wrapper {
         padding: 15px 0;
+        cursor: pointer;
     }
 
     .item {
         width: 200px;
         display: block;
         margin: 0 auto;
-        cursor: pointer;
     }
 
     .GalleryItem__Wrapper:hover {
