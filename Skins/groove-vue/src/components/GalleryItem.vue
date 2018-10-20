@@ -45,4 +45,25 @@
     .GalleryItem__Wrapper:hover {
         background: #f7f7f7;
     }
+
+    .image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .GalleryItem__Wrapper .image img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .title {
+        font-size: 16px;
+        padding-top: 8px;
+    }
+
+    .artist {
+        font-size: 12px;
+        color: #888;
+        padding: 2px 0;
+    }
 </style>
