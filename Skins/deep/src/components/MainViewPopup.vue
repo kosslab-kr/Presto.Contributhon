@@ -71,7 +71,7 @@ export default {
       this.$emit('popup-closed');
     }
 
-    document.body.addEventListener('mouseup', closePopup.bind(this));
+    document.body.addEventListener('click', closePopup.bind(this));
   },
 
   methods: {

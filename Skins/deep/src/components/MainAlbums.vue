@@ -7,7 +7,7 @@
         type="album"
         :group="item"
         @picture-selected="selectedAlbum = $event"
-        @group-played="$emit('music-played', $event)"
+        @group-played="playMusic"
       />
     </template>
     <template slot="popup">
@@ -34,7 +34,7 @@
                   :items="albumListItems"
                   :fields="albumListFields"
                   :height="'100%'"
-                  @music-played="$emit('music-played', $event)"
+                  @music-played="playMusic"
                   @context-menu-opened="openContextMenu"
                 />
               </template>
@@ -43,10 +43,20 @@
         </div>
       </transition>
     </template>
+    <template slot="context-menu">
+      <BaseContextMenu
+        v-if="isContextMenuOpened"
+        :style="contextMenu.style"
+        :items="contextMenu.items"
+        @outside-clicked="closeContextMenu"
+        @item-clicked="closeContextMenu"
+      />
+    </template>
   </MainView>
 </template>
 
 <script>
+import IPlaylistService from './IPlaylistService.js';
 import MainView from './MainView.vue';
 import MainViewGroup from './MainViewGroup';
 import MainViewPopup from './MainViewPopup.vue';
@@ -93,11 +103,47 @@ export default {
           textAlign: 'center',
           marginRight: '0%'
         }
-      ]
+      ],
+      isContextMenuOpened: false,
+      contextMenu: {
+        music: null,
+        style: {
+          top: '',
+          left: '',
+        },
+        items: [
+          {
+            name: '음악 재생',
+            callback: () => { this.playMusic(this.contextMenu.music); },
+          },
+          {
+            name: '플레이리스트에 추가',
+            subItems: IPlaylistService.playlists.reduce((items, playlist) => {
+              return items.concat({
+                name: playlist.name,
+                callback: () => { playlist.addMusic(this.contextMenu.music); },
+              })
+            }, [
+              {
+                name: 'New Playist',
+                callback: () => {
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title);
+                  newPlaylist.addMusic(this.contextMenu.music);
+                  this.addPlaylistOnContextMenu(newPlaylist);
+                }
+              }
+            ])
+          },
+        ],
+      }
     }
   },
 
   methods: {
+    playMusic(music) {
+      this.$emit('music-played', music);
+    },
+
     formatTime(milliseconds) {
       const date = new Date(milliseconds);
       const minutes = date.getMinutes();

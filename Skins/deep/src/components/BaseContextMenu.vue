@@ -6,7 +6,7 @@
       class="context-menu__item"
       v-for="(item, index) in items"
       :key="index"
-      @click="clickItem(item.callback)"
+      @click.stop="clickItem(item.callback)"
       @mouseenter="activatedSubContextMenuNumber = index"
       @mouseleave="activatedSubContextMenuNumber = null"
     >

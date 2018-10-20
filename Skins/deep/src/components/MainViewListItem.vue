@@ -31,47 +31,12 @@
 </template>
 
 <script>
-import IPlaylistService from './IPlaylistService.js';
-
 export default {
   name: 'MainViewListItem',
 
   props: {
     item: Object,
     fields: Array
-  },
-
-  data() {
-    return {
-      isContextMenuOpened: false,
-      contextMenuStyle: {
-        top: '0px',
-        left: '0px',
-      },
-      contextMenuItems: [
-        {
-          name: '음악 재생',
-          callback: this.playMusic.bind(this),
-        },
-        {
-          name: '플레이리스트에 추가',
-          subItems: IPlaylistService.playlists.reduce((items, playlist) => {
-            return items.concat({
-              name: playlist.name,
-              callback: () => { playlist.addMusic(this.item.source); },
-            })
-          }, [
-            {
-              name: 'New Playist',
-              callback: () => {
-                const newPlaylist = IPlaylistService.createPlaylist(this.item.title);
-                newPlaylist.addMusic(this.item.source);
-              }
-            }
-          ])
-        }
-      ]
-    }
   },
 
   computed: {
@@ -91,9 +56,10 @@ export default {
 
     openContextMenu(e) {
       e.preventDefault();
+      e.stopPropagation();
 
       const contextMenuOption = {
-        music: this.music,
+        music: this.item.source,
         style: {
           top: `${e.clientY}px`,
           left: `${e.clientX}px`,
