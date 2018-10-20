@@ -37,7 +37,7 @@
 
 <style scoped>
     .GalleryItem__Wrapper {
-        margin: 10px 0 30px 0;
+        padding: 15px 0;
     }
 
     .item {
