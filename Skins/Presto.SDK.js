@@ -94,7 +94,7 @@ const Presto = new EventEmitter();
 
     const POINTER_PREFIX = '__Ptr';
     const GETTER_PREFIX = 'get';
-    const SETTER_PREFIX = 'set';
+    const CHANGED_EVENT_SUFFIX = 'Changed';
 
     /**
      * Wrapping Object
@@ -160,37 +160,17 @@ const Presto = new EventEmitter();
     function wrappingCefSharpObject(object) {
         object.__proto__ = new EventEmitter();
 
-        let properties = {};
-
+        // Methods wrapping
         for (let key in object) {
             if (!object.hasOwnProperty(key)) continue;
-
-            let func = object[key];
-
-            if (key.startsWith(GETTER_PREFIX)) {
-                let name = key.substr(GETTER_PREFIX.length);
-                properties[name] = Object.assign({}, properties[name], { get: func });
-            }
-            else if (key.startsWith(SETTER_PREFIX)) {
-                let name = key.substr(SETTER_PREFIX.length);
-                properties[name] = Object.assign({}, properties[name], { set: func });
-            }
-
-            object[key] = wrappingCefSharpFunction(func);
+            object[key] = wrappingCefSharpFunction(object[key]);
         }
 
-        for (let name in properties) {
-            let get = wrappingCefSharpFunction(properties[name].get);
-            let set = properties[name].set;
-
-            let desc = {
-                get, set,
-                configurable: false,
-                enumerable: true,
-            };
-
-            Object.defineProperty(object, name, desc);
-        }
+        // PropertyChanged event wrapping
+        object.on('propertyChanged', propertyName => {
+            let lowerName = propertyName.charAt(0).toLowerCase() + propertyName.substr(1);
+            object.emit(`${lowerName}${CHANGED_EVENT_SUFFIX}`);
+        });
 
         return object;
     }
@@ -199,7 +179,7 @@ const Presto = new EventEmitter();
      * Binding object names
      * @type {[string]}
      */
-    let objectNames = [ 'album', 'artist', 'genre', 'player', 'playlist' ];
+    let objectNames = [ 'player', 'library', 'query' ];
 
     // Wait for binding
     await Promise.all(objectNames.map(bind));
