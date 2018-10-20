@@ -1,10 +1,12 @@
 <template>
     <div class="GalleryItem__Wrapper">
-        <div class="image">
-            <img :src="album" :alt="title">
+        <div class="item">
+            <div class="image">
+                <img :src="album" :alt="title">
+            </div>
+            <div class="title">{{ title }}</div>
+            <div class="artist">{{ artist }}</div>
         </div>
-        <div class="title">{{ title }}</div>
-        <div class="artist">{{ artist }}</div>
     </div>
 </template>
 
@@ -35,11 +37,13 @@
 
 <style scoped>
     .GalleryItem__Wrapper {
-        display: block;
+        margin: 10px 0 30px 0;
+    }
+
+    .item {
         width: 200px;
-        box-sizing: border-box;
-        margin: 10px auto 30px auto;
-        padding: 10px;
+        display: block;
+        margin: 0 auto;
         cursor: pointer;
     }
 
@@ -48,13 +52,13 @@
     }
 
     .image {
-        width: 180px;
-        height: 180px;
+        width: 200px;
+        height: 200px;
     }
 
     .GalleryItem__Wrapper .image img {
-        width: 180px;
-        height: 180px;
+        width: 200px;
+        height: 200px;
     }
 
     .title {

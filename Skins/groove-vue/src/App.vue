@@ -23,6 +23,11 @@
 </script>
 
 <style>
+    body, input, select, textarea, button {
+        font-size: inherit;
+        font-family: 'Gothic A1', sans-serif;
+    }
+
     body { margin: 0; }
 
     .clearfix::after {

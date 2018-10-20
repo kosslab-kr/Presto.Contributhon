@@ -131,8 +131,8 @@
         background: rgba(0, 63, 214, 0.8);
         color: #fff;
         padding: 30px 20px;
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
     }
 
     .slider-panel {
