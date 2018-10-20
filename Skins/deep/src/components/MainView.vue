@@ -8,6 +8,7 @@
       <slot name="body"></slot>
     </div>
     <slot name="popup"></slot>
+    <slot name="context-menu"></slot>
   </section>
 </template>
 

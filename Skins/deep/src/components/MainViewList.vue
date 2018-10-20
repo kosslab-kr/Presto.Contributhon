@@ -14,6 +14,7 @@
       :item="item"
       :fields="fields"
       @music-played="$emit('music-played', $event)"
+      @context-menu-opened="$emit('context-menu-opened', $event)"
     />
   </div>
 </template>

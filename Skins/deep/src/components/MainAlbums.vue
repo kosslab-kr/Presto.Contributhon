@@ -35,6 +35,7 @@
                   :fields="albumListFields"
                   :height="'100%'"
                   @music-played="$emit('music-played', $event)"
+                  @context-menu-opened="openContextMenu"
                 />
               </template>
             </MainViewPopup>
@@ -105,6 +106,26 @@ export default {
       const formattedSeconds = seconds.toString().padStart(2, 0);
 
       return `${formattedMinutes}:${formattedSeconds}`;
+    },
+
+    openContextMenu(contextMenuOption) {
+      this.contextMenu.music = contextMenuOption.music;
+      this.contextMenu.style = contextMenuOption.style;
+      this.isContextMenuOpened = true;
+    },
+
+    closeContextMenu() {
+      this.isContextMenuOpened = false;
+    },
+
+    addPlaylistOnContextMenu(playlist) {
+      const subItem = {
+        name: playlist.name,
+        callback: () => {
+          playlist.addMusic(this.contextMenu.music);
+        },
+      };
+      this.contextMenu.items[1].subItems.push(subItem);
     },
   },
 

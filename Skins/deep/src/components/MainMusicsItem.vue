@@ -27,19 +27,10 @@
       </div>
       <div class="music__artist">{{music.artist.name}}</div>
     </div>
-    <BaseContextMenu
-      v-if="isContextMenuOpened"
-      :style="contextMenuStyle"
-      :items="contextMenuItems"
-      @outside-clicked="closeContextMenu"
-      @item-clicked="closeContextMenu"
-    />
   </div>
 </template>
 
 <script>
-import IPlaylistService from './IPlaylistService.js';
-
 export default {
   name: 'MainMusicsItem',
 
@@ -49,41 +40,7 @@ export default {
 
   data() {
     return {
-      playlistService: IPlaylistService,
       isMouseOvered: false,
-      isContextMenuOpened: false,
-      contextMenuStyle: {
-        top: '0px',
-        left: '0px',
-      },
-    }
-  },
-
-  computed: {
-    contextMenuItems() {
-      return [
-        {
-          name: '음악 재생',
-          callback: this.playMusic.bind(this),
-        },
-        {
-          name: '플레이리스트에 추가',
-          subItems: this.playlistService.playlists.reduce((items, playlist) => {
-            return items.concat({
-              name: playlist.name,
-              callback: () => { playlist.addMusic(this.music); },
-            })
-          }, [
-            {
-              name: 'New Playist',
-              callback: () => {
-                const newPlaylist = this.playlistService.createPlaylist(this.music.title);
-                newPlaylist.addMusic(this.music);
-              }
-            }
-          ])
-        },
-      ];
     }
   },
 
@@ -93,16 +50,17 @@ export default {
     },
 
     openContextMenu(e) {
-      this.isContextMenuOpened = true;
-      this.contextMenuStyle = {
-        top: `${e.clientY}px`,
-        left: `${e.clientX}px`,
-      }
       e.preventDefault();
-    },
 
-    closeContextMenu() {
-      this.isContextMenuOpened = false;
+      const contextMenuOption = {
+        music: this.music,
+        style: {
+          top: `${e.clientY}px`,
+          left: `${e.clientX}px`,
+        },
+      };
+
+      this.$emit('context-menu-opened', contextMenuOption);
     },
   },
 }

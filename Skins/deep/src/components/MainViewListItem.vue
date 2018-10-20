@@ -27,13 +27,6 @@
     >
       <span class="field__name">{{item[field.value]}}</span>
     </div>
-    <BaseContextMenu
-      v-if="isContextMenuOpened"
-      :style="contextMenuStyle"
-      :items="contextMenuItems"
-      @outside-clicked="closeContextMenu"
-      @item-clicked="closeContextMenu"
-    />
   </div>
 </template>
 
@@ -97,12 +90,17 @@ export default {
     },
 
     openContextMenu(e) {
-      this.isContextMenuOpened = true;
-      this.contextMenuStyle = {
-        top: `${e.clientY}px`,
-        left: `${e.clientX}px`,
-      }
       e.preventDefault();
+
+      const contextMenuOption = {
+        music: this.music,
+        style: {
+          top: `${e.clientY}px`,
+          left: `${e.clientX}px`,
+        },
+      };
+
+      this.$emit('context-menu-opened', contextMenuOption);
     },
 
     closeContextMenu() {
