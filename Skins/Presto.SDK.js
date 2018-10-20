@@ -199,7 +199,7 @@ const Presto = new EventEmitter();
      * Binding object names
      * @type {[string]}
      */
-    let objectNames = [ 'album', 'artist', 'genre', 'player', 'playlist' ];
+    let objectNames = [ 'player', 'library', 'query' ];
 
     // Wait for binding
     await Promise.all(objectNames.map(bind));
