@@ -13,12 +13,17 @@
       <BaseContextMenu
         v-if="isContextMenuOpened"
 <<<<<<< HEAD
+<<<<<<< HEAD
         :style="contextMenu.style"
         :items="contextMenu.items"
 =======
         :style="contextMenuStyle"
         :items="contextMenuItems"
 >>>>>>> refactor: contextMenu Component move to MainView Component
+=======
+        :style="contextMenu.style"
+        :items="contextMenu.items"
+>>>>>>> pascalCase changed
         @outside-clicked="closeContextMenu"
         @item-clicked="closeContextMenu"
       />
@@ -47,6 +52,9 @@ export default {
   data() {
     return {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> pascalCase changed
       isContextMenuOpened: false,
       contextMenu: {
         music: null,
@@ -69,9 +77,14 @@ export default {
             }, [
               {
                 name: 'New Playist',
+<<<<<<< HEAD
                 border: true,
                 callback: () => {
                   const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title)
+=======
+                callback: () => {
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.Title);
+>>>>>>> pascalCase changed
                   newPlaylist.addMusic(this.contextMenu.music);
                   this.addPlaylistOnContextMenu(newPlaylist);
                 }
@@ -80,6 +93,7 @@ export default {
           },
         ],
       }
+<<<<<<< HEAD
 =======
       playlistService: IPlaylistService,
       isContextMenuOpened: false,
@@ -114,6 +128,8 @@ export default {
         },
       ];
 >>>>>>> refactor: contextMenu Component move to MainView Component
+=======
+>>>>>>> pascalCase changed
     }
   },
 
@@ -123,10 +139,14 @@ export default {
     },
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> pascalCase changed
     openContextMenu(contextMenuOption) {
       this.contextMenu.music = contextMenuOption.music;
       this.contextMenu.style = contextMenuOption.style;
       this.isContextMenuOpened = true;
+<<<<<<< HEAD
 =======
     openContextMenu(e) {
       this.isContextMenuOpened = true;
@@ -136,12 +156,17 @@ export default {
       };
       this.music = e.music;
 >>>>>>> refactor: contextMenu Component move to MainView Component
+=======
+>>>>>>> pascalCase changed
     },
 
     closeContextMenu() {
       this.isContextMenuOpened = false;
     },
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> pascalCase changed
 
     addPlaylistOnContextMenu(playlist) {
       const subItem = {
@@ -153,9 +178,12 @@ export default {
       this.contextMenu.items[1].subItems.push(subItem);
     }
   },
+<<<<<<< HEAD
 =======
   }
 >>>>>>> refactor: contextMenu Component move to MainView Component
+=======
+>>>>>>> pascalCase changed
 }
 </script>
 
