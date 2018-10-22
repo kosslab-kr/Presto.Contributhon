@@ -162,9 +162,10 @@
                 VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
-                Click="Button_Click"
+                Click="Click_Shuffle"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
+                    Name="shuffleControl"
                     Width="30"
                     Height="30"
                     Kind="Shuffle">

@@ -177,5 +177,18 @@ namespace NativeSkin.Small
 
             Player.Volume += 0.1f;
         }
+
+        private void Click_Shuffle(object sender, RoutedEventArgs e)
+        {
+            if(Player.ShuffleMode == ShuffleMode.None)
+            {
+                shuffleControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.ShuffleDisabled;
+                Player.ShuffleMode = ShuffleMode.Random;
+            } else
+            {
+                shuffleControl.Kind = MaterialDesignThemes.Wpf.PackIconKind.Shuffle;
+                Player.ShuffleMode = ShuffleMode.None;
+            }
+        }
     }
 }
