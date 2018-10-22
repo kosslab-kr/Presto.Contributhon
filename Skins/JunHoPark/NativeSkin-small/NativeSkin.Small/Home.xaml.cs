@@ -41,6 +41,7 @@ namespace NativeSkin.Small
             this.mainWindow = mainWindow;
             Player.RepeatMode = RepeatMode.All; // 전곡반복 세팅
             Player.PlaybackStateChanged += Player_PlaybackStateChanged;
+            Player.Volume = 0.5f;
         }
 
         private void Player_PlaybackStateChanged(object sender, PlaybackStateChangedEventArgs e)
@@ -153,6 +154,28 @@ namespace NativeSkin.Small
         {   
             var window = VisualTreeHelper2.FindVisualParents<Window>(this).First();
             window.DragMove();
+        }
+
+        private void Click_VolumeMinus(object sender, RoutedEventArgs e)
+        {
+            if(Player.Volume == 0.0f)
+            {
+                MessageBox.Show("볼륨이 최소입니다");
+                return;
+            }
+
+            Player.Volume -= 0.1f;
+        }
+
+        private void Click_VolumPlus(object sender, RoutedEventArgs e)
+        {
+            if(Player.Volume == 1.0f)
+            {
+                MessageBox.Show("볼륨이 최대입니다");
+                return;
+            }
+
+            Player.Volume += 0.1f;
         }
     }
 }
