@@ -32,7 +32,7 @@
           >
           </PlayerSliderHorizon>
         </div>
-        <div class="player__total-time">{{formatTime(music.getLength())}}</div>
+        <div class="player__total-time">{{formatTime(length)}}</div>
       </div>
     </div>
   </div>
@@ -61,12 +61,14 @@ export default {
       music: {length: 100000},
       currentTime: 0,
       onPlay: false,
-    }
+      length: 0,
+      isSliderPressed: false,
+    };
   },
 
   mounted() {
     player.on('positionChanged', this.changePosition);
-    player.on('streamChanged', this.changeStream);
+    player.on('currentMusicChanged', this.changeCurrentMusic);
   },
 
   methods: {
@@ -84,7 +86,7 @@ export default {
     },
 
     playPrevious() {
-      player.playPrev();
+      player.playPrevious();
     },
 
     playNext() {
@@ -104,18 +106,23 @@ export default {
     },
 
     changePosition() {
-      const position = player.getPosition();
-      this.setCurrentTime(position);
+      player.getPosition().then(position => {
+        if(this.isSliderPressed) return;
+        this.setCurrentTime(position);
+      });
     },
 
-    changeStream() {
-      const currentMusic = player.getCurrentMusic();
-      this.setMusic(currentMusic);
+    async changeCurrentMusic() {
+      let music = await player.getCurrentMusic();
+      let length = await player.getLength();
+
+      this.length = length;
+      this.setMusic(music);
     },
 
     setCurrentTime(position) {
       this.currentTime = position;
-      this.setSliderWidthPercentage({time: this.currentTime, length: this.music.getLength()});
+      this.setSliderWidthPercentage({time: this.currentTime, length: this.length});
     },
 
     setMusic(music) {
@@ -135,15 +142,17 @@ export default {
     },
 
     sliderDown(widthPercentage) {
+      this.isSliderPressed = true;
       this.onPlay && player.off('positionChanged', this.changePosition);
-      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
+      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.length});
     },
 
     sliderMove(widthPercentage) {
-      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
+      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.length});
     },
 
     sliderUp() {
+      this.isSliderPressed = false;
       player.setPosition(this.currentTime);
       this.onPlay && player.on('positionChanged', this.changePosition);
     },

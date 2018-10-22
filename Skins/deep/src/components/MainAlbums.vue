@@ -74,11 +74,11 @@ export default {
 
   props: {
     name: String,
-    items: Array,
   },
 
   data() {
     return {
+      items: null,
       selectedAlbum: null,
       albumListFields: [
         {
@@ -138,6 +138,12 @@ export default {
         ],
       }
     }
+  },
+
+  created () {
+    album.getAlbums().then(albums => {
+      this.items = albums;
+    });
   },
 
   methods: {

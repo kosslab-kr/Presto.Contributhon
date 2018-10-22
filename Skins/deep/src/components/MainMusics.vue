@@ -36,12 +36,11 @@ export default {
 
   props: {
     name: String,
-    // items: Array
   },
 
   data() {
     return {
-      items: [],
+      items: null,
       isContextMenuOpened: false,
       contextMenu: {
         music: null,

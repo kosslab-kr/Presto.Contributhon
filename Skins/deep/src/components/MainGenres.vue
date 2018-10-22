@@ -44,11 +44,11 @@ export default {
 
   props: {
     name: String,
-    items: Array
   },
 
   data() {
     return {
+      items: null,
       selectedGenreName: '',
       genreListFields: [
         {
@@ -129,6 +129,12 @@ export default {
         ],
       }
     }
+  },
+
+  created () {
+    genre.getGenres().then(genres => {
+      this.items = genres;
+    });
   },
 
   methods: {

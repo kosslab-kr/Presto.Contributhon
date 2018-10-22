@@ -8,7 +8,6 @@
         :key="index"
         :name="library.name"
         :componentName="library.componentName"
-        :items="library.items"
         @menu-clicked="showContent"
       />
     </ul>
@@ -52,33 +51,23 @@ export default {
         {
           name: 'Musics',
           componentName: 'MainMusics',
-          // items: [],
         },
         {
           name: 'Albums',
           componentName: 'MainAlbums',
-          items: IAlbumService.albums,
         },
         {
           name: 'Genres',
           componentName: 'MainGenres',
-          items: IGenreService.genres,
         },
         {
           name: 'Artists',
           componentName: 'MainArtists',
-          items: IArtistService.artists,
         },
       ],
 
       playlists: IPlaylistService.playlists,
     }
-  },
-
-  created () {
-    library.getMusics().then(musics => {
-      this.libraries[0].items = musics;
-    });
   },
 
   methods: {

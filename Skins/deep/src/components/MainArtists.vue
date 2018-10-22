@@ -74,11 +74,11 @@ export default {
 
   props: {
     name: String,
-    items: Array
   },
 
   data() {
     return {
+      items: null,
       selectedArtist: null,
       artistListFields: [
         {
@@ -152,6 +152,12 @@ export default {
         ],
       }
     }
+  },
+
+  created () {
+    artist.getArtists().then(artists => {
+      this.items = artists;
+    });
   },
 
   methods: {
