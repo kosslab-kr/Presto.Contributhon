@@ -6,9 +6,12 @@
     @dblclick="playMusic"
     @contextmenu="openContextMenu"
   >
-    <div
-      class="music__picture"
-      :style="{background: 'no-repeat center/100% url(' + music.Album.Picture + ')'}">
+    <div class="music__picture-wrap">
+      <img
+        class="music__picture"
+        :src="music.Album.Picture"
+        alt="music_picture"
+      >
       <div class="music__play-button">
         <BaseButtonPlayPause
           :background="'rgba(0,0,0,0.5)'"
@@ -63,6 +66,10 @@ export default {
       this.$emit('context-menu-opened', contextMenuOption);
     },
   },
+
+  mounted() {
+    console.log(music.Album.Picture);
+  }
 }
 </script>
 
@@ -91,14 +98,20 @@ $picture-size: 60px;
   }
 }
 
-.music__picture {
+.music__picture-wrap {
   float: left;
   position: relative;
   width: $picture-size; height: $picture-size;
 }
 
+.music__picture {
+  width: $picture-size; height: $picture-size;
+}
+
 .music__picture-cover {
   visibility: hidden;
+  position: absolute;
+  top: 0px; left: 0px;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.6);
 }
@@ -109,6 +122,7 @@ $picture-size: 60px;
   top: 50%; left: 50%;
   transform: translate3d(-50%, -50%, 0);
   width: 60%; height: 60%;
+  z-index: 1;
 }
 
 .music__description {
