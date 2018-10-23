@@ -27,7 +27,9 @@ export default {
   },
 
   mounted() {
-    this.$refs.menu.triggerClickEvent({menuIndex: 0});
+    window.addEventListener('load', () => {
+      this.$refs.menu.triggerClickEvent({menuIndex: 0});
+    });
   },
   
   methods: {
