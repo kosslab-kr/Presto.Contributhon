@@ -67,8 +67,10 @@ export default {
   },
 
   mounted() {
-    player.on('positionChanged', this.changePosition);
-    player.on('currentMusicChanged', this.changeCurrentMusic);
+    window.addEventListener('load', () => {
+      player.on('positionChanged', this.changePosition);
+      player.on('currentMusicChanged', this.changeCurrentMusic);
+    })
   },
 
   methods: {
