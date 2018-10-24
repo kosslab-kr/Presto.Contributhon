@@ -12,8 +12,8 @@
     <template slot="context-menu">
       <BaseContextMenu
         v-if="isContextMenuOpened"
-        :style="contextMenuStyle"
-        :items="contextMenuItems"
+        :style="contextMenu.style"
+        :items="contextMenu.items"
         @outside-clicked="closeContextMenu"
         @item-clicked="closeContextMenu"
       />
@@ -65,7 +65,7 @@ export default {
                 name: 'New Playist',
                 border: true,
                 callback: () => {
-                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title)
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.Title)
                   newPlaylist.addMusic(this.contextMenu.music);
                   this.addPlaylistOnContextMenu(newPlaylist);
                 }

@@ -66,10 +66,6 @@ export default {
       this.$emit('context-menu-opened', contextMenuOption);
     },
   },
-
-  mounted() {
-    console.log(music.Album.Picture);
-  }
 }
 </script>
 
