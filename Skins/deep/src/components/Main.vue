@@ -17,6 +17,7 @@
       />
     </header>
     <component
+      ref="view"
       :name="currentViewName"
       :is="currentViewComponentName"
       @music-played="playMusic"
@@ -72,16 +73,8 @@ export default {
     searchItem({target}) {
       const keyword = target.value;
       const keywordLowerCase = keyword.toLowerCase();
-
-      this.currentViewItems = this.currentViewItemsAll.filter(item => {
-        const targetName = item.title ? item.title :
-                           item.name ? item.name :
-                           item.type;
-                           
-        const targetNameLowerCase = targetName.toLowerCase();
-
-        return targetNameLowerCase.includes(keywordLowerCase);
-      })
+      
+      this.$refs.view.filterItem(keywordLowerCase);
     },
 
     openMoreMenu() {

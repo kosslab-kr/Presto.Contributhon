@@ -40,6 +40,7 @@ export default {
 
   data() {
     return {
+      itemsOrigin: null,
       items: null,
       isContextMenuOpened: false,
       contextMenu: {
@@ -79,6 +80,7 @@ export default {
 
   created () {
     library.getMusics().then(musics => {
+      this.itemsOrigin = musics;
       this.items = musics;
     });
   },
@@ -106,7 +108,15 @@ export default {
         },
       };
       this.contextMenu.items[1].subItems.push(subItem);
-    }
+    },
+
+    filterItem(keyword) {
+      this.items = this.itemsOrigin.filter(music => {
+        const musicTitle = music.Title.toLowerCase();
+        
+        return musicTitle.includes(keyword);
+      })
+    },
   },
 }
 </script>

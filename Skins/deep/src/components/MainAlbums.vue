@@ -78,6 +78,7 @@ export default {
 
   data() {
     return {
+      itemsOrigin: null,
       items: null,
       selectedAlbum: null,
       albumListItems: null,
@@ -143,6 +144,7 @@ export default {
 
   created () {
     album.getAlbums().then(albums => {
+      this.itemsOrigin = albums;
       this.items = albums;
     });
   },
@@ -189,7 +191,15 @@ export default {
         return {number: index+1, title: music.Title, time: this.formatTime(0), source: music};
       });
       this.selectedAlbum = album;
-    }
+    },
+
+    filterItem(keyword) {
+      this.items = this.itemsOrigin.filter(album => {
+        const albumName = album.Name.toLowerCase();
+        
+        return albumName.includes(keyword);
+      })
+    },
   },
 }
 </script>
