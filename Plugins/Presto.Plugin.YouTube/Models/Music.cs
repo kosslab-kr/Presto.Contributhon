@@ -1,10 +1,11 @@
 ﻿using Microsoft.Win32;
+using Presto.Common;
 using Presto.Component.Supports;
 using System.Windows.Input;
 
 namespace Presto.Plugin.YouTube.Models
 {
-    public class Music : ModelBase
+    public class Music : NotifyObject
     {
         #region 변수
         private string _path;

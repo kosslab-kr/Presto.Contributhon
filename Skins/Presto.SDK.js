@@ -92,18 +92,101 @@ const Presto = new EventEmitter();
         return CefSharp.BindObjectAsync(name);
     }
 
+    const POINTER_PREFIX = '__Ptr';
+    const GETTER_PREFIX = 'get';
+    const CHANGED_EVENT_SUFFIX = 'Changed';
+
+    /**
+     * Wrapping Object
+     * @param {Object} object
+     * @returns {Object} the object was passed as parameter.
+     */
+    function wrappingObject(object) {
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+
+            // Case normal
+            if (!key.startsWith(POINTER_PREFIX)) {
+                object[key] = wrapping(object[key]);
+                continue;
+            }
+
+            // Case pointer
+            let name = key.substr(POINTER_PREFIX.length);
+            let pointer = object[key];
+            let methodName = `${GETTER_PREFIX}${name}`;
+
+            // Define get method
+            object[methodName] = function () {
+                return query.get(pointer);
+            };
+        }
+
+        return object;
+    }
+
+    /**
+     * Wrapping Anything
+     * @param {*} value
+     * @returns {*}
+     */
+    function wrapping (value) {
+        // Wrapping Array
+        if (Array.isArray(value)) {
+            return value.map(v => wrapping(v));
+        }
+
+        // Wrapping Object
+        if (value && typeof value === 'object') {
+            return wrappingObject(value);
+        }
+
+        // Wrapping Normal (Number, String, Boolean, ...)
+        return value;
+    }
+
+    /**
+     * Wrapping CefSharp Function
+     * @param {Function} func The function that want to wrap.
+     * @returns {Function} Wrapped function.
+     */
+    function wrappingCefSharpFunction(func) {
+        return async function () {
+            let result = await func.apply(this, arguments);
+            return wrapping(result);
+        };
+    }
+
+    function wrappingCefSharpObject(object) {
+        object.__proto__ = new EventEmitter();
+
+        // Methods wrapping
+        for (let key in object) {
+            if (!object.hasOwnProperty(key)) continue;
+            object[key] = wrappingCefSharpFunction(object[key]);
+        }
+
+        // PropertyChanged event wrapping
+        object.on('propertyChanged', propertyName => {
+            let lowerName = propertyName.charAt(0).toLowerCase() + propertyName.substr(1);
+            object.emit(`${lowerName}${CHANGED_EVENT_SUFFIX}`);
+        });
+
+        return object;
+    }
+
     /**
      * Binding object names
      * @type {[string]}
      */
-    let objectNames = [ 'album', 'artist', 'genre', 'player', 'playlist' ];
+    let objectNames = [ 'player', 'library', 'query' ];
 
     // Wait for binding
     await Promise.all(objectNames.map(bind));
 
     // Make bound objects to EventEmitter
     for (let name of objectNames) {
-        window[name].__proto__ = new EventEmitter();
+        window[name] = wrappingCefSharpObject(window[name]);
     }
 
     // Call load event

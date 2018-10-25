@@ -17,6 +17,7 @@ namespace Presto.Plugin.YouTube.ViewModels
         private IEnumerable<Video> _videos;
         private bool _isProcessing = false;
         private double _progress;
+        private double _maximum;
         private string _status;
         #endregion
 
@@ -65,6 +66,16 @@ namespace Presto.Plugin.YouTube.ViewModels
             }
         }
 
+        public double Maximum
+        {
+            get => _maximum;
+            set
+            {
+                _maximum = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string Status
         {
             get => _status;
@@ -98,8 +109,14 @@ namespace Presto.Plugin.YouTube.ViewModels
                 {
                     Status = video.Title;
                     Progress = default(double);
+                    Maximum = 1 + (YouTubeUtility.IsEncodeRequired ? 0.5d : 0);
+                    
+                    var progressHandler = new Progress<double>(p =>
+                    {
+                        Progress = p;
+                        Status = $"[{p / Maximum:P0}] {video.Title}";
+                    });
 
-                    var progressHandler = new Progress<double>(p => Progress = p);
                     var music = await YouTubeUtility.Download(video, progressHandler);
                     if (Playlist != null)
                     {

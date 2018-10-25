@@ -146,7 +146,7 @@
                 BorderBrush="White"
                 BorderThickness="0"
                 Foreground="White"
-                Maximum="1"
+                Maximum="{Binding Maximum}"
                 Value="{Binding Progress}" />
         </StackPanel>
     </Grid>
