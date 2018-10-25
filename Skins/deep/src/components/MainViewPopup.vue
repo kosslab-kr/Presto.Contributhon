@@ -86,13 +86,11 @@ export default {
   },
 
   methods: {
-    playGroup() {
-      this.group.getMusics().then(musics => {
-        console.log(this.group);
-        console.log(musics);
-        this.isPlayButtonPressed = false;
-        this.$emit('group-played', musics[0]);
-      });
+    async playGroup() {
+      const musics = await this.group.getMusics();
+
+      this.isPlayButtonPressed = false;
+      this.$emit('group-played', musics[0]);
     },
   },
 }
