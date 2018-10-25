@@ -162,8 +162,10 @@
                 VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
+                Click="Click_Shuffle"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
+                    Name="shuffleControl"
                     Width="30"
                     Height="30"
                     Kind="Shuffle">
@@ -282,16 +284,37 @@
                 </materialDesign:PackIcon>
             </Button>
             <Button
-                Margin="0,0,20,0"
+                Margin="0,0,10,0"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Background="{x:Null}"
                 BorderBrush="{x:Null}"
+                Click="Click_VolumeMinus"
                 Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
                 <materialDesign:PackIcon
                     Width="30"
                     Height="30"
-                    Kind="Speaker">
+                    Kind="VolumeMinus">
+                    <materialDesign:PackIcon.Foreground>
+                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                            <GradientStop Offset="0" Color="{StaticResource mediumPurple}" />
+                            <GradientStop Offset="1" Color="{StaticResource darkPurple}" />
+                        </LinearGradientBrush>
+                    </materialDesign:PackIcon.Foreground>
+                </materialDesign:PackIcon>
+            </Button>
+            <Button
+                Margin="0,0,40,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Background="{x:Null}"
+                BorderBrush="{x:Null}"
+                Click="Click_VolumPlus"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}">
+                <materialDesign:PackIcon
+                    Width="30"
+                    Height="30"
+                    Kind="VolumePlus">
                     <materialDesign:PackIcon.Foreground>
                         <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                             <GradientStop Offset="0" Color="{StaticResource mediumPurple}" />
