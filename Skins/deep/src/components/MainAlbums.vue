@@ -6,7 +6,7 @@
         :key="index"
         type="album"
         :group="item"
-        @picture-selected="selectedAlbum = $event"
+        @picture-selected="selectAlbum"
         @group-played="playMusic"
       />
     </template>
@@ -80,6 +80,7 @@ export default {
     return {
       items: null,
       selectedAlbum: null,
+      albumListItems: null,
       albumListFields: [
         {
           name: '#',
@@ -180,17 +181,16 @@ export default {
       };
       this.contextMenu.items[1].subItems.push(subItem);
     },
-  },
 
-  computed: {
-    albumListItems() {
-      const musics = this.selectedAlbum.getMusics();
+    async selectAlbum(album) {
+      const musics = await album.getMusics();
 
-      return musics.map((music, index) => {
-        return {number: index+1, title: music.Title, time: this.formatTime(music.getLength()), source: music};
-      })
+      this.albumListItems = musics.map((music, index) => {
+        return {number: index+1, title: music.Title, time: this.formatTime(0), source: music};
+      });
+      this.selectedAlbum = album;
     }
-  }
+  },
 }
 </script>
 

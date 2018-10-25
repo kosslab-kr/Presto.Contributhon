@@ -48,8 +48,10 @@ export default {
       this.$emit('picture-selected', this.group);
     },
 
-    playGroup() {
-      this.$emit('group-played', this.group.getMusics()[0]);
+    async playGroup() {
+      const musics = await this.group.getMusics();
+      
+      this.$emit('group-played', musics[0]);
     }
   },
 
