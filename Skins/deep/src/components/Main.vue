@@ -17,9 +17,9 @@
       />
     </header>
     <component
+      ref="view"
       :name="currentViewName"
       :is="currentViewComponentName"
-      :items="currentViewItems"
       @music-played="playMusic"
     />
   </section>
@@ -66,23 +66,15 @@ export default {
     showView(view) {
       this.currentViewName = view.name;
       this.currentViewComponentName = view.componentName;
-      this.currentViewItemsAll = view.items;
-      this.currentViewItems = this.currentViewItemsAll;
+      // this.currentViewItemsAll = view.items;
+      // this.currentViewItems = this.currentViewItemsAll;
     },
 
     searchItem({target}) {
       const keyword = target.value;
       const keywordLowerCase = keyword.toLowerCase();
-
-      this.currentViewItems = this.currentViewItemsAll.filter(item => {
-        const targetName = item.title ? item.title :
-                           item.name ? item.name :
-                           item.type;
-                           
-        const targetNameLowerCase = targetName.toLowerCase();
-
-        return targetNameLowerCase.includes(keywordLowerCase);
-      })
+      
+      this.$refs.view.filterItem(keywordLowerCase);
     },
 
     openMoreMenu() {

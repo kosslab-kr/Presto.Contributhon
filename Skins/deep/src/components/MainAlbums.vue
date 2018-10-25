@@ -6,8 +6,8 @@
         :key="index"
         type="album"
         :group="item"
-        @picture-selected="selectedAlbum = $event"
-        @group-played="$emit('music-played', $event)"
+        @picture-selected="selectAlbum"
+        @group-played="playMusic"
       />
     </template>
     <template slot="popup">
@@ -34,7 +34,8 @@
                   :items="albumListItems"
                   :fields="albumListFields"
                   :height="'100%'"
-                  @music-played="$emit('music-played', $event)"
+                  @music-played="playMusic"
+                  @context-menu-opened="openContextMenu"
                 />
               </template>
             </MainViewPopup>
@@ -42,10 +43,20 @@
         </div>
       </transition>
     </template>
+    <template slot="context-menu">
+      <BaseContextMenu
+        v-if="isContextMenuOpened"
+        :style="contextMenu.style"
+        :items="contextMenu.items"
+        @outside-clicked="closeContextMenu"
+        @item-clicked="closeContextMenu"
+      />
+    </template>
   </MainView>
 </template>
 
 <script>
+import IPlaylistService from './IPlaylistService.js';
 import MainView from './MainView.vue';
 import MainViewGroup from './MainViewGroup';
 import MainViewPopup from './MainViewPopup.vue';
@@ -63,12 +74,14 @@ export default {
 
   props: {
     name: String,
-    items: Array,
   },
 
   data() {
     return {
+      itemsOrigin: null,
+      items: null,
       selectedAlbum: null,
+      albumListItems: null,
       albumListFields: [
         {
           name: '#',
@@ -92,11 +105,55 @@ export default {
           textAlign: 'center',
           marginRight: '0%'
         }
-      ]
+      ],
+      isContextMenuOpened: false,
+      contextMenu: {
+        music: null,
+        style: {
+          top: '',
+          left: '',
+        },
+        items: [
+          {
+            name: '음악 재생',
+            callback: () => { this.playMusic(this.contextMenu.music); },
+          },
+          {
+            name: '플레이리스트에 추가',
+            subItems: IPlaylistService.playlists.reduce((items, playlist) => {
+              return items.concat({
+                name: playlist.Name,
+                callback: () => { playlist.addMusic(this.contextMenu.music); },
+              })
+            }, [
+              {
+                name: 'New Playist',
+                border: true,
+                callback: () => {
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.Title);
+                  newPlaylist.addMusic(this.contextMenu.music);
+                  this.addPlaylistOnContextMenu(newPlaylist);
+                }
+              }
+            ])
+          },
+        ],
+      }
     }
   },
 
+  created () {
+    album.getAlbums().then(albums => {
+      this.itemsOrigin = albums;
+      this.items = albums;
+    });
+  },
+
   methods: {
+    playMusic(music) {
+      this.$emit('music-played', music);
+    },
+
     formatTime(milliseconds) {
       const date = new Date(milliseconds);
       const minutes = date.getMinutes();
@@ -106,17 +163,44 @@ export default {
 
       return `${formattedMinutes}:${formattedSeconds}`;
     },
-  },
 
-  computed: {
-    albumListItems() {
-      const musics = this.selectedAlbum.musics;
+    openContextMenu(contextMenuOption) {
+      this.contextMenu.music = contextMenuOption.music;
+      this.contextMenu.style = contextMenuOption.style;
+      this.isContextMenuOpened = true;
+    },
 
-      return musics.map((music, index) => {
-        return {number: index+1, title: music.title, time: this.formatTime(music.length), source: music};
+    closeContextMenu() {
+      this.isContextMenuOpened = false;
+    },
+
+    addPlaylistOnContextMenu(playlist) {
+      const subItem = {
+        name: playlist.Name,
+        callback: () => {
+          playlist.addMusic(this.contextMenu.music);
+        },
+      };
+      this.contextMenu.items[1].subItems.push(subItem);
+    },
+
+    async selectAlbum(album) {
+      const musics = await album.getMusics();
+
+      this.albumListItems = musics.map((music, index) => {
+        return {number: index+1, title: music.Title, time: this.formatTime(0), source: music};
+      });
+      this.selectedAlbum = album;
+    },
+
+    filterItem(keyword) {
+      this.items = this.itemsOrigin.filter(album => {
+        const albumName = album.Name.toLowerCase();
+        
+        return albumName.includes(keyword);
       })
-    }
-  }
+    },
+  },
 }
 </script>
 

@@ -6,17 +6,27 @@
       class="context-menu__item"
       v-for="(item, index) in items"
       :key="index"
-      @click="clickItem(item.callback)"
+      @click.stop="clickItem(item.callback)"
       @mouseenter="activatedSubContextMenuNumber = index"
       @mouseleave="activatedSubContextMenuNumber = null"
     >
-      {{item.name}}
+      <div class="context-menu__item-name">
+        {{item.name}}
+        <div
+          v-if="!!item.subItems"
+          class="context-menu__more-icon"
+        />
+      </div>
       <BaseContextMenu
         v-if="!!item.subItems"
         v-show="activatedSubContextMenuNumber === index"
         :style="{position: 'absolute', top: '-10px', left: '100%'}"
         :items="item.subItems"
         @item-clicked="$emit('item-clicked')"
+      />
+      <div
+        class="context-menu__border"
+        v-if="item.border && (index !== (items.length-1))"
       />
     </div>
   </div>
@@ -32,6 +42,7 @@ export default {
       name: {String},
       callback: {Function} - optional,
       subItems: {Array} - optional
+      border: {Boolean} - optional
     }
     */
     items: Array,
@@ -48,6 +59,9 @@ export default {
     window.onkeydown = (e) => { e.preventDefault(); };
     window.addEventListener('click', this.emitOutsideClickEvent, true);
     window.addEventListener('contextmenu', this.emitOutsideClickEvent, true);
+  },
+
+  updated() {
   },
 
   destroyed() {
@@ -81,7 +95,7 @@ export default {
 .context-menu {
   box-sizing: border-box;
   position: fixed;
-  width: 160px;
+  width: 200px;
   padding: 10px 0;
   background: #272727;
   border-radius: 8px;
@@ -92,15 +106,37 @@ export default {
 .context-menu__item {
   position: relative;
   box-sizing: border-box;
-  padding: 0 10px;
   line-height: 1.8rem;
-  color: #fff;
   font-weight: lighter;
   font-size: 0.9rem;
 
   &:hover {
-    background: #555;
+    > .context-menu__item-name {
+      color: #fff;
+      background: #555;
+    }
   }
 }
 
+.context-menu__item-name {
+  position: relative;
+  color: #ccc;
+  padding: 0 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.context-menu__more-icon {
+  position: absolute;
+  top: 0px; right: 10px;
+  width: 20px; height: 100%;
+  @include line-arrow($size: 10px, $border-width: 1px, $direction: right, $color: #ccc)
+}
+
+.context-menu__border {
+  width: 100%; height: 0px;
+  border-bottom: 1px solid #444;
+  margin: 5px 0px;
+}
 </style>

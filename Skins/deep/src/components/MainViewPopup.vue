@@ -7,16 +7,21 @@
   >
     <header class="popup__header">
       <div
-        class="popup__picture"
-        :style="{ background: 'no-repeat center/100% url(' + picture + ')' }"
-      />
+        class="popup__picture-wrap"
+      >
+        <img
+          class="popup__picture"
+          :src="picture"
+          alt="group_image"
+        >
+      </div>
       <div class="popup__description-wrap">
         <div class="popup__description">
           <div class="popup__title">
             <BaseTextRolling
               :onPlay="isMouseOvered"
-              :text="group.name"
-              :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '900'}"
+              :text="group.Name"
+              :fontStyle="{'color': '#fff', 'font-size': '2rem', 'font-weight': '700'}"
               :delay="1"
             />
           </div>
@@ -25,7 +30,7 @@
             class="popup__artist"
           >
             <span class="popup__artist-by">By</span>
-            {{group.artist.name}}
+            {{group.Artist.Name}}
           </div>
         </div>
       </div>
@@ -59,7 +64,8 @@ export default {
   data() {
     return {
       isPlayButtonPressed: false,
-      isMouseOvered: false
+      isMouseOvered: false,
+      picture: '',
     }
   },
 
@@ -71,20 +77,21 @@ export default {
       this.$emit('popup-closed');
     }
 
-    document.body.addEventListener('mouseup', closePopup.bind(this));
+    document.body.addEventListener('click', closePopup.bind(this));
+
+    // initialize picture
+    this.group.getMusics().then(musics => {
+      this.picture = this.type === 'artist' ? musics[0].Album.Picture : this.group.Picture;
+    });
   },
 
   methods: {
-    playGroup() {
-      this.isPlayButtonPressed = false;
-      this.$emit('group-played', this.group.musics[0]);
-    }
-  },
+    async playGroup() {
+      const musics = await this.group.getMusics();
 
-  computed: {
-    picture() {
-      return this.type === 'artist' ? this.group.musics[0].album.picture : this.group.picture;
-    }
+      this.isPlayButtonPressed = false;
+      this.$emit('group-played', musics[0]);
+    },
   },
 }
 </script>
@@ -108,7 +115,7 @@ $popup-height: 70vh;
 }
 
 .popup--artist {
-  .popup__picture { border-radius: 50%; }
+  .popup__picture-wrap { border-radius: 50%; }
 }
 
 .popup__header {
@@ -119,9 +126,13 @@ $popup-height: 70vh;
   margin-bottom: 15px;
 }
 
-.popup__picture {
+.popup__picture-wrap {
   float: left;
   width: $picture-size; height: $picture-size;
+}
+
+.popup__picture {
+  width: 100%; height: 100%;
 }
 
 .popup__description-wrap {

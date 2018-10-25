@@ -15,7 +15,6 @@ export default {
   props: {
     name: String,
     componentName: String,
-    items: Array,
   },
 
   data() {
@@ -29,7 +28,7 @@ export default {
     activate() {
       this.isPressed = false;
       this.isActive = true;
-      this.$emit('menu-clicked', {name: this.name, componentName: this.componentName, items: this.items});
+      this.$emit('menu-clicked', {name: this.name, componentName: this.componentName});
     }
   }
 }

@@ -7,7 +7,7 @@
         type="artist"
         :group="item"
         @picture-selected="selectedArtist = $event"
-        @group-played="$emit('music-played', $event)"
+        @group-played="playMusic"
       />
     </template>
     <template slot="popup">
@@ -27,14 +27,15 @@
               type="artist"
               :group="selectedArtist"
               @popup-closed="selectedArtist = null"
-              @group-played="$emit('music-played', $event)"
+              @group-played="playMusic"
             >
               <template slot="body">
                 <MainViewList
                   :items="artistListItems"
                   :fields="artistListFields"
                   :height="'100%'"
-                  @music-played="$emit('music-played', $event)"
+                  @music-played="playMusic"
+                  @context-menu-opened="openContextMenu"
                 />
               </template>
             </MainViewPopup>
@@ -42,10 +43,20 @@
         </div>
       </transition>
     </template>
+    <template slot="context-menu">
+      <BaseContextMenu
+        v-if="isContextMenuOpened"
+        :style="contextMenu.style"
+        :items="contextMenu.items"
+        @outside-clicked="closeContextMenu"
+        @item-clicked="closeContextMenu"
+      />
+    </template>
   </MainView>
 </template>
 
 <script>
+import IPlaylistService from './IPlaylistService.js';
 import MainView from './MainView.vue';
 import MainViewGroup from './MainViewGroup';
 import MainViewPopup from './MainViewPopup.vue';
@@ -63,11 +74,11 @@ export default {
 
   props: {
     name: String,
-    items: Array
   },
 
   data() {
     return {
+      items: null,
       selectedArtist: null,
       artistListFields: [
         {
@@ -106,11 +117,54 @@ export default {
           textAlign: 'center',
           marginRight: '0%'
         }
-      ]
+      ],
+      isContextMenuOpened: false,
+      contextMenu: {
+        music: null,
+        style: {
+          top: '',
+          left: '',
+        },
+        items: [
+          {
+            name: '음악 재생',
+            callback: () => { this.playMusic(this.contextMenu.music); },
+          },
+          {
+            name: '플레이리스트에 추가',
+            subItems: IPlaylistService.playlists.reduce((items, playlist) => {
+              return items.concat({
+                name: playlist.name,
+                callback: () => { playlist.addMusic(this.contextMenu.music); },
+              })
+            }, [
+              {
+                name: 'New Playist',
+                border: true,
+                callback: () => {
+                  const newPlaylist = IPlaylistService.createPlaylist(this.contextMenu.music.title);
+                  newPlaylist.addMusic(this.contextMenu.music);
+                  this.addPlaylistOnContextMenu(newPlaylist);
+                }
+              }
+            ])
+          },
+        ],
+      }
     }
   },
 
+  created () {
+    artist.getArtists().then(artists => {
+      this.items = artists;
+    });
+  },
+
   methods: {
+    playMusic(music) {
+      this.$emit('music-played', music);
+    },
+
     formatTime(milliseconds) {
       const date = new Date(milliseconds);
       const minutes = date.getMinutes();
@@ -120,18 +174,38 @@ export default {
 
       return `${formattedMinutes}:${formattedSeconds}`;
     },
+
+    openContextMenu(contextMenuOption) {
+      this.contextMenu.music = contextMenuOption.music;
+      this.contextMenu.style = contextMenuOption.style;
+      this.isContextMenuOpened = true;
+    },
+
+    closeContextMenu() {
+      this.isContextMenuOpened = false;
+    },
+
+    addPlaylistOnContextMenu(playlist) {
+      const subItem = {
+        name: playlist.name,
+        callback: () => {
+          playlist.addMusic(this.contextMenu.music);
+        },
+      };
+      this.contextMenu.items[1].subItems.push(subItem);
+    },
   },
 
   computed: {
     artistListItems() {
-      const musics = this.selectedArtist.musics;
+      const musics = this.selectedArtist.getMusics();
 
       return musics.map((music, index) => {
         return {
           number: index+1,
-          title: music.title,
-          album: music.album.name,
-          time: this.formatTime(music.length),
+          title: music.Title,
+          album: music.Album.Name,
+          time: this.formatTime(music.getLength()),
           more: '',
           source: music,
         };

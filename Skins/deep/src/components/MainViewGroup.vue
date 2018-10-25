@@ -18,7 +18,7 @@
         </div>
       </div>
     </div>
-    <div class="group__name">{{group.name}}</div>
+    <div class="group__name">{{group.Name}}</div>
     <div class="group__description">{{description}}</div>
   </div>
 </template>
@@ -48,18 +48,20 @@ export default {
       this.$emit('picture-selected', this.group);
     },
 
-    playGroup() {
-      this.$emit('group-played', this.group.musics[0]);
+    async playGroup() {
+      const musics = await this.group.getMusics();
+      
+      this.$emit('group-played', musics[0]);
     }
   },
 
   computed: {
     description() {
-      return this.type === 'artist' ? this.group.musics.length + ' SONGS' : this.group.artist.name;
+      return this.type === 'artist' ? this.group.getMusics().length + ' SONGS' : this.group.Artist.Name;
     },
 
     picture() {
-      return this.type === 'artist' ? this.group.musics[0].album.picture : this.group.picture;
+      return this.type === 'artist' ? this.group.getMusics()[0].Album.Picture : this.group.Picture;
     },
   }
 }

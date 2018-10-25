@@ -6,9 +6,12 @@
     @dblclick="playMusic"
     @contextmenu="openContextMenu"
   >
-    <div
-      class="music__picture"
-      :style="{background: 'no-repeat center/100% url(' + music.album.picture + ')'}">
+    <div class="music__picture-wrap">
+      <img
+        class="music__picture"
+        :src="music.Album.Picture"
+        alt="music_picture"
+      >
       <div class="music__play-button">
         <BaseButtonPlayPause
           :background="'rgba(0,0,0,0.5)'"
@@ -21,25 +24,16 @@
     <div class="music__description">
       <div class="music__title">
         <BaseTextRolling
-          :text="music.title"
+          :text="music.Title"
           :onPlay="isMouseOvered"
         />
       </div>
-      <div class="music__artist">{{music.artist.name}}</div>
+      <div class="music__artist">{{music.Artist.Name}}</div>
     </div>
-    <BaseContextMenu
-      v-if="isContextMenuOpened"
-      :style="contextMenuStyle"
-      :items="contextMenuItems"
-      @outside-clicked="closeContextMenu"
-      @item-clicked="closeContextMenu"
-    />
   </div>
 </template>
 
 <script>
-import IPlaylistService from './IPlaylistService.js';
-
 export default {
   name: 'MainMusicsItem',
 
@@ -50,34 +44,6 @@ export default {
   data() {
     return {
       isMouseOvered: false,
-      isContextMenuOpened: false,
-      contextMenuStyle: {
-        top: '0px',
-        left: '0px',
-      },
-      contextMenuItems: [
-        {
-          name: '음악 재생',
-          callback: this.playMusic.bind(this),
-        },
-        {
-          name: '플레이리스트에 추가',
-          subItems: IPlaylistService.playlists.reduce((items, playlist) => {
-            return items.concat({
-              name: playlist.name,
-              callback: () => { playlist.addMusic(this.music); },
-            })
-          }, [
-            {
-              name: 'New Playist',
-              callback: () => {
-                const newPlaylist = IPlaylistService.createPlaylist(this.music.title);
-                newPlaylist.addMusic(this.music);
-              }
-            }
-          ])
-        },
-      ],
     }
   },
 
@@ -87,18 +53,19 @@ export default {
     },
 
     openContextMenu(e) {
-      this.isContextMenuOpened = true;
-      this.contextMenuStyle = {
-        top: `${e.clientY}px`,
-        left: `${e.clientX}px`,
-      }
       e.preventDefault();
-    },
 
-    closeContextMenu() {
-      this.isContextMenuOpened = false;
-    }
-  }
+      const contextMenuOption = {
+        music: this.music,
+        style: {
+          top: `${e.clientY}px`,
+          left: `${e.clientX}px`,
+        },
+      };
+
+      this.$emit('context-menu-opened', contextMenuOption);
+    },
+  },
 }
 </script>
 
@@ -127,14 +94,20 @@ $picture-size: 60px;
   }
 }
 
-.music__picture {
+.music__picture-wrap {
   float: left;
   position: relative;
   width: $picture-size; height: $picture-size;
 }
 
+.music__picture {
+  width: $picture-size; height: $picture-size;
+}
+
 .music__picture-cover {
   visibility: hidden;
+  position: absolute;
+  top: 0px; left: 0px;
   width: 100%; height: 100%;
   background: rgba(0,0,0,0.6);
 }
@@ -145,6 +118,7 @@ $picture-size: 60px;
   top: 50%; left: 50%;
   transform: translate3d(-50%, -50%, 0);
   width: 60%; height: 60%;
+  z-index: 1;
 }
 
 .music__description {

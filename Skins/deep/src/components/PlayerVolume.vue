@@ -18,7 +18,6 @@
 <script>
 import PlayerButtonMute from './PlayerButtonMute.vue';
 import PlayerSliderHorizon from './PlayerSliderHorizon.vue';
-import IPlayerService from './IPlayerService.js';
 
 export default {
   name: 'PlayerVolume',
@@ -40,7 +39,7 @@ export default {
 
   methods: {
     setVolume(volume) {
-      IPlayerService.setVolume(volume);
+      player.setVolume(volume);
     },
     
     mute(isMuted) {

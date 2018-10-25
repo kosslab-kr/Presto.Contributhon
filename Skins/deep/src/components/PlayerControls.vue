@@ -32,7 +32,7 @@
           >
           </PlayerSliderHorizon>
         </div>
-        <div class="player__total-time">{{formatTime(music.length)}}</div>
+        <div class="player__total-time">{{formatTime(length)}}</div>
       </div>
     </div>
   </div>
@@ -44,7 +44,6 @@ import PlayerButtonShuffle from './PlayerButtonShuffle.vue';
 import PlayerButtonBack from './PlayerButtonBack.vue';
 import PlayerButtonNext from './PlayerButtonNext.vue';
 import PlayerButtonRepeat from './PlayerButtonRepeat.vue';
-import IPlayerService from './IPlayerService.js';
 
 export default {
   name: 'PlayerControls',
@@ -59,37 +58,41 @@ export default {
 
   data() {
     return {
-      music: {length: 0},
+      music: {length: 100000},
       currentTime: 0,
       onPlay: false,
-    }
+      length: 0,
+      isSliderPressed: false,
+    };
   },
 
   mounted() {
-    IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
-    IPlayerService.addEventListener('onStreamChanged', ({music}) => { this.setMusic(music); });
+    window.addEventListener('load', () => {
+      player.on('positionChanged', this.changePosition);
+      player.on('currentMusicChanged', this.changeCurrentMusic);
+    })
   },
 
   methods: {
     play(music) {
       this.setMusic(music);
-      IPlayerService.play(music);
+      player.playByMusic(music);
     },
 
     pause() {
-      IPlayerService.pause();
+      player.pause();
     },
 
     resume() {
-      IPlayerService.resume();
+      player.resume();
     },
 
     playPrevious() {
-      IPlayerService.playPrevious();
+      player.playPrevious();
     },
 
     playNext() {
-      IPlayerService.playNext();
+      player.playNext();
     },
 
     // @param {Boolean} isShuffled
@@ -104,9 +107,24 @@ export default {
       console.log(repeatMode);
     },
 
-    setCurrentTime({position}) {
+    changePosition() {
+      player.getPosition().then(position => {
+        if(this.isSliderPressed) return;
+        this.setCurrentTime(position);
+      });
+    },
+
+    async changeCurrentMusic() {
+      let music = await player.getCurrentMusic();
+      let length = await player.getLength();
+
+      this.length = length;
+      this.setMusic(music);
+    },
+
+    setCurrentTime(position) {
       this.currentTime = position;
-      this.setSliderWidthPercentage({time: this.currentTime, length: this.music.length});
+      this.setSliderWidthPercentage({time: this.currentTime, length: this.length});
     },
 
     setMusic(music) {
@@ -126,17 +144,19 @@ export default {
     },
 
     sliderDown(widthPercentage) {
-      this.onPlay && IPlayerService.removeEventListener('onPositionChanged', this.setCurrentTime);
-      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
+      this.isSliderPressed = true;
+      this.onPlay && player.off('positionChanged', this.changePosition);
+      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.length});
     },
 
     sliderMove(widthPercentage) {
-      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.music.length});
+      this.currentTime = this.calcTimeByPercentage({percentage: widthPercentage, length: this.length});
     },
 
     sliderUp() {
-      IPlayerService.setPosition(this.currentTime);
-      this.onPlay && IPlayerService.addEventListener('onPositionChanged', this.setCurrentTime);
+      this.isSliderPressed = false;
+      player.setPosition(this.currentTime);
+      this.onPlay && player.on('positionChanged', this.changePosition);
     },
 
     calcTimeByPercentage({percentage, length}) {

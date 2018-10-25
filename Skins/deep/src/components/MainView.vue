@@ -8,6 +8,7 @@
       <slot name="body"></slot>
     </div>
     <slot name="popup"></slot>
+    <slot name="context-menu"></slot>
   </section>
 </template>
 
@@ -50,7 +51,7 @@ export default {
   color: #fff;
   padding: 0px 30px 20px 30px;
   font-size: 2.8rem;
-  font-weight: 900;
+  font-weight: 700;
   background: #191919;
 
   &:hover {

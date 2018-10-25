@@ -8,7 +8,6 @@
         :key="index"
         :name="library.name"
         :componentName="library.componentName"
-        :items="library.items"
         @menu-clicked="showContent"
       />
     </ul>
@@ -34,8 +33,6 @@
 import MenuItem from './MenuItem.vue';
 import MenuButtonPlaylist from './MenuButtonPlaylist.vue';
 import IPlaylistService from './IPlaylistService.js';
-// import library from './library.js';
-import ILibraryService from './ILibraryService.js';
 import IAlbumService from './IAlbumService.js';
 import IGenreService from './IGenreService.js';
 import IArtistService from './IArtistService.js';
@@ -54,22 +51,18 @@ export default {
         {
           name: 'Musics',
           componentName: 'MainMusics',
-          items: ILibraryService.musics,
         },
         {
           name: 'Albums',
           componentName: 'MainAlbums',
-          items: IAlbumService.albums,
         },
         {
           name: 'Genres',
           componentName: 'MainGenres',
-          items: IGenreService.genres,
         },
         {
           name: 'Artists',
           componentName: 'MainArtists',
-          items: IArtistService.artists,
         },
       ],
 
