@@ -133,16 +133,7 @@ namespace Presto.Plugin.YouTube.ViewModels
                 }
                 catch (VideoUnavailableException ex)
                 {
-                    switch (ex.Code)
-                    {
-                        case 150:
-                            PrestoDialog.Show("저작권상의 이유로 해당 콘텐츠는 사용할 수 없습니다.", "동영상 오류");
-                            break;
-
-                        default:
-                            PrestoDialog.Show(ex.Reason, "동영상 오류");
-                            break;
-                    }
+                    PrestoDialog.Show(ex.Message, "동영상 오류");
                 }
             }
             else
