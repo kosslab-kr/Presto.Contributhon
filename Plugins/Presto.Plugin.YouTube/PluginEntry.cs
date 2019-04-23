@@ -51,14 +51,14 @@ namespace Presto.Plugin.YouTube
             _searchDialog = null;
         }
 
-        [PrestoMenu(PrestoKey.MenuLibrary, "음악 추가/YouTube에서 음악 추가", Priority = 2)]
+        [PrestoMenu(PrestoKey.MenuLibrary, "음악 추가/YouTube에서 음악 추가", Priority = 3)]
         private void AddMusic()
         {
             PluginData.CurrentPlaylist = null;
             OpenDialog();
         }
 
-        [PrestoMenu(PrestoKey.MenuPlaylistContent, "목록에 음악 추가/YouTube에서 음악 추가", Priority = 3)]
+        [PrestoMenu(PrestoKey.MenuPlaylistContent, "목록에 음악 추가/YouTube에서 음악 추가", Priority = 4)]
         private void AddMusicPlaylist()
         {
             PluginData.CurrentPlaylist = Playlist.Selector.SelectedItems.FirstOrDefault();
